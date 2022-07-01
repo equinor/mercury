@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  f2py:
+    image: f2py
+    build:
+      context: .
+      args:
+        LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
+    volumes:
+        - "./:/code/"
