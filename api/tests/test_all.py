@@ -1,7 +1,4 @@
-import sys
-sys.path.append('/code/')
 import unittest
-import re
 import numpy
 import libhg
 

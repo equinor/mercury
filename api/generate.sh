@@ -18,7 +18,6 @@ echo "Compiling python usable module..."
 echo ""
 unset LDFLAGS
 f2py --fcompiler=gfortran -c program.f90 -m libhg my_lib.a
-ls -la
 
 mv libhg.cpython-310-x86_64-linux-gnu.so ../libhg.so
 
