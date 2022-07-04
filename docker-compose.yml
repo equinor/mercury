@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  api:
+    image: mercury-api-dev
+    build:
+#      target: build
+      target: dev-api
+      context: api
+      args:
+        LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
+    volumes:
+        - "./api/:/code/"
+        - "./api/libhg.so:/usr/local/lib/libhg.so"

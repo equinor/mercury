@@ -1,3 +1,4 @@
+.idea
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +128,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+/api/id_rsa
+/api/id_rsa
+/api/Reactions/
+/api/info/
+/api/dat/
