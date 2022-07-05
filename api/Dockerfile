@@ -9,7 +9,7 @@ RUN apt-get update && \
     pip install numpy=="1.23.0"
 
 # Clone libhg fortran repo (cfortan compatible branch)
-RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_rsa
+RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
@@ -17,8 +17,8 @@ RUN cd gpa-libhg && git checkout cfortan-compatible && cd ..
 RUN mv gpa-libhg/libhg ./libhg
 
 # Compile fortran library and create python .so file
-COPY ./generate.sh ./libhg/
-RUN cd libhg && ./generate.sh
+COPY compile.sh ./libhg/
+RUN cd libhg && ./compile.sh
 
 FROM python:3.10-slim as base-api
 ENV PYTHONUNBUFFERED=1

@@ -10,4 +10,4 @@ services:
         LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
     volumes:
         - "./api/:/code/"
-        - "./api/libhg.so:/usr/local/lib/libhg.so"
+#        - "./api/libhg.so:/usr/local/lib/libhg.so"

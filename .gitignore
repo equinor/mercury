@@ -129,7 +129,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /api/id_rsa
-/api/id_rsa
 /api/Reactions/
 /api/info/
 /api/dat/
+/id_ed25519
+/id_ed25519.pub
