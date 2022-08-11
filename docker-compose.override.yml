@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+
+  api:
+    build:
+      target: dev-api
+    image: template-api-dev
+    volumes:
+      - ./api/src/:/code
+    env_file:
+      - .env
+    environment:
+      ENVIRONMENT: local
+      LOGGING_LEVEL: debug
+      AUTH_ENABLED: $AUTH_ENABLED
+      OAUTH_TOKEN_ENDPOINT: $OAUTH_TOKEN_ENDPOINT
+      OAUTH_AUTH_ENDPOINT: $OAUTH_AUTH_ENDPOINT
+      OAUTH_WELL_KNOWN: $OAUTH_WELL_KNOWN
+      OAUTH_AUDIENCE: $OAUTH_AUDIENCE
+    ports:
+      - "5000:5000"
+
+  web:
+    build:
+      target: development
+      args:
+        AUTH_ENABLED: $AUTH_ENABLED
+        AUTH_SCOPE: $AUTH_SCOPE
+        CLIENT_ID: $CLIENT_ID
+        TENANT_ID: $TENANT_ID
+    image: template-web-dev
+    stdin_open: true
+    volumes:
+      - ./web/src:/code/src
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development

@@ -134,3 +134,5 @@ dmypy.json
 /api/dat/
 /id_ed25519
 /id_ed25519.pub
+/web/.yarn/
+/web/node_modules/
