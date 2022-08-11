@@ -24,6 +24,9 @@ FROM python:3.10-slim as base-api
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
+ENTRYPOINT ["/code/init.sh"]
+CMD ["api"]
+EXPOSE 5000
 WORKDIR /code
 
 RUN apt-get update && \
@@ -42,7 +45,9 @@ COPY poetry.lock poetry.lock
 FROM base-api as dev-api
 RUN poetry install
 COPY . .
+USER 1000
 
 FROM base-api as prod-api
 RUN poetry install --no-dev
 COPY . .
+USER 1000

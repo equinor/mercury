@@ -1,13 +1,25 @@
-version: "3.7"
+version: "3.8"
+
 services:
+  nginx:
+    restart: unless-stopped
+    build: ./nginx
+    ports:
+      - "80:8080"
+    links:
+      - web
+      - api
+
   api:
-    image: mercury-api-dev
+    image: ghcr.io/equinor/mercury/api
     build:
 #      target: build
       target: dev-api
       context: api
       args:
         LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
-    volumes:
-        - "./api/:/code/"
-#        - "./api/libhg.so:/usr/local/lib/libhg.so"
+
+  web:
+    build: ./web
+    image: ghcr.io/equinor/mercury/web
+    restart: unless-stopped

@@ -1,0 +1,20 @@
+{
+  "short_name": "React App",
+  "name": "Template React App",
+  "icons": [
+    {
+      "src": "Equinor_Diamond_Favicon_RED_32x32px.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "Equinor_Symbol_Favicon_RED_64x64px.png",
+      "type": "image/png",
+      "sizes": "64x64"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
