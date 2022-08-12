@@ -3,10 +3,24 @@ ARG LIBHG_REPO_DEPLOY_KEY
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
-# Update and install Fortran compiler and f2py(Fortan to python, included in numpy)
+# Update and install f2py(Fortan to python, included in numpy)
 RUN apt-get update && \
-    apt-get install gfortran git -y && \
-    pip install numpy=="1.23.0"
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    curl ca-certificates gnupg2 git openssh-client && \
+    pip install numpy=="1.23.0" && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Intel Fortran compiler
+RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB | gpg --dearmor > /usr/share/keyrings/oneAPI-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/oneAPI-keyring.gpg] https://apt.repos.intel.com/oneapi all main " > /etc/apt/sources.list.d/oneAPI.list
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    build-essential openssh-client intel-oneapi-compiler-fortran && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set environment variables
+ENV PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" \
+    LD_LIBRARY_PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/lib:/opt/intel/oneapi/compiler/2022.1.0/linux/lib/x64:/opt/intel/oneapi/compiler/2022.1.0/linux/compiler/lib/intel64_lin"
 
 # Clone libhg fortran repo (cfortan compatible branch)
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
@@ -29,8 +43,6 @@ CMD ["api"]
 EXPOSE 5000
 WORKDIR /code
 
-RUN apt-get update && \
-    apt-get install gfortran -y
 COPY --from=build /build/libhg.so /usr/local/lib/
 # Install poetry
 RUN pip install --upgrade pip && \
