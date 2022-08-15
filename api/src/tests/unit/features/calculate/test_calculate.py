@@ -1,6 +1,8 @@
 import numpy
+from entities.Chemeq import Chemeq
+from entities.Multiflash import Multiflash
 
-import libhg
+from timeit import default_timer as timer
 
 
 def read_dat(filename):
@@ -10,7 +12,7 @@ def read_dat(filename):
         number_of_components = all_lines[2]
         component_ids = [int(i.rstrip()) for i in all_lines[4].split(" ")]
 
-        temprature, pressure = all_lines[6].split(" ")
+        temperature, pressure = all_lines[6].split(" ")
 
         composition = []
         start_line = 8
@@ -18,7 +20,7 @@ def read_dat(filename):
             composition.append(float(all_lines[start_line]))
             start_line += 1
 
-        return number_of_components, component_ids, temprature, pressure, composition
+        return number_of_components, component_ids, temperature, pressure, composition
 
 
 def read_reaction(filename):
@@ -56,11 +58,19 @@ def read_reaction(filename):
 
 
 def test_multiflash():
-    number_of_components, component_ids, temprature, pressure, composition = read_dat(filename="dat/Asg_20VA001.dat")
+    number_of_components, component_ids, temperature, pressure, composition = read_dat(filename="tests/test_data/Asg_20VA001.dat")
 
-    ph_index, ph_frac, moles = libhg.mf(
-        nc=number_of_components, list=component_ids, t=temprature, p=pressure, compos=composition
-    )
+    multiflash = Multiflash(**{
+        "number_of_components": number_of_components,
+        "component_ids": component_ids,
+        "temperature": temperature,
+        "pressure": pressure,
+        "composition": composition,
+    })
+    print("\nComputing multiflash:")
+    start = timer()
+    ph_index, ph_frac, moles = multiflash.compute()
+    print(f"Multiflash finished: {timer() - start}")
 
     assert numpy.allclose(ph_frac, [0.009901, 0.21116665, 0.60826751, 0.17066484])
     assert numpy.allclose(
@@ -94,7 +104,7 @@ def test_multiflash():
     )
 
 
-def test_cpe():
+def test_chemeq():
     (
         ne,
         number_of_components,
@@ -103,17 +113,19 @@ def test_cpe():
         feed_composition,
         formula_matrix,
         stoichiometric_matrix,
-    ) = read_reaction(filename="Reactions/AsgB_20VA001.dat")
-
-    ph_index, ntot, ph_frac, moles = libhg.cpe(
-        ne=ne,
-        nc=number_of_components,
-        nr=number_of_reactions,
-        list=component_ids,
-        nf=feed_composition,
-        a=formula_matrix,
-        n=stoichiometric_matrix,
-    )
+    ) = read_reaction(filename="tests/test_data/AsgB_20VA001.dat")
+    chemeq = Chemeq(**{
+        "number_of_components": number_of_components,
+        "number_of_reactions": number_of_reactions,
+        "component_ids": component_ids,
+        "feed_composition": feed_composition,
+        "formula_matrix": formula_matrix,
+        "stoichiometric_matrix": stoichiometric_matrix,
+    })
+    print("\nComputing chemeq:")
+    start = timer()
+    ph_index, ntot, ph_frac, moles = chemeq.compute()
+    print(f"Chemeq finished: {timer() - start}")
 
     assert numpy.allclose(ntot, [17.25400118, 62.40474538, 20.33896651, 0.0])
     assert numpy.allclose(ph_frac, [0.17254396, 0.62406173, 0.20339432, 0.0])
