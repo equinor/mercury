@@ -134,5 +134,13 @@ dmypy.json
 /api/dat/
 /id_ed25519
 /id_ed25519.pub
-/web/.yarn/
 /web/node_modules/
+
+# Yarn 2
+web/.yarn/*
+!web/.yarn/cache
+!web/.yarn/patches
+!web/.yarn/plugins
+!web/.yarn/releases
+!web/.yarn/sdks
+!web/.yarn/versions
