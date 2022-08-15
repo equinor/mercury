@@ -31,15 +31,3 @@ class Multiflash:
             compos=self.composition
         )
         return ph_index, ph_frac, moles
-
-    # def cpe(self) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    #     ph_index, ntot, ph_frac, moles = libhg.cpe(
-    #         ne=self.number_of_components - self.number_of_reactions,
-    #         nc=self.number_of_components,
-    #         nr=self.number_of_reactions,
-    #         list=self.component_ids,
-    #         nf=self.feed_composition,
-    #         a=self.formula_matrix,
-    #         n=self.stoichiometric_matrix,
-    #     )
-    #     return ph_index, ntot, ph_frac, moles

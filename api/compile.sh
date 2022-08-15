@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eux
 
 export LDFLAGS="-static -static-intel"
 
