@@ -69,15 +69,6 @@ repos:
         args:
           ["--config=web/.prettierrc.js", "--ignore-path=web/.prettierignore"]
 
-  - repo: local
-    hooks:
-      - id: mypy
-        name: Python type checking
-        pass_filenames: false
-        files: ^api/.*\.py$
-        entry: sh -c "api/.venv/bin/python -m mypy --namespace-packages --ignore-missing-imports api/src/app.py"
-        language: system
-
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: 'v8.18.0'
     hooks:
@@ -117,9 +108,3 @@ repos:
         files: ^api/.*\.py$
         entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; else var=api/.venv/Scripts/python; fi; $var -m mypy --namespace-packages --ignore-missing-imports api/src/app.py"
         language: system
-      - id: pytest
-        name: pytest-check
-        entry: sh -c "export PYTHONPATH=$(pwd)/api/src; if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; else var=api/.venv/Scripts/python; fi; $var -m pytest api/src/tests"
-        language: system
-        pass_filenames: false
-        always_run: true
