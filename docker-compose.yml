@@ -15,7 +15,6 @@ services:
     # Platform flag necessary to work on M1 Mac:
     platform: linux/x86_64
     build:
-#      target: build
       target: dev-api
       context: api
       args:

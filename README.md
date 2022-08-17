@@ -26,6 +26,19 @@ Upload the public key to Github, and add the private key to .env, replacing newl
 LIBHG_REPO_DEPLOY_KEY=-----BEGIN OPENSSH PRIVATE KEY-----\nb3Blbn...
 ```
 
+
+### Testing
+
+Depending on your OS/CPU, tests can be run locally or via Docker. In order to test locally, Intel's Fortran compiler 
+must be installed and libhg must be compiled (see https://github.com/equinor/gpa-libhg) for more details on how to
+compile the library. Tests are then run through pytest from the command line.
+
+To run tests in docker you first have to build the Docker image. When the build is done, tests can be run with the 
+command:
+```bash
+docker-compose run --rm api python -m pytest
+```
+
 <a id="Contributing"></a>
 ## :+1: Contributing
 

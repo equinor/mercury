@@ -1,6 +1,8 @@
 # Global fixtures can be defined in this file
 
+import json
 import os
+from pathlib import Path
 
 import pytest
 from starlette.testclient import TestClient
@@ -28,3 +30,18 @@ def pytest_addoption(parser):
 def pytest_runtest_setup(item):
     if "integration" in item.keywords and not item.config.getvalue("integration"):
         pytest.skip("need --integration option to run")
+
+
+def read_json(filepath: str):
+    with open(filepath, "r") as file:
+        data = file.read()
+    return json.loads(data)
+
+
+@pytest.fixture(scope="module")
+def get_test_data(request):
+    function: str = request.param
+    test_data_location: Path = Path("tests/test_data").resolve()
+    test_input: dict = read_json(f"{test_data_location}/{function}_input")
+    test_output: dict = read_json(f"{test_data_location}/{function}_output")
+    return test_input, test_output

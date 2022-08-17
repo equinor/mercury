@@ -10,7 +10,9 @@ from starlette.responses import Response
 from authentication.authentication import auth_with_jwt
 from common.utils.logger import logger
 from config import config
+from features.chemeq import chemeq_feature
 from features.health_check import health_check_feature
+from features.multiflash import multiflash_feature
 from features.whoami import whoami_feature
 
 server_root = "/api"
@@ -24,6 +26,8 @@ def create_app() -> FastAPI:
 
     authenticated_routes = APIRouter()
     authenticated_routes.include_router(whoami_feature.router)
+    authenticated_routes.include_router(multiflash_feature.router)
+    authenticated_routes.include_router(chemeq_feature.router)
     app = FastAPI(title="Mercury", description="")
     app.include_router(authenticated_routes, prefix=prefix, dependencies=[Security(auth_with_jwt)])
     app.include_router(public_routes, prefix=prefix)
