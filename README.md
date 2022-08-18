@@ -1,4 +1,4 @@
-# Mercury &middot; [![License][license-badge]][license] [![On push main branch][on-push-main-branch-badge]][on-push-main-branch-action]
+# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch-action.yaml/badge.svg) 
 
 Mercury calculator - API and Webapp
 
