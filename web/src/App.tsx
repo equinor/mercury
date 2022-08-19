@@ -1,15 +1,15 @@
-import { TodoApp } from './components/TodoApp'
 import { AuthProvider } from 'react-oauth2-code-pkce'
-import { authConfig } from './auth'
+import { authConfig } from './authConfig'
+import { MainPage } from './pages/Main'
 
-const hasUnsafeAuthConfig = process.env.REACT_APP_AUTH !== '1'
+const AUTH_DISABLED = process.env.REACT_APP_AUTH !== '1'
 
 function App() {
-  return hasUnsafeAuthConfig ? (
-    <TodoApp />
+  return AUTH_DISABLED ? (
+    <MainPage />
   ) : (
     <AuthProvider authConfig={authConfig}>
-      <TodoApp />
+      <MainPage />
     </AuthProvider>
   )
 }

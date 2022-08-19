@@ -1,11 +1,17 @@
 from typing import List, NamedTuple
 
-import libhg
 import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
 
+import libhg
 
-ChemeqResult = NamedTuple("ChemeqResult", ph_index=npt.NDArray[bytes], ntot=npt.NDArray[float], ph_frac=npt.NDArray[float], moles=npt.NDArray[float])
+ChemeqResult = NamedTuple(
+    "ChemeqResult",
+    ph_index=npt.NDArray[bytes],
+    ntot=npt.NDArray[float],
+    ph_frac=npt.NDArray[float],
+    moles=npt.NDArray[float],
+)
 
 
 class Chemeq(BaseModel):

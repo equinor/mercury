@@ -3,9 +3,9 @@ version: "3.8"
 services:
 
   api:
+    image: api-dev
     build:
       target: dev-api
-    image: template-api-dev
     volumes:
       - ./api/src/:/code
     env_file:
@@ -22,6 +22,7 @@ services:
       - "5000:5000"
 
   web:
+    image: web-dev
     build:
       target: development
       args:
@@ -29,7 +30,6 @@ services:
         AUTH_SCOPE: $AUTH_SCOPE
         CLIENT_ID: $CLIENT_ID
         TENANT_ID: $TENANT_ID
-    image: template-web-dev
     stdin_open: true
     volumes:
       - ./web/src:/code/src
