@@ -29,6 +29,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/boolean-prop-naming": "warn",
     "prettier/prettier": "error",
-    "@typescript-eslint/ban-ts-comment": "warn"
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "jsx-a11y/click-events-have-key-events": "off"
   }
 }

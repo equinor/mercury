@@ -1,6 +1,6 @@
 import { Configuration, TodosApi } from './generated'
 
-export class TodoAPI extends TodosApi {
+export class MercuryAPI extends TodosApi {
   constructor(token: string) {
     const configuration = new Configuration({
       basePath: 'http://localhost',
@@ -10,4 +10,4 @@ export class TodoAPI extends TodosApi {
   }
 }
 
-export default TodoAPI
+export default MercuryAPI

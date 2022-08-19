@@ -5,14 +5,4 @@ export const authConfig = {
   scope: process.env.REACT_APP_AUTH_SCOPE || '',
   redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URI || '',
   logoutEndpoint: process.env.REACT_APP_LOGOUT_ENDPOINT || '',
-  preLogin: () =>
-    localStorage.setItem(
-      'preLoginPath',
-      `${window.location.pathname}${window.location.search}${window.location.hash}`
-    ),
-  postLogin: () =>
-    window.location.replace(
-      localStorage.getItem('preLoginPath') ??
-        (process.env.REACT_APP_AUTH_REDIRECT_URI || '')
-    ),
 }
