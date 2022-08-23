@@ -1,9 +1,8 @@
 from typing import List, NamedTuple
 
+import libhg
 import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
-
-import libhg
 
 ChemeqResult = NamedTuple(
     "ChemeqResult",

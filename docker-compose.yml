@@ -11,16 +11,17 @@ services:
       - api
 
   api:
-    image: ghcr.io/equinor/mercury/api
+    image: ghcr.io/equinor/mercury-api
     # Platform flag necessary to work on M1 Mac:
     platform: linux/x86_64
     build:
-      target: dev-api
       context: api
       args:
         LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
+      cache_from:
+        - ghcr.io/equinor/mercury-api:latest
 
   web:
     build: ./web
-    image: ghcr.io/equinor/mercury/web
+    image: ghcr.io/equinor/mercury-web
     restart: unless-stopped

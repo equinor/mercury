@@ -8,6 +8,7 @@ from features.multiflash.multiflash_use_case import (
 )
 
 
+@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["multiflash"], indirect=True)
 def test_compute_multiflash_use_case(get_test_data):
     multiflash_input, multiflash_output = get_test_data

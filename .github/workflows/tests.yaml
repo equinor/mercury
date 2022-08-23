@@ -1,0 +1,89 @@
+name: "Test"
+on:
+  # Workflow dispatch is used for manual triggers
+  workflow_dispatch:
+  # Workflow call is used for called from another workflow
+  workflow_call:
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY:
+        description: 'Deploy key for cloning libhg repository'
+        required: true
+
+env:
+  IMAGE_REGISTRY: ghcr.io
+  REGISTRY_USER: $GITHUB_ACTOR
+  MERCURY_BASE_PATH: $GITHUB_WORKSPACE
+  API_IMAGE: ghcr.io/equinor/mercury-api
+  WEB_IMAGE: ghcr.io/equinor/mercury-web
+
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+       # Caches the venv at the end of the job and reloads for quicker pre-commit.
+       # Uses pyproject.toml and pre-commit-config file to create hash.
+      - name: Cache venv
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ~/work/mercury/mercury/api/.venv
+            ~/.cache/pre-commit
+          key: venv-${{ runner.os }}-${{ hashFiles('api/pyproject.toml') }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Set up venv
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pip install poetry
+          poetry config virtualenvs.in-project true
+          cd api
+          poetry install
+          pre-commit install --install-hooks
+
+      - name: Run pre-commit
+        run: pre-commit run --all-files
+
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build API image
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+          docker pull $API_IMAGE
+          DOCKER_BUILDKIT=1 docker build \
+          --cache-from $API_IMAGE \
+          --target development \
+          --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
+          --tag api-dev ./api
+
+      - name: Pytest Unit tests
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
+
+      - name: Pytest Integration tests
+        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
+
+  test-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build Web Image
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+          docker pull $WEB_IMAGE
+          DOCKER_BUILDKIT=1 docker build \
+          --cache-from $WEB_IMAGE \
+          --target development \
+          --tag web-dev ./web

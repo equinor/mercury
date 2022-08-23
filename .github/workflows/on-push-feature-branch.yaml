@@ -1,0 +1,14 @@
+name: "On push to branches"
+on:
+  workflow_dispatch:
+  push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - v*
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yaml
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}

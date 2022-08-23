@@ -5,6 +5,7 @@ from entities.Chemeq import Chemeq
 from features.chemeq.chemeq_use_case import ChemeqResponse, compute_chemeq_use_case
 
 
+@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["chemeq"], indirect=True)
 def test_compute_chemeq_use_case(get_test_data):
     chemeq_input, chemeq_output = get_test_data

@@ -7,29 +7,32 @@ spec:
     - name: prod
       build:
         from: main
-    - name: test
+    - name: dev
       build:
         from: main
   components:
     - name: web
-      image: ghcr.io/equinor/mercury/web:{imageTagName}
+      image: ghcr.io/equinor/mercury-web:{imageTagName}
       alwaysPullImageOnDeploy: true
       environmentConfig:
         - environment: prod
           imageTagName: production
-        - environment: test
+        - environment: dev
           imageTagName: latest
+      variables:
+        AUTH_ENABLED: "True"
+        REDIRECT_URI: ""
       ports:
         - name: http
           port: 3000
 
     - name: api
-      image: ghcr.io/equinor/mercury/api:{imageTagName}
+      image: ghcr.io/equinor/mercury-api:{imageTagName}
       alwaysPullImageOnDeploy: true
       environmentConfig:
         - environment: prod
           imageTagName: production
-        - environment: test
+        - environment: dev
           imageTagName: latest
       variables:
         LOGGING_LEVEL: "debug"
@@ -38,25 +41,30 @@ spec:
         OAUTH_WELL_KNOWN: https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/v2.0/.well-known/openid-configuration
         OAUTH_TOKEN_ENDPOINT: https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/token
         OAUTH_AUTH_ENDPOINT: https://login.microsoftonline.com/3aa4a235-b6e2-48d5-9195-7fcf05b459b0/oauth2/v2.0/authorize
-        OAUTH_CLIENT_ID: "TODO:"
-        OAUTH_AUDIENCE: "TODO: "
+        OAUTH_CLIENT_ID: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f
+        OAUTH_AUDIENCE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f
       ports:
         - name: rest
           port: 5000
       publicPort: rest
 
     - name: proxy
-      image: ghcr.io/equinor/mercury/nginx:{imageTagName}
+      image: ghcr.io/equinor/mercury-nginx:{imageTagName}
       alwaysPullImageOnDeploy: true
       environmentConfig:
         - environment: prod
           imageTagName: production
-        - environment: test
+        - environment: dev
           imageTagName: latest
       ports:
         - name: nginx
           port: 8080
       publicPort: nginx
+
+  privateImageHubs:
+    ghcr.io:
+      username: mariuswinger
+      email: mlw@equinor.com
 
   dnsAppAlias:
     environment: prod
