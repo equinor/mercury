@@ -27,9 +27,18 @@ def pytest_addoption(parser):
     parser.addoption("--integration", action="store_true", help="run integration tests")
 
 
-def pytest_runtest_setup(item):
-    if "integration" in item.keywords and not item.config.getvalue("integration"):
-        pytest.skip("need --integration option to run")
+def pytest_collection_modifyitems(config, items):
+    if config.getoption("--integration"):
+        # --integration given in cli
+        for item in items:
+            if "integration" not in item.keywords:
+                item.add_marker(
+                    pytest.mark.skip(reason="--integration option is passed: Test is not an integration test")
+                )
+    else:
+        for item in items:
+            if "integration" in item.keywords:
+                item.add_marker(pytest.mark.skip(reason="need --integration option to run"))
 
 
 def read_json(filepath: str):

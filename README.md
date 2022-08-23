@@ -33,10 +33,14 @@ Depending on your OS/CPU, tests can be run locally or via Docker. In order to te
 must be installed and libhg must be compiled (see https://github.com/equinor/gpa-libhg) for more details on how to
 compile the library. Tests are then run through pytest from the command line.
 
-To run tests in docker you first have to build the Docker image. When the build is done, tests can be run with the 
+To run tests in docker you first have to build the Docker image. When the build is done, unit tests can be run with the 
 command:
 ```bash
-docker-compose run --rm api python -m pytest
+docker-compose run --rm api pytest
+```
+Integration tests are run with the command:
+```bash
+docker-compose run --rm api pytest --integration
 ```
 
 <a id="Contributing"></a>

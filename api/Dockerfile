@@ -1,5 +1,4 @@
-FROM python:3.10-slim as build
-ARG LIBHG_REPO_DEPLOY_KEY
+FROM python:3.10-slim as dependencies
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
@@ -22,17 +21,21 @@ ENV PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:$PATH" \
     LD_LIBRARY_PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/lib:/opt/intel/oneapi/compiler/2022.1.0/linux/lib/x64:/opt/intel/oneapi/compiler/2022.1.0/linux/compiler/lib/intel64_lin"
 
 # Clone libhg fortran repo
+FROM dependencies as build
+ARG LIBHG_REPO_DEPLOY_KEY
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
+# TODO: update with new changes
+RUN git -C gpa-libhg checkout 65b09f9e011dcad4e7784ba63753ead3b6bd287b
 RUN mv gpa-libhg/libhg ./libhg
 
 # Compile fortran library and create python .so file
 COPY compile.sh ./libhg/
 RUN cd libhg && ./compile.sh
 
-FROM python:3.10-slim as base-api
+FROM python:3.10-slim as base
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
@@ -52,12 +55,12 @@ COPY pyproject.toml pyproject.toml
 COPY poetry.lock poetry.lock
 
 
-FROM base-api as dev-api
+FROM base as development
 RUN poetry install
-COPY . .
+COPY ./src .
 USER 1000
 
-FROM base-api as prod-api
+FROM base as prod
 RUN poetry install --no-dev
-COPY . .
+COPY ./src .
 USER 1000

@@ -50,6 +50,7 @@ def test_multiflash_comparison():
     assert multiflash_1 == multiflash_2
 
 
+@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["multiflash"], indirect=True)
 def test_multiflash_compute(get_test_data):
     multiflash_input, multiflash_output = get_test_data

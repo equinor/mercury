@@ -5,6 +5,7 @@ from starlette.status import HTTP_200_OK
 pytestmark = pytest.mark.integration
 
 
+@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["chemeq"], indirect=True)
 def test_compute_chemeq_feature(test_app, get_test_data):
     chemeq_input, chemeq_output = get_test_data
