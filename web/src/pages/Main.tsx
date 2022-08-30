@@ -1,4 +1,4 @@
-import { Header } from '../componenets/common/Header'
+import { Header } from '../components/common/Header'
 import { useContext } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 
