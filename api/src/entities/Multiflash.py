@@ -1,11 +1,15 @@
 from typing import List, NamedTuple
 
 import libhg
+import numpy as np
 import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
 
 MultiflashResult = NamedTuple(
-    "MultiflashResult", ph_index=npt.NDArray[bytes], ph_frac=npt.NDArray[float], moles=npt.NDArray[float]
+    "MultiflashResult",
+    phase_label=npt.NDArray[str],
+    phase_fraction=npt.NDArray[float],
+    moles=npt.NDArray[float],
 )
 
 
@@ -48,11 +52,13 @@ class Multiflash(BaseModel):
         return v
 
     def compute(self) -> MultiflashResult:
-        ph_index, ph_frac, moles = libhg.mf(
-            nc=self.number_of_components,
-            list=self.component_ids,
-            t=self.temperature,
-            p=self.pressure,
-            compos=self.composition,
+        phase_label, phase_fraction, moles = libhg.compute_multiflash(
+            num_comp=self.number_of_components,
+            components=self.component_ids,
+            temperature=self.temperature,
+            pressure=self.pressure,
+            feed_composition=self.composition,
         )
-        return MultiflashResult(ph_index=ph_index, ph_frac=ph_frac, moles=moles)
+        # convert phase_label from list[list[bytes]] to list[str] and remove empty strings:
+        new_phase_label = list(filter(None, [entry.tobytes().decode("utf-8").strip() for entry in phase_label]))
+        return MultiflashResult(phase_label=np.array(new_phase_label), phase_fraction=phase_fraction, moles=moles)

@@ -27,8 +27,9 @@ RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
-# TODO: update with new changes
-RUN git -C gpa-libhg checkout 65b09f9e011dcad4e7784ba63753ead3b6bd287b
+
+# Pulls latest stabile commit from libhg repository:
+RUN git -C gpa-libhg checkout 13cd2bb75be626f4fbb779f763e38f6dca4ed6b9
 RUN mv gpa-libhg/libhg ./libhg
 
 # Compile fortran library and create python .so file
