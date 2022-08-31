@@ -8,11 +8,11 @@ from features.multiflash.multiflash_use_case import (
 )
 
 
-@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["multiflash"], indirect=True)
 def test_compute_multiflash_use_case(get_test_data):
     multiflash_input, multiflash_output = get_test_data
     multiflash = Multiflash(**multiflash_input)
     response: MultiflashResponse = compute_multiflash_use_case(multiflash)
-    assert np.allclose(response.ph_frac, multiflash_output["ph_frac"])
+    assert [x.value for x in response.phase_label] == multiflash_output["phase_labels"]
+    assert np.allclose(response.phase_fraction, multiflash_output["phase_fraction"])
     assert np.allclose(response.moles, multiflash_output["moles"])

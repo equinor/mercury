@@ -51,6 +51,6 @@ def read_json(filepath: str):
 def get_test_data(request):
     function: str = request.param
     test_data_location: Path = Path("tests/test_data").resolve()
-    test_input: dict = read_json(f"{test_data_location}/{function}_input")
-    test_output: dict = read_json(f"{test_data_location}/{function}_output")
+    test_input: dict = read_json(f"{test_data_location}/{function}_input.json")
+    test_output: dict = read_json(f"{test_data_location}/{function}_output.json")
     return test_input, test_output

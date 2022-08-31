@@ -50,7 +50,6 @@ def test_multiflash_comparison():
     assert multiflash_1 == multiflash_2
 
 
-@pytest.mark.skip(reason="Wait for test data")
 @pytest.mark.parametrize("get_test_data", ["multiflash"], indirect=True)
 def test_multiflash_compute(get_test_data):
     multiflash_input, multiflash_output = get_test_data
@@ -61,5 +60,6 @@ def test_multiflash_compute(get_test_data):
     multiflash_result: MultiflashResult = multiflash.compute()
     print(f"Multiflash finished: {timer() - start}")
 
-    assert np.allclose(multiflash_result.ph_frac, np.array(multiflash_output["ph_frac"]))
+    assert list(multiflash_result.phase_label) == multiflash_output["phase_labels"]
+    assert np.allclose(multiflash_result.phase_fraction, np.array(multiflash_output["phase_fraction"]))
     assert np.allclose(multiflash_result.moles, np.array(multiflash_output["moles"]))

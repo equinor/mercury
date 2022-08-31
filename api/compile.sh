@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eux
 
-export LDFLAGS="-static -static-intel"
+export LDFLAGS="-static-intel"
 
 rm *.mod
 
@@ -10,13 +10,13 @@ ifort -c UNIFACfast.f90 thermclc.f90
 
 echo "Compiling object files..."
 echo ""
-ifort -fPIC -static -c -static-intel multiflash.f90 Stability.f90 MIXRULESfast.f90 UNIFACfast.f90 chemeq.f90 thermclc.f90
+ifort -fPIC -static -c -static-intel multiflash.f90 Stability.f90 MIXRULESfast.f90 UNIFACfast.f90 thermclc.f90
 
-ar rc my_lib.a thermclc.o multiflash.o Stability.o MIXRULESfast.o UNIFACfast.o chemeq.o
+ar rc my_lib.a thermclc.o multiflash.o Stability.o MIXRULESfast.o UNIFACfast.o
 
 echo "Compiling python usable module..."
 echo ""
-f2py --fcompiler=intelem -c program.f90 -m libhg my_lib.a
+f2py --fcompiler=intelem -c mercury.f90 -m libhg my_lib.a
 
 cp libhg.cpython-310-x86_64-linux-gnu.so libhg.so
 cp libhg.so ../libhg.so
