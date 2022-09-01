@@ -13,7 +13,7 @@ services:
     environment:
       ENVIRONMENT: local
       LOGGING_LEVEL: debug
-      AUTH_ENABLED: $AUTH_ENABLED
+      AUTH_ENABLED: 0
       OAUTH_TOKEN_ENDPOINT: $OAUTH_TOKEN_ENDPOINT
       OAUTH_AUTH_ENDPOINT: $OAUTH_AUTH_ENDPOINT
       OAUTH_WELL_KNOWN: $OAUTH_WELL_KNOWN
@@ -33,6 +33,7 @@ services:
     stdin_open: true
     volumes:
       - ./web/src:/code/src
+      - ./web/node_modules:/code/src/node_modules
     env_file:
       - .env
     environment:

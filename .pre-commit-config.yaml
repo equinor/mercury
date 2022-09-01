@@ -100,11 +100,11 @@ repos:
     hooks:
       - id: safety
         name: safety-check
-        entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; else var=api/.venv/Scripts/python; fi; $var -m safety check"
+        entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; elif [ -f api/.venv/Scripts/python ]; then var=api/.venv/Scripts/python; else echo \"Could not find .venv in './api/'\" && exit 1;  fi; $var -m safety check"
         language: system
       - id: mypy
         name: Python type checking
         pass_filenames: false
         files: ^api/.*\.py$
-        entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; else var=api/.venv/Scripts/python; fi; $var -m mypy --namespace-packages --ignore-missing-imports api/src/app.py"
+        entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; elif [ -f api/.venv/Scripts/python ]; then var=api/.venv/Scripts/python; else echo \"Could not find .venv in './api/'\" && exit 1;  fi; $var -m mypy --namespace-packages --ignore-missing-imports api/src/app.py"
         language: system
