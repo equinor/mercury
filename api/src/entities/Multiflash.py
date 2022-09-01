@@ -40,7 +40,7 @@ class Multiflash(BaseModel):
 
     @validator("component_ids")
     def validate_component_ids(cls, v, values):
-        # TODO: Possible to validate each ID against table
+        # TODO: Possible to validate each ID against table (currently not possible as test data includes other components)
         if len(v) != values["number_of_components"]:
             raise ValueError("Length of component_ids must match number_of_components.")
         return v
