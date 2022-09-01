@@ -2,26 +2,20 @@ import { Autocomplete, Button, TextField } from '@equinor/eds-core-react'
 import { Card } from '../common/Card'
 import styled from 'styled-components'
 
-const Form = styled.form`
+const FlexContainer = styled.div`
   display: flex;
+  gap: 16px;
+`
+
+const Form = styled(FlexContainer)`
   flex-direction: column;
-  gap: 16px;
 `
 
-const TextFieldContainer = styled.div`
-  display: flex;
-  gap: 16px;
-`
-
-const FluidPackage = styled.div`
-  display: flex;
-  gap: 16px;
-
-  .Button__ButtonBase-sc-1hs0myn-1 {
+const FluidPackage = styled(FlexContainer)`
+  button {
     align-self: flex-end;
   }
-
-  .Autocomplete__Container-sc-yvif0e-0 {
+  > :first-child {
     flex-grow: 1;
   }
 `
@@ -30,12 +24,12 @@ export const CalculateFluid = () => {
   const fluidPackages = ['Krafla']
 
   const InputParameters = () => (
-    <Form>
+    <Form as="form">
       <FluidPackage>
         <Autocomplete label="Fluid package" options={fluidPackages} autoWidth />
         <Button variant="outlined">Edit</Button>
       </FluidPackage>
-      <TextFieldContainer>
+      <FlexContainer>
         <TextField
           id="temperature-input"
           placeholder="15"
@@ -50,7 +44,7 @@ export const CalculateFluid = () => {
           unit="bar"
           type="number"
         />
-      </TextFieldContainer>
+      </FlexContainer>
     </Form>
   )
 

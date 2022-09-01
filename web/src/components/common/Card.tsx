@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const StyledCard = styled(CardWrapper)`
   min-width: 250px;
   background-color: #f7f7f7;
+`
 
-  .Typography__StyledTypography-sc-179guof-0 {
-    color: #007079;
-  }
+const Title = styled(Typography)`
+  color: #007079;
 `
 
 export const Card = ({
@@ -23,7 +23,7 @@ export const Card = ({
     <StyledCard>
       <StyledCard.Header>
         <StyledCard.HeaderTitle>
-          <Typography variant="h4">{title}</Typography>
+          <Title variant="h4">{title}</Title>
         </StyledCard.HeaderTitle>
       </StyledCard.Header>
       <StyledCard.Content>{children}</StyledCard.Content>
