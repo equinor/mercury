@@ -28,7 +28,7 @@
    ],
    "temperature":20,
    "pressure":21,
-   "composition":[
+   "feed_composition":[
       0.173798348,
       0.0039,
       0.0247,

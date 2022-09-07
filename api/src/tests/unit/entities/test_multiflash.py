@@ -8,42 +8,37 @@ from entities.Multiflash import Multiflash, MultiflashResult
 
 def test_multiflash_init():
     multiflash = Multiflash(
-        number_of_components=5,
         component_ids=[1, 2, 3, 4, 1001],
         temperature=9001,
         pressure=9001,
-        composition=[0.1, 0.2, 0.3, 0.4, 0.5],
+        feed_composition=[0.1, 0.2, 0.3, 0.2, 0.2],
     )
-    assert multiflash.number_of_components == 5
     assert multiflash.component_ids == [1, 2, 3, 4, 1001]
     assert multiflash.temperature > 9000
     assert multiflash.pressure > 9000
-    assert multiflash.composition == [0.1, 0.2, 0.3, 0.4, 0.5]
+    assert multiflash.feed_composition == [0.1, 0.2, 0.3, 0.2, 0.2]
 
 
 def test_multiflash_from_dict():
     init_dict = {
-        "number_of_components": 5,
         "component_ids": [1, 2, 3, 4, 1001],
         "temperature": 9001,
         "pressure": 9001,
-        "composition": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "feed_composition": [0.1, 0.2, 0.3, 0.2, 0.2],
     }
     multiflash = Multiflash(**init_dict)
-    assert multiflash.number_of_components == 5
     assert multiflash.component_ids == [1, 2, 3, 4, 1001]
     assert multiflash.temperature > 9000
     assert multiflash.pressure > 9000
-    assert multiflash.composition == [0.1, 0.2, 0.3, 0.4, 0.5]
+    assert multiflash.feed_composition == [0.1, 0.2, 0.3, 0.2, 0.2]
 
 
 def test_multiflash_comparison():
     init_dict = {
-        "number_of_components": 5,
         "component_ids": [1, 2, 3, 4, 1001],
         "temperature": 9001,
         "pressure": 9001,
-        "composition": [0.1, 0.2, 0.3, 0.4, 0.5],
+        "feed_composition": [0.1, 0.2, 0.3, 0.2, 0.2],
     }
     multiflash_1 = Multiflash(**init_dict)
     multiflash_2 = Multiflash(**init_dict)
