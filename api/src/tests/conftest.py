@@ -48,9 +48,8 @@ def read_json(filepath: str):
 
 
 @pytest.fixture(scope="module")
-def get_test_data(request):
-    function: str = request.param
+def get_multiflash_test_data():
     test_data_location: Path = Path("tests/test_data").resolve()
-    test_input: dict = read_json(f"{test_data_location}/{function}_input.json")
-    test_output: dict = read_json(f"{test_data_location}/{function}_output.json")
+    test_input: dict = read_json(f"{test_data_location}/multiflash_input.json")
+    test_output: dict = read_json(f"{test_data_location}/multiflash_output.json")
     return test_input, test_output
