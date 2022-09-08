@@ -1,13 +1,14 @@
 import { Card as CardWrapper, Typography } from '@equinor/eds-core-react'
+import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 
 const StyledCard = styled(CardWrapper)`
   min-width: 250px;
-  background-color: #f7f7f7;
+  background-color: ${tokens.colors.ui.background__light.hex};
 `
 
 const Title = styled(Typography)`
-  color: #007079;
+  color: ${tokens.colors.infographic.primary__moss_green_100.hex};
 `
 
 export const Card = ({
