@@ -2490,7 +2490,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.16.4":
+"@testing-library/jest-dom@npm:^5.16.5":
   version: 5.16.5
   resolution: "@testing-library/jest-dom@npm:5.16.5"
   dependencies:
@@ -12410,7 +12410,7 @@ __metadata:
     "@equinor/eds-core-react": ^0.20.3
     "@equinor/eds-icons": ^0.12.0
     "@equinor/eds-tokens": ^0.7.1
-    "@testing-library/jest-dom": ^5.16.4
+    "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^13.5.0
     "@types/jest": ^27.5.2
