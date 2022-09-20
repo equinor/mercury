@@ -1,18 +1,31 @@
 import numpy as np
 import pytest
 from starlette.status import HTTP_200_OK
+from test_data.multiflash_data import MultiflashInput, MultiflashOutput
 
-pytestmark = pytest.mark.integration
 
-
-@pytest.mark.parametrize("get_multiflash_test_data", ["multiflash"], indirect=True)
-def test_compute_multiflash_feature(test_app, get_multiflash_test_data):
-    multiflash_input, multiflash_output = get_multiflash_test_data
+@pytest.mark.parametrize(
+    "multiflash_input, multiflash_expected_output",
+    [
+        (MultiflashInput.case_1, MultiflashOutput.case_1),
+        (MultiflashInput.case_2, MultiflashOutput.case_2),
+        (MultiflashInput.case_3, MultiflashOutput.case_3),
+    ],
+)
+def test_compute_multiflash_feature(test_app, multiflash_input: dict, multiflash_expected_output: dict):
     response = test_app.post("/api/v1/multiflash", json=multiflash_input)
     results = response.json()
+    computed_phase_values = results["phase_values"]
+    computed_component_fractions = results["component_fractions"]
 
     assert response.status_code == HTTP_200_OK
-    assert list(results["phases"].keys()) == list(multiflash_output["phases"].keys())
-    assert np.allclose(list(results["phases"].values()), list(multiflash_output["phases"].values()))
-    for component_id in results["moles"].keys():
-        assert np.allclose(results["moles"][component_id], multiflash_output["moles"][component_id])
+
+    for label, expected_values in multiflash_expected_output["phase_values"].items():
+        assert np.isclose(computed_phase_values[label]["percentage"], expected_values["percentage"])
+        assert np.isclose(computed_phase_values[label]["mercury"], expected_values["mercury"])
+    for component_id in multiflash_expected_output["component_fractions"].keys():
+        assert np.allclose(
+            computed_component_fractions[component_id],
+            multiflash_expected_output["component_fractions"][component_id],
+            rtol=1e-3,
+        )
