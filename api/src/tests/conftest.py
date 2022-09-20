@@ -1,8 +1,6 @@
 # Global fixtures can be defined in this file
 
-import json
 import os
-from pathlib import Path
 
 import pytest
 from starlette.testclient import TestClient
@@ -24,32 +22,26 @@ def test_app():
 
 
 def pytest_addoption(parser):
+    """
+    Adds option flags to pytest:
+        --integration: runs only integration tests
+        --unit: runs unit tests
+    """
     parser.addoption("--integration", action="store_true", help="run integration tests")
+    parser.addoption("--unit", action="store_true", help="run unit tests")
 
 
 def pytest_collection_modifyitems(config, items):
-    if config.getoption("--integration"):
-        # --integration given in cli
-        for item in items:
-            if "integration" not in item.keywords:
+    """
+    Collection modifier for passed options. If --integration is passed, only integration tests are run, similarly
+    for --unit. No options mean all tests are run.
+    """
+    for item in items:
+        if config.getoption("--integration"):
+            if "integration" not in str(item.path):
                 item.add_marker(
-                    pytest.mark.skip(reason="--integration option is passed: Test is not an integration test")
+                    pytest.mark.skip(reason=f"--integration option is passed: {item.name} is not an integration test")
                 )
-    else:
-        for item in items:
-            if "integration" in item.keywords:
-                item.add_marker(pytest.mark.skip(reason="need --integration option to run"))
-
-
-def read_json(filepath: str):
-    with open(filepath, "r") as file:
-        data = file.read()
-    return json.loads(data)
-
-
-@pytest.fixture(scope="module")
-def get_multiflash_test_data():
-    test_data_location: Path = Path("tests/test_data").resolve()
-    test_input: dict = read_json(f"{test_data_location}/multiflash_input.json")
-    test_output: dict = read_json(f"{test_data_location}/multiflash_output.json")
-    return test_input, test_output
+        elif config.getoption("--unit"):
+            if "unit" not in str(item.path):
+                item.add_marker(pytest.mark.skip(reason=f"--unit option is passed: {item.name} is not a unit test"))

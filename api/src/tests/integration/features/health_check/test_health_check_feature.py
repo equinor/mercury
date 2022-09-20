@@ -1,7 +1,4 @@
-import pytest
 from starlette.status import HTTP_200_OK
-
-pytestmark = pytest.mark.integration
 
 
 class TestTodo:

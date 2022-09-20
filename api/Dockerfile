@@ -29,7 +29,7 @@ RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
 
 # Pulls latest stabile commit from libhg repository:
-RUN git -C gpa-libhg checkout 13cd2bb75be626f4fbb779f763e38f6dca4ed6b9
+RUN git -C gpa-libhg checkout 90e7c74978ef8984306d2878dfef4a56dd2b1d2f
 RUN mv gpa-libhg/libhg ./libhg
 
 # Compile fortran library and create python .so file
