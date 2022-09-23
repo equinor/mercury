@@ -1,5 +1,5 @@
-import {DynamicTable, TDynamicTableInput} from '../common/DynamicTable'
-import {TComponentResponse} from '../../pages/Main'
+import { DynamicTable, TDynamicTableInput } from '../common/DynamicTable'
+import { TComponentResponse } from '../../pages/Main'
 
 // TODO: Update with type from generated api
 type TMultiFlashResponse = {
@@ -11,7 +11,7 @@ function transformRawResponse(
   multiFlashResponse: TMultiFlashResponse,
   components: TComponentResponse
 ): TDynamicTableInput {
-  const tableInput: TDynamicTableInput = {Components: []}
+  const tableInput: TDynamicTableInput = { Components: [] }
   const phasesInResult: string[] = Object.keys(multiFlashResponse.phase_values)
 
   // Add phases "headers" to the tableInput
@@ -41,7 +41,7 @@ export const MoleTable = (props: {
   multiFlashResponse: any
   components: TComponentResponse
 }) => {
-  const {multiFlashResponse, components} = props
+  const { multiFlashResponse, components } = props
 
   return (
     <DynamicTable
