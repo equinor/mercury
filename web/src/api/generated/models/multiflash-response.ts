@@ -17,27 +17,21 @@
 /**
  * 
  * @export
- * @interface ValidationError
+ * @interface MultiflashResponse
  */
-export interface ValidationError {
+export interface MultiflashResponse {
     /**
-     * 
-     * @type {Array<string | number>}
-     * @memberof ValidationError
+     * Phase labels (vapor, liquid, aqueous, mercury) and their fraction of unity
+     * @type {{ [key: string]: number; }}
+     * @memberof MultiflashResponse
      */
-    loc: Array<string | number>;
+    phases: { [key: string]: number; };
     /**
-     * 
-     * @type {string}
-     * @memberof ValidationError
+     * Mole fractions of each phase
+     * @type {{ [key: string]: Array<number>; }}
+     * @memberof MultiflashResponse
      */
-    msg: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidationError
-     */
-    type: string;
+    moles: { [key: string]: Array<number>; };
 }
 
 
