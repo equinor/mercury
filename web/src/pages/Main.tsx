@@ -12,19 +12,19 @@ export type TComponentResponse = {
 
 export const MainPage = (): JSX.Element => {
   const { token } = useContext(AuthContext)
-  const mercuryApi = new MercuryAPI(token)
   const [components, setComponents] = useState<TComponentResponse>()
   const [loading, setLoading] = useState<boolean>(true)
 
   // Fetch list of components name once on page load
   useEffect(() => {
+    const mercuryApi = new MercuryAPI(token)
     mercuryApi
       .getComponents()
       .then((response: AxiosResponse<TComponentResponse>) =>
         setComponents(response.data)
       )
       .finally(() => setLoading(false))
-  }, [])
+  }, [token])
 
   // TODO: Remove with actual calculation results
   const multiflashResult = {

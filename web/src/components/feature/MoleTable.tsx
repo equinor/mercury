@@ -4,7 +4,7 @@ import { TComponentResponse } from '../../pages/Main'
 // TODO: Update with type from generated api
 type TMultiFlashResponse = {
   component_fractions: { [key: number]: number[] }
-  phase_values: { [key: string]: any }
+  phase_values: { [key: string]: { percentage: number; mercury: number } }
 }
 
 function transformRawResponse(
@@ -38,7 +38,7 @@ function transformRawResponse(
 
 // TODO: Get type from generated API
 export const MoleTable = (props: {
-  multiFlashResponse: any
+  multiFlashResponse: TMultiFlashResponse
   components: TComponentResponse
 }) => {
   const { multiFlashResponse, components } = props

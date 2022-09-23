@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.22",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
     "@typescript-eslint/parser": "^5.33.0",
     "eslint": "^8.9.0",
@@ -41,6 +42,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test-ci": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "browserslist": {
