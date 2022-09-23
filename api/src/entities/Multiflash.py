@@ -1,10 +1,9 @@
 from typing import Dict, NamedTuple
 
+import libhg
 import numpy as np
 import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
-
-import libhg
 
 MultiflashResult = NamedTuple(
     "MultiflashResult",
