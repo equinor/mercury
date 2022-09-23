@@ -3,4 +3,3 @@ web/src/api/generated
 
 build
 coverage
-web/src/components/TodoApp.tsx
