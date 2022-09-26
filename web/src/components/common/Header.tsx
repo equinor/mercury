@@ -3,7 +3,7 @@ import { TopBar, Icon, Popover, Button } from '@equinor/eds-core-react'
 import { account_circle, grid_on, info_circle } from '@equinor/eds-icons'
 import { useContext, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
-import { AUTH_DISABLED } from '../../App'
+import { AUTH_DISABLED } from '../../constants'
 
 const Icons = styled.div`
   display: flex;
