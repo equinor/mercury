@@ -21,19 +21,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 /**
- * WhoamiApi - axios parameter creator
+ * ComponentApi - axios parameter creator
  * @export
  */
-export const WhoamiApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ComponentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get Information On Authenticated User
+         * @summary Components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        whoami: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/whoami/`;
+        getComponents: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/v1/components`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -64,59 +64,59 @@ export const WhoamiApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * WhoamiApi - functional programming interface
+ * ComponentApi - functional programming interface
  * @export
  */
-export const WhoamiApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = WhoamiApiAxiosParamCreator(configuration)
+export const ComponentApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ComponentApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Get Information On Authenticated User
+         * @summary Components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async whoami(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<any>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.whoami(options);
+        async getComponents(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<{ [key: string]: { [key: string]: string; }; }>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getComponents(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * WhoamiApi - factory interface
+ * ComponentApi - factory interface
  * @export
  */
-export const WhoamiApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = WhoamiApiFp(configuration)
+export const ComponentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ComponentApiFp(configuration)
     return {
         /**
          * 
-         * @summary Get Information On Authenticated User
+         * @summary Components
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        whoami(options?: any): AxiosPromise<any> {
-            return localVarFp.whoami(options).then((request) => request(axios, basePath));
+        getComponents(options?: any): AxiosPromise<{ [key: string]: { [key: string]: string; }; }> {
+            return localVarFp.getComponents(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * WhoamiApi - object-oriented interface
+ * ComponentApi - object-oriented interface
  * @export
- * @class WhoamiApi
+ * @class ComponentApi
  * @extends {BaseAPI}
  */
-export class WhoamiApi extends BaseAPI {
+export class ComponentApi extends BaseAPI {
     /**
      * 
-     * @summary Get Information On Authenticated User
+     * @summary Components
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof WhoamiApi
+     * @memberof ComponentApi
      */
-    public whoami(options?: any) {
-        return WhoamiApiFp(this.configuration).whoami(options).then((request) => request(this.axios, this.basePath));
+    public getComponents(options?: any) {
+        return ComponentApiFp(this.configuration).getComponents(options).then((request) => request(this.axios, this.basePath));
     }
 }
