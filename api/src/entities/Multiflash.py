@@ -17,15 +17,17 @@ class Multiflash(BaseModel):
     component_composition: Dict[str, float] = Field(
         ...,
         description="The component ids (as string parsed numbers) and the percentage of each component in the feed",
+        alias="componentComposition",
     )
     temperature: float = Field(..., description="Temperature (in Celsius) for computation", gt=-273.15)
     pressure: float = Field(..., description="Pressure (in bar) for computation")
 
     class Config:
         allow_mutation = False
+        allow_population_by_field_name = True
         schema_extra = {
             "example": {
-                "component_composition": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
+                "componentComposition": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
                 "temperature": 37,
                 "pressure": 20,
             }
