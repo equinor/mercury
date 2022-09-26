@@ -3,7 +3,7 @@ import { useContext, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { CalculateFluid } from '../components/feature/CalculateFluid'
 import { FluidDialog } from '../components/feature/FluidDialog'
-import { AUTH_DISABLED } from '../App'
+import { AUTH_DISABLED } from '../constants'
 
 export const MainPage = (): JSX.Element => {
   const { token, loginInProgress } = useContext(AuthContext)
@@ -19,7 +19,7 @@ export const MainPage = (): JSX.Element => {
       <CalculateFluid edit={toggleFluidDialog} />
       <FluidDialog open={isOpen} onClose={toggleFluidDialog} />
       {!AUTH_DISABLED && token ? (
-                <>
+        <>
           <p>You are not logged in.</p>
           <p>
             To use the calculator you need to be logged in with an Equinor
@@ -30,9 +30,8 @@ export const MainPage = (): JSX.Element => {
             related to the app.
           </p>
         </>
-
       ) : (
-<>This is my app</>
+        <>This is my app</>
       )}
     </>
   )

@@ -1,8 +1,7 @@
 import { AuthProvider } from 'react-oauth2-code-pkce'
 import { authConfig } from './authConfig'
 import { MainPage } from './pages/Main'
-
-export const AUTH_DISABLED = process.env.REACT_APP_AUTH !== '1'
+import { AUTH_DISABLED } from './constants'
 
 function App() {
   return AUTH_DISABLED ? (
