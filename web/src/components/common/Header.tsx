@@ -3,6 +3,7 @@ import { TopBar, Icon, Popover, Button } from '@equinor/eds-core-react'
 import { account_circle, grid_on, info_circle } from '@equinor/eds-icons'
 import { useContext, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
+import { AUTH_DISABLED } from '../../App'
 
 const Icons = styled.div`
   display: flex;
@@ -53,8 +54,14 @@ export const Header = (): JSX.Element => {
           <Popover.Title>Logged in user</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          <p>{tokenData?.name}</p>
-          <p>{tokenData?.upn}</p>
+          {AUTH_DISABLED ? (
+            <p>Not logged in</p>
+          ) : (
+            <>
+              <p>{tokenData?.name}</p>
+              <p>{tokenData?.upn}</p>
+            </>
+          )}
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={() => setUserInfoOpen(false)}>Close</Button>
