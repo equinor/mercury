@@ -51,14 +51,14 @@ jobs:
           pre-commit install --install-hooks
 
       - name: Run pre-commit
-        run: pre-commit run --all-files
+        run: pre-commit run --all-files --verbose
 
   test-api:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
-      - name: Build API image
+      - name: Build API test image
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
@@ -79,11 +79,15 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Build Web Image
+      - name: Build Web test image
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $WEB_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $WEB_IMAGE \
           --target development \
+          --build-arg AUTH_ENABLED=0 \
           --tag web-dev ./web
+
+      - name: yarn tests
+        run: docker run --rm web-dev yarn test-ci
