@@ -23,13 +23,14 @@ ENV PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:$PATH" \
 # Clone libhg fortran repo
 FROM dependencies as build
 ARG LIBHG_REPO_DEPLOY_KEY
+ENV GITHASH=90e7c74978ef8984306d2878dfef4a56dd2b1d2f
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
 
 # Pulls latest stabile commit from libhg repository:
-RUN git -C gpa-libhg checkout 90e7c74978ef8984306d2878dfef4a56dd2b1d2f
+RUN git -C gpa-libhg checkout $GITHASH
 RUN mv gpa-libhg/libhg ./libhg
 
 # Compile fortran library and create python .so file
