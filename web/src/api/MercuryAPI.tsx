@@ -1,6 +1,6 @@
-import { Configuration, TodosApi } from './generated'
+import { ComponentApi, Configuration } from './generated'
 
-export class MercuryAPI extends TodosApi {
+export class MercuryAPI extends ComponentApi {
   constructor(token: string) {
     const configuration = new Configuration({
       basePath: 'http://localhost',

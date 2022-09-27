@@ -15,29 +15,23 @@
 
 
 /**
- * 
+ * Model containing the ComponentName: I.e. the chemical name (H2O, HG, etc.) and the alternate name for a component (water, mercury, etc.).
  * @export
- * @interface ValidationError
+ * @interface ComponentName
  */
-export interface ValidationError {
+export interface ComponentName {
     /**
-     * 
-     * @type {Array<string | number>}
-     * @memberof ValidationError
-     */
-    loc: Array<string | number>;
-    /**
-     * 
+     * Chemical name of the component
      * @type {string}
-     * @memberof ValidationError
+     * @memberof ComponentName
      */
-    msg: string;
+    chemicalFormula: string;
     /**
-     * 
+     * Alternate name of the component
      * @type {string}
-     * @memberof ValidationError
+     * @memberof ComponentName
      */
-    type: string;
+    altName: string;
 }
 
 
