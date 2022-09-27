@@ -5,7 +5,7 @@ WORKDIR /build
 # Installing build dependencies. Including f2py(Fortan to python, included in numpy)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    curl ca-certificates gnupg2 git openssh-client && \
+    curl ca-certificates gnupg2 git openssh-client procps && \
     pip install numpy=="1.23.0"
 
 # Install Intel Fortran compiler
@@ -16,25 +16,23 @@ RUN apt-get update && \
     build-essential openssh-client intel-oneapi-compiler-fortran && \
     rm -rf /var/lib/apt/lists/*
 
-# Set environment variables
-ENV PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/bin/intel64:$PATH" \
-    LD_LIBRARY_PATH="/opt/intel/oneapi/compiler/2022.1.0/linux/lib:/opt/intel/oneapi/compiler/2022.1.0/linux/lib/x64:/opt/intel/oneapi/compiler/2022.1.0/linux/compiler/lib/intel64_lin"
-
 # Clone libhg fortran repo
 FROM dependencies as build
 ARG LIBHG_REPO_DEPLOY_KEY
+ENV GITHASH=90e7c74978ef8984306d2878dfef4a56dd2b1d2f
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
 RUN git clone git@github.com:equinor/gpa-libhg.git
 
 # Pulls latest stabile commit from libhg repository:
-RUN git -C gpa-libhg checkout 90e7c74978ef8984306d2878dfef4a56dd2b1d2f
+RUN git -C gpa-libhg checkout $GITHASH
 RUN mv gpa-libhg/libhg ./libhg
 
-# Compile fortran library and create python .so file
+# Load env variables, compile fortran library and create python .so file
+SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
-RUN cd libhg && ./compile.sh
+RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
 
 FROM python:3.10-slim as base
 ENV PYTHONUNBUFFERED=1
