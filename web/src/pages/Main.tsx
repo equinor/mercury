@@ -1,12 +1,20 @@
 import { Header } from '../components/common/Header'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
+import { CalculateFluid } from '../components/feature/CalculateFluid'
+import { FluidDialog } from '../components/feature/FluidDialog'
 
 export const MainPage = (): JSX.Element => {
   const { token } = useContext(AuthContext)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const toggleFluidDialog = () => setIsOpen(!isOpen)
+
   return (
-    <div>
+    <>
       <Header />
+      <CalculateFluid edit={toggleFluidDialog} />
+      <FluidDialog open={isOpen} onClose={toggleFluidDialog} />
       {token ? (
         <div>This is my app</div>
       ) : (
@@ -22,6 +30,6 @@ export const MainPage = (): JSX.Element => {
           </p>
         </div>
       )}
-    </div>
+    </>
   )
 }
