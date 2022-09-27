@@ -20,14 +20,16 @@ const FluidPackage = styled(FlexContainer)`
   }
 `
 
-export const CalculateFluid = () => {
+export const CalculateFluid = ({ edit }: { edit: () => void }) => {
   const fluidPackages = ['Krafla']
 
   const InputParameters = () => (
     <Form as="form">
       <FluidPackage>
         <Autocomplete label="Fluid package" options={fluidPackages} autoWidth />
-        <Button variant="outlined">Edit</Button>
+        <Button variant="outlined" onClick={edit}>
+          Edit
+        </Button>
       </FluidPackage>
       <FlexContainer>
         <TextField
