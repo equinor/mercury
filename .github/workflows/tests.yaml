@@ -33,7 +33,7 @@ jobs:
        # Caches the venv at the end of the job and reloads for quicker pre-commit.
        # Uses pyproject.toml and pre-commit-config file to create hash.
       - name: Cache venv
-        uses: actions/cache@v3
+        uses: actions/cache@v3.0.8
         id: cache
         with:
           path: |
