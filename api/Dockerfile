@@ -19,7 +19,7 @@ RUN apt-get update && \
 # Clone libhg fortran repo
 FROM dependencies as build
 ARG LIBHG_REPO_DEPLOY_KEY
-ENV GITHASH=90e7c74978ef8984306d2878dfef4a56dd2b1d2f
+ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 RUN chmod -R 600 /root/.ssh
 RUN ssh-keyscan github.com > ~/.ssh/known_hosts
