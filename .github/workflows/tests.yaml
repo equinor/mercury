@@ -23,6 +23,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: Set up python
+        id: setup-python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
@@ -30,7 +31,19 @@ jobs:
       - name: Install pre-commit
         run: pip install pre-commit
 
+       # Caches the venv at the end of the job and reloads for quicker pre-commit.
+       # Uses pyproject.toml and pre-commit-config file to create hash.
+      - name: Cache venv
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ~/work/mercury/mercury/api/.venv
+            ~/.cache/pre-commit
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('api/pyproject.toml') }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
       - name: Set up venv
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
           pip install poetry
           poetry config virtualenvs.in-project true
