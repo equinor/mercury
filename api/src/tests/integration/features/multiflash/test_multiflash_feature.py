@@ -15,8 +15,8 @@ from test_data.multiflash_data import MultiflashInput, MultiflashOutput
 def test_compute_multiflash_feature(test_app, multiflash_input: dict, multiflash_expected_output: dict):
     response = test_app.post("/api/v1/multiflash", json=multiflash_input)
     results = response.json()
-    computed_phase_values = results["phase_values"]
-    computed_component_fractions = results["component_fractions"]
+    computed_phase_values = results["phaseValues"]
+    computed_component_fractions = results["componentFractions"]
 
     assert response.status_code == HTTP_200_OK
 

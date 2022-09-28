@@ -16,21 +16,25 @@ class MultiflashResponse(BaseModel):
         ...,
         description="Phase labels (vapor, liquid, aqueous, mercury) with "
         "their fraction of unity and mercury concentration",
+        alias="phaseValues",
     )
     component_fractions: Dict[str, List[float]] = Field(
-        ..., description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)"
+        ...,
+        description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)",
+        alias="componentFractions",
     )
 
     class Config:
         allow_mutation = False
+        allow_population_by_field_name = True
         schema_extra = {
             "example": {
-                "phase_values": {
+                "phaseValues": {
                     "Mercury": {"percentage": 0.13710670215621407, "mercury": 1000000000},
                     "Vapor": {"percentage": 0.5923732280108018, "mercury": 3426.2630579508586},
                     "Aqueous": {"percentage": 0.2705200698329841, "mercury": 82.76725027120922},
                 },
-                "component_fractions": {
+                "componentFractions": {
                     "1": [3.153640195684568e-23, 0.17798810356465122, 0.001283168757794131],
                     "2": [8.232685472278065e-23, 0.42824009015281783, 0.00007363513673381724],
                     "3": [6.089783280850285e-25, 0.0035486377271550557, 0.9984849101778882],
@@ -51,7 +55,7 @@ class MultiflashResponse(BaseModel):
             component_id: component_fractions[component_id].moles.tolist()
             for component_id in component_fractions.keys()
         }
-        return cls(phase_values=new_phase_values, component_fractions=new_component_fractions)
+        return MultiflashResponse(phase_values=new_phase_values, component_fractions=new_component_fractions)
 
     @property
     def phase_labels(self) -> List[PhaseLabels]:

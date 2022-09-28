@@ -13,31 +13,20 @@
  */
 
 
+import { ComponentName } from './component-name';
 
 /**
- * 
+ * Model for containing the response of getting the component dictionary.
  * @export
- * @interface ValidationError
+ * @interface ComponentResponse
  */
-export interface ValidationError {
+export interface ComponentResponse {
     /**
-     * 
-     * @type {Array<string | number>}
-     * @memberof ValidationError
+     * Dictionary of component_ids as string and ComponentName as value
+     * @type {{ [key: string]: ComponentName; }}
+     * @memberof ComponentResponse
      */
-    loc: Array<string | number>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidationError
-     */
-    msg: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidationError
-     */
-    type: string;
+    components: { [key: string]: ComponentName; };
 }
 
 
