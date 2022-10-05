@@ -1,9 +1,9 @@
 from typing import Dict, List
 
+import libhg
 import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
 
-import libhg
 from common.components import COMPONENT_IDS
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
