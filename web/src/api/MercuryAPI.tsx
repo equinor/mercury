@@ -1,9 +1,9 @@
-import { ComponentApi, Configuration } from './generated'
+import { Configuration, MercuryApi } from './generated'
 
-// TODO: Combine all generated api's into MercuryAPI
-export class MercuryAPI extends ComponentApi {
+export class MercuryAPI extends MercuryApi {
   constructor(token: string) {
     const configuration = new Configuration({
+      basePath: 'http://localhost',
       accessToken: token,
     })
     super(configuration)

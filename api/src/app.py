@@ -24,7 +24,7 @@ def create_app() -> FastAPI:
     public_routes = APIRouter()
     public_routes.include_router(health_check_feature.router)
 
-    authenticated_routes = APIRouter()
+    authenticated_routes = APIRouter(tags=["mercury"])
     authenticated_routes.include_router(whoami_feature.router)
     authenticated_routes.include_router(multiflash_feature.router)
     authenticated_routes.include_router(component_feature.router)

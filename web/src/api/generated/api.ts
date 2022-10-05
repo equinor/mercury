@@ -16,6 +16,7 @@
 
 export * from './api/component-api';
 export * from './api/health-check-api';
+export * from './api/mercury-api';
 export * from './api/multiflash-api';
 export * from './api/whoami-api';
 

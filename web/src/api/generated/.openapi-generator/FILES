@@ -1,9 +1,9 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 api/component-api.ts
 api/health-check-api.ts
+api/mercury-api.ts
 api/multiflash-api.ts
 api/whoami-api.ts
 base.ts
