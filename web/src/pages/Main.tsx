@@ -1,20 +1,15 @@
 import { Header } from '../components/common/Header'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { MoleTable } from '../components/feature/MoleTable'
-import { AuthContext } from 'react-oauth2-code-pkce'
 import { CalculateFluid } from '../components/feature/CalculateFluid'
-import { FluidDialog } from '../components/feature/FluidDialog'
-import { AUTH_DISABLED } from '../constants'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
-  const { token, loginInProgress } = useContext(AuthContext)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [components, setComponents] = useState<ComponentResponse>()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [result, setResult] = useState<MultiflashResponse>({
     phaseValues: {},
     componentFractions: {},
@@ -29,10 +24,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       )
       .finally(() => setIsLoading(false))
   }, [mercuryApi])
-
-  const toggleFluidDialog = () => setIsOpen(!isOpen)
-
-  if (loginInProgress) return <></>
 
   // TODO: Remove with actual calculation results
   const multiflashResult: MultiflashResponse = {
@@ -57,40 +48,20 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     },
   }
 
-  if (isLoading) return <>Loading...</>
+  if (isLoading) return <></>
 
   // TODO: Better error handling and message
   if (!components) return <div>Failed to fetch list of components</div>
 
   return (
     <>
-      {!AUTH_DISABLED && !token ? (
-        <>
-          <p>You are not logged in.</p>
-          <p>
-            To use the calculator you need to be logged in with an Equinor
-            account
-          </p>
-          <p>
-            To login, refresh the page. Contact administrators for any issues
-            related to the app.
-          </p>
-        </>
-      ) : (
-        <>
-          <Header />
-          <CalculateFluid
-            mercuryApi={mercuryApi}
-            edit={toggleFluidDialog}
-            setResult={setResult}
-          />
-          <FluidDialog open={isOpen} onClose={toggleFluidDialog} />
-          <MoleTable
-            multiFlashResponse={multiflashResult}
-            components={components}
-          />
-        </>
-      )}
+      <Header />
+      <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
+      <MoleTable
+        multiFlashResponse={multiflashResult}
+        components={components}
+      />
+      <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   )
 }
