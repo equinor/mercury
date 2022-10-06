@@ -1,18 +1,16 @@
 import { AuthProvider } from 'react-oauth2-code-pkce'
-import { authConfig } from './authConfig'
-import { MainPage } from './pages/Main'
-import MercuryAPI from './api/MercuryAPI'
 
-import { AUTH_DISABLED } from './constants'
+import { AUTH_DISABLED, authConfig } from './constants'
+import { LoginPage } from './pages/Login'
+import MercuryAPI from './api/MercuryAPI'
+import { MainPage } from './pages/Main'
 
 function App() {
-  const mercuryApi = new MercuryAPI('')
-
   return AUTH_DISABLED ? (
-    <MainPage mercuryApi={mercuryApi} />
+    <MainPage mercuryApi={new MercuryAPI('')} />
   ) : (
     <AuthProvider authConfig={authConfig}>
-      <MainPage mercuryApi={mercuryApi} />
+      <LoginPage />
     </AuthProvider>
   )
 }

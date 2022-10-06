@@ -1,7 +1,8 @@
 import { Autocomplete, Button, TextField } from '@equinor/eds-core-react'
-import { useState } from 'react'
 import { Card } from '../common/Card'
 import styled from 'styled-components'
+import { FluidDialog } from './FluidDialog'
+import { useState } from 'react'
 import { Multiflash, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
@@ -26,13 +27,12 @@ const FluidPackage = styled(FlexContainer)`
 
 export const CalculateFluid = ({
   mercuryApi,
-  edit,
   setResult,
 }: {
   mercuryApi: MercuryAPI
-  edit: () => void
   setResult: (result: MultiflashResponse) => void
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState(15)
   const [pressure, setPressure] = useState(1)
   const fluidPackages = ['Krafla']
@@ -41,7 +41,7 @@ export const CalculateFluid = ({
     <Form as="form">
       <FluidPackage>
         <Autocomplete label="Fluid package" options={fluidPackages} autoWidth />
-        <Button variant="outlined" onClick={edit}>
+        <Button variant="outlined" onClick={() => setIsOpen(true)}>
           Edit
         </Button>
       </FluidPackage>
@@ -117,8 +117,11 @@ export const CalculateFluid = ({
   )
 
   return (
-    <Card title={'Calculate Fluid'} actions={calculate}>
-      <InputParameters />
-    </Card>
+    <>
+      <Card title={'Calculate Fluid'} actions={calculate}>
+        <InputParameters />
+      </Card>
+      <FluidDialog open={isOpen} onClose={() => setIsOpen(false)} />
+    </>
   )
 }
