@@ -5,6 +5,7 @@ import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
 
 from common.components import COMPONENT_IDS
+from common.molecular_weights import MOLECULAR_WEIGHTS
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
 
@@ -58,6 +59,13 @@ class Multiflash(BaseModel):
     @property
     def number_of_components(self) -> int:
         return len(self.component_ids)
+
+    @property
+    def feed_molecular_weight(self):
+        total_molecular_weight = 0
+        for component_id, mole_fraction in self.component_composition.items():
+            total_molecular_weight += mole_fraction * MOLECULAR_WEIGHTS[component_id]
+        return total_molecular_weight
 
     @staticmethod
     def format_phase_results(
@@ -114,4 +122,5 @@ class Multiflash(BaseModel):
         return MultiflashResult(
             phase_values=phase_values,
             component_fractions=self.format_component_results(mole_fractions, mass_fractions, columns_to_keep),
+            feed_molecular_weight=self.feed_molecular_weight,
         )

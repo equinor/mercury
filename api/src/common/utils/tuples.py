@@ -48,10 +48,12 @@ class MultiflashResult(NamedTuple):
         as values
     component_fractions - a dictionary where the keys are strings (component numbers) with ComponentFractions as
         values
+    feed_molecular_weight - float with the total molecular weight for the given input feed.
     """
 
     phase_values: Dict[PhaseLabels, PhaseValues]
     component_fractions: Dict[str, ComponentFractions]
+    feed_molecular_weight: float
 
     def __eq__(self, other) -> bool:
         if not set(self.phase_values.keys()) == set(other.phase_values.keys()):

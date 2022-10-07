@@ -120,6 +120,7 @@ class OutputArgumentsEntityTest(NamedTuple):
                 mass=np.array([0.000000288, 0.000001493, 0.00000004154, 1.000000000000000000000000000000]),
             ),
         },
+        feed_molecular_weight=26.494307395,
     )
 
     case_2: MultiflashResult = MultiflashResult(
@@ -181,6 +182,7 @@ class OutputArgumentsEntityTest(NamedTuple):
                 mass=np.array([0.00000012830, 1.000000000000000000000000000000]),
             ),
         },
+        feed_molecular_weight=19.492674006999994,
     )
 
     case_3: MultiflashResult = MultiflashResult(
@@ -231,6 +233,7 @@ class OutputArgumentsEntityTest(NamedTuple):
                 mass=np.array([0.0000000000221, 1.000000000000000000000000000000, 0.0000000007599]),
             ),
         },
+        feed_molecular_weight=18.97405548,
     )
 
 
@@ -256,6 +259,7 @@ class OutputArguments(NamedTuple):
             "605": [0.00407000000, 0.4269000000, 0.000006839000, 0.00000000000000000000000029550],
             "5": [0.00000002972, 0.0000004422, 0.000000003738, 1.00000000000000000000000000000],
         },
+        "feed_molecular_weight": 26.494307395,
     }
     case_2: dict = {
         "phase_values": {
@@ -277,6 +281,7 @@ class OutputArguments(NamedTuple):
             "809": [0.000023040000, 0.000000000000000000000000000433],
             "5": [0.000000012360, 1.000000000000000000000000000000],
         },
+        "feed_molecular_weight": 19.492674006999994,
     }
     case_3: dict = {
         "phase_values": {
@@ -296,6 +301,7 @@ class OutputArguments(NamedTuple):
             "504": [0.000009358000000, 0.000000000000000000000000000200, 0.00591900000000],
             "5": [0.000000000001912, 1.000000000000000000000000000000, 0.00000000009838],
         },
+        "feed_molecular_weight": 18.97405548,
     }
 
 

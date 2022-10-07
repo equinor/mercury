@@ -23,6 +23,11 @@ class MultiflashResponse(BaseModel):
         description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)",
         alias="componentFractions",
     )
+    feed_molecular_weight: float = Field(
+        ...,
+        description="The molecular weight of the feed composition input",
+        alias="feedMolecularWeight",
+    )
 
     class Config:
         allow_mutation = False
@@ -46,7 +51,10 @@ class MultiflashResponse(BaseModel):
 
     @classmethod
     def from_values(
-        cls, phase_values: Dict[PhaseLabels, PhaseValues], component_fractions: Dict[str, ComponentFractions]
+        cls,
+        phase_values: Dict[PhaseLabels, PhaseValues],
+        component_fractions: Dict[str, ComponentFractions],
+        feed_molecular_weight: float,
     ) -> "MultiflashResponse":
         # convert phase_values to dictionary
         new_phase_values = {label: value._asdict() for label, value in phase_values.items()}
@@ -55,7 +63,11 @@ class MultiflashResponse(BaseModel):
             component_id: component_fractions[component_id].moles.tolist()
             for component_id in component_fractions.keys()
         }
-        return MultiflashResponse(phase_values=new_phase_values, component_fractions=new_component_fractions)
+        return MultiflashResponse(
+            phase_values=new_phase_values,
+            component_fractions=new_component_fractions,
+            feed_molecular_weight=feed_molecular_weight,
+        )
 
     @property
     def phase_labels(self) -> List[PhaseLabels]:
