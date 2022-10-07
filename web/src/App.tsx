@@ -7,7 +7,7 @@ import { MainPage } from './pages/Main'
 
 function App() {
   return AUTH_DISABLED ? (
-    <MainPage mercuryApi={new MercuryAPI('')} />
+    <MainPage mercuryApi={new MercuryAPI()} />
   ) : (
     <AuthProvider authConfig={authConfig}>
       <LoginPage />

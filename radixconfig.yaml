@@ -19,9 +19,6 @@ spec:
           imageTagName: production
         - environment: dev
           imageTagName: latest
-      variables:
-        AUTH_ENABLED: "True"
-        REDIRECT_URI: ""
       ports:
         - name: http
           port: 3000
