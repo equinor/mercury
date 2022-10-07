@@ -5,6 +5,7 @@ import { CalculateFluid } from '../components/feature/CalculateFluid'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
+import { PhaseTable } from '../components/feature/PhaseTable'
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
@@ -50,6 +51,9 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     feedMolecularWeight: 5,
   }
 
+  // TODO: get value from input
+  const cubicFeedFlow = 1000
+
   if (isLoading) return <></>
 
   // TODO: Better error handling and message
@@ -64,6 +68,10 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
         components={components}
       />
       <pre>{JSON.stringify(result, null, 2)}</pre>
+      <PhaseTable
+        multiFlashResponse={multiflashResult}
+        cubicFeedFlow={cubicFeedFlow}
+      />
     </>
   )
 }
