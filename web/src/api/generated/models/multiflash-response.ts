@@ -32,6 +32,12 @@ export interface MultiflashResponse {
      * @memberof MultiflashResponse
      */
     componentFractions: { [key: string]: Array<number>; };
+    /**
+     * 
+     * @type {number}
+     * @memberof MultiflashResponse
+     */
+    feedMolecularWeight: number;
 }
 
 
