@@ -1,5 +1,5 @@
 import { Header } from '../components/common/Header'
-import { useEffect, useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { MoleTable } from '../components/feature/MoleTable'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { CalculateFluid } from '../components/feature/CalculateFluid'
@@ -15,6 +15,10 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [components, setComponents] = useState<ComponentResponse>()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [result, setResult] = useState<MultiflashResponse>({
+    phaseValues: {},
+    componentFractions: {},
+  })
 
   // Fetch list of components name once on page load
   useEffect(() => {
@@ -75,7 +79,11 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       ) : (
         <>
           <Header />
-          <CalculateFluid edit={toggleFluidDialog} />
+          <CalculateFluid
+            mercuryApi={mercuryApi}
+            edit={toggleFluidDialog}
+            setResult={setResult}
+          />
           <FluidDialog open={isOpen} onClose={toggleFluidDialog} />
           <MoleTable
             multiFlashResponse={multiflashResult}

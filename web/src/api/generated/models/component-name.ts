@@ -15,7 +15,7 @@
 
 
 /**
- * Model containing the ComponentName: I.e. the chemical name (H2O, HG, etc.) and the alternate name for a component (water, mercury, etc.).
+ * Model containing the ComponentName: I.e. the chemical name (H2O, Hg, etc.) and the alternate name for a component (water, mercury, etc.).
  * @export
  * @interface ComponentName
  */
