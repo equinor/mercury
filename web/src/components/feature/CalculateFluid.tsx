@@ -37,40 +37,6 @@ export const CalculateFluid = ({
   const [pressure, setPressure] = useState(1)
   const fluidPackages = ['Krafla']
 
-  const InputParameters = () => (
-    <Form as="form">
-      <FluidPackage>
-        <Autocomplete label="Fluid package" options={fluidPackages} autoWidth />
-        <Button variant="outlined" onClick={() => setIsOpen(true)}>
-          Edit
-        </Button>
-      </FluidPackage>
-      <FlexContainer>
-        <TextField
-          id="temperature-input"
-          min={-273.15}
-          value={temperature.toString()}
-          label="Temperature"
-          unit="ºC"
-          type="number"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setTemperature(Number(event.target.value))
-          }
-        />
-        <TextField
-          id="pressure-input"
-          value={pressure.toString()}
-          label="Pressure"
-          unit="bar"
-          type="number"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setPressure(Number(event.target.value))
-          }
-        />
-      </FlexContainer>
-    </Form>
-  )
-
   const multiflashInput: Multiflash = {
     // TODO: get actual components
     componentComposition: {
@@ -119,7 +85,41 @@ export const CalculateFluid = ({
   return (
     <>
       <Card title={'Calculate Fluid'} actions={calculate}>
-        <InputParameters />
+        <Form as="form">
+          <FluidPackage>
+            <Autocomplete
+              label="Fluid package"
+              options={fluidPackages}
+              autoWidth
+            />
+            <Button variant="outlined" onClick={() => setIsOpen(true)}>
+              Edit
+            </Button>
+          </FluidPackage>
+          <FlexContainer>
+            <TextField
+              id="temperature-input"
+              min={-273.15}
+              value={temperature.toString()}
+              label="Temperature"
+              unit="ºC"
+              type="number"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setTemperature(Number(event.target.value))
+              }
+            />
+            <TextField
+              id="pressure-input"
+              value={pressure.toString()}
+              label="Pressure"
+              unit="bar"
+              type="number"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPressure(Number(event.target.value))
+              }
+            />
+          </FlexContainer>
+        </Form>
       </Card>
       <FluidDialog open={isOpen} onClose={() => setIsOpen(false)} />
     </>
