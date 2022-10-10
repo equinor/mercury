@@ -13,6 +13,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [result, setResult] = useState<MultiflashResponse>({
     phaseValues: {},
     componentFractions: {},
+    feedMolecularWeight: 0,
   })
 
   // Fetch list of components name once on page load
@@ -46,6 +47,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       809: [0.00002304, 0.000000000000000000000000000433],
       5: [0.00000001236, 1.0],
     },
+    feedMolecularWeight: 5,
   }
 
   if (isLoading) return <></>

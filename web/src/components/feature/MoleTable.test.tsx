@@ -60,6 +60,7 @@ const testMultiflashResult: MultiflashResponse = {
     809: [0.00002304, 0.000000000000000000000000000433],
     5: [0.00000001236, 1.0],
   },
+  feedMolecularWeight: 5,
 }
 
 test('renders without crashing and displaying correct values in table', async () => {
