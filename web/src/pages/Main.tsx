@@ -73,7 +73,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           <MoleTable multiFlashResponse={result} components={components} />
         </Results>
       </Container>
-      <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   )
 }
