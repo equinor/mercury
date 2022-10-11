@@ -31,6 +31,7 @@ export const PhaseTable = (props: {
         'Mercury Flow (g/d)',
       ]}
       rows={getRows(multiFlashResponse, cubicFeedFlow)}
+      density={'comfortable'}
     />
   )
 }
