@@ -12,7 +12,8 @@ import { PhaseTable } from '../components/feature/PhaseTable'
 
 const Results = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 50px;
   align-items: center;
   flex-wrap: wrap;
 `
