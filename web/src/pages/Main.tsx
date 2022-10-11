@@ -7,6 +7,14 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { ComponentSelector } from '../components/feature/ComponentSelector'
 import { PhaseTable } from '../components/feature/PhaseTable'
+import styled from 'styled-components'
+
+const Results = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+`
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
@@ -41,8 +49,11 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       <Header />
       <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
       <ComponentSelector components={components} />
-      <PhaseTable multiFlashResponse={result} cubicFeedFlow={cubicFeedFlow} />
-      <MoleTable multiFlashResponse={result} components={components} />
+      <Results>
+        <PhaseTable multiFlashResponse={result} cubicFeedFlow={cubicFeedFlow} />
+        <MoleTable multiFlashResponse={result} components={components} />
+      </Results>
+      <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   )
 }
