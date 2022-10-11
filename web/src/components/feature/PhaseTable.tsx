@@ -10,6 +10,7 @@ function getRows(
   return Object.entries(multiFlashResponse.phaseValues).map(
     ([phase, values], index) => [
       phase,
+      values['percentage'].toString(),
       values['mercury'].toString(),
       mercury[index].toString(),
       (phPhaseFlowFactor * values['percentage'] * mercury[index]).toString(),
@@ -26,6 +27,7 @@ export const PhaseTable = (props: {
     <DynamicTable
       headers={[
         'Phases',
+        'Ratio',
         'Mass Concentration',
         'Mole Concentration',
         'Mercury Flow (g/d)',
