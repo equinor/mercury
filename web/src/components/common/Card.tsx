@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const StyledCard = styled(CardWrapper)`
   min-width: 250px;
+  max-width: 400px;
   background-color: ${tokens.colors.ui.background__light.hex};
 `
 
