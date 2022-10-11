@@ -1,8 +1,8 @@
 from typing import Dict, NamedTuple
 
 import numpy as np
-import numpy.typing as npt
 
+from common.utils.arrays import NDArrayFloat
 from common.utils.enums import PhaseLabels
 
 
@@ -29,8 +29,8 @@ class ComponentFractions(NamedTuple):
     from the multiflash computation output.
     """
 
-    moles: npt.NDArray[float]
-    mass: npt.NDArray[float]
+    moles: NDArrayFloat
+    mass: NDArrayFloat
 
     def __eq__(self, other) -> bool:
         if not np.allclose(self.moles, other.moles, rtol=1e-3):

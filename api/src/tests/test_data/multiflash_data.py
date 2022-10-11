@@ -1,4 +1,4 @@
-from typing import NamedTuple
+from typing import Dict, NamedTuple
 
 import numpy as np
 
@@ -7,7 +7,7 @@ from entities.Multiflash import MultiflashResult
 
 
 class InputArguments(NamedTuple):
-    case_1 = {
+    case_1: Dict = {
         "component_composition": {
             "3": 0.062202,
             "2": 0.0047,
@@ -25,7 +25,7 @@ class InputArguments(NamedTuple):
         "temperature": 10,
         "pressure": 35,
     }
-    case_2 = {
+    case_2: Dict = {
         "component_composition": {
             "2": 0.0169,
             "1": 0.0539,
@@ -44,7 +44,7 @@ class InputArguments(NamedTuple):
         "temperature": 5,
         "pressure": 70,
     }
-    case_3 = {
+    case_3: Dict = {
         "component_composition": {
             "1": 0.026457,
             "2": 0.005817,

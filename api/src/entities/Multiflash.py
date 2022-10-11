@@ -1,11 +1,11 @@
 from typing import Dict, List
 
 import libhg
-import numpy.typing as npt
 from pydantic import BaseModel, Field, validator
 
 from common.components import COMPONENT_IDS
 from common.molecular_weights import MOLECULAR_WEIGHTS
+from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
 
@@ -69,9 +69,9 @@ class Multiflash(BaseModel):
 
     @staticmethod
     def format_phase_results(
-        phase_labels: npt.NDArray[bytes],
-        phase_fractions: npt.NDArray[float],
-        mercury_concentrations: npt.NDArray[float],
+        phase_labels: NDArrayBytes,
+        phase_fractions: NDArrayFloat,
+        mercury_concentrations: NDArrayFloat,
     ) -> Dict[PhaseLabels, PhaseValues]:
         """
         Converts phase related output from libhg.compute_multiflash (phase_labels, phase_fractions,
@@ -88,8 +88,8 @@ class Multiflash(BaseModel):
 
     def format_component_results(
         self,
-        mole_fractions: npt.NDArray[float],
-        mass_fractions: npt.NDArray[float],
+        mole_fractions: NDArrayFloat,
+        mass_fractions: NDArrayFloat,
         columns_to_keep: tuple = (1, 2, 3, 4),
     ) -> Dict[str, ComponentFractions]:
         """
