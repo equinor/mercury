@@ -16,6 +16,13 @@ const Results = styled.div`
   flex-wrap: wrap;
 `
 
+const Container = styled.div`
+  margin: 60px 20px;
+  @media (min-width: 1200px) {
+    margin: 60px 150px;
+  }
+`
+
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [components, setComponents] = useState<ComponentResponse>()
@@ -47,12 +54,17 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   return (
     <>
       <Header />
-      <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
-      <ComponentSelector components={components} />
-      <Results>
-        <PhaseTable multiFlashResponse={result} cubicFeedFlow={cubicFeedFlow} />
-        <MoleTable multiFlashResponse={result} components={components} />
-      </Results>
+      <Container>
+        <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
+        <ComponentSelector components={components} />
+        <Results>
+          <PhaseTable
+            multiFlashResponse={result}
+            cubicFeedFlow={cubicFeedFlow}
+          />
+          <MoleTable multiFlashResponse={result} components={components} />
+        </Results>
+      </Container>
       <pre>{JSON.stringify(result, null, 2)}</pre>
     </>
   )
