@@ -59,6 +59,7 @@ export const CalculateFluid = ({
 
   const calculate = (
     <Button
+      data-testid="computeMf"
       onClick={() => {
         mercuryApi
           .computeMultiflash({ multiflash: multiflashInput })
