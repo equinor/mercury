@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+import { Divider } from '@equinor/eds-core-react'
 import { Header } from '../components/common/Header'
 import { useEffect, useState } from 'react'
 import { MoleTable } from '../components/feature/MoleTable'
@@ -7,7 +9,6 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { ComponentSelector } from '../components/feature/ComponentSelector'
 import { PhaseTable } from '../components/feature/PhaseTable'
-import styled from 'styled-components'
 
 const Results = styled.div`
   display: flex;
@@ -57,6 +58,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       <Container>
         <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
         <ComponentSelector components={components} />
+        <Divider />
         <Results>
           <PhaseTable
             multiFlashResponse={result}
