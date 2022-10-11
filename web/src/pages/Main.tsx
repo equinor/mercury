@@ -24,6 +24,11 @@ const Container = styled.div`
   }
 `
 
+const DividerWithLargeSpacings = styled(Divider)`
+  margin-top: 40px;
+  margin-bottom: 55px;
+`
+
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [components, setComponents] = useState<ComponentResponse>()
@@ -58,7 +63,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       <Container>
         <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
         <ComponentSelector components={components} />
-        <Divider />
+        <DividerWithLargeSpacings />
         <Results>
           <PhaseTable
             multiFlashResponse={result}
