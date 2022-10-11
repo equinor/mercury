@@ -3,6 +3,7 @@ import { EdsProvider, Table } from '@equinor/eds-core-react'
 type TDynamicTableInput = {
   headers: string[]
   rows: string[][]
+  density: 'comfortable' | 'compact'
 }
 export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   function createTableRows() {
@@ -21,7 +22,7 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   }
 
   return (
-    <EdsProvider density={'compact'}>
+    <EdsProvider density={props.density}>
       <Table>
         <Table.Head>
           <Table.Row>
