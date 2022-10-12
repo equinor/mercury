@@ -7,7 +7,6 @@ import { CalculateFluid } from '../components/feature/CalculateFluid'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
-import { ComponentSelector } from '../components/feature/ComponentSelector'
 import { PhaseTable } from '../components/feature/PhaseTable'
 
 const Results = styled.div`
@@ -59,8 +58,11 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     <>
       <Header />
       <Container>
-        <CalculateFluid mercuryApi={mercuryApi} setResult={setResult} />
-        <ComponentSelector components={components} />
+        <CalculateFluid
+          mercuryApi={mercuryApi}
+          setResult={setResult}
+          components={components}
+        />
         <DividerWithLargeSpacings />
         <Results>
           <PhaseTable multiFlashResponse={result} />

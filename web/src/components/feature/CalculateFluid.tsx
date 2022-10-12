@@ -3,7 +3,11 @@ import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
 import { useState } from 'react'
-import { Multiflash, MultiflashResponse } from '../../api/generated'
+import {
+  ComponentResponse,
+  Multiflash,
+  MultiflashResponse,
+} from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 
@@ -28,9 +32,11 @@ const FluidPackage = styled(FlexContainer)`
 export const CalculateFluid = ({
   mercuryApi,
   setResult,
+  components,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
+  components: ComponentResponse
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState(15)
@@ -122,7 +128,11 @@ export const CalculateFluid = ({
           </FlexContainer>
         </Form>
       </Card>
-      <FluidDialog open={isOpen} onClose={() => setIsOpen(false)} />
+      <FluidDialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        components={components}
+      />
     </>
   )
 }
