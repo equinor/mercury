@@ -8,3 +8,18 @@ export const authConfig = {
   redirectUri: process.env.REACT_APP_AUTH_REDIRECT_URI || '',
   logoutEndpoint: process.env.REACT_APP_LOGOUT_ENDPOINT || '',
 }
+
+export const preSelectedComponents: Array<string> = [
+  '5',
+  '1',
+  '2',
+  '3',
+  '101',
+  '201',
+  '301',
+  '401',
+  '402',
+  '503',
+  '504',
+  '605',
+]

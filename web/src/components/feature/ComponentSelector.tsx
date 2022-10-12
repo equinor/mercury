@@ -3,6 +3,7 @@ import { Autocomplete } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable, TComponentEntry } from './ComponentTable'
+import { preSelectedComponents } from '../../constants'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const ComponentSelectorContainer = styled.div`
 const ComponentTableContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 400px;
+  height: 420px;
   overflow: auto;
 `
 
@@ -28,12 +29,23 @@ function createOptions(components: ComponentResponse): Array<TComponentEntry> {
   )
 }
 
+function getInitialSelectedOptions(
+  componentOptions: Array<TComponentEntry>
+): Array<TComponentEntry> {
+  return componentOptions.filter((component) =>
+    preSelectedComponents.includes(component.componentId)
+  )
+}
+
 export const ComponentSelector = ({
   components,
 }: {
   components: ComponentResponse
 }) => {
-  const [selectedEntries, setSelectedEntries] = useState(Array<TComponentEntry>)
+  const componentOptions = createOptions(components)
+  const initialComponents = getInitialSelectedOptions(componentOptions)
+  const [selectedEntries, setSelectedEntries] =
+    useState<Array<TComponentEntry>>(initialComponents)
 
   return (
     <ComponentSelectorContainer>
@@ -41,9 +53,10 @@ export const ComponentSelector = ({
         onOptionsChange={({ selectedItems }) => {
           setSelectedEntries(selectedItems)
         }}
-        label="Select components"
+        label="Add components"
         multiple
-        options={createOptions(components)}
+        options={componentOptions}
+        initialSelectedOptions={initialComponents}
         optionLabel={(option) =>
           `${option.altName} (${option.chemicalFormula})`
         }
