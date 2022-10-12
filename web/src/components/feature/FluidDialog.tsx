@@ -1,6 +1,29 @@
+import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentResponse } from '../../api/generated'
+
+const WideDialog = styled(Dialog)`
+  min-width: 700px;
+`
+
+const Form = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+`
+
+const Left = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+`
+
+const CustomDialogActions = styled(Dialog.Actions)`
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 30px;
+`
 
 export const FluidDialog = ({
   open,
@@ -12,24 +35,28 @@ export const FluidDialog = ({
   components: ComponentResponse
 }) => {
   return (
-    <Dialog open={open} onClose={onClose}>
+    <WideDialog open={open} onClose={onClose}>
       <Dialog.Header>
-        <Dialog.Title>Fluid package</Dialog.Title>
+        <Dialog.Title>Create fluid package</Dialog.Title>
       </Dialog.Header>
       <Dialog.CustomContent>
-        <TextField
-          id="fluid-package-name"
-          placeholder="Fluid package"
-          label="Name"
-        />
-        <TextField
-          id="fluid-package-description"
-          placeholder="Description"
-          label="Description"
-        />
-        <ComponentSelector components={components} />
+        <Form>
+          <Left>
+            <TextField
+              id="fluid-package-name"
+              placeholder="Fluid package"
+              label="Name"
+            />
+            <TextField
+              id="fluid-package-description"
+              placeholder="Description"
+              label="Description"
+            />
+          </Left>
+          <ComponentSelector components={components} />
+        </Form>
       </Dialog.CustomContent>
-      <Dialog.Actions>
+      <CustomDialogActions>
         <Button color="danger" variant="outlined">
           Delete
         </Button>
@@ -37,7 +64,7 @@ export const FluidDialog = ({
           Cancel
         </Button>
         <Button type="submit">Save</Button>
-      </Dialog.Actions>
-    </Dialog>
+      </CustomDialogActions>
+    </WideDialog>
   )
 }
