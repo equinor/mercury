@@ -50,9 +50,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       .finally(() => setIsLoading(false))
   }, [mercuryApi])
 
-  // TODO: get value from input
-  const cubicFeedFlow = 1000
-
   if (isLoading) return <></>
 
   // TODO: Better error handling and message
@@ -66,10 +63,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
         <ComponentSelector components={components} />
         <DividerWithLargeSpacings />
         <Results>
-          <PhaseTable
-            multiFlashResponse={result}
-            cubicFeedFlow={cubicFeedFlow}
-          />
+          <PhaseTable multiFlashResponse={result} />
           <MoleTable multiFlashResponse={result} components={components} />
         </Results>
       </Container>
