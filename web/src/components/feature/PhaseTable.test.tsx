@@ -26,15 +26,8 @@ const multiflashResult: MultiflashResponse = {
   feedMolecularWeight: 5,
 }
 
-const cubicFeedFlow = 1000
-
 test('renders without crashing and displaying correct values in table', async () => {
-  render(
-    <PhaseTable
-      multiFlashResponse={multiflashResult}
-      cubicFeedFlow={cubicFeedFlow}
-    />
-  )
+  render(<PhaseTable multiFlashResponse={multiflashResult} />)
   // @ts-ignore because not able to get eslint to discover these types
   expect(screen.getByTestId('Mass Concentration-0')).toHaveTextContent(
     '104.82781237'
