@@ -4,7 +4,12 @@ import '@testing-library/jest-dom/extend-expect'
 import { mockMultiflashResponse } from '../../setupTests'
 
 test('renders without crashing and displaying correct values in table', async () => {
-  render(<PhaseTable multiFlashResponse={mockMultiflashResponse} />)
+  render(
+    <PhaseTable
+      multiFlashResponse={mockMultiflashResponse}
+      feedFlow={{ unit: 'Sm3/d', value: 0 }}
+    />
+  )
   // @ts-ignore because not able to get eslint to discover these types
   expect(screen.getByTestId('Mass Concentration-0')).toHaveTextContent(
     '9576.977265669584'

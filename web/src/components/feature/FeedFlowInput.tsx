@@ -1,6 +1,7 @@
 import { Switch, TextField } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { TFeedUnit } from './PhaseTable'
+import { Card } from '../common/Card'
+import { TFeedFlow } from '../../pages/Main'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -8,29 +9,31 @@ const FlexContainer = styled.div`
 `
 
 export const FeedFlowInput = (props: {
-  feedFlow: number
-  feedUnit: TFeedUnit
-  setFeedFlow: (value: number) => void
-  setFeedUnit: (unit: TFeedUnit) => void
+  feedFlow: TFeedFlow
+  setFeedFlow: (value: TFeedFlow) => void
 }) => {
   return (
     <FlexContainer>
       <TextField
         id="feed-flow-input"
-        value={props.feedFlow.toString()}
-        label="Feed Flow"
-        unit={props.feedUnit}
+        value={props.feedFlow.value.toString()}
+        unit={props.feedFlow.unit}
         type="number"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          props.setFeedFlow(Number(event.target.value))
+          props.setFeedFlow({
+            unit: props.feedFlow.unit,
+            value: Number(event.target.value),
+          })
         }
       />
       <Switch
-        label="Feed unit"
-        size="small"
-        checked={props.feedUnit === 'kg/d'}
+        label="Unit"
+        checked={props.feedFlow.unit === 'kg/d'}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          props.setFeedUnit(event.target.checked ? 'kg/d' : 'Sm3/d')
+          props.setFeedFlow({
+            unit: event.target.checked ? 'kg/d' : 'Sm3/d',
+            value: props.feedFlow.value,
+          })
         }
       />
     </FlexContainer>
