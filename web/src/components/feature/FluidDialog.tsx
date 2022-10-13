@@ -7,21 +7,15 @@ const WideDialog = styled(Dialog)`
   min-width: 700px;
 `
 
-const Form = styled.div`
+const FluidPackageForm = styled.div`
   display: flex;
   flex-flow: row wrap;
   gap: 30px;
 `
 
-const Left = styled.div`
+const FirstColumn = styled.div`
   display: flex;
   flex-flow: column nowrap;
-  gap: 30px;
-`
-
-const CustomDialogActions = styled(Dialog.Actions)`
-  display: flex;
-  flex-flow: row nowrap;
   gap: 30px;
 `
 
@@ -40,8 +34,8 @@ export const FluidDialog = ({
         <Dialog.Title>Create fluid package</Dialog.Title>
       </Dialog.Header>
       <Dialog.CustomContent>
-        <Form>
-          <Left>
+        <FluidPackageForm>
+          <FirstColumn>
             <TextField
               id="fluid-package-name"
               placeholder="Fluid package"
@@ -51,12 +45,13 @@ export const FluidDialog = ({
               id="fluid-package-description"
               placeholder="Description"
               label="Description"
+              multiline
             />
-          </Left>
+          </FirstColumn>
           <ComponentSelector components={components} />
-        </Form>
+        </FluidPackageForm>
       </Dialog.CustomContent>
-      <CustomDialogActions>
+      <Dialog.Actions>
         <Button color="danger" variant="outlined">
           Delete
         </Button>
@@ -64,7 +59,7 @@ export const FluidDialog = ({
           Cancel
         </Button>
         <Button type="submit">Save</Button>
-      </CustomDialogActions>
+      </Dialog.Actions>
     </WideDialog>
   )
 }
