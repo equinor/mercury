@@ -4,7 +4,10 @@ import { ComponentSelector } from './ComponentSelector'
 import { ComponentResponse } from '../../api/generated'
 
 const WideDialog = styled(Dialog)`
-  min-width: 700px;
+  width: auto;
+  @media (min-width: 900px) {
+    min-width: 800px;
+  }
 `
 
 const FluidPackageForm = styled.div`
