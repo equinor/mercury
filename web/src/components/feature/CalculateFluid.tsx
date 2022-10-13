@@ -1,4 +1,9 @@
-import { Autocomplete, Button, TextField } from '@equinor/eds-core-react'
+import {
+  Autocomplete,
+  Button,
+  Progress,
+  TextField,
+} from '@equinor/eds-core-react'
 import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
@@ -41,6 +46,7 @@ export const CalculateFluid = ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
+  const [calculating, setCalculating] = useState<boolean>(false)
   const fluidPackages = ['Krafla']
   const multiflashInput: Multiflash = {
     // TODO: get actual components
@@ -65,7 +71,9 @@ export const CalculateFluid = ({
   const calculate = (
     <Button
       data-testid="computeMf"
+      disabled={calculating}
       onClick={() => {
+        setCalculating(true)
         mercuryApi
           .computeMultiflash({ multiflash: multiflashInput })
           .then((result: AxiosResponse<MultiflashResponse>) => {
@@ -79,12 +87,18 @@ export const CalculateFluid = ({
               })`
             )
           )
-          .finally
-          // TODO: loading
-          ()
+          .finally(() => {
+            setCalculating(false)
+          })
       }}
     >
-      Run
+      {calculating && (
+        <>
+          <Progress.Circular size={16} color="neutral" />
+          Calculating...
+        </>
+      )}
+      {!calculating && <>Run</>}
     </Button>
   )
 
