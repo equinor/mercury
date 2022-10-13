@@ -33,10 +33,9 @@ export const CalculateFluid = ({
   setResult: (result: MultiflashResponse) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [temperature, setTemperature] = useState(15)
-  const [pressure, setPressure] = useState(1)
+  const [temperature, setTemperature] = useState<number>(15)
+  const [pressure, setPressure] = useState<number>(1)
   const fluidPackages = ['Krafla']
-
   const multiflashInput: Multiflash = {
     // TODO: get actual components
     componentComposition: {
@@ -101,7 +100,7 @@ export const CalculateFluid = ({
             <TextField
               id="temperature-input"
               min={-273.15}
-              value={temperature.toString()}
+              defaultValue={temperature.toString()}
               label="Temperature"
               unit="ºC"
               type="number"
@@ -111,7 +110,7 @@ export const CalculateFluid = ({
             />
             <TextField
               id="pressure-input"
-              value={pressure.toString()}
+              defaultValue={pressure.toString()}
               label="Pressure"
               unit="bar"
               type="number"
