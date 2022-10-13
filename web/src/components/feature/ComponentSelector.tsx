@@ -37,9 +37,6 @@ export const ComponentSelector = ({
 
   return (
     <ComponentSelectorContainer>
-      <ComponentTableContainer>
-        <ComponentTable input={selectedEntries} />
-      </ComponentTableContainer>
       <Autocomplete
         onOptionsChange={({ selectedItems }) => {
           setSelectedEntries(selectedItems)
@@ -51,6 +48,9 @@ export const ComponentSelector = ({
           `${option.altName} (${option.chemicalFormula})`
         }
       />
+      <ComponentTableContainer>
+        <ComponentTable input={selectedEntries} />
+      </ComponentTableContainer>
     </ComponentSelectorContainer>
   )
 }
