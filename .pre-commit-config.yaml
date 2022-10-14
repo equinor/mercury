@@ -95,12 +95,13 @@ repos:
         files: ^api/src/.*\.py$
         args: [ '--max-line-length=119', '--max-complexity=18', '--select=B,C,E,F,W,T4,B9', '--ignore=E203,E266,E501,W503' ]
 
-# The path to the venv python interpreter differ between linux and windows. An if/else is used to find it on either.
-  - repo: local
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v0.982'
     hooks:
       - id: mypy
-        name: Python type checking
-        pass_filenames: false
-        files: ^api/src/.*\.py$
-        entry: sh -c "if [ -f api/.venv/bin/python ]; then var=api/.venv/bin/python; elif [ -f api/.venv/Scripts/python ]; then var=api/.venv/Scripts/python; else echo \"Could not find .venv in './api/'\" && exit 1; fi; $var -m mypy --config-file=./api/pyproject.toml api/src/"
-        language: system
+        args: [--config-file=./api/pyproject.toml]
+        additional_dependencies:
+          - types-cachetools == 5.2.0
+          - types-requests == 2.27.30
+          - types-ujson == 5.3.0
