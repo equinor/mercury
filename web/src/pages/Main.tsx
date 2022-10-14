@@ -30,6 +30,7 @@ const DividerWithLargeSpacings = styled(Divider)`
 `
 
 export type TFeedFlow = { unit: TFeedUnit; value: number }
+export type TFeedComponentRatios = { [componentId: string]: number }
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
@@ -39,6 +40,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     unit: 'Sm3/d',
     value: 1000,
   })
+  const [feedComponentRatios, setFeedComponentRatios] =
+    useState<TFeedComponentRatios>({})
   const [result, setResult] = useState<MultiflashResponse>({
     phaseValues: {},
     componentFractions: {},
@@ -70,6 +73,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           components={components}
           feedFlow={feedFlow}
           setFeedFlow={setFeedFlow}
+          feedComponentRatios={feedComponentRatios}
+          setFeedComponentRatios={setFeedComponentRatios}
         />
         <DividerWithLargeSpacings />
         <Results>

@@ -1,9 +1,9 @@
-import { ComponentName, ComponentResponse } from '../../api/generated'
 import { Autocomplete } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { ComponentTable, TComponentEntry } from './ComponentTable'
+import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
+import { TComponentInput } from './FluidDialog'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -19,14 +19,20 @@ const ComponentTableContainer = styled.div`
   overflow: auto;
 `
 
-function createOptions(components: ComponentResponse): Array<TComponentEntry> {
-  return Object.entries(components.components).map(
-    ([key, name]: [string, ComponentName]) => ({
-      componentId: key,
-      altName: name.altName,
-      chemicalFormula: name.chemicalFormula,
-    })
-  )
+export type TComponentEntry = {
+  componentId: string
+  altName: string
+  chemicalFormula: string
+}
+
+function createOptions(
+  componentInput: TComponentInput
+): Array<TComponentEntry> {
+  return Object.entries(componentInput).map(([componentId, entry]) => ({
+    componentId: componentId,
+    altName: entry.altName,
+    chemicalFormula: entry.chemicalFormula,
+  }))
 }
 
 function getInitialSelectedOptions(
@@ -38,11 +44,13 @@ function getInitialSelectedOptions(
 }
 
 export const ComponentSelector = ({
-  components,
+  componentInput,
+  setComponentInput,
 }: {
-  components: ComponentResponse
+  componentInput: TComponentInput
+  setComponentInput: (componentInput: TComponentInput) => void
 }) => {
-  const componentOptions = createOptions(components)
+  const componentOptions = createOptions(componentInput)
   const initialComponents = getInitialSelectedOptions(componentOptions)
   const [selectedEntries, setSelectedEntries] =
     useState<Array<TComponentEntry>>(initialComponents)
@@ -62,7 +70,11 @@ export const ComponentSelector = ({
         }
       />
       <ComponentTableContainer>
-        <ComponentTable input={selectedEntries} />
+        <ComponentTable
+          input={selectedEntries}
+          componentInput={componentInput}
+          setComponentInput={setComponentInput}
+        />
       </ComponentTableContainer>
     </ComponentSelectorContainer>
   )
