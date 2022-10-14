@@ -14,7 +14,6 @@ on:
 
 env:
   RADIX_APP: mercury
-  # TODO ?
   RADIX_USER: mlw@equinor.com
 
 jobs:

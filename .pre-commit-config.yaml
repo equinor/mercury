@@ -84,9 +84,9 @@ repos:
           - eslint-plugin-prettier # runs prettier as an eslint rule
           - eslint-plugin-react # react specific linting rules
           - eslint-plugin-react-hooks # enforces the rules of hooks
-        files: ^web/src/.*\.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+        files: ^web\/src\/(?!.*generated).*\.(tsx|js|jsx|ts)$  # *.js, *.jsx, *.ts and *.tsx (excluding 'generated')
         types: [file]
-        args: ["--config=web/.eslintrc.json", "--ignore-path=web/.eslintignore"]
+        args: [--config=web/.eslintrc.json, --fix]
 
   - repo: https://gitlab.com/pycqa/flake8
     rev: 4.0.1
