@@ -1,4 +1,4 @@
-# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch-action.yaml/badge.svg) 
+# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI)](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml/badge.svg)
 
 Mercury calculator - API and Webapp
 
@@ -20,7 +20,7 @@ Generate the keypair like so;
 ssh-keygen -t ed25519 -f ./id_ed25519
 ```
 
-Upload the public key to Github, and add the private key to .env, replacing newlines with `\n` so that it is one line.
+Upload the public key to Github, and add the private key to .env, replacing newlines with __`\n`__ so that it is one line.
 
 ```bash
 LIBHG_REPO_DEPLOY_KEY=-----BEGIN OPENSSH PRIVATE KEY-----\nb3Blbn...
@@ -44,7 +44,7 @@ docker-compose run --rm api pytest --integration
 ```
 
 <a id="Contributing"></a>
-## :+1: Contributing
+## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
