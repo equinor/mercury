@@ -15,6 +15,8 @@ import {
 } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
+import { FeedFlowInput } from './FeedFlowInput'
+import { TFeedFlow } from '../../pages/Main'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -38,10 +40,14 @@ export const CalculateFluid = ({
   mercuryApi,
   setResult,
   components,
+  feedFlow,
+  setFeedFlow,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   components: ComponentResponse
+  feedFlow: TFeedFlow
+  setFeedFlow: (feedFlow: TFeedFlow) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
@@ -139,6 +145,7 @@ export const CalculateFluid = ({
               }
             />
           </FlexContainer>
+          <FeedFlowInput feedFlow={feedFlow} setFeedFlow={setFeedFlow} />
         </Form>
       </Card>
       <FluidDialog

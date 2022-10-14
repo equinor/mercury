@@ -7,7 +7,7 @@ import { CalculateFluid } from '../components/feature/CalculateFluid'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
-import { PhaseTable } from '../components/feature/PhaseTable'
+import { PhaseTable, TFeedUnit } from '../components/feature/PhaseTable'
 
 const Results = styled.div`
   display: flex;
@@ -29,10 +29,16 @@ const DividerWithLargeSpacings = styled(Divider)`
   margin-bottom: 55px;
 `
 
+export type TFeedFlow = { unit: TFeedUnit; value: number }
+
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [components, setComponents] = useState<ComponentResponse>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [feedFlow, setFeedFlow] = useState<TFeedFlow>({
+    unit: 'Sm3/d',
+    value: 1000,
+  })
   const [result, setResult] = useState<MultiflashResponse>({
     phaseValues: {},
     componentFractions: {},
@@ -62,10 +68,12 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           mercuryApi={mercuryApi}
           setResult={setResult}
           components={components}
+          feedFlow={feedFlow}
+          setFeedFlow={setFeedFlow}
         />
         <DividerWithLargeSpacings />
         <Results>
-          <PhaseTable multiFlashResponse={result} />
+          <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
           <MoleTable multiFlashResponse={result} components={components} />
         </Results>
       </Container>
