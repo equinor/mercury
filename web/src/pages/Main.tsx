@@ -8,6 +8,7 @@ import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { PhaseTable, TFeedUnit } from '../components/feature/PhaseTable'
+import { MercuryWarning } from '../components/feature/MercuryWarning'
 
 const Results = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const Results = styled.div`
   gap: 50px;
   align-items: center;
   flex-wrap: wrap;
+  margin-top: 40px;
 `
 
 const Container = styled.div`
@@ -26,7 +28,6 @@ const Container = styled.div`
 
 const DividerWithLargeSpacings = styled(Divider)`
   margin-top: 40px;
-  margin-bottom: 55px;
 `
 
 export type TFeedFlow = { unit: TFeedUnit; value: number }
@@ -72,6 +73,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           setFeedFlow={setFeedFlow}
         />
         <DividerWithLargeSpacings />
+        {'Mercury' in result.phaseValues && <MercuryWarning />}
         <Results>
           <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
           <MoleTable multiFlashResponse={result} components={components} />
