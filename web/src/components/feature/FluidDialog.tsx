@@ -4,7 +4,7 @@ import { ComponentSelector } from './ComponentSelector'
 import { ComponentResponse } from '../../api/generated'
 import { useState } from 'react'
 import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
-import { TComponentInput, TComponentComposition } from '../../types'
+import { TComponentInput, TComponentComposition, TPackage } from '../../types'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -62,11 +62,15 @@ export const FluidDialog = ({
   onClose,
   components,
   setComponentComposition,
+  packages,
+  setPackages,
 }: {
   open: boolean
   onClose: () => void
   components: ComponentResponse
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
+  packages: TPackage[]
+  setPackages: (v: TPackage[]) => void
 }) => {
   // Array of components containing input from user
   const [componentInput, setComponentInput] = useState<TComponentInput>(() => {
@@ -75,16 +79,34 @@ export const FluidDialog = ({
   const [packageName, setPackageName] = useState<string>('')
   const [packageDescription, setPackageDescription] = useState<string>('')
 
-  const handleSubmit = () => {
-    const editedComponentComposition: TComponentComposition = {}
+  const getComponentComposition = () => {
+    const componentComposition: TComponentComposition = {}
     Object.entries(componentInput).forEach(([componentId, componentEntry]) => {
       if (componentEntry.value !== 0) {
-        editedComponentComposition[componentId] = componentEntry.value
+        componentComposition[componentId] = componentEntry.value
       }
     })
+    return componentComposition
+  }
+
+  const applyPackage = () => {
     setComponentComposition(
-      normalizeComponentComposition(editedComponentComposition)
+      normalizeComponentComposition(getComponentComposition())
     )
+    onClose()
+  }
+
+  const savePackage = () => {
+    const componentComposition = getComponentComposition()
+    setComponentComposition(normalizeComponentComposition(componentComposition))
+    setPackages([
+      ...packages,
+      {
+        name: packageName,
+        description: packageDescription,
+        components: componentComposition,
+      },
+    ])
     onClose()
   }
 
@@ -129,7 +151,8 @@ export const FluidDialog = ({
         <Button variant="outlined" onClick={onClose}>
           Cancel
         </Button>
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button onClick={applyPackage}>Apply</Button>
+        <Button onClick={savePackage}>Save</Button>
         <Button
           // TODO: Demo button to remove when done testing
           onClick={() => {
