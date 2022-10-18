@@ -1,6 +1,7 @@
 import { DynamicTable } from '../common/DynamicTable'
 import { MultiflashResponse } from '../../api/generated'
 import { TFeedFlow } from '../../pages/Main'
+import { formatNumber } from '../../tableUtils'
 
 export type TFeedUnit = 'kg/d' | 'Sm3/d'
 
@@ -14,10 +15,10 @@ function getRows(
   return Object.entries(multiFlashResponse.phaseValues).map(
     ([phase, values], index) => [
       phase,
-      values['percentage'].toString(),
-      values['mercury'].toString(),
-      mercury[index].toString(),
-      (phPhaseFlowFactor * values['percentage'] * mercury[index]).toString(),
+      formatNumber(values['percentage']),
+      formatNumber(values['mercury']),
+      formatNumber(mercury[index]),
+      formatNumber(phPhaseFlowFactor * values['percentage'] * mercury[index]),
     ]
   )
 }

@@ -1,5 +1,6 @@
 import { DynamicTable } from '../common/DynamicTable'
 import { ComponentResponse, MultiflashResponse } from '../../api/generated'
+import { formatNumber } from '../../tableUtils'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
@@ -8,7 +9,7 @@ function getRows(
   return Object.entries(multiFlashResponse.componentFractions).map(
     ([compId, fractions]) => [
       componentResponse.components[compId].altName,
-      ...fractions.map((x) => x.toString()),
+      ...fractions.map((x) => formatNumber(x, 2, 3)),
     ]
   )
 }
