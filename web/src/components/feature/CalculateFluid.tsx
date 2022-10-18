@@ -107,7 +107,7 @@ export const CalculateFluid = ({
               autoWidth
             />
             <Button variant="outlined" onClick={() => setIsOpen(true)}>
-              Edit
+              New
             </Button>
           </FluidPackage>
           <FlexContainer>
