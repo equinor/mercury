@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
-import { ComponentName, ComponentResponse } from '../../api/generated'
-import { TFeedComponentRatios } from '../../pages/Main'
+import { ComponentResponse } from '../../api/generated'
+import { TComponentComposition } from '../../pages/Main'
 import { useState } from 'react'
 import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
 
@@ -25,6 +25,13 @@ const FirstColumn = styled.div`
   gap: 30px;
 `
 
+export type TComponent = {
+  componentId: string
+  altName: string
+  chemicalFormula: string
+  value: number
+}
+
 export type TComponentInput = {
   [componentId: string]: {
     altName: string
@@ -36,17 +43,13 @@ export type TComponentInput = {
 function convertComponentResponseToComponentInput(
   components: ComponentResponse
 ): TComponentInput {
-  // convert from ComponentResponse type to ComponentInput type
-  const componentInput: TComponentInput = {}
-  Object.entries(components.components).forEach(
-    ([key, name]: [string, ComponentName]) =>
-      (componentInput[key] = {
-        altName: name.altName,
-        chemicalFormula: name.chemicalFormula,
-        value: 0,
-      })
+  // convert from ComponentResponse type to TComponentInput
+  return Object.fromEntries(
+    Object.entries(components.components).map(([componentId, names]) => [
+      componentId,
+      { ...names, value: 0 },
+    ])
   )
-  return componentInput
 }
 
 function normalizeArray(array: Array<number>): Array<number> {
@@ -60,46 +63,52 @@ function normalizeArray(array: Array<number>): Array<number> {
     : array
 }
 
-function normalizeFeedComponentRatios(
-  feedComponentRatios: TFeedComponentRatios
-): TFeedComponentRatios {
+function normalizeComponentComposition(
+  componentComposition: TComponentComposition
+): TComponentComposition {
   // Normalize feedComponentRatios if necessary, else return
   const normalizedValues: Array<number> = normalizeArray(
-    Object.values(feedComponentRatios)
+    Object.values(componentComposition)
   )
-  if (normalizedValues !== Object.values(feedComponentRatios)) {
-    Object.entries(feedComponentRatios).forEach(
+  if (
+    JSON.stringify(normalizedValues) !==
+    JSON.stringify(Object.values(componentComposition))
+  ) {
+    Object.entries(componentComposition).forEach(
       ([componentId, value], index) => {
-        feedComponentRatios[componentId] = normalizedValues[index]
+        componentComposition[componentId] = normalizedValues[index]
       }
     )
   }
-  return feedComponentRatios
+  return componentComposition
 }
 
 export const FluidDialog = ({
   open,
   onClose,
   components,
-  setFeedComponentRatios,
+  setComponentComposition,
 }: {
   open: boolean
   onClose: () => void
   components: ComponentResponse
-  setFeedComponentRatios: (feedComponentRatios: TFeedComponentRatios) => void
+  setComponentComposition: (feedComponentRatios: TComponentComposition) => void
 }) => {
+  // Array of components containing input from user
   const [componentInput, setComponentInput] = useState<TComponentInput>(() => {
     return convertComponentResponseToComponentInput(components)
   })
 
   const handleSubmit = () => {
-    const editedComponentRatios: TFeedComponentRatios = {}
+    const editedComponentComposition: TComponentComposition = {}
     Object.entries(componentInput).forEach(([componentId, componentEntry]) => {
       if (componentEntry.value !== 0) {
-        editedComponentRatios[componentId] = componentEntry.value
+        editedComponentComposition[componentId] = componentEntry.value
       }
     })
-    setFeedComponentRatios(normalizeFeedComponentRatios(editedComponentRatios))
+    setComponentComposition(
+      normalizeComponentComposition(editedComponentComposition)
+    )
     onClose()
   }
 
@@ -140,7 +149,7 @@ export const FluidDialog = ({
         <Button
           // TODO: Demo button to remove when done testing
           onClick={() => {
-            setFeedComponentRatios(demoFeedComponentRatios)
+            setComponentComposition(demoFeedComponentRatios)
             setComponentInput(demoComponentInput)
             onClose()
           }}

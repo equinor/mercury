@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
-import { TComponentInput } from './FluidDialog'
+import { TComponent, TComponentInput } from './FluidDialog'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -19,25 +19,18 @@ const ComponentTableContainer = styled.div`
   overflow: auto;
 `
 
-export type TComponentEntry = {
-  componentId: string
-  altName: string
-  chemicalFormula: string
-}
-
-function createOptions(
-  componentInput: TComponentInput
-): Array<TComponentEntry> {
+function createOptions(componentInput: TComponentInput): TComponent[] {
+  // Convert TComponentInput to TComponent for table
   return Object.entries(componentInput).map(([componentId, entry]) => ({
     componentId: componentId,
-    altName: entry.altName,
-    chemicalFormula: entry.chemicalFormula,
+    ...entry,
   }))
 }
 
-function getInitialSelectedOptions(
-  componentOptions: Array<TComponentEntry>
-): Array<TComponentEntry> {
+function getInitialSelectedComponents(
+  componentOptions: TComponent[]
+): TComponent[] {
+  // Filter out components not in preSelectedComponents constant
   return componentOptions.filter((component) =>
     preSelectedComponents.includes(component.componentId)
   )
@@ -50,28 +43,28 @@ export const ComponentSelector = ({
   componentInput: TComponentInput
   setComponentInput: (componentInput: TComponentInput) => void
 }) => {
-  const componentOptions = createOptions(componentInput)
-  const initialComponents = getInitialSelectedOptions(componentOptions)
-  const [selectedEntries, setSelectedEntries] =
-    useState<Array<TComponentEntry>>(initialComponents)
-
+  const allComponents = createOptions(componentInput)
+  const initialSelectedComponents = getInitialSelectedComponents(allComponents)
+  const [selectedComponents, setSelectedComponents] = useState<TComponent[]>(
+    initialSelectedComponents
+  )
   return (
     <ComponentSelectorContainer>
       <Autocomplete
         onOptionsChange={({ selectedItems }) => {
-          setSelectedEntries(selectedItems)
+          setSelectedComponents(selectedItems)
         }}
         label="Add components"
         multiple
-        options={componentOptions}
-        initialSelectedOptions={initialComponents}
+        options={allComponents}
+        initialSelectedOptions={initialSelectedComponents}
         optionLabel={(option) =>
           `${option.altName} (${option.chemicalFormula})`
         }
       />
       <ComponentTableContainer>
         <ComponentTable
-          input={selectedEntries}
+          input={selectedComponents}
           componentInput={componentInput}
           setComponentInput={setComponentInput}
         />

@@ -1,13 +1,12 @@
 import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
-import { TComponentInput } from './FluidDialog'
-import { TComponentEntry } from './ComponentSelector'
+import { TComponent, TComponentInput } from './FluidDialog'
 
 export const ComponentTable = ({
   input,
   componentInput,
   setComponentInput,
 }: {
-  input: Array<TComponentEntry>
+  input: TComponent[]
   componentInput: TComponentInput
   setComponentInput: (componentInput: TComponentInput) => void
 }): JSX.Element => {

@@ -8,15 +8,11 @@ import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
 import { useState } from 'react'
-import {
-  ComponentResponse,
-  Multiflash,
-  MultiflashResponse,
-} from '../../api/generated'
+import { ComponentResponse, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TFeedComponentRatios, TFeedFlow } from '../../pages/Main'
+import { TComponentComposition, TFeedFlow } from '../../pages/Main'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -42,16 +38,16 @@ export const CalculateFluid = ({
   components,
   feedFlow,
   setFeedFlow,
-  feedComponentRatios,
-  setFeedComponentRatios,
+  componentComposition,
+  setComponentComposition,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   components: ComponentResponse
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
-  feedComponentRatios: TFeedComponentRatios
-  setFeedComponentRatios: (feedComponentRatios: TFeedComponentRatios) => void
+  componentComposition: TComponentComposition
+  setComponentComposition: (feedComponentRatios: TComponentComposition) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
@@ -68,7 +64,7 @@ export const CalculateFluid = ({
         mercuryApi
           .computeMultiflash({
             multiflash: {
-              componentComposition: feedComponentRatios,
+              componentComposition: componentComposition,
               temperature: temperature,
               pressure: pressure,
             },
@@ -143,7 +139,7 @@ export const CalculateFluid = ({
         open={isOpen}
         onClose={() => setIsOpen(false)}
         components={components}
-        setFeedComponentRatios={setFeedComponentRatios}
+        setComponentComposition={setComponentComposition}
       />
     </>
   )

@@ -95,5 +95,9 @@ export const demoComponentInput = {
     chemicalFormula: 'nC6',
     value: 0.066681,
   },
-  '5': { altName: 'Mercury', chemicalFormula: 'Hg', value: 0.001 },
+  '5': {
+    altName: 'Mercury',
+    chemicalFormula: 'Hg',
+    value: 0.001,
+  },
 }
