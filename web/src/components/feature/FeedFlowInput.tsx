@@ -1,7 +1,6 @@
 import { Switch, TextField } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { Card } from '../common/Card'
-import { TFeedFlow } from '../../pages/Main'
+import { TFeedFlow } from '../../types'
 
 const FlexContainer = styled.div`
   display: flex;

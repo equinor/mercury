@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
-import { TComponent, TComponentInput } from './FluidDialog'
+import { TComponent, TComponentInput } from '../../types'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;

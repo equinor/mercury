@@ -12,7 +12,7 @@ import { ComponentResponse, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentComposition, TFeedFlow } from '../../pages/Main'
+import { TComponentComposition, TFeedFlow } from '../../types'
 
 const FlexContainer = styled.div`
   display: flex;

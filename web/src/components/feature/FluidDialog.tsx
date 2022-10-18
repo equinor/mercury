@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentResponse } from '../../api/generated'
-import { TComponentComposition } from '../../pages/Main'
 import { useState } from 'react'
 import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
+import { TComponentInput, TComponentComposition } from '../../types'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -24,21 +24,6 @@ const FirstColumn = styled.div`
   flex-flow: column nowrap;
   gap: 30px;
 `
-
-export type TComponent = {
-  componentId: string
-  altName: string
-  chemicalFormula: string
-  value: number
-}
-
-export type TComponentInput = {
-  [componentId: string]: {
-    altName: string
-    chemicalFormula: string
-    value: number
-  }
-}
 
 function convertComponentResponseToComponentInput(
   components: ComponentResponse
