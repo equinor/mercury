@@ -15,3 +15,8 @@ export type TComponentInput = {
 export type TComponentComposition = { [componentId: string]: number }
 export type TFeedUnit = 'kg/d' | 'Sm3/d'
 export type TFeedFlow = { unit: TFeedUnit; value: number }
+export type TPackage = {
+  name: string
+  description: string
+  components: TComponentComposition
+}
