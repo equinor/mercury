@@ -12,7 +12,8 @@ import { ComponentResponse, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentComposition, TFeedFlow } from '../../types'
+import { TComponentComposition, TFeedFlow, TPackage } from '../../types'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -53,7 +54,7 @@ export const CalculateFluid = ({
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
-  const fluidPackages = ['Krafla']
+  const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
 
   const calculate = (
     <Button
@@ -102,7 +103,7 @@ export const CalculateFluid = ({
           <FluidPackage>
             <Autocomplete
               label="Fluid package"
-              options={fluidPackages}
+              options={packages.map((x) => x.name)}
               autoWidth
             />
             <Button variant="outlined" onClick={() => setIsOpen(true)}>
@@ -140,6 +141,8 @@ export const CalculateFluid = ({
         onClose={() => setIsOpen(false)}
         components={components}
         setComponentComposition={setComponentComposition}
+        packages={packages}
+        setPackages={setPackages}
       />
     </>
   )
