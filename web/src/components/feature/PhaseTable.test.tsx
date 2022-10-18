@@ -11,9 +11,7 @@ test('renders without crashing and displaying correct values in table', async ()
     />
   )
   // @ts-ignore because not able to get eslint to discover these types
-  expect(screen.getByTestId('Mass Concentration-0')).toHaveTextContent(
-    '9576.977265669584'
-  )
+  expect(screen.getByTestId('Mass Concentration-0')).toHaveTextContent('9577')
   // @ts-ignore because not able to get eslint to discover these types
   expect(screen.getByTestId('Mole Concentration-2')).toHaveTextContent('1')
   // @ts-ignore because not able to get eslint to discover these types

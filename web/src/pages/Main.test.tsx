@@ -23,12 +23,10 @@ test('renders without crashing and calculate run populates tables', async () => 
   expect(await screen.findByTestId('Phases-0')).toHaveTextContent('Vapor')
   // @ts-ignore because not able to get eslint to discover these types
   expect(await screen.findByTestId('Mole Concentration-2')).toHaveTextContent(
-    '1.0000000000000002'
+    '1.000'
   )
   // @ts-ignore because not able to get eslint to discover these types
   expect(await screen.findByTestId('Components-3')).toHaveTextContent('Mercury')
   // @ts-ignore because not able to get eslint to discover these types
-  expect(await screen.findByTestId('Vapor-3')).toHaveTextContent(
-    '0.0000011288993580273517'
-  )
+  expect(await screen.findByTestId('Vapor-3')).toHaveTextContent('1.13E-6')
 })
