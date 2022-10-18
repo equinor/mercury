@@ -72,6 +72,8 @@ export const FluidDialog = ({
   const [componentInput, setComponentInput] = useState<TComponentInput>(() => {
     return convertComponentResponseToComponentInput(components)
   })
+  const [packageName, setPackageName] = useState<string>('')
+  const [packageDescription, setPackageDescription] = useState<string>('')
 
   const handleSubmit = () => {
     const editedComponentComposition: TComponentComposition = {}
@@ -98,11 +100,19 @@ export const FluidDialog = ({
               id="fluid-package-name"
               placeholder="Fluid package"
               label="Name"
+              value={packageName}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPackageName(event.target.value)
+              }
             />
             <TextField
               id="fluid-package-description"
               placeholder="Description"
               label="Description"
+              value={packageDescription}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setPackageDescription(event.target.value)
+              }
               multiline
             />
           </FirstColumn>
