@@ -1,15 +1,14 @@
 import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
-
-export type TComponentEntry = {
-  componentId: string
-  altName: string
-  chemicalFormula: string
-}
+import { TComponent, TComponentInput } from './FluidDialog'
 
 export const ComponentTable = ({
   input,
+  componentInput,
+  setComponentInput,
 }: {
-  input: Array<TComponentEntry>
+  input: TComponent[]
+  componentInput: TComponentInput
+  setComponentInput: (componentInput: TComponentInput) => void
 }): JSX.Element => {
   function createTableRows() {
     return input.map((entry, index) => (
@@ -17,11 +16,18 @@ export const ComponentTable = ({
         <Table.Cell
           data-testid={`Component-${index}`}
         >{`${entry.altName} (${entry.chemicalFormula})`}</Table.Cell>
-        <Table.Cell data-testid={`Feed Value (mol)-${index}`}>
+        <Table.Cell data-testid={`Ratio (mol)-${index}`}>
           <TextField
-            id={`Feed Value (mol)-${index}-input`}
-            placeholder={'0'}
+            id={`${entry.chemicalFormula}-input`}
+            defaultValue={componentInput[entry.componentId].value}
+            min={0}
             type="number"
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              componentInput[entry.componentId].value = Number(
+                event.target.value
+              )
+              setComponentInput(componentInput)
+            }}
           />
         </Table.Cell>
       </Table.Row>

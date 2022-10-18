@@ -1,9 +1,9 @@
-import { ComponentName, ComponentResponse } from '../../api/generated'
 import { Autocomplete } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { ComponentTable, TComponentEntry } from './ComponentTable'
+import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
+import { TComponent, TComponentInput } from './FluidDialog'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -19,50 +19,55 @@ const ComponentTableContainer = styled.div`
   overflow: auto;
 `
 
-function createOptions(components: ComponentResponse): Array<TComponentEntry> {
-  return Object.entries(components.components).map(
-    ([key, name]: [string, ComponentName]) => ({
-      componentId: key,
-      altName: name.altName,
-      chemicalFormula: name.chemicalFormula,
-    })
-  )
+function createOptions(componentInput: TComponentInput): TComponent[] {
+  // Convert TComponentInput to TComponent for table
+  return Object.entries(componentInput).map(([componentId, entry]) => ({
+    componentId: componentId,
+    ...entry,
+  }))
 }
 
-function getInitialSelectedOptions(
-  componentOptions: Array<TComponentEntry>
-): Array<TComponentEntry> {
+function getInitialSelectedComponents(
+  componentOptions: TComponent[]
+): TComponent[] {
+  // Filter out components not in preSelectedComponents constant
   return componentOptions.filter((component) =>
     preSelectedComponents.includes(component.componentId)
   )
 }
 
 export const ComponentSelector = ({
-  components,
+  componentInput,
+  setComponentInput,
 }: {
-  components: ComponentResponse
+  componentInput: TComponentInput
+  setComponentInput: (componentInput: TComponentInput) => void
 }) => {
-  const componentOptions = createOptions(components)
-  const initialComponents = getInitialSelectedOptions(componentOptions)
-  const [selectedEntries, setSelectedEntries] =
-    useState<Array<TComponentEntry>>(initialComponents)
-
+  const allComponents = createOptions(componentInput)
+  const initialSelectedComponents = getInitialSelectedComponents(allComponents)
+  const [selectedComponents, setSelectedComponents] = useState<TComponent[]>(
+    initialSelectedComponents
+  )
   return (
     <ComponentSelectorContainer>
       <Autocomplete
         onOptionsChange={({ selectedItems }) => {
-          setSelectedEntries(selectedItems)
+          setSelectedComponents(selectedItems)
         }}
         label="Add components"
         multiple
-        options={componentOptions}
-        initialSelectedOptions={initialComponents}
+        options={allComponents}
+        initialSelectedOptions={initialSelectedComponents}
         optionLabel={(option) =>
           `${option.altName} (${option.chemicalFormula})`
         }
       />
       <ComponentTableContainer>
-        <ComponentTable input={selectedEntries} />
+        <ComponentTable
+          input={selectedComponents}
+          componentInput={componentInput}
+          setComponentInput={setComponentInput}
+        />
       </ComponentTableContainer>
     </ComponentSelectorContainer>
   )

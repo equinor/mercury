@@ -23,3 +23,81 @@ export const preSelectedComponents: Array<string> = [
   '504',
   '605',
 ]
+
+export const demoFeedComponentRatios = {
+  '3': 0.062202,
+  '2': 0.0047,
+  '1': 0.046539,
+  '101': 0.65364,
+  '201': 0.086307,
+  '301': 0.045563,
+  '401': 0.007579,
+  '402': 0.015481,
+  '503': 0.005188,
+  '504': 0.00612,
+  '605': 0.066681,
+  '5': 0.001,
+}
+
+export const demoComponentInput = {
+  '3': {
+    altName: 'Water',
+    chemicalFormula: 'H2O',
+    value: 0.062202,
+  },
+  '2': {
+    altName: 'Nitrogen',
+    chemicalFormula: 'N2',
+    value: 0.0047,
+  },
+  '1': {
+    altName: 'Carbondioxide',
+    chemicalFormula: 'CO2',
+    value: 0.046539,
+  },
+  '101': {
+    altName: 'Methane',
+    chemicalFormula: 'CH4',
+    value: 0.65364,
+  },
+  '201': {
+    altName: 'Ethane',
+    chemicalFormula: 'C2H6',
+    value: 0.086307,
+  },
+  '301': {
+    altName: 'Propane',
+    chemicalFormula: 'nC3',
+    value: 0.045563,
+  },
+  '401': {
+    altName: 'i-Butane',
+    chemicalFormula: 'iC4',
+    value: 0.007579,
+  },
+  '402': {
+    altName: 'n-Butane',
+    chemicalFormula: 'nC4',
+    value: 0.015481,
+  },
+  '503': {
+    altName: 'i-Pentane',
+    chemicalFormula: 'iC5',
+    value: 0.005188,
+  },
+  '504': {
+    altName: 'n-Pentane',
+    chemicalFormula: 'nC5',
+    value: 0.00612,
+  },
+  '605': {
+    altName: 'n-Hexane',
+    chemicalFormula: 'nC6',
+    value: 0.066681,
+  },
+  '5': {
+    altName: 'Mercury',
+    chemicalFormula: 'Hg',
+    value: 0.001,
+  },
+}

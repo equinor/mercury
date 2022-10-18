@@ -8,15 +8,11 @@ import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
 import { useState } from 'react'
-import {
-  ComponentResponse,
-  Multiflash,
-  MultiflashResponse,
-} from '../../api/generated'
+import { ComponentResponse, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TFeedFlow } from '../../pages/Main'
+import { TComponentComposition, TFeedFlow } from '../../pages/Main'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -42,37 +38,22 @@ export const CalculateFluid = ({
   components,
   feedFlow,
   setFeedFlow,
+  componentComposition,
+  setComponentComposition,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   components: ComponentResponse
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
+  componentComposition: TComponentComposition
+  setComponentComposition: (feedComponentRatios: TComponentComposition) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
   const fluidPackages = ['Krafla']
-  const multiflashInput: Multiflash = {
-    // TODO: get actual components
-    componentComposition: {
-      '3': 0.062202,
-      '2': 0.0047,
-      '1': 0.046539,
-      '101': 0.65364,
-      '201': 0.086307,
-      '301': 0.045563,
-      '401': 0.007579,
-      '402': 0.015481,
-      '503': 0.005188,
-      '504': 0.00612,
-      '605': 0.066681,
-      '5': 0.001,
-    },
-    temperature: temperature,
-    pressure: pressure,
-  }
 
   const calculate = (
     <Button
@@ -81,7 +62,13 @@ export const CalculateFluid = ({
       onClick={() => {
         setCalculating(true)
         mercuryApi
-          .computeMultiflash({ multiflash: multiflashInput })
+          .computeMultiflash({
+            multiflash: {
+              componentComposition: componentComposition,
+              temperature: temperature,
+              pressure: pressure,
+            },
+          })
           .then((result: AxiosResponse<MultiflashResponse>) => {
             setResult(result.data)
           })
@@ -152,6 +139,7 @@ export const CalculateFluid = ({
         open={isOpen}
         onClose={() => setIsOpen(false)}
         components={components}
+        setComponentComposition={setComponentComposition}
       />
     </>
   )
