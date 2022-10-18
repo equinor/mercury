@@ -1,5 +1,5 @@
 import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
-import { TComponent, TComponentInput } from './FluidDialog'
+import { TComponent, TComponentInput } from '../../types'
 
 export const ComponentTable = ({
   input,

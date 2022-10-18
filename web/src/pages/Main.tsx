@@ -7,8 +7,9 @@ import { CalculateFluid } from '../components/feature/CalculateFluid'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
-import { PhaseTable, TFeedUnit } from '../components/feature/PhaseTable'
+import { PhaseTable } from '../components/feature/PhaseTable'
 import { MercuryWarning } from '../components/feature/MercuryWarning'
+import { TComponentComposition, TFeedFlow } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -29,9 +30,6 @@ const Container = styled.div`
 const DividerWithLargeSpacings = styled(Divider)`
   margin-top: 40px;
 `
-
-export type TFeedFlow = { unit: TFeedUnit; value: number }
-export type TComponentComposition = { [componentId: string]: number }
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props

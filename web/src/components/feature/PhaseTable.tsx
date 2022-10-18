@@ -1,9 +1,7 @@
 import { DynamicTable } from '../common/DynamicTable'
 import { MultiflashResponse } from '../../api/generated'
-import { TFeedFlow } from '../../pages/Main'
+import { TFeedFlow } from '../../types'
 import { formatNumber } from '../../tableUtils'
-
-export type TFeedUnit = 'kg/d' | 'Sm3/d'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
