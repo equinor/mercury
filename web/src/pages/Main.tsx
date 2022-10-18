@@ -79,7 +79,11 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
         {'Mercury' in result.phaseValues && <MercuryWarning />}
         <Results>
           <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
-          <MoleTable multiFlashResponse={result} components={components} />
+          <MoleTable
+            multiFlashResponse={result}
+            components={components}
+            componentComposition={componentComposition}
+          />
         </Results>
       </Container>
     </>
