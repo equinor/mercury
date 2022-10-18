@@ -52,35 +52,24 @@ function convertComponentResponseToComponentInput(
   )
 }
 
-function normalizeArray(array: Array<number>): Array<number> {
-  // Normalize array if not "close enough" (|sum - 1| > 0.01) to 1
+function getNormalizationFactor(array: Array<number>): number {
   const arraySum: number = array.reduce(
     (partialSum, value) => partialSum + value,
     0
   )
-  return Math.abs(arraySum - 1) > 0.01
-    ? array.map((value) => value / arraySum)
-    : array
+  return Math.abs(arraySum - 1) > 0.01 ? arraySum : 1
 }
 
 function normalizeComponentComposition(
   componentComposition: TComponentComposition
 ): TComponentComposition {
-  // Normalize feedComponentRatios if necessary, else return
-  const normalizedValues: Array<number> = normalizeArray(
-    Object.values(componentComposition)
+  const factor = getNormalizationFactor(Object.values(componentComposition))
+  return Object.fromEntries(
+    Object.entries(componentComposition).map(([componentId, value]) => [
+      componentId,
+      value / factor,
+    ])
   )
-  if (
-    JSON.stringify(normalizedValues) !==
-    JSON.stringify(Object.values(componentComposition))
-  ) {
-    Object.entries(componentComposition).forEach(
-      ([componentId, value], index) => {
-        componentComposition[componentId] = normalizedValues[index]
-      }
-    )
-  }
-  return componentComposition
 }
 
 export const FluidDialog = ({
