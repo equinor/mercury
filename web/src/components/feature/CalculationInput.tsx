@@ -1,6 +1,5 @@
 import {
   Autocomplete,
-  AutocompleteChanges,
   Button,
   Progress,
   TextField,
@@ -9,11 +8,16 @@ import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
 import { useState } from 'react'
-import { ComponentResponse, MultiflashResponse } from '../../api/generated'
+import { MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentComposition, TFeedFlow, TPackage } from '../../types'
+import {
+  TComponentNames,
+  TComponentRatios,
+  TFeedFlow,
+  TPackage,
+} from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
 const FlexContainer = styled.div`
@@ -37,40 +41,37 @@ const FluidPackage = styled(FlexContainer)`
 export const CalculationInput = ({
   mercuryApi,
   setResult,
-  components,
+  componentNames,
   feedFlow,
   setFeedFlow,
-  componentComposition,
-  setComponentComposition,
+  setUsedComponentRatios,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
-  components: ComponentResponse
+  componentNames: TComponentNames
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
-  componentComposition: TComponentComposition | undefined
-  setComponentComposition: (feedComponentRatios: TComponentComposition) => void
+  setUsedComponentRatios: (ratios: TComponentRatios) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
-  const [packages, setPackages] = useLocalStorage<{ [name: string]: TPackage }>(
-    'packages',
-    {}
-  )
+  const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
+  const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
 
   const calculate = (
     <Button
       data-testid="computeMf"
-      disabled={calculating || !componentComposition}
+      disabled={calculating || !selectedPackage}
       onClick={() => {
-        if (!componentComposition) return
+        if (selectedPackage === undefined) return
         setCalculating(true)
+        setUsedComponentRatios(selectedPackage.components)
         mercuryApi
           .computeMultiflash({
             multiflash: {
-              componentComposition: componentComposition,
+              componentComposition: selectedPackage.components,
               temperature: temperature,
               pressure: pressure,
             },
@@ -95,15 +96,6 @@ export const CalculationInput = ({
     </Button>
   )
 
-  function setLoadedFluidPackage(selectedPackages: string[]): void {
-    // There will always be ether 0 or 1 selected package
-    if (!selectedPackages.length) return
-    const allPackages: { [name: string]: TPackage } = JSON.parse(
-      localStorage.getItem('packages') ?? '{}'
-    )
-    setComponentComposition(allPackages[selectedPackages[0]].components)
-  }
-
   return (
     <>
       <Card title={'Calculate Fluid'} actions={calculate}>
@@ -111,11 +103,12 @@ export const CalculationInput = ({
           <FluidPackage>
             <Autocomplete
               label="Fluid package"
-              options={Object.keys(packages).map((x) => x)}
-              autoWidth
-              onOptionsChange={(value: AutocompleteChanges<string>) =>
-                setLoadedFluidPackage(value.selectedItems)
+              options={packages}
+              optionLabel={(option) => option.name}
+              onOptionsChange={(changes) =>
+                setSelectedPackage(changes.selectedItems[0])
               }
+              autoWidth
             />
             <Button variant="outlined" onClick={() => setIsOpen(true)}>
               New
@@ -150,8 +143,8 @@ export const CalculationInput = ({
       <FluidDialog
         isOpen={isOpen}
         close={() => setIsOpen(false)}
-        components={components}
-        setComponentComposition={setComponentComposition}
+        componentNames={componentNames}
+        selectedPackage={selectedPackage}
         packages={packages}
         setPackages={setPackages}
       />

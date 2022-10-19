@@ -1,22 +1,16 @@
-export type TComponent = {
-  componentId: string
-  altName: string
-  chemicalFormula: string
-  value: number
-}
-
-export type TComponentInput = {
-  [componentId: string]: {
-    altName: string
-    chemicalFormula: string
-    value: number
+export type TComponentNames = {
+  [id: string]: {
+    name: string
+    formula: string
   }
 }
-export type TComponentComposition = { [componentId: string]: number }
+export type TComponentRatios = {
+  [id: string]: number
+}
 export type TFeedUnit = 'kg/d' | 'Sm3/d'
 export type TFeedFlow = { unit: TFeedUnit; value: number }
 export type TPackage = {
   name: string
   description: string
-  components: TComponentComposition
+  components: TComponentRatios
 }

@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
-import { ComponentResponse } from '../../api/generated'
-import { useState } from 'react'
-import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
-import { TComponentInput, TComponentComposition, TPackage } from '../../types'
+import { useEffect, useState } from 'react'
+import { TPackage, TComponentNames, TComponentRatios } from '../../types'
+import { demoFeedComponentRatios } from '../../constants'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -25,18 +24,6 @@ const FirstColumn = styled.div`
   gap: 30px;
 `
 
-function convertComponentResponseToComponentInput(
-  components: ComponentResponse
-): TComponentInput {
-  // convert from ComponentResponse type to TComponentInput
-  return Object.fromEntries(
-    Object.entries(components.components).map(([componentId, names]) => [
-      componentId,
-      { ...names, value: 0 },
-    ])
-  )
-}
-
 function getNormalizationFactor(array: Array<number>): number {
   const arraySum: number = array.reduce(
     (partialSum, value) => partialSum + value,
@@ -45,68 +32,54 @@ function getNormalizationFactor(array: Array<number>): number {
   return Math.abs(arraySum - 1) > 0.01 ? arraySum : 1
 }
 
-function normalizeComponentComposition(
-  componentComposition: TComponentComposition
-): TComponentComposition {
-  const factor = getNormalizationFactor(Object.values(componentComposition))
+function normalizeRatios(componentRatios: TComponentRatios): TComponentRatios {
+  const factor = getNormalizationFactor(Object.values(componentRatios))
   return Object.fromEntries(
-    Object.entries(componentComposition).map(([componentId, value]) => [
-      componentId,
-      value / factor,
-    ])
+    Object.entries(componentRatios).map(([id, ratio]) => [id, ratio / factor])
   )
 }
 
 export const FluidDialog = ({
   isOpen,
   close,
-  components,
-  setComponentComposition,
+  componentNames,
+  selectedPackage,
   packages,
   setPackages,
 }: {
   isOpen: boolean
   close: () => void
-  components: ComponentResponse
-  setComponentComposition: (feedComponentRatios: TComponentComposition) => void
-  packages: { [name: string]: TPackage }
-  setPackages: (v: { [name: string]: TPackage }) => void
+  componentNames: TComponentNames
+  selectedPackage: TPackage | undefined
+  packages: TPackage[]
+  setPackages: (v: TPackage[]) => void
 }) => {
   // Array of components containing input from user
-  const [componentInput, setComponentInput] = useState<TComponentInput>(
-    convertComponentResponseToComponentInput(components)
-  )
+  const [componentRatios, setComponentRatios] = useState<TComponentRatios>({})
   const [packageName, setPackageName] = useState<string>('')
   const [packageDescription, setPackageDescription] = useState<string>('')
 
-  const getComponentComposition = () => {
-    const componentComposition: TComponentComposition = {}
-    Object.entries(componentInput).forEach(([componentId, componentEntry]) => {
-      if (componentEntry.value !== 0) {
-        componentComposition[componentId] = componentEntry.value
-      }
-    })
-    return componentComposition
-  }
-
-  const applyPackage = () => {
-    setComponentComposition(
-      normalizeComponentComposition(getComponentComposition())
-    )
-    close()
-  }
+  useEffect(() => {
+    if (selectedPackage === undefined) {
+      setPackageName('')
+      setPackageDescription('')
+      setComponentRatios({})
+    } else {
+      setPackageName(selectedPackage.name)
+      setPackageDescription(selectedPackage.description)
+      setComponentRatios(selectedPackage.components)
+    }
+  }, [selectedPackage])
 
   const savePackage = () => {
-    const componentComposition = getComponentComposition()
-    setComponentComposition(normalizeComponentComposition(componentComposition))
-    setPackages({
+    setPackages([
       ...packages,
-      [packageName]: {
+      {
         name: packageName,
         description: packageDescription,
-        components: componentComposition,
+        components: normalizeRatios(componentRatios),
       },
-    })
+    ])
     close()
   }
 
@@ -139,8 +112,9 @@ export const FluidDialog = ({
             />
           </FirstColumn>
           <ComponentSelector
-            componentInput={componentInput}
-            setComponentInput={setComponentInput}
+            componentNames={componentNames}
+            componentRatios={componentRatios}
+            setComponentRatios={setComponentRatios}
           />
         </FluidPackageForm>
       </Dialog.CustomContent>
@@ -151,16 +125,15 @@ export const FluidDialog = ({
         <Button variant="outlined" onClick={close}>
           Cancel
         </Button>
-        <Button onClick={applyPackage}>Apply</Button>
         <Button onClick={savePackage} disabled={!packageName}>
           Save
         </Button>
         <Button
           // TODO: Demo button to remove when done testing
           onClick={() => {
-            setComponentComposition(demoFeedComponentRatios)
-            setComponentInput(demoComponentInput)
-            close()
+            setPackageName('Demo data')
+            setPackageDescription('')
+            setComponentRatios(demoFeedComponentRatios)
           }}
         >
           Demo data

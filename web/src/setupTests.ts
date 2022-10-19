@@ -3,9 +3,10 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
-import { ComponentResponse, MultiflashResponse } from './api/generated'
+import { MultiflashResponse } from './api/generated'
+import { TComponentNames } from './types'
 
-export const mockComponentComposition = {
+export const mockComponentRatios = {
   '3': 0.062202,
   '2': 0.0047,
   '1': 0.046539,
@@ -60,39 +61,37 @@ export const mockMultiflashResponse: MultiflashResponse = {
   feedMolecularWeight: 26.494307395,
 }
 
-export const mockComponentResponse: ComponentResponse = {
-  components: {
-    '1': { chemicalFormula: 'CO2', altName: 'Carbondioxide' },
-    '2': { chemicalFormula: 'N2', altName: 'Nitrogen' },
-    '3': { chemicalFormula: 'H2O', altName: 'Water' },
-    '4': { chemicalFormula: 'H2S', altName: 'Hydrogensulfide' },
-    '5': { chemicalFormula: 'Hg', altName: 'Mercury' },
-    '101': { chemicalFormula: 'CH4', altName: 'Methane' },
-    '201': { chemicalFormula: 'C2H6', altName: 'Ethane' },
-    '301': { chemicalFormula: 'nC3', altName: 'Propane' },
-    '401': { chemicalFormula: 'iC4', altName: 'i-Butane' },
-    '402': { chemicalFormula: 'nC4', altName: 'n-Butane' },
-    '501': { chemicalFormula: '22-dm-C3', altName: '2-2-dimethyl-propane' },
-    '503': { chemicalFormula: 'iC5', altName: 'i-Pentane' },
-    '504': { chemicalFormula: 'nC5', altName: 'n-Pentane' },
-    '502': { chemicalFormula: 'cy-C5', altName: 'Cy-C5' },
-    '601': {
-      chemicalFormula: '22-dm-C4',
-      altName: '2-2-dimethyl-butane(neohexane)',
-    },
-    '602': { chemicalFormula: '23-dm-C4', altName: '2-3-dimethyl-butane' },
-    '603': { chemicalFormula: '2-m-C5', altName: '2-methyl-pentane' },
-    '604': { chemicalFormula: '3-m-C5', altName: '3-methyl-pentane' },
-    '605': { chemicalFormula: 'nC6', altName: 'n-Hexane' },
-    '606': { chemicalFormula: 'cy-C6', altName: 'Cy-hexane' },
-    '608': { chemicalFormula: 'benzene', altName: 'Benzene' },
-    '701': { chemicalFormula: 'nC7', altName: 'n-heptane' },
-    '707': { chemicalFormula: 'cy-C7', altName: 'Cy-heptane' },
-    '710': { chemicalFormula: 'toluene', altName: 'Toluene' },
-    '801': { chemicalFormula: 'nC8', altName: 'n-octane' },
-    '806': { chemicalFormula: 'cy-C8', altName: 'Cy-octane' },
-    '809': { chemicalFormula: 'm-xylene', altName: 'M-xylene' },
-    '901': { chemicalFormula: 'nC9', altName: 'n-nonane' },
-    '1016': { chemicalFormula: 'nC10', altName: 'n-decane' },
+export const mockComponentNames: TComponentNames = {
+  '1': { formula: 'CO2', name: 'Carbondioxide' },
+  '2': { formula: 'N2', name: 'Nitrogen' },
+  '3': { formula: 'H2O', name: 'Water' },
+  '4': { formula: 'H2S', name: 'Hydrogensulfide' },
+  '5': { formula: 'Hg', name: 'Mercury' },
+  '101': { formula: 'CH4', name: 'Methane' },
+  '201': { formula: 'C2H6', name: 'Ethane' },
+  '301': { formula: 'nC3', name: 'Propane' },
+  '401': { formula: 'iC4', name: 'i-Butane' },
+  '402': { formula: 'nC4', name: 'n-Butane' },
+  '501': { formula: '22-dm-C3', name: '2-2-dimethyl-propane' },
+  '503': { formula: 'iC5', name: 'i-Pentane' },
+  '504': { formula: 'nC5', name: 'n-Pentane' },
+  '502': { formula: 'cy-C5', name: 'Cy-C5' },
+  '601': {
+    formula: '22-dm-C4',
+    name: '2-2-dimethyl-butane(neohexane)',
   },
+  '602': { formula: '23-dm-C4', name: '2-3-dimethyl-butane' },
+  '603': { formula: '2-m-C5', name: '2-methyl-pentane' },
+  '604': { formula: '3-m-C5', name: '3-methyl-pentane' },
+  '605': { formula: 'nC6', name: 'n-Hexane' },
+  '606': { formula: 'cy-C6', name: 'Cy-hexane' },
+  '608': { formula: 'benzene', name: 'Benzene' },
+  '701': { formula: 'nC7', name: 'n-heptane' },
+  '707': { formula: 'cy-C7', name: 'Cy-heptane' },
+  '710': { formula: 'toluene', name: 'Toluene' },
+  '801': { formula: 'nC8', name: 'n-octane' },
+  '806': { formula: 'cy-C8', name: 'Cy-octane' },
+  '809': { formula: 'm-xylene', name: 'M-xylene' },
+  '901': { formula: 'nC9', name: 'n-nonane' },
+  '1016': { formula: 'nC10', name: 'n-decane' },
 }
