@@ -5,6 +5,21 @@
 import '@testing-library/jest-dom'
 import { ComponentResponse, MultiflashResponse } from './api/generated'
 
+export const mockComponentComposition = {
+  '3': 0.062202,
+  '2': 0.0047,
+  '1': 0.046539,
+  '101': 0.65364,
+  '201': 0.086307,
+  '301': 0.045563,
+  '401': 0.007579,
+  '402': 0.015481,
+  '503': 0.005188,
+  '504': 0.00612,
+  '605': 0.066681,
+  '5': 0.001,
+}
+
 export const mockMultiflashResponse: MultiflashResponse = {
   phaseValues: {
     Vapor: {
