@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
-import { ComponentResponse } from '../../api/generated'
+import { ComponentProperties, Components } from '../../api/generated'
 import { useState } from 'react'
 import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
-import { TComponentInput, TComponentComposition, TPackage } from '../../types'
+import { TComponentComposition, TComponentInput, TPackage } from '../../types'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -26,14 +26,20 @@ const FirstColumn = styled.div`
 `
 
 function convertComponentResponseToComponentInput(
-  components: ComponentResponse
+  components: Components
 ): TComponentInput {
   // convert from ComponentResponse type to TComponentInput
   return Object.fromEntries(
-    Object.entries(components.components).map(([componentId, names]) => [
-      componentId,
-      { ...names, value: 0 },
-    ])
+    Object.entries(components).map(
+      ([componentId, properties]: [string, ComponentProperties]) => [
+        componentId,
+        {
+          altName: properties.altName,
+          chemicalFormula: properties.chemicalFormula,
+          value: 0,
+        },
+      ]
+    )
   )
 }
 
@@ -67,7 +73,7 @@ export const FluidDialog = ({
 }: {
   open: boolean
   onClose: () => void
-  components: ComponentResponse
+  components: Components
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
   packages: TPackage[]
   setPackages: (v: TPackage[]) => void

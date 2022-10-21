@@ -8,7 +8,7 @@ import { Card } from '../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from './FluidDialog'
 import { useState } from 'react'
-import { ComponentResponse, MultiflashResponse } from '../../api/generated'
+import { Components, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
@@ -44,7 +44,7 @@ export const CalculateFluid = ({
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
-  components: ComponentResponse
+  components: Components
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
   componentComposition: TComponentComposition

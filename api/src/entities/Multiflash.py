@@ -3,11 +3,10 @@ from typing import Dict, List
 import libhg
 from pydantic import BaseModel, Field, validator
 
-from common.components import COMPONENT_IDS
-from common.molecular_weights import MOLECULAR_WEIGHTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
+from entities.Components import Components
 
 
 class Multiflash(BaseModel):
@@ -28,7 +27,7 @@ class Multiflash(BaseModel):
         allow_population_by_field_name = True
         schema_extra = {
             "example": {
-                "componentComposition": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
+                "componentComposition": {"id1": 0.1057, "id2": 0.2535, "id3": 0.2720, "id101": 0.23102, "id5": 0.137},
                 "temperature": 37,
                 "pressure": 20,
             }
@@ -38,7 +37,7 @@ class Multiflash(BaseModel):
     def validate_composition(cls, v):
         composition = list(v.values())
         ids = list(v.keys())
-        if not set(ids) <= set(COMPONENT_IDS.keys()):
+        if not set(ids) <= set(Components().get_ids()):
             raise ValueError("component_id input contains unknown component!")
         if abs(sum(composition) - 1) > 0.01:
             raise ValueError("composition list should add to approx. 1")
@@ -50,7 +49,7 @@ class Multiflash(BaseModel):
 
     @property
     def component_ids_as_ints(self) -> List[int]:
-        return [int(x) for x in self.component_ids]
+        return [int(x[2:]) for x in self.component_ids]
 
     @property
     def feed_composition(self) -> List[float]:
@@ -59,13 +58,6 @@ class Multiflash(BaseModel):
     @property
     def number_of_components(self) -> int:
         return len(self.component_ids)
-
-    @property
-    def feed_molecular_weight(self):
-        total_molecular_weight = 0
-        for component_id, mole_fraction in self.component_composition.items():
-            total_molecular_weight += mole_fraction * MOLECULAR_WEIGHTS[component_id]
-        return total_molecular_weight
 
     @staticmethod
     def format_phase_results(
@@ -122,5 +114,4 @@ class Multiflash(BaseModel):
         return MultiflashResult(
             phase_values=phase_values,
             component_fractions=self.format_component_results(mole_fractions, mass_fractions, columns_to_keep),
-            feed_molecular_weight=self.feed_molecular_weight,
         )

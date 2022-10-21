@@ -13,20 +13,18 @@
  */
 
 
-import { Components } from './components';
 
 /**
- * Model containing the response of getting the Components model.
+ * Enum class for phase labels
  * @export
- * @interface ComponentResponse
+ * @enum {string}
  */
-export interface ComponentResponse {
-    /**
-     * Model containing all components supported by Mercury app
-     * @type {Components}
-     * @memberof ComponentResponse
-     */
-    components: Components;
+export enum PhaseLabels {
+    Mercury = 'mercury',
+    Liquid = 'liquid',
+    Vapor = 'vapor',
+    Aqueous = 'aqueous'
 }
+
 
 

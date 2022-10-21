@@ -1,7 +1,6 @@
 from starlette.status import HTTP_200_OK
 
-from common.components import COMPONENT_IDS
-from entities.ComponentResponse import ComponentName
+from entities.Components import Components
 
 
 def test_components_feature(test_app):
@@ -9,7 +8,7 @@ def test_components_feature(test_app):
     results = response.json()
     components = results["components"]
     # using sets as sets do not care about ordering
-    assert set(components.keys()) == set(COMPONENT_IDS.keys())
+    assert set(components.keys()) == set(Components().get_ids())
     for key, value in components.items():
-        assert value == ComponentName(**COMPONENT_IDS[key]).dict(by_alias=True)
+        assert value == Components().dict(by_alias=True)[key]
     assert response.status_code == HTTP_200_OK

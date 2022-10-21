@@ -6,7 +6,12 @@ import { MoleTable } from '../components/feature/MoleTable'
 import { CalculateFluid } from '../components/feature/CalculateFluid'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
-import { ComponentResponse, MultiflashResponse } from '../api/generated'
+import {
+  ComponentResponse,
+  Components,
+  MultiflashResponse,
+  PhaseLabels,
+} from '../api/generated'
 import { PhaseTable } from '../components/feature/PhaseTable'
 import { MercuryWarning } from '../components/feature/MercuryWarning'
 import { TComponentComposition, TFeedFlow } from '../types'
@@ -33,7 +38,7 @@ const DividerWithLargeSpacings = styled(Divider)`
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
-  const [components, setComponents] = useState<ComponentResponse>()
+  const [components, setComponents] = useState<Components>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [feedFlow, setFeedFlow] = useState<TFeedFlow>({
     unit: 'Sm3/d',
@@ -42,9 +47,9 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [componentComposition, setComponentComposition] =
     useState<TComponentComposition>({})
   const [result, setResult] = useState<MultiflashResponse>({
+    componentIds: [],
+    phases: [],
     phaseValues: {},
-    componentFractions: {},
-    feedMolecularWeight: 0,
   })
 
   // Fetch list of components name once on page load
@@ -52,7 +57,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     mercuryApi
       .getComponents()
       .then((response: AxiosResponse<ComponentResponse>) =>
-        setComponents(response.data)
+        setComponents(response.data.components)
       )
       .finally(() => setIsLoading(false))
   }, [mercuryApi])
@@ -76,7 +81,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           setComponentComposition={setComponentComposition}
         />
         <DividerWithLargeSpacings />
-        {'Mercury' in result.phaseValues && <MercuryWarning />}
+        {PhaseLabels.Mercury in result.phases && <MercuryWarning />}
         <Results>
           <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
           <MoleTable multiFlashResponse={result} components={components} />

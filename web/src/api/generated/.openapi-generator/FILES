@@ -11,10 +11,15 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
-models/component-name.ts
+models/component-ids.ts
+models/component-properties.ts
 models/component-response.ts
+models/components.ts
 models/httpvalidation-error.ts
 models/index.ts
 models/multiflash-response.ts
 models/multiflash.ts
+models/phase-labels.ts
+models/phase-properties.ts
+models/phase-results.ts
 models/validation-error.ts

@@ -15,23 +15,29 @@
 
 
 /**
- * Model containing the ComponentName: I.e. the chemical name (H2O, Hg, etc.) and the alternate name for a component (water, mercury, etc.).
+ * Model for the properties of a component
  * @export
- * @interface ComponentName
+ * @interface ComponentProperties
  */
-export interface ComponentName {
+export interface ComponentProperties {
     /**
      * Chemical name of the component
      * @type {string}
-     * @memberof ComponentName
+     * @memberof ComponentProperties
      */
     chemicalFormula: string;
     /**
      * Alternate name of the component
      * @type {string}
-     * @memberof ComponentName
+     * @memberof ComponentProperties
      */
     altName: string;
+    /**
+     * Molecular weight of the component
+     * @type {number}
+     * @memberof ComponentProperties
+     */
+    molecularWeight: number;
 }
 
 

@@ -13,20 +13,31 @@
  */
 
 
-import { Components } from './components';
 
 /**
- * Model containing the response of getting the Components model.
+ * 
  * @export
- * @interface ComponentResponse
+ * @interface PhaseProperties
  */
-export interface ComponentResponse {
+export interface PhaseProperties {
     /**
-     * Model containing all components supported by Mercury app
-     * @type {Components}
-     * @memberof ComponentResponse
+     * 
+     * @type {number}
+     * @memberof PhaseProperties
      */
-    components: Components;
+    ratio: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof PhaseProperties
+     */
+    mercuryConcentration: number;
+    /**
+     * 
+     * @type {Array<number>}
+     * @memberof PhaseProperties
+     */
+    moleFractions: Array<number>;
 }
 
 

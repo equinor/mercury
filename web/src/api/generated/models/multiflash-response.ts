@@ -13,6 +13,9 @@
  */
 
 
+import { ComponentIds } from './component-ids';
+import { PhaseLabels } from './phase-labels';
+import { PhaseResults } from './phase-results';
 
 /**
  * 
@@ -21,23 +24,23 @@
  */
 export interface MultiflashResponse {
     /**
-     * Phase labels (vapor, liquid, aqueous, mercury) with their fraction of unity and mercury concentration
-     * @type {{ [key: string]: { [key: string]: number; }; }}
+     * 
+     * @type {Array<ComponentIds>}
      * @memberof MultiflashResponse
      */
-    phaseValues: { [key: string]: { [key: string]: number; }; };
-    /**
-     * Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)
-     * @type {{ [key: string]: Array<number>; }}
-     * @memberof MultiflashResponse
-     */
-    componentFractions: { [key: string]: Array<number>; };
+    componentIds: Array<ComponentIds>;
     /**
      * 
-     * @type {number}
+     * @type {Array<PhaseLabels>}
      * @memberof MultiflashResponse
      */
-    feedMolecularWeight: number;
+    phases: Array<PhaseLabels>;
+    /**
+     * 
+     * @type {PhaseResults}
+     * @memberof MultiflashResponse
+     */
+    phaseValues: PhaseResults;
 }
 
 
