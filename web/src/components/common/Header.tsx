@@ -72,6 +72,13 @@ export const Header = (): JSX.Element => {
           >
             Logout
           </Button>
+          <Button
+            onClick={() => localStorage.removeItem('packages')}
+            color={'secondary'}
+            variant={'outlined'}
+          >
+            Reset application
+          </Button>
         </Popover.Actions>
       </Popover>
       <Popover open={isAboutOpen} anchorEl={infoRefElement.current}>

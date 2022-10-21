@@ -1,5 +1,6 @@
 import {
   Autocomplete,
+  AutocompleteChanges,
   Button,
   Progress,
   TextField,
@@ -33,7 +34,7 @@ const FluidPackage = styled(FlexContainer)`
   }
 `
 
-export const CalculateFluid = ({
+export const CalculationInput = ({
   mercuryApi,
   setResult,
   components,
@@ -54,7 +55,10 @@ export const CalculateFluid = ({
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
-  const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
+  const [packages, setPackages] = useLocalStorage<{ [name: string]: TPackage }>(
+    'packages',
+    {}
+  )
 
   const calculate = (
     <Button
@@ -91,6 +95,15 @@ export const CalculateFluid = ({
     </Button>
   )
 
+  function setLoadedFluidPackage(selectedPackages: string[]): void {
+    // There will always be ether 0 or 1 selected package
+    if (!selectedPackages.length) return
+    const allPackages: { [name: string]: TPackage } = JSON.parse(
+      localStorage.getItem('packages') ?? '{}'
+    )
+    setComponentComposition(allPackages[selectedPackages[0]].components)
+  }
+
   return (
     <>
       <Card title={'Calculate Fluid'} actions={calculate}>
@@ -98,8 +111,11 @@ export const CalculateFluid = ({
           <FluidPackage>
             <Autocomplete
               label="Fluid package"
-              options={packages.map((x) => x.name)}
+              options={Object.keys(packages).map((x) => x)}
               autoWidth
+              onOptionsChange={(value: AutocompleteChanges<string>) =>
+                setLoadedFluidPackage(value.selectedItems)
+              }
             />
             <Button variant="outlined" onClick={() => setIsOpen(true)}>
               New

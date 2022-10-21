@@ -69,8 +69,8 @@ export const FluidDialog = ({
   close: () => void
   components: ComponentResponse
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
-  packages: TPackage[]
-  setPackages: (v: TPackage[]) => void
+  packages: { [name: string]: TPackage }
+  setPackages: (v: { [name: string]: TPackage }) => void
 }) => {
   // Array of components containing input from user
   const [componentInput, setComponentInput] = useState<TComponentInput>(
@@ -99,14 +99,14 @@ export const FluidDialog = ({
   const savePackage = () => {
     const componentComposition = getComponentComposition()
     setComponentComposition(normalizeComponentComposition(componentComposition))
-    setPackages([
+    setPackages({
       ...packages,
-      {
+      [packageName]: {
         name: packageName,
         description: packageDescription,
         components: componentComposition,
       },
-    ])
+    })
     close()
   }
 
