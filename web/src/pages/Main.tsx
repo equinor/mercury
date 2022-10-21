@@ -3,7 +3,7 @@ import { Divider, Typography } from '@equinor/eds-core-react'
 import { Header } from '../components/common/Header'
 import { useEffect, useState } from 'react'
 import { MoleTable } from '../components/feature/MoleTable'
-import { CalculateFluid } from '../components/feature/CalculateFluid'
+import { CalculationInput } from '../components/feature/CalculationInput'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
@@ -63,7 +63,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     <>
       <Header />
       <Container>
-        <CalculateFluid
+        <CalculationInput
           mercuryApi={mercuryApi}
           setResult={setResult}
           components={components}
