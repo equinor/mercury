@@ -13,7 +13,7 @@
  */
 
 
-import { ComponentName } from './component-name';
+import { ComponentProperties } from './component-properties';
 
 /**
  * Model for containing the response of getting the component dictionary.
@@ -22,11 +22,11 @@ import { ComponentName } from './component-name';
  */
 export interface ComponentResponse {
     /**
-     * Dictionary of component_ids as string and ComponentName as value
-     * @type {{ [key: string]: ComponentName; }}
+     * Dictionary of component_ids as string and ComponentProperties as value
+     * @type {{ [key: string]: ComponentProperties; }}
      * @memberof ComponentResponse
      */
-    components: { [key: string]: ComponentName; };
+    components: { [key: string]: ComponentProperties; };
 }
 
 
