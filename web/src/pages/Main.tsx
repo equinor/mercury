@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Divider } from '@equinor/eds-core-react'
+import { Divider, Typography } from '@equinor/eds-core-react'
 import { Header } from '../components/common/Header'
 import { useEffect, useState } from 'react'
 import { MoleTable } from '../components/feature/MoleTable'
@@ -18,6 +18,7 @@ const Results = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin-top: 40px;
+  align-items: flex-start;
 `
 
 const Container = styled.div`
@@ -40,12 +41,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     value: 1000,
   })
   const [componentComposition, setComponentComposition] =
-    useState<TComponentComposition>({})
-  const [result, setResult] = useState<MultiflashResponse>({
-    phaseValues: {},
-    componentFractions: {},
-    feedMolecularWeight: 0,
-  })
+    useState<TComponentComposition>()
+  const [result, setResult] = useState<MultiflashResponse>()
 
   // Fetch list of components name once on page load
   useEffect(() => {
@@ -76,15 +73,24 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           setComponentComposition={setComponentComposition}
         />
         <DividerWithLargeSpacings />
-        {'Mercury' in result.phaseValues && <MercuryWarning />}
-        <Results>
-          <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
-          <MoleTable
-            multiFlashResponse={result}
-            components={components}
-            componentComposition={componentComposition}
-          />
-        </Results>
+        {!result && (
+          <Typography variant="body_short" color="primary">
+            Run a calculation to get results
+          </Typography>
+        )}
+        {result && componentComposition && (
+          <>
+            {'Mercury' in result.phaseValues && <MercuryWarning />}
+            <Results>
+              <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
+              <MoleTable
+                multiFlashResponse={result}
+                components={components}
+                componentComposition={componentComposition}
+              />
+            </Results>
+          </>
+        )}
       </Container>
     </>
   )

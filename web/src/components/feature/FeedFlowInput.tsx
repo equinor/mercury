@@ -5,6 +5,7 @@ import { TFeedFlow } from '../../types'
 const FlexContainer = styled.div`
   display: flex;
   gap: 16px;
+  max-width: 250px;
 `
 
 export const FeedFlowInput = (props: {
@@ -26,7 +27,7 @@ export const FeedFlowInput = (props: {
         }
       />
       <Switch
-        label="Unit"
+        label="unit"
         checked={props.feedFlow.unit === 'kg/d'}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           props.setFeedFlow({
