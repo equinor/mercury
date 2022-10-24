@@ -1,5 +1,14 @@
 import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
 import { TComponent, TComponentInput } from '../../types'
+import styled from 'styled-components'
+
+const ComponentTableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  overflow: auto;
+  margin-top: 15px;
+`
 
 export const ComponentTable = ({
   input,
@@ -35,18 +44,20 @@ export const ComponentTable = ({
   }
 
   return (
-    <EdsProvider density={'compact'}>
-      <Table>
-        <Table.Head>
-          <Table.Row>
-            <Table.Cell key={`Component`}>{`Component`}</Table.Cell>
-            <Table.Cell
-              key={`Feed value (mol)`}
-            >{`Feed value (mol)`}</Table.Cell>
-          </Table.Row>
-        </Table.Head>
-        <Table.Body>{createTableRows()}</Table.Body>
-      </Table>
-    </EdsProvider>
+    <ComponentTableContainer>
+      <EdsProvider density={'compact'}>
+        <Table>
+          <Table.Head sticky>
+            <Table.Row>
+              <Table.Cell key={`Component`}>{`Component`}</Table.Cell>
+              <Table.Cell
+                key={`Feed value (mol)`}
+              >{`Feed value (mol)`}</Table.Cell>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>{createTableRows()}</Table.Body>
+        </Table>
+      </EdsProvider>
+    </ComponentTableContainer>
   )
 }

@@ -47,7 +47,7 @@ export const CalculateFluid = ({
   components: ComponentResponse
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
-  componentComposition: TComponentComposition
+  componentComposition: TComponentComposition | undefined
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -59,8 +59,9 @@ export const CalculateFluid = ({
   const calculate = (
     <Button
       data-testid="computeMf"
-      disabled={calculating}
+      disabled={calculating || !componentComposition}
       onClick={() => {
+        if (!componentComposition) return
         setCalculating(true)
         mercuryApi
           .computeMultiflash({
@@ -86,13 +87,7 @@ export const CalculateFluid = ({
           })
       }}
     >
-      {calculating && (
-        <>
-          <Progress.Circular size={16} color="neutral" />
-          Calculating...
-        </>
-      )}
-      {!calculating && <>Run</>}
+      {calculating ? <Progress.Circular size={16} color="neutral" /> : <>Run</>}
     </Button>
   )
 
@@ -137,8 +132,8 @@ export const CalculateFluid = ({
         </Form>
       </Card>
       <FluidDialog
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
+        isOpen={isOpen}
+        close={() => setIsOpen(false)}
         components={components}
         setComponentComposition={setComponentComposition}
         packages={packages}

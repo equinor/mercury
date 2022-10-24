@@ -12,13 +12,6 @@ const ComponentSelectorContainer = styled.div`
   max-width: 500px;
 `
 
-const ComponentTableContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 420px;
-  overflow: auto;
-`
-
 function createOptions(componentInput: TComponentInput): TComponent[] {
   // Convert TComponentInput to TComponent for table
   return Object.entries(componentInput).map(([componentId, entry]) => ({
@@ -62,13 +55,11 @@ export const ComponentSelector = ({
           `${option.altName} (${option.chemicalFormula})`
         }
       />
-      <ComponentTableContainer>
-        <ComponentTable
-          input={selectedComponents}
-          componentInput={componentInput}
-          setComponentInput={setComponentInput}
-        />
-      </ComponentTableContainer>
+      <ComponentTable
+        input={selectedComponents}
+        componentInput={componentInput}
+        setComponentInput={setComponentInput}
+      />
     </ComponentSelectorContainer>
   )
 }

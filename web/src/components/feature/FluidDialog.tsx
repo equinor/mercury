@@ -58,24 +58,24 @@ function normalizeComponentComposition(
 }
 
 export const FluidDialog = ({
-  open,
-  onClose,
+  isOpen,
+  close,
   components,
   setComponentComposition,
   packages,
   setPackages,
 }: {
-  open: boolean
-  onClose: () => void
+  isOpen: boolean
+  close: () => void
   components: ComponentResponse
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
   packages: TPackage[]
   setPackages: (v: TPackage[]) => void
 }) => {
   // Array of components containing input from user
-  const [componentInput, setComponentInput] = useState<TComponentInput>(() => {
-    return convertComponentResponseToComponentInput(components)
-  })
+  const [componentInput, setComponentInput] = useState<TComponentInput>(
+    convertComponentResponseToComponentInput(components)
+  )
   const [packageName, setPackageName] = useState<string>('')
   const [packageDescription, setPackageDescription] = useState<string>('')
 
@@ -93,7 +93,7 @@ export const FluidDialog = ({
     setComponentComposition(
       normalizeComponentComposition(getComponentComposition())
     )
-    onClose()
+    close()
   }
 
   const savePackage = () => {
@@ -107,11 +107,11 @@ export const FluidDialog = ({
         components: componentComposition,
       },
     ])
-    onClose()
+    close()
   }
 
   return (
-    <WideDialog open={open} onClose={onClose}>
+    <WideDialog open={isOpen} onClose={close} isDismissable={true}>
       <Dialog.Header>
         <Dialog.Title>Create fluid package</Dialog.Title>
       </Dialog.Header>
@@ -148,17 +148,19 @@ export const FluidDialog = ({
         <Button color="danger" variant="outlined">
           Delete
         </Button>
-        <Button variant="outlined" onClick={onClose}>
+        <Button variant="outlined" onClick={close}>
           Cancel
         </Button>
         <Button onClick={applyPackage}>Apply</Button>
-        <Button onClick={savePackage}>Save</Button>
+        <Button onClick={savePackage} disabled={!packageName}>
+          Save
+        </Button>
         <Button
           // TODO: Demo button to remove when done testing
           onClick={() => {
             setComponentComposition(demoFeedComponentRatios)
             setComponentInput(demoComponentInput)
-            onClose()
+            close()
           }}
         >
           Demo data
