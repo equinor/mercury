@@ -1,4 +1,4 @@
-export type TComponentNames = {
+export type TComponentProperties = {
   [id: string]: {
     name: string
     formula: string

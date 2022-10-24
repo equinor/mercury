@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { useEffect, useState } from 'react'
-import { TPackage, TComponentNames, TComponentRatios } from '../../types'
+import { TPackage, TComponentProperties, TComponentRatios } from '../../types'
 import { demoFeedComponentRatios } from '../../constants'
 
 const WideDialog = styled(Dialog)`
@@ -42,14 +42,14 @@ function normalizeRatios(componentRatios: TComponentRatios): TComponentRatios {
 export const FluidDialog = ({
   isOpen,
   close,
-  componentNames,
+  componentProperties,
   selectedPackage,
   packages,
   setPackages,
 }: {
   isOpen: boolean
   close: () => void
-  componentNames: TComponentNames
+  componentProperties: TComponentProperties
   selectedPackage: TPackage | undefined
   packages: TPackage[]
   setPackages: (v: TPackage[]) => void
@@ -112,7 +112,7 @@ export const FluidDialog = ({
             />
           </FirstColumn>
           <ComponentSelector
-            componentNames={componentNames}
+            componentProperties={componentProperties}
             componentRatios={componentRatios}
             setComponentRatios={setComponentRatios}
           />

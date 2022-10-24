@@ -13,7 +13,7 @@ import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
 import {
-  TComponentNames,
+  TComponentProperties,
   TComponentRatios,
   TFeedFlow,
   TPackage,
@@ -41,14 +41,14 @@ const FluidPackage = styled(FlexContainer)`
 export const CalculationInput = ({
   mercuryApi,
   setResult,
-  componentNames,
+  componentProperties,
   feedFlow,
   setFeedFlow,
   setUsedComponentRatios,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
-  componentNames: TComponentNames
+  componentProperties: TComponentProperties
   feedFlow: TFeedFlow
   setFeedFlow: (feedFlow: TFeedFlow) => void
   setUsedComponentRatios: (ratios: TComponentRatios) => void
@@ -143,7 +143,7 @@ export const CalculationInput = ({
       <FluidDialog
         isOpen={isOpen}
         close={() => setIsOpen(false)}
-        componentNames={componentNames}
+        componentProperties={componentProperties}
         selectedPackage={selectedPackage}
         packages={packages}
         setPackages={setPackages}

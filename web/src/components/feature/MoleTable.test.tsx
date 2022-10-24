@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { MoleTable } from './MoleTable'
 import '@testing-library/jest-dom/extend-expect'
 import {
-  mockComponentNames,
+  mockComponentProperties,
   mockComponentRatios,
   mockMultiflashResponse,
 } from '../../setupTests'
@@ -10,7 +10,7 @@ import {
 test('renders without crashing and displaying correct values in table', async () => {
   render(
     <MoleTable
-      componentNames={mockComponentNames}
+      componentProperties={mockComponentProperties}
       multiFlashResponse={mockMultiflashResponse}
       componentRatios={mockComponentRatios}
     />

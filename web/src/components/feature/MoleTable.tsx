@@ -1,16 +1,16 @@
 import { DynamicTable } from '../common/DynamicTable'
 import { MultiflashResponse } from '../../api/generated'
 import { formatNumber } from '../../tableUtils'
-import { TComponentNames, TComponentRatios } from '../../types'
+import { TComponentProperties, TComponentRatios } from '../../types'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
-  componentNames: TComponentNames,
+  componentProperties: TComponentProperties,
   componentRatios: TComponentRatios
 ): string[][] {
   return Object.entries(multiFlashResponse.componentFractions).map(
     ([compId, fractions]) => [
-      componentNames[compId].name,
+      componentProperties[compId].name,
       formatNumber(componentRatios[compId]),
       ...fractions.map((x) => formatNumber(x, 2, 3)),
     ]
@@ -20,7 +20,7 @@ function getRows(
 // TODO: Get type from generated API
 export const MoleTable = (props: {
   multiFlashResponse: MultiflashResponse
-  componentNames: TComponentNames
+  componentProperties: TComponentProperties
   componentRatios: TComponentRatios
 }) => {
   return (
@@ -32,7 +32,7 @@ export const MoleTable = (props: {
       ]}
       rows={getRows(
         props.multiFlashResponse,
-        props.componentNames,
+        props.componentProperties,
         props.componentRatios
       )}
       density={'compact'}

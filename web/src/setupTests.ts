@@ -4,7 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 import { MultiflashResponse } from './api/generated'
-import { TComponentNames } from './types'
+import { TComponentProperties } from './types'
 
 export const mockComponentRatios = {
   '3': 0.062202,
@@ -61,7 +61,7 @@ export const mockMultiflashResponse: MultiflashResponse = {
   feedMolecularWeight: 26.494307395,
 }
 
-export const mockComponentNames: TComponentNames = {
+export const mockComponentProperties: TComponentProperties = {
   '1': { formula: 'CO2', name: 'Carbondioxide' },
   '2': { formula: 'N2', name: 'Nitrogen' },
   '3': { formula: 'H2O', name: 'Water' },

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
-import { TComponentNames, TComponentRatios } from '../../types'
+import { TComponentProperties, TComponentRatios } from '../../types'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -12,22 +12,22 @@ const ComponentSelectorContainer = styled.div`
   max-width: 500px;
 `
 
-type TComponentName = {
+type TComponentProperty = {
   name: string
   formula: string
   id: string
 }
 
 export const ComponentSelector = ({
-  componentNames,
+  componentProperties,
   componentRatios,
   setComponentRatios,
 }: {
-  componentNames: TComponentNames
+  componentProperties: TComponentProperties
   componentRatios: TComponentRatios
   setComponentRatios: (componentInput: TComponentRatios) => void
 }) => {
-  const options: TComponentName[] = Object.entries(componentNames).map(
+  const options: TComponentProperty[] = Object.entries(componentProperties).map(
     ([key, entry]) => ({
       name: entry.name,
       formula: entry.formula,
@@ -38,7 +38,7 @@ export const ComponentSelector = ({
     preSelectedComponents.includes(option.id)
   )
   const [selectedComponents, setSelectedComponents] =
-    useState<TComponentName[]>(initials)
+    useState<TComponentProperty[]>(initials)
   return (
     <ComponentSelectorContainer>
       <Autocomplete
