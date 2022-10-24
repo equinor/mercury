@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/PhaseTable'
 import { MercuryWarning } from '../components/feature/MercuryWarning'
-import { TComponentComposition, TFeedFlow } from '../types'
+import { TComponentComposition } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -36,10 +36,9 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [components, setComponents] = useState<ComponentResponse>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [feedFlow, setFeedFlow] = useState<TFeedFlow>({
-    unit: 'Sm3/d',
-    value: 1000,
-  })
+
+  // feedFlow unit is Sm3/d
+  const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
   const [componentComposition, setComponentComposition] =
     useState<TComponentComposition>()
   const [result, setResult] = useState<MultiflashResponse>()
@@ -67,8 +66,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           mercuryApi={mercuryApi}
           setResult={setResult}
           components={components}
-          feedFlow={feedFlow}
-          setFeedFlow={setFeedFlow}
+          cubicFeedFlow={cubicFeedFlow}
+          setCubicFeedFlow={setCubicFeedFlow}
           componentComposition={componentComposition}
           setComponentComposition={setComponentComposition}
         />
@@ -82,7 +81,10 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           <>
             {'Mercury' in result.phaseValues && <MercuryWarning />}
             <Results>
-              <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
+              <PhaseTable
+                multiFlashResponse={result}
+                cubicFeedFlow={cubicFeedFlow}
+              />
               <MoleTable
                 multiFlashResponse={result}
                 components={components}

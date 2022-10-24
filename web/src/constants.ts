@@ -9,6 +9,12 @@ export const authConfig = {
   logoutEndpoint: process.env.REACT_APP_LOGOUT_ENDPOINT || '',
 }
 
+// Molecular weight of mercury
+export const mercuryMolecularWeight = 200.59
+
+// Approximate mole in 1 Sm3 (from ideal gas law with K = 288.15, P=1.01325)
+export const molePerStandardCubicMeter = 42.29256
+
 export const preSelectedComponents: Array<string> = [
   '5',
   '1',
@@ -43,61 +49,73 @@ export const demoComponentInput = {
   '3': {
     altName: 'Water',
     chemicalFormula: 'H2O',
-    value: 0.062202,
+    molecularWeight: 18.015,
+    feedValue: 0.062202,
   },
   '2': {
     altName: 'Nitrogen',
     chemicalFormula: 'N2',
-    value: 0.0047,
+    molecularWeight: 28.014,
+    feedValue: 0.0047,
   },
   '1': {
     altName: 'Carbondioxide',
     chemicalFormula: 'CO2',
-    value: 0.046539,
+    molecularWeight: 44.01,
+    feedValue: 0.046539,
   },
   '101': {
     altName: 'Methane',
     chemicalFormula: 'CH4',
-    value: 0.65364,
+    molecularWeight: 16.043,
+    feedValue: 0.65364,
   },
   '201': {
     altName: 'Ethane',
     chemicalFormula: 'C2H6',
-    value: 0.086307,
+    molecularWeight: 30.07,
+    feedValue: 0.086307,
   },
   '301': {
     altName: 'Propane',
     chemicalFormula: 'nC3',
-    value: 0.045563,
+    molecularWeight: 44.096,
+    feedValue: 0.045563,
   },
   '401': {
     altName: 'i-Butane',
     chemicalFormula: 'iC4',
-    value: 0.007579,
+    molecularWeight: 58.123,
+    feedValue: 0.007579,
   },
   '402': {
     altName: 'n-Butane',
     chemicalFormula: 'nC4',
-    value: 0.015481,
+    molecularWeight: 58.123,
+    feedValue: 0.015481,
   },
   '503': {
     altName: 'i-Pentane',
     chemicalFormula: 'iC5',
-    value: 0.005188,
+    molecularWeight: 72.15,
+    feedValue: 0.005188,
   },
   '504': {
     altName: 'n-Pentane',
     chemicalFormula: 'nC5',
-    value: 0.00612,
+    molecularWeight: 72.15,
+    feedValue: 0.00612,
   },
   '605': {
     altName: 'n-Hexane',
     chemicalFormula: 'nC6',
-    value: 0.066681,
+    molecularWeight: 86.177,
+    feedValue: 0.066681,
   },
   '5': {
     altName: 'Mercury',
     chemicalFormula: 'Hg',
-    value: 0.001,
+    molecularWeight: 200.59,
+    feedValue: 0.001,
   },
 }

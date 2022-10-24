@@ -28,11 +28,11 @@ export const ComponentTable = ({
         <Table.Cell data-testid={`Ratio (mol)-${index}`}>
           <TextField
             id={`${entry.chemicalFormula}-input`}
-            defaultValue={componentInput[entry.componentId].value}
+            defaultValue={componentInput[entry.componentId].feedValue}
             min={0}
             type="number"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              componentInput[entry.componentId].value = Number(
+              componentInput[entry.componentId].feedValue = Number(
                 event.target.value
               )
               setComponentInput(componentInput)

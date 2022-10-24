@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentResponse } from '../../api/generated'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { demoComponentInput, demoFeedComponentRatios } from '../../constants'
-import { TComponentInput, TComponentComposition, TPackage } from '../../types'
+import { TComponentComposition, TComponentInput, TPackage } from '../../types'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -30,9 +30,9 @@ function convertComponentResponseToComponentInput(
 ): TComponentInput {
   // convert from ComponentResponse type to TComponentInput
   return Object.fromEntries(
-    Object.entries(components.components).map(([componentId, names]) => [
+    Object.entries(components.components).map(([componentId, properties]) => [
       componentId,
-      { ...names, value: 0 },
+      { ...properties, feedValue: 0 },
     ])
   )
 }
@@ -57,11 +57,24 @@ function normalizeComponentComposition(
   )
 }
 
+function computeFeedMolecularWeight(
+  components: ComponentResponse,
+  componentInput: TComponentInput
+) {
+  return Object.entries(componentInput)
+    .map(
+      ([id, properties]) =>
+        components.components[id].molecularWeight * properties.feedValue
+    )
+    .reduce((a, b) => a + b)
+}
+
 export const FluidDialog = ({
   isOpen,
   close,
   components,
   setComponentComposition,
+  setFeedMolecularWeight,
   packages,
   setPackages,
 }: {
@@ -69,6 +82,7 @@ export const FluidDialog = ({
   close: () => void
   components: ComponentResponse
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
+  setFeedMolecularWeight: (feedMolecularWeight: number) => void
   packages: { [name: string]: TPackage }
   setPackages: (v: { [name: string]: TPackage }) => void
 }) => {
@@ -79,11 +93,17 @@ export const FluidDialog = ({
   const [packageName, setPackageName] = useState<string>('')
   const [packageDescription, setPackageDescription] = useState<string>('')
 
+  useEffect(() => {
+    setFeedMolecularWeight(
+      computeFeedMolecularWeight(components, componentInput)
+    )
+  }, [components, componentInput, setFeedMolecularWeight])
+
   const getComponentComposition = () => {
     const componentComposition: TComponentComposition = {}
     Object.entries(componentInput).forEach(([componentId, componentEntry]) => {
-      if (componentEntry.value !== 0) {
-        componentComposition[componentId] = componentEntry.value
+      if (componentEntry.feedValue !== 0) {
+        componentComposition[componentId] = componentEntry.feedValue
       }
     })
     return componentComposition

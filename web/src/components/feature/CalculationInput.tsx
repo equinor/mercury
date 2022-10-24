@@ -13,7 +13,7 @@ import { ComponentResponse, MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentComposition, TFeedFlow, TPackage } from '../../types'
+import { TComponentComposition, TPackage } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 
 const FlexContainer = styled.div`
@@ -38,16 +38,16 @@ export const CalculationInput = ({
   mercuryApi,
   setResult,
   components,
-  feedFlow,
-  setFeedFlow,
+  cubicFeedFlow,
+  setCubicFeedFlow,
   componentComposition,
   setComponentComposition,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   components: ComponentResponse
-  feedFlow: TFeedFlow
-  setFeedFlow: (feedFlow: TFeedFlow) => void
+  cubicFeedFlow: number
+  setCubicFeedFlow: (cubicFeedFlow: number) => void
   componentComposition: TComponentComposition | undefined
   setComponentComposition: (feedComponentRatios: TComponentComposition) => void
 }) => {
@@ -55,6 +55,7 @@ export const CalculationInput = ({
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
+  const [feedMolecularWeight, setFeedMolecularWeight] = useState<number>()
   const [packages, setPackages] = useLocalStorage<{ [name: string]: TPackage }>(
     'packages',
     {}
@@ -144,7 +145,11 @@ export const CalculationInput = ({
               }
             />
           </FlexContainer>
-          <FeedFlowInput feedFlow={feedFlow} setFeedFlow={setFeedFlow} />
+          <FeedFlowInput
+            cubicFeedFlow={cubicFeedFlow}
+            setCubicFeedFlow={setCubicFeedFlow}
+            feedMolecularWeight={feedMolecularWeight}
+          />
         </Form>
       </Card>
       <FluidDialog
@@ -152,6 +157,7 @@ export const CalculationInput = ({
         close={() => setIsOpen(false)}
         components={components}
         setComponentComposition={setComponentComposition}
+        setFeedMolecularWeight={setFeedMolecularWeight}
         packages={packages}
         setPackages={setPackages}
       />
