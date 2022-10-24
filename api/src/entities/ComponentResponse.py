@@ -3,18 +3,21 @@ from typing import Dict
 from pydantic import BaseModel, Field
 
 
-class ComponentName(BaseModel):
+class ComponentProperties(BaseModel):
     """
-    Model containing the ComponentName: I.e. the chemical name (H2O, Hg, etc.) and the alternate name for a component
-    (water, mercury, etc.).
+    Model containing properties of the component: I.e. the chemical name (H2O, Hg, etc.), the alternate name for a
+    component (water, mercury, etc.) and the molecular weight of the component.
     """
 
     chemical_formula: str = Field(..., description="Chemical name of the component", alias="chemicalFormula")
     alt_name: str = Field(..., description="Alternate name of the component", alias="altName")
+    molecular_weight: float = Field(
+        ..., description="Molecular weight of the component (g/mol)", alias="molecularWeight"
+    )
 
     class Config:
         allow_population_by_field_name = True
-        schema_extra = {"example": {"chemicalFormula": "Hg", "altName": "Mercury"}}
+        schema_extra = {"example": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59}}
 
 
 class ComponentResponse(BaseModel):
@@ -22,9 +25,9 @@ class ComponentResponse(BaseModel):
     Model for containing the response of getting the component dictionary.
     """
 
-    components: Dict[str, ComponentName] = Field(
+    components: Dict[str, ComponentProperties] = Field(
         ...,
-        description="Dictionary of component_ids as string and ComponentName as value",
+        description="Dictionary of component_ids as string and ComponentProperties as value",
     )
 
     class Config:
@@ -32,11 +35,11 @@ class ComponentResponse(BaseModel):
         schema_extra = {
             "example": {
                 "components": {
-                    "1": {"chemicalFormula": "CO2", "altName": "Carbondioxide"},
-                    "2": {"chemicalFormula": "N2", "altName": "Nitrogen"},
-                    "3": {"chemicalFormula": "H2O", "altName": "Water"},
-                    "101": {"chemicalFormula": "CH4", "altName": "Methane"},
-                    "5": {"chemicalFormula": "Hg", "altName": "Mercury"},
+                    "1": {"chemicalFormula": "CO2", "altName": "Carbondioxide", "molecularWeight": 44.01},
+                    "2": {"chemicalFormula": "N2", "altName": "Nitrogen", "molecularWeight": 28.014},
+                    "3": {"chemicalFormula": "H2O", "altName": "Water", "molecularWeight": 18.015},
+                    "101": {"chemicalFormula": "CH4", "altName": "Methane", "molecularWeight": 16.043},
+                    "5": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59},
                 },
             }
         }

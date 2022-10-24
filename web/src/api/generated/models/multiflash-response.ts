@@ -33,7 +33,7 @@ export interface MultiflashResponse {
      */
     componentFractions: { [key: string]: Array<number>; };
     /**
-     * 
+     * The molecular weight of the feed composition input
      * @type {number}
      * @memberof MultiflashResponse
      */

@@ -11,7 +11,7 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
-models/component-name.ts
+models/component-properties.ts
 models/component-response.ts
 models/httpvalidation-error.ts
 models/index.ts

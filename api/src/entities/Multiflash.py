@@ -3,7 +3,7 @@ from typing import Dict, List
 import libhg
 from pydantic import BaseModel, Field, validator
 
-from common.components import COMPONENT_IDS
+from common.components import COMPONENTS
 from common.molecular_weights import MOLECULAR_WEIGHTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
@@ -38,7 +38,7 @@ class Multiflash(BaseModel):
     def validate_composition(cls, v):
         composition = list(v.values())
         ids = list(v.keys())
-        if not set(ids) <= set(COMPONENT_IDS.keys()):
+        if not set(ids) <= set(COMPONENTS.keys()):
             raise ValueError("component_id input contains unknown component!")
         if abs(sum(composition) - 1) > 0.01:
             raise ValueError("composition list should add to approx. 1")
