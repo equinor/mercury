@@ -18,6 +18,13 @@ import {
   TPackage,
 } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
+import {
+  absoluteZero,
+  maxPressure,
+  maxTemperature,
+  minPressure,
+  minTemperature,
+} from '../../../constants'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -116,11 +123,23 @@ export const CalculationInput = ({
           <FlexContainer>
             <TextField
               id="temperature-input"
-              min={-273.15}
+              min={absoluteZero}
               defaultValue={temperature.toString()}
               label="Temperature"
               unit="ºC"
               type="number"
+              variant={
+                temperature > maxTemperature || temperature < minTemperature
+                  ? 'warning'
+                  : undefined
+              }
+              helperText={
+                temperature > maxTemperature
+                  ? 'The temperature is very high'
+                  : temperature < minTemperature
+                  ? 'The temperature is very low'
+                  : undefined
+              }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setTemperature(Number(event.target.value))
               }
@@ -131,6 +150,18 @@ export const CalculationInput = ({
               label="Pressure"
               unit="bar"
               type="number"
+              variant={
+                pressure > maxPressure || pressure < minPressure
+                  ? 'warning'
+                  : undefined
+              }
+              helperText={
+                pressure > maxPressure
+                  ? 'The pressure is very high'
+                  : pressure < minPressure
+                  ? 'The pressure is very low'
+                  : undefined
+              }
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setPressure(Number(event.target.value))
               }
