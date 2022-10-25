@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/results/PhaseTable'
 import { MercuryWarning } from '../components/feature/results/MercuryWarning'
-import { TComponentProperties, TComponentRatios, TFeedFlow } from '../types'
+import { TComponentProperties, TComponentRatios } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -37,10 +37,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [componentProperties, setComponentProperties] =
     useState<TComponentProperties>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [feedFlow, setFeedFlow] = useState<TFeedFlow>({
-    unit: 'Sm3/d',
-    value: 1000,
-  })
+  // feedFlow unit is Sm3/d
+  const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
   const [usedComponentRatios, setUsedComponentRatios] = useState<
     TComponentRatios | undefined
   >()
@@ -69,8 +67,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           mercuryApi={mercuryApi}
           setResult={setResult}
           componentProperties={componentProperties}
-          feedFlow={feedFlow}
-          setFeedFlow={setFeedFlow}
+          cubicFeedFlow={cubicFeedFlow}
+          setCubicFeedFlow={setCubicFeedFlow}
           setUsedComponentRatios={setUsedComponentRatios}
         />
         <DividerWithLargeSpacings />
@@ -83,7 +81,10 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           <>
             {'Mercury' in result.phaseValues && <MercuryWarning />}
             <Results>
-              <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
+              <PhaseTable
+                multiFlashResponse={result}
+                cubicFeedFlow={cubicFeedFlow}
+              />
               <MoleTable
                 multiFlashResponse={result}
                 componentProperties={componentProperties}

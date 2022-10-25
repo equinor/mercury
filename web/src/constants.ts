@@ -9,6 +9,12 @@ export const authConfig = {
   logoutEndpoint: process.env.REACT_APP_LOGOUT_ENDPOINT || '',
 }
 
+// Molecular weight of mercury
+export const mercuryMolecularWeight = 200.59
+
+// Approximate mole in 1 Sm3 (from ideal gas law with K = 288.15, P=1.01325)
+export const molePerStandardCubicMeter = 42.29256
+
 export const preSelectedComponents: Array<string> = [
   '5',
   '1',

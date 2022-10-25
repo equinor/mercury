@@ -15,7 +15,6 @@ import { FeedFlowInput } from './FeedFlowInput'
 import {
   TComponentProperties,
   TComponentRatios,
-  TFeedFlow,
   TPackage,
 } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
@@ -42,15 +41,15 @@ export const CalculationInput = ({
   mercuryApi,
   setResult,
   componentProperties,
-  feedFlow,
-  setFeedFlow,
+  cubicFeedFlow,
+  setCubicFeedFlow,
   setUsedComponentRatios,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   componentProperties: TComponentProperties
-  feedFlow: TFeedFlow
-  setFeedFlow: (feedFlow: TFeedFlow) => void
+  cubicFeedFlow: number
+  setCubicFeedFlow: (cubicFeedFlow: number) => void
   setUsedComponentRatios: (ratios: TComponentRatios) => void
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -137,7 +136,11 @@ export const CalculationInput = ({
               }
             />
           </FlexContainer>
-          <FeedFlowInput feedFlow={feedFlow} setFeedFlow={setFeedFlow} />
+          <FeedFlowInput
+            cubicFeedFlow={cubicFeedFlow}
+            setCubicFeedFlow={setCubicFeedFlow}
+            molecularWeightSum={selectedPackage?.molecularWeightSum}
+          />
         </Form>
       </Card>
       <FluidDialog

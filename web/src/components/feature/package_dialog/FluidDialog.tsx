@@ -43,6 +43,17 @@ function normalizeRatios(componentRatios: TComponentRatios): TComponentRatios {
   )
 }
 
+function computeFeedMolecularWeight(
+  componentProperties: TComponentProperties,
+  componentRatios: TComponentRatios
+): number {
+  return componentRatios !== {}
+    ? Object.entries(componentRatios)
+        .map(([id, ratio]) => componentProperties[id].molecularWeight * ratio)
+        .reduce((a, b) => a + b)
+    : 1
+}
+
 export const FluidDialog = ({
   isOpen,
   close,
@@ -82,6 +93,10 @@ export const FluidDialog = ({
         name: packageName,
         description: packageDescription,
         components: normalizeRatios(componentRatios),
+        molecularWeightSum: computeFeedMolecularWeight(
+          componentProperties,
+          componentRatios
+        ),
       },
     })
     close()
