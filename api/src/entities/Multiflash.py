@@ -58,11 +58,8 @@ class Multiflash(BaseModel):
         return len(self.component_ids)
 
     @property
-    def normalized_feed_composition(self) -> Dict[str, float]:
-        composition_norm = np.linalg.norm(self.feed_composition)
-        composition_array = np.array(self.feed_composition)
-        normalized_array = composition_array / composition_norm
-        return {component_id: feed_ratio for component_id, feed_ratio in zip(self.component_ids, normalized_array)}
+    def normalized_feed_composition(self) -> List[float]:
+        return list(np.array(self.feed_composition) / np.sum(self.feed_composition))
 
     @staticmethod
     def format_phase_results(
@@ -101,6 +98,8 @@ class Multiflash(BaseModel):
         }
 
     def compute(self) -> MultiflashResult:
+        # Need to normalize feed composition for phase_fraction to not be NaN:
+        normalized_feed_composition = self.normalized_feed_composition
         (
             phase_labels,
             phase_fractions,
@@ -112,7 +111,7 @@ class Multiflash(BaseModel):
             components=self.component_ids_as_ints,
             temperature=self.temperature,
             pressure=self.pressure,
-            feed_composition=self.feed_composition,
+            feed_composition=normalized_feed_composition,
         )
         phase_values = self.format_phase_results(phase_labels, phase_fractions, mercury_concentrations)
         columns_to_keep = tuple(n for n in range(len(phase_values.keys())))

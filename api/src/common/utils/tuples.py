@@ -1,4 +1,4 @@
-from typing import Dict, NamedTuple
+from typing import Dict, List, NamedTuple
 
 import numpy as np
 
@@ -53,7 +53,7 @@ class MultiflashResult(NamedTuple):
 
     phase_values: Dict[PhaseLabels, PhaseValues]
     component_fractions: Dict[str, ComponentFractions]
-    feed_fractions: Dict[str, float]
+    feed_fractions: List[float]
 
     def __eq__(self, other) -> bool:
         if not set(self.phase_values.keys()) == set(other.phase_values.keys()):
