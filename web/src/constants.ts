@@ -107,3 +107,9 @@ export const demoComponentInput = {
     value: 0.001,
   },
 }
+
+export const absoluteZero = -273
+export const minTemperature = -60
+export const maxTemperature = 70
+export const minPressure = 0
+export const maxPressure = 300
