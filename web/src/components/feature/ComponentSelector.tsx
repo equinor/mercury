@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
-import { TComponent, TComponentInput } from '../../types'
+import { TComponentProperties, TComponentRatios } from '../../types'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -12,35 +12,35 @@ const ComponentSelectorContainer = styled.div`
   max-width: 500px;
 `
 
-function createOptions(componentInput: TComponentInput): TComponent[] {
-  // Convert TComponentInput to TComponent for table
-  return Object.entries(componentInput).map(([componentId, entry]) => ({
-    componentId: componentId,
-    ...entry,
-  }))
-}
-
-function getInitialSelectedComponents(
-  componentOptions: TComponent[]
-): TComponent[] {
-  // Filter out components not in preSelectedComponents constant
-  return componentOptions.filter((component) =>
-    preSelectedComponents.includes(component.componentId)
-  )
+type TComponentProperty = {
+  name: string
+  formula: string
+  weight: number
+  id: string
 }
 
 export const ComponentSelector = ({
-  componentInput,
-  setComponentInput,
+  componentProperties,
+  componentRatios,
+  setComponentRatios,
 }: {
-  componentInput: TComponentInput
-  setComponentInput: (componentInput: TComponentInput) => void
+  componentProperties: TComponentProperties
+  componentRatios: TComponentRatios
+  setComponentRatios: (componentInput: TComponentRatios) => void
 }) => {
-  const allComponents = createOptions(componentInput)
-  const initialSelectedComponents = getInitialSelectedComponents(allComponents)
-  const [selectedComponents, setSelectedComponents] = useState<TComponent[]>(
-    initialSelectedComponents
+  const options: TComponentProperty[] = Object.entries(componentProperties).map(
+    ([key, entry]) => ({
+      name: entry.altName,
+      formula: entry.chemicalFormula,
+      weight: entry.molecularWeight,
+      id: key,
+    })
   )
+  const initials = options.filter((option) =>
+    preSelectedComponents.includes(option.id)
+  )
+  const [selectedComponents, setSelectedComponents] =
+    useState<TComponentProperty[]>(initials)
   return (
     <ComponentSelectorContainer>
       <Autocomplete
@@ -49,16 +49,23 @@ export const ComponentSelector = ({
         }}
         label="Add components"
         multiple
-        options={allComponents}
-        initialSelectedOptions={initialSelectedComponents}
-        optionLabel={(option) =>
-          `${option.altName} (${option.chemicalFormula})`
-        }
+        options={options}
+        initialSelectedOptions={initials}
+        optionLabel={(option) => `${option.name} (${option.formula})`}
       />
       <ComponentTable
-        input={selectedComponents}
-        componentInput={componentInput}
-        setComponentInput={setComponentInput}
+        selectedComponents={Object.fromEntries(
+          selectedComponents.map((x) => [
+            x.id,
+            {
+              altName: x.name,
+              chemicalFormula: x.formula,
+              molecularWeight: x.weight,
+            },
+          ])
+        )}
+        componentRatios={componentRatios}
+        setComponentRatios={setComponentRatios}
       />
     </ComponentSelectorContainer>
   )

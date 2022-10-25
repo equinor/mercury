@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/PhaseTable'
 import { MercuryWarning } from '../components/feature/MercuryWarning'
-import { TComponentComposition, TFeedFlow } from '../types'
+import { TComponentProperties, TComponentRatios, TFeedFlow } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -34,14 +34,16 @@ const DividerWithLargeSpacings = styled(Divider)`
 
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
-  const [components, setComponents] = useState<ComponentResponse>()
+  const [componentProperties, setComponentProperties] =
+    useState<TComponentProperties>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [feedFlow, setFeedFlow] = useState<TFeedFlow>({
     unit: 'Sm3/d',
     value: 1000,
   })
-  const [componentComposition, setComponentComposition] =
-    useState<TComponentComposition>()
+  const [usedComponentRatios, setUsedComponentRatios] = useState<
+    TComponentRatios | undefined
+  >()
   const [result, setResult] = useState<MultiflashResponse>()
 
   // Fetch list of components name once on page load
@@ -49,7 +51,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     mercuryApi
       .getComponents()
       .then((response: AxiosResponse<ComponentResponse>) =>
-        setComponents(response.data)
+        setComponentProperties(response.data.components)
       )
       .finally(() => setIsLoading(false))
   }, [mercuryApi])
@@ -57,7 +59,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   if (isLoading) return <></>
 
   // TODO: Better error handling and message
-  if (!components) return <div>Failed to fetch list of components</div>
+  if (!componentProperties) return <div>Failed to fetch list of components</div>
 
   return (
     <>
@@ -66,11 +68,10 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
         <CalculationInput
           mercuryApi={mercuryApi}
           setResult={setResult}
-          components={components}
+          componentProperties={componentProperties}
           feedFlow={feedFlow}
           setFeedFlow={setFeedFlow}
-          componentComposition={componentComposition}
-          setComponentComposition={setComponentComposition}
+          setUsedComponentRatios={setUsedComponentRatios}
         />
         <DividerWithLargeSpacings />
         {!result && (
@@ -78,15 +79,15 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
             Run a calculation to get results
           </Typography>
         )}
-        {result && componentComposition && (
+        {result && usedComponentRatios && (
           <>
             {'Mercury' in result.phaseValues && <MercuryWarning />}
             <Results>
               <PhaseTable multiFlashResponse={result} feedFlow={feedFlow} />
               <MoleTable
                 multiFlashResponse={result}
-                components={components}
-                componentComposition={componentComposition}
+                componentProperties={componentProperties}
+                componentRatios={usedComponentRatios}
               />
             </Results>
           </>

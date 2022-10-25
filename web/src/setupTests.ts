@@ -3,9 +3,10 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
-import { ComponentResponse, MultiflashResponse } from './api/generated'
+import { MultiflashResponse } from './api/generated'
+import { TComponentProperties } from './types'
 
-export const mockComponentComposition = {
+export const mockComponentRatios = {
   '3': 0.062202,
   '2': 0.0047,
   '1': 0.046539,
@@ -60,39 +61,37 @@ export const mockMultiflashResponse: MultiflashResponse = {
   feedMolecularWeight: 26.494307395,
 }
 
-export const mockComponentResponse: ComponentResponse = {
-  components: {
-    '1': { chemicalFormula: 'CO2', altName: 'Carbondioxide' },
-    '2': { chemicalFormula: 'N2', altName: 'Nitrogen' },
-    '3': { chemicalFormula: 'H2O', altName: 'Water' },
-    '4': { chemicalFormula: 'H2S', altName: 'Hydrogensulfide' },
-    '5': { chemicalFormula: 'Hg', altName: 'Mercury' },
-    '101': { chemicalFormula: 'CH4', altName: 'Methane' },
-    '201': { chemicalFormula: 'C2H6', altName: 'Ethane' },
-    '301': { chemicalFormula: 'nC3', altName: 'Propane' },
-    '401': { chemicalFormula: 'iC4', altName: 'i-Butane' },
-    '402': { chemicalFormula: 'nC4', altName: 'n-Butane' },
-    '501': { chemicalFormula: '22-dm-C3', altName: '2-2-dimethyl-propane' },
-    '503': { chemicalFormula: 'iC5', altName: 'i-Pentane' },
-    '504': { chemicalFormula: 'nC5', altName: 'n-Pentane' },
-    '502': { chemicalFormula: 'cy-C5', altName: 'Cy-C5' },
-    '601': {
-      chemicalFormula: '22-dm-C4',
-      altName: '2-2-dimethyl-butane(neohexane)',
-    },
-    '602': { chemicalFormula: '23-dm-C4', altName: '2-3-dimethyl-butane' },
-    '603': { chemicalFormula: '2-m-C5', altName: '2-methyl-pentane' },
-    '604': { chemicalFormula: '3-m-C5', altName: '3-methyl-pentane' },
-    '605': { chemicalFormula: 'nC6', altName: 'n-Hexane' },
-    '606': { chemicalFormula: 'cy-C6', altName: 'Cy-hexane' },
-    '608': { chemicalFormula: 'benzene', altName: 'Benzene' },
-    '701': { chemicalFormula: 'nC7', altName: 'n-heptane' },
-    '707': { chemicalFormula: 'cy-C7', altName: 'Cy-heptane' },
-    '710': { chemicalFormula: 'toluene', altName: 'Toluene' },
-    '801': { chemicalFormula: 'nC8', altName: 'n-octane' },
-    '806': { chemicalFormula: 'cy-C8', altName: 'Cy-octane' },
-    '809': { chemicalFormula: 'm-xylene', altName: 'M-xylene' },
-    '901': { chemicalFormula: 'nC9', altName: 'n-nonane' },
-    '1016': { chemicalFormula: 'nC10', altName: 'n-decane' },
+export const mockComponentProperties: TComponentProperties = {
+  '1': { chemicalFormula: 'CO2', altName: 'Carbondioxide' },
+  '2': { chemicalFormula: 'N2', altName: 'Nitrogen' },
+  '3': { chemicalFormula: 'H2O', altName: 'Water' },
+  '4': { chemicalFormula: 'H2S', altName: 'Hydrogensulfide' },
+  '5': { chemicalFormula: 'Hg', altName: 'Mercury' },
+  '101': { chemicalFormula: 'CH4', altName: 'Methane' },
+  '201': { chemicalFormula: 'C2H6', altName: 'Ethane' },
+  '301': { chemicalFormula: 'nC3', altName: 'Propane' },
+  '401': { chemicalFormula: 'iC4', altName: 'i-Butane' },
+  '402': { chemicalFormula: 'nC4', altName: 'n-Butane' },
+  '501': { chemicalFormula: '22-dm-C3', altName: '2-2-dimethyl-propane' },
+  '503': { chemicalFormula: 'iC5', altName: 'i-Pentane' },
+  '504': { chemicalFormula: 'nC5', altName: 'n-Pentane' },
+  '502': { chemicalFormula: 'cy-C5', altName: 'Cy-C5' },
+  '601': {
+    chemicalFormula: '22-dm-C4',
+    altName: '2-2-dimethyl-butane(neohexane)',
   },
+  '602': { chemicalFormula: '23-dm-C4', altName: '2-3-dimethyl-butane' },
+  '603': { chemicalFormula: '2-m-C5', altName: '2-methyl-pentane' },
+  '604': { chemicalFormula: '3-m-C5', altName: '3-methyl-pentane' },
+  '605': { chemicalFormula: 'nC6', altName: 'n-Hexane' },
+  '606': { chemicalFormula: 'cy-C6', altName: 'Cy-hexane' },
+  '608': { chemicalFormula: 'benzene', altName: 'Benzene' },
+  '701': { chemicalFormula: 'nC7', altName: 'n-heptane' },
+  '707': { chemicalFormula: 'cy-C7', altName: 'Cy-heptane' },
+  '710': { chemicalFormula: 'toluene', altName: 'Toluene' },
+  '801': { chemicalFormula: 'nC8', altName: 'n-octane' },
+  '806': { chemicalFormula: 'cy-C8', altName: 'Cy-octane' },
+  '809': { chemicalFormula: 'm-xylene', altName: 'M-xylene' },
+  '901': { chemicalFormula: 'nC9', altName: 'n-nonane' },
+  '1016': { chemicalFormula: 'nC10', altName: 'n-decane' },
 }

@@ -1,17 +1,17 @@
 import { DynamicTable } from '../common/DynamicTable'
-import { ComponentResponse, MultiflashResponse } from '../../api/generated'
+import { MultiflashResponse } from '../../api/generated'
 import { formatNumber } from '../../tableUtils'
-import { TComponentComposition } from '../../types'
+import { TComponentProperties, TComponentRatios } from '../../types'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
-  componentResponse: ComponentResponse,
-  componentComposition: TComponentComposition
+  componentProperties: TComponentProperties,
+  componentRatios: TComponentRatios
 ): string[][] {
   return Object.entries(multiFlashResponse.componentFractions).map(
-    ([componentId, fractions]) => [
-      componentResponse.components[componentId].altName,
-      formatNumber(componentComposition[componentId]),
+    ([compId, fractions]) => [
+      componentProperties[compId].altName,
+      formatNumber(componentRatios[compId]),
       ...fractions.map((x) => formatNumber(x, 2, 3)),
     ]
   )
@@ -20,19 +20,21 @@ function getRows(
 // TODO: Get type from generated API
 export const MoleTable = (props: {
   multiFlashResponse: MultiflashResponse
-  components: ComponentResponse
-  componentComposition: TComponentComposition
+  componentProperties: TComponentProperties
+  componentRatios: TComponentRatios
 }) => {
-  const { multiFlashResponse, components } = props
-
   return (
     <DynamicTable
       headers={[
         'Components',
         'Feed Value (mol)',
-        ...Object.keys(multiFlashResponse.phaseValues),
+        ...Object.keys(props.multiFlashResponse.phaseValues),
       ]}
-      rows={getRows(multiFlashResponse, components, props.componentComposition)}
+      rows={getRows(
+        props.multiFlashResponse,
+        props.componentProperties,
+        props.componentRatios
+      )}
       density={'compact'}
     />
   )

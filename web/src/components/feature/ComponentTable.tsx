@@ -1,6 +1,6 @@
-import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
-import { TComponent, TComponentInput } from '../../types'
 import styled from 'styled-components'
+import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
+import { TComponentRatios, TComponentProperties } from '../../types'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -11,31 +11,36 @@ const ComponentTableContainer = styled.div`
 `
 
 export const ComponentTable = ({
-  input,
-  componentInput,
-  setComponentInput,
+  selectedComponents,
+  componentRatios,
+  setComponentRatios,
 }: {
-  input: TComponent[]
-  componentInput: TComponentInput
-  setComponentInput: (componentInput: TComponentInput) => void
+  selectedComponents: TComponentProperties
+  componentRatios: TComponentRatios
+  setComponentRatios: (componentInput: TComponentRatios) => void
 }): JSX.Element => {
   function createTableRows() {
-    return input.map((entry, index) => (
+    return Object.entries(selectedComponents).map(([id, names], index) => (
       <Table.Row key={index}>
         <Table.Cell
           data-testid={`Component-${index}`}
-        >{`${entry.altName} (${entry.chemicalFormula})`}</Table.Cell>
+        >{`${names.altName} (${names.chemicalFormula})`}</Table.Cell>
         <Table.Cell data-testid={`Ratio (mol)-${index}`}>
           <TextField
-            id={`${entry.chemicalFormula}-input`}
-            defaultValue={componentInput[entry.componentId].value}
+            id={`${names.chemicalFormula}-input`}
+            value={(componentRatios[id] ?? 0).toString()}
             min={0}
             type="number"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              componentInput[entry.componentId].value = Number(
-                event.target.value
-              )
-              setComponentInput(componentInput)
+              const ratio = Number(event.target.value)
+              const newRatios = { ...componentRatios }
+              if (ratio === 0) {
+                delete newRatios[id]
+                setComponentRatios(newRatios)
+              } else {
+                newRatios[id] = ratio
+                setComponentRatios(newRatios)
+              }
             }}
           />
         </Table.Cell>
