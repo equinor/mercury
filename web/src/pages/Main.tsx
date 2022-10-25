@@ -51,14 +51,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     mercuryApi
       .getComponents()
       .then((response: AxiosResponse<ComponentResponse>) =>
-        setComponentProperties(
-          Object.fromEntries(
-            Object.entries(response.data.components).map(([id, names]) => [
-              id,
-              { name: names.altName, formula: names.chemicalFormula },
-            ])
-          )
-        )
+        setComponentProperties(response.data.components)
       )
       .finally(() => setIsLoading(false))
   }, [mercuryApi])

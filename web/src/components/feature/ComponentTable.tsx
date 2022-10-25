@@ -24,10 +24,10 @@ export const ComponentTable = ({
       <Table.Row key={index}>
         <Table.Cell
           data-testid={`Component-${index}`}
-        >{`${names.name} (${names.formula})`}</Table.Cell>
+        >{`${names.altName} (${names.chemicalFormula})`}</Table.Cell>
         <Table.Cell data-testid={`Ratio (mol)-${index}`}>
           <TextField
-            id={`${names.formula}-input`}
+            id={`${names.chemicalFormula}-input`}
             value={(componentRatios[id] ?? 0).toString()}
             min={0}
             type="number"

@@ -15,6 +15,7 @@ const ComponentSelectorContainer = styled.div`
 type TComponentProperty = {
   name: string
   formula: string
+  weight: number
   id: string
 }
 
@@ -29,8 +30,9 @@ export const ComponentSelector = ({
 }) => {
   const options: TComponentProperty[] = Object.entries(componentProperties).map(
     ([key, entry]) => ({
-      name: entry.name,
-      formula: entry.formula,
+      name: entry.altName,
+      formula: entry.chemicalFormula,
+      weight: entry.molecularWeight,
       id: key,
     })
   )
@@ -55,7 +57,11 @@ export const ComponentSelector = ({
         selectedComponents={Object.fromEntries(
           selectedComponents.map((x) => [
             x.id,
-            { name: x.name, formula: x.formula },
+            {
+              altName: x.name,
+              chemicalFormula: x.formula,
+              molecularWeight: x.weight,
+            },
           ])
         )}
         componentRatios={componentRatios}

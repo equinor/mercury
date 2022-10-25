@@ -10,7 +10,7 @@ function getRows(
 ): string[][] {
   return Object.entries(multiFlashResponse.componentFractions).map(
     ([compId, fractions]) => [
-      componentProperties[compId].name,
+      componentProperties[compId].altName,
       formatNumber(componentRatios[compId]),
       ...fractions.map((x) => formatNumber(x, 2, 3)),
     ]

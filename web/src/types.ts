@@ -1,8 +1,7 @@
+import { ComponentProperties } from './api/generated'
+
 export type TComponentProperties = {
-  [id: string]: {
-    name: string
-    formula: string
-  }
+  [id: string]: ComponentProperties
 }
 export type TComponentRatios = {
   [id: string]: number
