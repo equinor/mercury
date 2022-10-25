@@ -1,6 +1,6 @@
 import { Switch, TextField } from '@equinor/eds-core-react'
 import styled from 'styled-components'
-import { TFeedFlow } from '../../types'
+import { TFeedFlow } from '../../../types'
 
 const FlexContainer = styled.div`
   display: flex;

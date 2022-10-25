@@ -5,7 +5,7 @@ import {
   mockComponentProperties,
   mockComponentRatios,
   mockMultiflashResponse,
-} from '../../setupTests'
+} from '../../../setupTests'
 
 test('renders without crashing and displaying correct values in table', async () => {
   render(

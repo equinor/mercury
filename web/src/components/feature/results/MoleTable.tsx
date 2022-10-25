@@ -1,7 +1,7 @@
-import { DynamicTable } from '../common/DynamicTable'
-import { MultiflashResponse } from '../../api/generated'
-import { formatNumber } from '../../tableUtils'
-import { TComponentProperties, TComponentRatios } from '../../types'
+import { DynamicTable } from '../../common/DynamicTable'
+import { MultiflashResponse } from '../../../api/generated'
+import { formatNumber } from '../../../tableUtils'
+import { TComponentProperties, TComponentRatios } from '../../../types'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,

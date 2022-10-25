@@ -4,21 +4,21 @@ import {
   Progress,
   TextField,
 } from '@equinor/eds-core-react'
-import { Card } from '../common/Card'
+import { Card } from '../../common/Card'
 import styled from 'styled-components'
-import { FluidDialog } from './FluidDialog'
+import { FluidDialog } from '../package_dialog/FluidDialog'
 import { useState } from 'react'
-import { MultiflashResponse } from '../../api/generated'
+import { MultiflashResponse } from '../../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
-import MercuryAPI from '../../api/MercuryAPI'
+import MercuryAPI from '../../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
 import {
   TComponentProperties,
   TComponentRatios,
   TFeedFlow,
   TPackage,
-} from '../../types'
-import useLocalStorage from '../../hooks/useLocalStorage'
+} from '../../../types'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 
 const FlexContainer = styled.div`
   display: flex;

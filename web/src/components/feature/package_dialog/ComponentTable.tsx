@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
-import { TComponentRatios, TComponentProperties } from '../../types'
+import { TComponentRatios, TComponentProperties } from '../../../types'
 
 const ComponentTableContainer = styled.div`
   display: flex;

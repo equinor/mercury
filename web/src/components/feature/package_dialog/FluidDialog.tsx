@@ -2,8 +2,12 @@ import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { useEffect, useState } from 'react'
-import { TPackage, TComponentProperties, TComponentRatios } from '../../types'
-import { demoFeedComponentRatios } from '../../constants'
+import {
+  TPackage,
+  TComponentProperties,
+  TComponentRatios,
+} from '../../../types'
+import { demoFeedComponentRatios } from '../../../constants'
 
 const WideDialog = styled(Dialog)`
   width: auto;
