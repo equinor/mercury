@@ -1,10 +1,10 @@
 from typing import Dict, List
 
 import libhg
+import numpy as np
 from pydantic import BaseModel, Field, validator
 
 from common.components import COMPONENTS
-from common.molecular_weights import MOLECULAR_WEIGHTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
@@ -36,12 +36,9 @@ class Multiflash(BaseModel):
 
     @validator("component_composition")
     def validate_composition(cls, v):
-        composition = list(v.values())
         ids = list(v.keys())
         if not set(ids) <= set(COMPONENTS.keys()):
             raise ValueError("component_id input contains unknown component!")
-        if abs(sum(composition) - 1) > 0.01:
-            raise ValueError("composition list should add to approx. 1")
         return v
 
     @property
@@ -61,11 +58,11 @@ class Multiflash(BaseModel):
         return len(self.component_ids)
 
     @property
-    def feed_molecular_weight(self):
-        total_molecular_weight = 0
-        for component_id, mole_fraction in self.component_composition.items():
-            total_molecular_weight += mole_fraction * MOLECULAR_WEIGHTS[component_id]
-        return total_molecular_weight
+    def normalized_feed_composition(self) -> Dict[str, float]:
+        composition_norm = np.linalg.norm(self.feed_composition)
+        composition_array = np.array(self.feed_composition)
+        normalized_array = composition_array / composition_norm
+        return {component_id: feed_ratio for component_id, feed_ratio in zip(self.component_ids, normalized_array)}
 
     @staticmethod
     def format_phase_results(
@@ -122,5 +119,5 @@ class Multiflash(BaseModel):
         return MultiflashResult(
             phase_values=phase_values,
             component_fractions=self.format_component_results(mole_fractions, mass_fractions, columns_to_keep),
-            feed_molecular_weight=self.feed_molecular_weight,
+            feed_fractions=self.normalized_feed_composition,
         )

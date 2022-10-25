@@ -23,10 +23,8 @@ class MultiflashResponse(BaseModel):
         description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)",
         alias="componentFractions",
     )
-    feed_molecular_weight: float = Field(
-        ...,
-        description="The molecular weight of the feed composition input",
-        alias="feedMolecularWeight",
+    feed_fractions: Dict[str, float] = Field(
+        ..., description="Ratio of components in the feed (guaranteed to sum to 1)", alias="feedFractions"
     )
 
     class Config:
@@ -46,6 +44,7 @@ class MultiflashResponse(BaseModel):
                     "5": [1.0000000000000002, 4.038754670974074e-7, 7.447270506156235e-9],
                     "101": [7.260898200622709e-23, 0.390222764679909, 0.00015827848031333905],
                 },
+                "feedFractions": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
             }
         }
 
@@ -54,7 +53,7 @@ class MultiflashResponse(BaseModel):
         cls,
         phase_values: Dict[PhaseLabels, PhaseValues],
         component_fractions: Dict[str, ComponentFractions],
-        feed_molecular_weight: float,
+        feed_fractions: Dict[str, float],
     ) -> "MultiflashResponse":
         # convert phase_values to dictionary
         new_phase_values = {label: value._asdict() for label, value in phase_values.items()}
@@ -66,7 +65,7 @@ class MultiflashResponse(BaseModel):
         return MultiflashResponse(
             phase_values=new_phase_values,
             component_fractions=new_component_fractions,
-            feed_molecular_weight=feed_molecular_weight,
+            feed_fractions=feed_fractions,
         )
 
     @property

@@ -53,7 +53,7 @@ class MultiflashResult(NamedTuple):
 
     phase_values: Dict[PhaseLabels, PhaseValues]
     component_fractions: Dict[str, ComponentFractions]
-    feed_molecular_weight: float
+    feed_fractions: Dict[str, float]
 
     def __eq__(self, other) -> bool:
         if not set(self.phase_values.keys()) == set(other.phase_values.keys()):
