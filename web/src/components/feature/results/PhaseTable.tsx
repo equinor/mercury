@@ -1,7 +1,7 @@
-import { DynamicTable } from '../common/DynamicTable'
-import { MultiflashResponse } from '../../api/generated'
-import { TFeedFlow } from '../../types'
-import { formatNumber } from '../../tableUtils'
+import { DynamicTable } from '../../common/DynamicTable'
+import { MultiflashResponse } from '../../../api/generated'
+import { TFeedFlow } from '../../../types'
+import { formatNumber } from '../../../tableUtils'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
