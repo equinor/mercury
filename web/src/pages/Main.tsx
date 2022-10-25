@@ -88,7 +88,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
               <MoleTable
                 multiFlashResponse={result}
                 componentProperties={componentProperties}
-                componentRatios={usedComponentRatios}
               />
             </Results>
           </>

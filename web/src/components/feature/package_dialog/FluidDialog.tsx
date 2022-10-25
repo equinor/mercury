@@ -28,21 +28,6 @@ const FirstColumn = styled.div`
   gap: 30px;
 `
 
-function getNormalizationFactor(array: Array<number>): number {
-  const arraySum: number = array.reduce(
-    (partialSum, value) => partialSum + value,
-    0
-  )
-  return Math.abs(arraySum - 1) > 0.01 ? arraySum : 1
-}
-
-function normalizeRatios(componentRatios: TComponentRatios): TComponentRatios {
-  const factor = getNormalizationFactor(Object.values(componentRatios))
-  return Object.fromEntries(
-    Object.entries(componentRatios).map(([id, ratio]) => [id, ratio / factor])
-  )
-}
-
 function computeFeedMolecularWeight(
   componentProperties: TComponentProperties,
   componentRatios: TComponentRatios
@@ -92,7 +77,7 @@ export const FluidDialog = ({
       [packageName]: {
         name: packageName,
         description: packageDescription,
-        components: normalizeRatios(componentRatios),
+        components: componentRatios,
         molecularWeightSum: computeFeedMolecularWeight(
           componentProperties,
           componentRatios

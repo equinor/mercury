@@ -3,7 +3,6 @@ import { MoleTable } from './MoleTable'
 import '@testing-library/jest-dom/extend-expect'
 import {
   mockComponentProperties,
-  mockComponentRatios,
   mockMultiflashResponse,
 } from '../../../setupTests'
 
@@ -12,7 +11,6 @@ test('renders without crashing and displaying correct values in table', async ()
     <MoleTable
       componentProperties={mockComponentProperties}
       multiFlashResponse={mockMultiflashResponse}
-      componentRatios={mockComponentRatios}
     />
   )
   // @ts-ignore because not able to get eslint to discover these types
