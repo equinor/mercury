@@ -145,8 +145,10 @@ export const CalculationInput = ({
         close={() => setIsOpen(false)}
         componentProperties={componentProperties}
         selectedPackage={selectedPackage}
-        packages={packages}
-        setPackages={setPackages}
+        packages={Object.fromEntries(packages.map((x) => [x.name, x]))}
+        setPackages={(x: { [name: string]: TPackage }) =>
+          setPackages(Object.values(x))
+        }
       />
     </>
   )

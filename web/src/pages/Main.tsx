@@ -44,11 +44,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [usedComponentRatios, setUsedComponentRatios] = useState<
     TComponentRatios | undefined
   >()
-  const [result, setResult] = useState<MultiflashResponse>({
-    phaseValues: {},
-    componentFractions: {},
-    feedMolecularWeight: 0,
-  })
+  const [result, setResult] = useState<MultiflashResponse>()
 
   // Fetch list of components name once on page load
   useEffect(() => {
