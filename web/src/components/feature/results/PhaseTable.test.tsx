@@ -7,7 +7,7 @@ test('renders without crashing and displaying correct values in table', async ()
   render(
     <PhaseTable
       multiFlashResponse={mockMultiflashResponse}
-      feedFlow={{ unit: 'Sm3/d', value: 0 }}
+      cubicFeedFlow={1000}
     />
   )
   // @ts-ignore because not able to get eslint to discover these types

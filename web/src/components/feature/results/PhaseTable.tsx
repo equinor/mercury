@@ -1,14 +1,17 @@
 import { DynamicTable } from '../../common/DynamicTable'
 import { MultiflashResponse } from '../../../api/generated'
-import { TFeedFlow } from '../../../types'
 import { formatNumber } from '../../../tableUtils'
+import {
+  mercuryMolecularWeight,
+  molePerStandardCubicMeter,
+} from '../../../constants'
 
 function getRows(
   multiFlashResponse: MultiflashResponse,
-  feedFlow: number
+  cubicFeedFlow: number
 ): string[][] {
-  // TODO: Assumes feed flow unit is Sm3/d
-  const phPhaseFlowFactor = feedFlow * 42.29256 * 200.59
+  const phPhaseFlowFactor =
+    cubicFeedFlow * molePerStandardCubicMeter * mercuryMolecularWeight
   const mercury = multiFlashResponse.componentFractions['5']
   return Object.entries(multiFlashResponse.phaseValues).map(
     ([phase, values], index) => [
@@ -23,7 +26,7 @@ function getRows(
 
 export const PhaseTable = (props: {
   multiFlashResponse: MultiflashResponse
-  feedFlow: TFeedFlow
+  cubicFeedFlow: number
 }) => {
   return (
     <DynamicTable
@@ -34,7 +37,7 @@ export const PhaseTable = (props: {
         'Mole Concentration',
         'Mercury Flow (g/d)',
       ]}
-      rows={getRows(props.multiFlashResponse, props.feedFlow.value)}
+      rows={getRows(props.multiFlashResponse, props.cubicFeedFlow)}
       density={'comfortable'}
     />
   )
