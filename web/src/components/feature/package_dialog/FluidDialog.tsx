@@ -67,7 +67,7 @@ export const FluidDialog = ({
       setPackageDescription(editablePackage.description)
       setComponentRatios(editablePackage.components)
     }
-  }, [editablePackage])
+  }, [editablePackage, isOpen])
 
   return (
     <WideDialog open={isOpen} onClose={close} isDismissable={true}>
