@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../../constants'
 import { TComponentProperties, TComponentRatios } from '../../../types'
+import { ComponentTableSum } from './ComponentTableSum'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -67,6 +68,7 @@ export const ComponentSelector = ({
         componentRatios={componentRatios}
         setComponentRatios={setComponentRatios}
       />
+      <ComponentTableSum componentRatios={componentRatios} />
     </ComponentSelectorContainer>
   )
 }
