@@ -1,9 +1,4 @@
-import {
-  Autocomplete,
-  Button,
-  Progress,
-  TextField,
-} from '@equinor/eds-core-react'
+import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
 import { Card } from '../../common/Card'
 import styled from 'styled-components'
 import { FluidDialog } from '../package_dialog/FluidDialog'
@@ -18,13 +13,7 @@ import {
   TPackage,
 } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
-import {
-  absoluteZero,
-  maxPressure,
-  maxTemperature,
-  minPressure,
-  minTemperature,
-} from '../../../constants'
+import { TempOrPressureInput } from './TempOrPressureInput'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -121,50 +110,15 @@ export const CalculationInput = ({
             </Button>
           </FluidPackage>
           <FlexContainer>
-            <TextField
-              id="temperature-input"
-              min={absoluteZero}
-              defaultValue={temperature.toString()}
-              label="Temperature"
-              unit="ºC"
-              type="number"
-              variant={
-                temperature > maxTemperature || temperature < minTemperature
-                  ? 'warning'
-                  : undefined
-              }
-              helperText={
-                temperature > maxTemperature
-                  ? 'The temperature is very high'
-                  : temperature < minTemperature
-                  ? 'The temperature is very low'
-                  : undefined
-              }
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setTemperature(Number(event.target.value))
-              }
+            <TempOrPressureInput
+              value={temperature}
+              setValue={setTemperature}
+              name="Temperature"
             />
-            <TextField
-              id="pressure-input"
-              defaultValue={pressure.toString()}
-              label="Pressure"
-              unit="bar"
-              type="number"
-              variant={
-                pressure > maxPressure || pressure < minPressure
-                  ? 'warning'
-                  : undefined
-              }
-              helperText={
-                pressure > maxPressure
-                  ? 'The pressure is very high'
-                  : pressure < minPressure
-                  ? 'The pressure is very low'
-                  : undefined
-              }
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPressure(Number(event.target.value))
-              }
+            <TempOrPressureInput
+              value={pressure}
+              setValue={setPressure}
+              name="Pressure"
             />
           </FlexContainer>
           <FeedFlowInput
