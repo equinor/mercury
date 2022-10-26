@@ -3,8 +3,8 @@ import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 
 const StyledCard = styled(CardWrapper)`
-  min-width: 250px;
-  max-width: 400px;
+  min-width: 300px;
+  max-width: 450px;
   background-color: ${tokens.colors.ui.background__light.hex};
 `
 
