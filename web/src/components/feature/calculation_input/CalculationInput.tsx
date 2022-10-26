@@ -97,15 +97,15 @@ export const CalculationInput = ({
   )
 
   const savePackage = (newPackage: TPackage) => {
-    let newPackages = [...packages]
+    let oldPackages = [...packages]
     if (editablePackage !== undefined) {
-      newPackages = newPackages.filter((x) => x.name !== editablePackage.name)
+      oldPackages = oldPackages.filter((x) => x.name !== editablePackage.name)
     }
-    if (newPackages.find((x) => x.name === newPackage.name)) {
-      newPackages = newPackages.filter((x) => x.name !== newPackage.name)
+    if (oldPackages.find((x) => x.name === newPackage.name)) {
+      oldPackages = oldPackages.filter((x) => x.name !== newPackage.name)
     }
     setSelectedPackage(newPackage)
-    setPackages([...newPackages, newPackage])
+    setPackages([...oldPackages, newPackage])
   }
 
   return (
