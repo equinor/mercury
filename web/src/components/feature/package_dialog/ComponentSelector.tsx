@@ -36,9 +36,9 @@ export const ComponentSelector = ({
       id: key,
     })
   )
-  const initials = options.filter((option) =>
-    preSelectedComponents.includes(option.id)
-  )
+  const initials = Object.keys(componentRatios).length
+    ? options.filter((option) => componentRatios[option.id])
+    : options.filter((option) => preSelectedComponents.includes(option.id))
   const [selectedComponents, setSelectedComponents] =
     useState<TComponentProperty[]>(initials)
   return (

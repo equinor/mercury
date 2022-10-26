@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Button, Dialog, TextField } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   TPackage,
   TComponentProperties,
@@ -40,37 +40,29 @@ function computeFeedMolecularWeight(
 }
 
 export const FluidDialog = ({
-  isOpen,
   close,
   componentProperties,
   editablePackage,
   savePackage,
 }: {
-  isOpen: boolean
   close: () => void
   componentProperties: TComponentProperties
-  editablePackage: TPackage | undefined
+  editablePackage?: TPackage
   savePackage: (x: TPackage) => void
 }) => {
   // Array of components containing input from user
-  const [componentRatios, setComponentRatios] = useState<TComponentRatios>({})
-  const [packageName, setPackageName] = useState<string>('')
-  const [packageDescription, setPackageDescription] = useState<string>('')
-
-  useEffect(() => {
-    if (editablePackage === undefined) {
-      setPackageName('')
-      setPackageDescription('')
-      setComponentRatios({})
-    } else {
-      setPackageName(editablePackage.name)
-      setPackageDescription(editablePackage.description)
-      setComponentRatios(editablePackage.components)
-    }
-  }, [editablePackage, isOpen])
+  const [componentRatios, setComponentRatios] = useState<TComponentRatios>(
+    editablePackage?.components ?? {}
+  )
+  const [packageName, setPackageName] = useState<string>(
+    editablePackage?.name ?? ''
+  )
+  const [packageDescription, setPackageDescription] = useState<string>(
+    editablePackage?.description ?? ''
+  )
 
   return (
-    <WideDialog open={isOpen} onClose={close} isDismissable={true}>
+    <WideDialog open onClose={close} isDismissable>
       <Dialog.Header>
         <Dialog.Title>Create fluid package</Dialog.Title>
       </Dialog.Header>
