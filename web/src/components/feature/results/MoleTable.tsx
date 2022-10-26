@@ -25,8 +25,10 @@ export const MoleTable = (props: {
     <DynamicTable
       headers={[
         'Components',
-        'Feed Value (mol)',
-        ...Object.keys(props.multiFlashResponse.phaseValues),
+        'Feed ratio',
+        ...Object.keys(props.multiFlashResponse.phaseValues).map(
+          (phase) => `${phase} (mol)`
+        ),
       ]}
       rows={getRows(props.multiFlashResponse, props.componentProperties)}
       density={'compact'}
