@@ -43,16 +43,14 @@ export const FluidDialog = ({
   isOpen,
   close,
   componentProperties,
-  selectedPackage,
-  packages,
-  setPackages,
+  editablePackage,
+  savePackage,
 }: {
   isOpen: boolean
   close: () => void
   componentProperties: TComponentProperties
-  selectedPackage: TPackage | undefined
-  packages: { [name: string]: TPackage }
-  setPackages: (v: { [name: string]: TPackage }) => void
+  editablePackage: TPackage | undefined
+  savePackage: (x: TPackage) => void
 }) => {
   // Array of components containing input from user
   const [componentRatios, setComponentRatios] = useState<TComponentRatios>({})
@@ -60,32 +58,16 @@ export const FluidDialog = ({
   const [packageDescription, setPackageDescription] = useState<string>('')
 
   useEffect(() => {
-    if (selectedPackage === undefined) {
+    if (editablePackage === undefined) {
       setPackageName('')
       setPackageDescription('')
       setComponentRatios({})
     } else {
-      setPackageName(selectedPackage.name)
-      setPackageDescription(selectedPackage.description)
-      setComponentRatios(selectedPackage.components)
+      setPackageName(editablePackage.name)
+      setPackageDescription(editablePackage.description)
+      setComponentRatios(editablePackage.components)
     }
-  }, [selectedPackage])
-
-  const savePackage = () => {
-    setPackages({
-      ...packages,
-      [packageName]: {
-        name: packageName,
-        description: packageDescription,
-        components: componentRatios,
-        molecularWeightSum: computeFeedMolecularWeight(
-          componentProperties,
-          componentRatios
-        ),
-      },
-    })
-    close()
-  }
+  }, [editablePackage])
 
   return (
     <WideDialog open={isOpen} onClose={close} isDismissable={true}>
@@ -123,13 +105,29 @@ export const FluidDialog = ({
         </FluidPackageForm>
       </Dialog.CustomContent>
       <Dialog.Actions>
-        <Button color="danger" variant="outlined">
-          Delete
-        </Button>
+        {editablePackage !== undefined && (
+          <Button color="danger" variant="outlined">
+            Delete
+          </Button>
+        )}
         <Button variant="outlined" onClick={close}>
           Cancel
         </Button>
-        <Button onClick={savePackage} disabled={!packageName}>
+        <Button
+          onClick={() => {
+            savePackage({
+              name: packageName,
+              description: packageDescription,
+              components: componentRatios,
+              molecularWeightSum: computeFeedMolecularWeight(
+                componentProperties,
+                componentRatios
+              ),
+            })
+            close()
+          }}
+          disabled={!packageName}
+        >
           Save
         </Button>
         <Button

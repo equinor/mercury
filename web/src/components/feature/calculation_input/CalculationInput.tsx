@@ -54,6 +54,7 @@ export const CalculationInput = ({
   const [calculating, setCalculating] = useState<boolean>(false)
   const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
   const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
+  const [editablePackage, setEditablePackage] = useState<TPackage | undefined>()
 
   const calculate = (
     <Button
@@ -91,6 +92,18 @@ export const CalculationInput = ({
     </Button>
   )
 
+  const savePackage = (newPackage: TPackage) => {
+    let oldPackages = [...packages]
+    if (editablePackage !== undefined) {
+      oldPackages = oldPackages.filter((x) => x.name !== editablePackage.name)
+    }
+    if (oldPackages.find((x) => x.name === newPackage.name)) {
+      oldPackages = oldPackages.filter((x) => x.name !== newPackage.name)
+    }
+    setSelectedPackage(newPackage)
+    setPackages([...oldPackages, newPackage])
+  }
+
   return (
     <>
       <Card title={'Calculate Fluid'} actions={calculate}>
@@ -103,9 +116,26 @@ export const CalculationInput = ({
               onOptionsChange={(changes) =>
                 setSelectedPackage(changes.selectedItems[0])
               }
+              selectedOptions={selectedPackage ? [selectedPackage] : []}
               autoWidth
             />
-            <Button variant="outlined" onClick={() => setIsOpen(true)}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setEditablePackage(selectedPackage)
+                setIsOpen(true)
+              }}
+              disabled={selectedPackage === undefined}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setEditablePackage(undefined)
+                setIsOpen(true)
+              }}
+            >
               New
             </Button>
           </FluidPackage>
@@ -132,11 +162,8 @@ export const CalculationInput = ({
         isOpen={isOpen}
         close={() => setIsOpen(false)}
         componentProperties={componentProperties}
-        selectedPackage={selectedPackage}
-        packages={Object.fromEntries(packages.map((x) => [x.name, x]))}
-        setPackages={(x: { [name: string]: TPackage }) =>
-          setPackages(Object.values(x))
-        }
+        editablePackage={editablePackage}
+        savePackage={savePackage}
       />
     </>
   )
