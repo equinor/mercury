@@ -6,7 +6,7 @@ import { useState } from 'react'
 const FlexContainer = styled.div`
   display: flex;
   gap: 16px;
-  max-width: 250px;
+  max-width: 400px;
 `
 
 function convertFlowFromCubicToMass(
