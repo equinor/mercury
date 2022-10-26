@@ -48,13 +48,13 @@ export const CalculationInput = ({
   setCubicFeedFlow: (cubicFeedFlow: number) => void
   setUsedComponentRatios: (ratios: TComponentRatios) => void
 }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
+  const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
   const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
   const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
-  const [editablePackage, setEditablePackage] = useState<TPackage | undefined>()
 
   const calculate = (
     <Button
@@ -92,10 +92,10 @@ export const CalculationInput = ({
     </Button>
   )
 
-  const savePackage = (newPackage: TPackage) => {
+  const savePackage = (newPackage: TPackage, mode: 'new' | 'edit') => {
     let oldPackages = [...packages]
-    if (editablePackage !== undefined) {
-      oldPackages = oldPackages.filter((x) => x.name !== editablePackage.name)
+    if (mode === 'edit' && selectedPackage !== undefined) {
+      oldPackages = oldPackages.filter((x) => x.name !== selectedPackage.name)
     }
     if (oldPackages.find((x) => x.name === newPackage.name)) {
       oldPackages = oldPackages.filter((x) => x.name !== newPackage.name)
@@ -121,21 +121,12 @@ export const CalculationInput = ({
             />
             <Button
               variant="outlined"
-              onClick={() => {
-                setEditablePackage(selectedPackage)
-                setIsOpen(true)
-              }}
+              onClick={() => setIsEditOpen(true)}
               disabled={selectedPackage === undefined}
             >
               Edit
             </Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                setEditablePackage(undefined)
-                setIsOpen(true)
-              }}
-            >
+            <Button variant="outlined" onClick={() => setIsNewOpen(true)}>
               New
             </Button>
           </FluidPackage>
@@ -158,13 +149,21 @@ export const CalculationInput = ({
           />
         </Form>
       </Card>
-      <FluidDialog
-        isOpen={isOpen}
-        close={() => setIsOpen(false)}
-        componentProperties={componentProperties}
-        editablePackage={editablePackage}
-        savePackage={savePackage}
-      />
+      {isNewOpen && (
+        <FluidDialog
+          close={() => setIsNewOpen(false)}
+          componentProperties={componentProperties}
+          savePackage={(x) => savePackage(x, 'new')}
+        />
+      )}
+      {isEditOpen && (
+        <FluidDialog
+          close={() => setIsEditOpen(false)}
+          componentProperties={componentProperties}
+          editablePackage={selectedPackage}
+          savePackage={(x) => savePackage(x, 'edit')}
+        />
+      )}
     </>
   )
 }
