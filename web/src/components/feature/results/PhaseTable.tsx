@@ -1,6 +1,6 @@
 import { DynamicTable } from '../../common/DynamicTable'
 import { MultiflashResponse } from '../../../api/generated'
-import { formatNumber } from '../../../tableUtils'
+import { formatNumber, getCorrectUnit } from '../../../tableUtils'
 import {
   mercuryMolecularWeight,
   molePerStandardCubicMeter,
@@ -17,9 +17,10 @@ function getRows(
     ([phase, values], index) => [
       phase,
       formatNumber(values['percentage']),
-      formatNumber(values['mercury']),
-      formatNumber(mercury[index]),
-      formatNumber(phPhaseFlowFactor * values['percentage'] * mercury[index]),
+      formatNumber(values['mercury']) + getCorrectUnit(phase),
+      formatNumber(mercury[index]) + ' mol/mol',
+      formatNumber(phPhaseFlowFactor * values['percentage'] * mercury[index]) +
+        ' g/d',
     ]
   )
 }
@@ -32,10 +33,10 @@ export const PhaseTable = (props: {
     <DynamicTable
       headers={[
         'Phases',
-        'Ratio',
-        'Mass Concentration',
-        'Mole Concentration',
-        'Mercury Flow (g/d)',
+        'Fractions',
+        'Concentration (μg)',
+        'Concentration (mol)',
+        'Mercury Flow',
       ]}
       rows={getRows(props.multiFlashResponse, props.cubicFeedFlow)}
       density={'comfortable'}

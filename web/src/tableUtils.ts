@@ -18,3 +18,7 @@ export function formatNumber(
     return number.toPrecision(precision).toString()
   }
 }
+
+export function getCorrectUnit(phase: string): string {
+  return phase === 'Vapor' ? ' μg/Sm3' : ' μg/kg'
+}
