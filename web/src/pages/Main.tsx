@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse, MultiflashResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/results/PhaseTable'
 import { MercuryWarning } from '../components/feature/results/MercuryWarning'
-import { TComponentProperties, TComponentRatios } from '../types'
+import { TComponentProperties } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -39,9 +39,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   // feedFlow unit is Sm3/d
   const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
-  const [usedComponentRatios, setUsedComponentRatios] = useState<
-    TComponentRatios | undefined
-  >()
   const [result, setResult] = useState<MultiflashResponse>()
 
   // Fetch list of components name once on page load
@@ -69,7 +66,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           componentProperties={componentProperties}
           cubicFeedFlow={cubicFeedFlow}
           setCubicFeedFlow={setCubicFeedFlow}
-          setUsedComponentRatios={setUsedComponentRatios}
         />
         <DividerWithLargeSpacings />
         {!result && (
@@ -77,7 +73,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
             Run a calculation to get results
           </Typography>
         )}
-        {result && usedComponentRatios && (
+        {result && (
           <>
             {'Mercury' in result.phaseValues && <MercuryWarning />}
             <Results>

@@ -7,11 +7,7 @@ import { MultiflashResponse } from '../../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import {
-  TComponentProperties,
-  TComponentRatios,
-  TPackage,
-} from '../../../types'
+import { TComponentProperties, TPackage } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
 
@@ -39,14 +35,12 @@ export const CalculationInput = ({
   componentProperties,
   cubicFeedFlow,
   setCubicFeedFlow,
-  setUsedComponentRatios,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   componentProperties: TComponentProperties
   cubicFeedFlow: number
   setCubicFeedFlow: (cubicFeedFlow: number) => void
-  setUsedComponentRatios: (ratios: TComponentRatios) => void
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
@@ -63,7 +57,6 @@ export const CalculationInput = ({
       onClick={() => {
         if (selectedPackage === undefined) return
         setCalculating(true)
-        setUsedComponentRatios(selectedPackage.components)
         mercuryApi
           .computeMultiflash({
             multiflash: {
