@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { EdsProvider, Table, TextField } from '@equinor/eds-core-react'
+import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
 import { TComponentRatios, TComponentProperties } from '../../../types'
 
 const ComponentTableContainer = styled.div`
@@ -26,9 +26,9 @@ export const ComponentTable = ({
           data-testid={`Component-${index}`}
         >{`${names.altName} (${names.chemicalFormula})`}</Table.Cell>
         <Table.Cell data-testid={`Ratio (mol)-${index}`}>
-          <TextField
+          <Input
             id={`${names.chemicalFormula}-input`}
-            value={(componentRatios[id] ?? 0).toString()}
+            value={componentRatios[id] ?? 0}
             min={0}
             type="number"
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
