@@ -7,7 +7,7 @@ import { MultiflashResponse } from '../../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentProperties, TPackage } from '../../../types'
+import { TComponentProperties, TPackage, TResults } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
 
@@ -33,12 +33,10 @@ export const CalculationInput = ({
   mercuryApi,
   setResult,
   componentProperties,
-  setUsedCubicFeedFlow,
 }: {
   mercuryApi: MercuryAPI
-  setResult: (result: MultiflashResponse) => void
+  setResult: (result: TResults) => void
   componentProperties: TComponentProperties
-  setUsedCubicFeedFlow: (cubicFeedFlow: number) => void
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
@@ -65,8 +63,7 @@ export const CalculationInput = ({
             },
           })
           .then((result: AxiosResponse<MultiflashResponse>) => {
-            setResult(result.data)
-            setUsedCubicFeedFlow(cubicFeedFlow)
+            setResult({ ...result.data, cubicFeedFlow: cubicFeedFlow })
           })
           .catch((error: AxiosError) =>
             // TODO: Notify user of failed calculation
