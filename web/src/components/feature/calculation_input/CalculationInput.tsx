@@ -85,16 +85,14 @@ export const CalculationInput = ({
     </Button>
   )
 
-  const savePackage = (newPackage: TPackage, mode: 'new' | 'edit') => {
+  const savePackage = (mode: 'new' | 'edit', newPackage?: TPackage) => {
     let oldPackages = [...packages]
     if (mode === 'edit' && selectedPackage !== undefined) {
       oldPackages = oldPackages.filter((x) => x.name !== selectedPackage.name)
     }
-    if (oldPackages.find((x) => x.name === newPackage.name)) {
-      oldPackages = oldPackages.filter((x) => x.name !== newPackage.name)
-    }
+    oldPackages = oldPackages.filter((x) => x.name !== newPackage?.name)
     setSelectedPackage(newPackage)
-    setPackages([...oldPackages, newPackage])
+    setPackages(newPackage ? [...oldPackages, newPackage] : oldPackages)
   }
 
   return (
@@ -146,7 +144,7 @@ export const CalculationInput = ({
         <FluidDialog
           close={() => setIsNewOpen(false)}
           componentProperties={componentProperties}
-          savePackage={(x) => savePackage(x, 'new')}
+          savePackage={(x) => savePackage('new', x)}
         />
       )}
       {isEditOpen && (
@@ -154,7 +152,7 @@ export const CalculationInput = ({
           close={() => setIsEditOpen(false)}
           componentProperties={componentProperties}
           editablePackage={selectedPackage}
-          savePackage={(x) => savePackage(x, 'edit')}
+          savePackage={(x) => savePackage('edit', x)}
         />
       )}
     </>
