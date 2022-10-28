@@ -28,6 +28,18 @@ const FirstColumn = styled.div`
   gap: 30px;
 `
 
+const ButtonRow = styled.div`
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+  padding-top: 16px;
+`
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 16px;
+`
+
 function computeFeedMolecularWeight(
   componentProperties: TComponentProperties,
   componentRatios: TComponentRatios
@@ -95,44 +107,46 @@ export const FluidDialog = ({
             setComponentRatios={setComponentRatios}
           />
         </FluidPackageForm>
+        <ButtonRow>
+          <ButtonGroup>
+            <Button variant="outlined" onClick={close}>
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                savePackage({
+                  name: packageName,
+                  description: packageDescription,
+                  components: componentRatios,
+                  molecularWeightSum: computeFeedMolecularWeight(
+                    componentProperties,
+                    componentRatios
+                  ),
+                })
+                close()
+              }}
+              disabled={!packageName}
+            >
+              Save
+            </Button>
+            <Button
+              // TODO: Demo button to remove when done testing
+              onClick={() => {
+                setPackageName('Demo data')
+                setPackageDescription('')
+                setComponentRatios(demoFeedComponentRatios)
+              }}
+            >
+              Demo data
+            </Button>
+          </ButtonGroup>
+          {editablePackage !== undefined && (
+            <Button color="danger" variant="outlined">
+              Delete
+            </Button>
+          )}
+        </ButtonRow>
       </Dialog.CustomContent>
-      <Dialog.Actions>
-        {editablePackage !== undefined && (
-          <Button color="danger" variant="outlined">
-            Delete
-          </Button>
-        )}
-        <Button variant="outlined" onClick={close}>
-          Cancel
-        </Button>
-        <Button
-          onClick={() => {
-            savePackage({
-              name: packageName,
-              description: packageDescription,
-              components: componentRatios,
-              molecularWeightSum: computeFeedMolecularWeight(
-                componentProperties,
-                componentRatios
-              ),
-            })
-            close()
-          }}
-          disabled={!packageName}
-        >
-          Save
-        </Button>
-        <Button
-          // TODO: Demo button to remove when done testing
-          onClick={() => {
-            setPackageName('Demo data')
-            setPackageDescription('')
-            setComponentRatios(demoFeedComponentRatios)
-          }}
-        >
-          Demo data
-        </Button>
-      </Dialog.Actions>
     </WideDialog>
   )
 }
