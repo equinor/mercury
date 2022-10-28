@@ -38,7 +38,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     useState<TComponentProperties>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   // feedFlow unit is Sm3/d
-  const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
+  const [usedCubicFeedFlow, setUsedCubicFeedFlow] = useState<number>(1000)
   const [result, setResult] = useState<MultiflashResponse>()
 
   // Fetch list of components name once on page load
@@ -64,8 +64,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           mercuryApi={mercuryApi}
           setResult={setResult}
           componentProperties={componentProperties}
-          cubicFeedFlow={cubicFeedFlow}
-          setCubicFeedFlow={setCubicFeedFlow}
+          setUsedCubicFeedFlow={setUsedCubicFeedFlow}
         />
         <DividerWithLargeSpacings />
         {!result && (
@@ -79,7 +78,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
             <Results>
               <PhaseTable
                 multiFlashResponse={result}
-                cubicFeedFlow={cubicFeedFlow}
+                cubicFeedFlow={usedCubicFeedFlow}
               />
               <MoleTable
                 multiFlashResponse={result}

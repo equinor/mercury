@@ -33,14 +33,12 @@ export const CalculationInput = ({
   mercuryApi,
   setResult,
   componentProperties,
-  cubicFeedFlow,
-  setCubicFeedFlow,
+  setUsedCubicFeedFlow,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: MultiflashResponse) => void
   componentProperties: TComponentProperties
-  cubicFeedFlow: number
-  setCubicFeedFlow: (cubicFeedFlow: number) => void
+  setUsedCubicFeedFlow: (cubicFeedFlow: number) => void
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
@@ -49,6 +47,7 @@ export const CalculationInput = ({
   const [calculating, setCalculating] = useState<boolean>(false)
   const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
   const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
+  const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
 
   const calculate = (
     <Button
@@ -67,6 +66,7 @@ export const CalculationInput = ({
           })
           .then((result: AxiosResponse<MultiflashResponse>) => {
             setResult(result.data)
+            setUsedCubicFeedFlow(cubicFeedFlow)
           })
           .catch((error: AxiosError) =>
             // TODO: Notify user of failed calculation
