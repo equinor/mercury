@@ -3,8 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
-import { MultiflashResponse } from './api/generated'
-import { TComponentProperties } from './types'
+import { TComponentProperties, TResults } from './types'
 
 export const mockComponentRatios = {
   '3': 0.062202,
@@ -21,7 +20,7 @@ export const mockComponentRatios = {
   '5': 0.001,
 }
 
-export const mockMultiflashResponse: MultiflashResponse = {
+export const mockResults: TResults = {
   phaseValues: {
     Vapor: {
       percentage: 0.9530398821754837,
@@ -72,6 +71,7 @@ export const mockMultiflashResponse: MultiflashResponse = {
     '605': 0.066681,
     '5': 0.001,
   },
+  cubicFeedFlow: 1000,
 }
 
 export const mockComponentProperties: TComponentProperties = {

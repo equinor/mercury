@@ -6,10 +6,10 @@ import { MoleTable } from '../components/feature/results/MoleTable'
 import { CalculationInput } from '../components/feature/calculation_input/CalculationInput'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
-import { ComponentResponse, MultiflashResponse } from '../api/generated'
+import { ComponentResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/results/PhaseTable'
 import { MercuryWarning } from '../components/feature/results/MercuryWarning'
-import { TComponentProperties } from '../types'
+import { TComponentProperties, TResults } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -37,9 +37,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [componentProperties, setComponentProperties] =
     useState<TComponentProperties>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  // feedFlow unit is Sm3/d
-  const [usedCubicFeedFlow, setUsedCubicFeedFlow] = useState<number>(1000)
-  const [result, setResult] = useState<MultiflashResponse>()
+  const [result, setResult] = useState<TResults>()
 
   // Fetch list of components name once on page load
   useEffect(() => {
@@ -64,7 +62,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           mercuryApi={mercuryApi}
           setResult={setResult}
           componentProperties={componentProperties}
-          setUsedCubicFeedFlow={setUsedCubicFeedFlow}
         />
         <DividerWithLargeSpacings />
         {!result && (
@@ -76,12 +73,9 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           <>
             {'Mercury' in result.phaseValues && <MercuryWarning />}
             <Results>
-              <PhaseTable
-                multiFlashResponse={result}
-                cubicFeedFlow={usedCubicFeedFlow}
-              />
+              <PhaseTable results={result} />
               <MoleTable
-                multiFlashResponse={result}
+                results={result}
                 componentProperties={componentProperties}
               />
             </Results>
