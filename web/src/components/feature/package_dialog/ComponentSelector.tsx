@@ -46,6 +46,13 @@ export const ComponentSelector = ({
     <ComponentSelectorContainer>
       <Autocomplete
         onOptionsChange={({ selectedItems }) => {
+          setComponentRatios(
+            Object.fromEntries(
+              Object.entries(componentRatios).filter(([compId]) =>
+                selectedItems.find((x) => x.id === compId)
+              )
+            )
+          )
           setSelectedComponents(selectedItems)
         }}
         label="Add components"
