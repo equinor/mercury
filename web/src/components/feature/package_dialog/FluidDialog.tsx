@@ -9,6 +9,7 @@ import {
   TComponentRatios,
 } from '../../../types'
 import { demoFeedComponentRatios } from '../../../constants'
+import { SaveButton } from './SaveButton'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -40,17 +41,6 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 16px;
 `
-
-function computeFeedMolecularWeight(
-  componentProperties: TComponentProperties,
-  componentRatios: TComponentRatios
-): number {
-  return componentRatios !== {}
-    ? Object.entries(componentRatios)
-        .map(([id, ratio]) => componentProperties[id].molecularWeight * ratio)
-        .reduce((a, b) => a + b)
-    : 1
-}
 
 export const FluidDialog = ({
   close,
@@ -118,23 +108,15 @@ export const FluidDialog = ({
             <Button variant="outlined" onClick={close}>
               Cancel
             </Button>
-            <Button
-              onClick={() => {
-                savePackage({
-                  name: packageName,
-                  description: packageDescription,
-                  components: componentRatios,
-                  molecularWeightSum: computeFeedMolecularWeight(
-                    componentProperties,
-                    componentRatios
-                  ),
-                })
-                close()
-              }}
-              disabled={!packageName}
-            >
-              Save
-            </Button>
+            <SaveButton
+              componentProperties={componentProperties}
+              packageName={packageName}
+              packageDescription={packageDescription}
+              componentRatios={componentRatios}
+              editablePackage={editablePackage}
+              savePackage={savePackage}
+              close={close}
+            />
             <Button
               // TODO: Demo button to remove when done testing
               onClick={() => {
