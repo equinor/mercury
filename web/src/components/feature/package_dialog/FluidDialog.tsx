@@ -61,7 +61,7 @@ export const FluidDialog = ({
   close: () => void
   componentProperties: TComponentProperties
   editablePackage?: TPackage
-  savePackage: (x: TPackage) => void
+  savePackage: (x?: TPackage) => void
 }) => {
   // Array of components containing input from user
   const [componentRatios, setComponentRatios] = useState<TComponentRatios>(
@@ -147,7 +147,14 @@ export const FluidDialog = ({
             </Button>
           </ButtonGroup>
           {editablePackage !== undefined && (
-            <Button color="danger" variant="outlined">
+            <Button
+              color="danger"
+              variant="outlined"
+              onClick={() => {
+                savePackage()
+                close()
+              }}
+            >
               Delete
             </Button>
           )}
