@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Button, Dialog, TextField } from '@equinor/eds-core-react'
+import { Button, Dialog, TextField, Typography } from '@equinor/eds-core-react'
+import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useState } from 'react'
 import {
@@ -76,7 +77,12 @@ export const FluidDialog = ({
   return (
     <WideDialog open onClose={close} isDismissable>
       <Dialog.Header>
-        <Dialog.Title>Create fluid package</Dialog.Title>
+        <Typography
+          variant="h6"
+          color={tokens.colors.infographic.primary__moss_green_100.hex}
+        >
+          {`${editablePackage === undefined ? 'Create' : 'Edit'} fluid package`}
+        </Typography>
       </Dialog.Header>
       <Dialog.CustomContent>
         <FluidPackageForm>
