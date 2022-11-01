@@ -9,7 +9,9 @@ import { TResults } from '../../../types'
 function getRows(results: TResults): string[][] {
   const phPhaseFlowFactor =
     results.cubicFeedFlow * molePerStandardCubicMeter * mercuryMolecularWeight
-  const mercury = results.componentFractions['5']
+  const mercury =
+    results.componentFractions['5'] ??
+    Array(Object.keys(results.phaseValues).length).fill(0)
   return Object.entries(results.phaseValues).map(([phase, values], index) => [
     phase,
     formatNumber(values['percentage']),
