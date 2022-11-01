@@ -7,7 +7,7 @@ export type TResults = MultiflashResponse & {
   cubicFeedFlow: number
 }
 export type TComponentRatios = {
-  [id: string]: number
+  [id: string]: string
 }
 export type TFeedUnit = 'kg/d' | 'Sm3/d'
 export type TFeedFlow = { unit: TFeedUnit; value: number }

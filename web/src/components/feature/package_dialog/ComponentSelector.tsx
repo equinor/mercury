@@ -24,10 +24,14 @@ export const ComponentSelector = ({
   componentProperties,
   componentRatios,
   setComponentRatios,
+  ratiosAreValid,
+  setRatiosAreValid,
 }: {
   componentProperties: TComponentProperties
   componentRatios: TComponentRatios
   setComponentRatios: (componentInput: TComponentRatios) => void
+  ratiosAreValid: { [id: string]: boolean }
+  setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }) => {
   const options: TComponentProperty[] = Object.entries(componentProperties).map(
     ([key, entry]) => ({
@@ -53,6 +57,13 @@ export const ComponentSelector = ({
               )
             )
           )
+          setRatiosAreValid(
+            Object.fromEntries(
+              Object.entries(ratiosAreValid).filter(([compId]) =>
+                selectedItems.find((x) => x.id === compId)
+              )
+            )
+          )
           setSelectedComponents(selectedItems)
         }}
         label="Add components"
@@ -74,6 +85,8 @@ export const ComponentSelector = ({
         )}
         componentRatios={componentRatios}
         setComponentRatios={setComponentRatios}
+        ratiosAreValid={ratiosAreValid}
+        setRatiosAreValid={setRatiosAreValid}
       />
       <ComponentTableSum componentRatios={componentRatios} />
     </ComponentSelectorContainer>

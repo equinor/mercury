@@ -11,7 +11,10 @@ function computeFeedMolecularWeight(
 ): number {
   return componentRatios !== {}
     ? Object.entries(componentRatios)
-        .map(([id, ratio]) => componentProperties[id].molecularWeight * ratio)
+        .map(
+          ([id, ratio]) =>
+            componentProperties[id].molecularWeight * Number(ratio)
+        )
         .reduce((a, b) => a + b)
     : 1
 }
@@ -24,11 +27,13 @@ export const SaveButton = (props: {
   editablePackage?: TPackage
   close: () => void
   savePackage: (x?: TPackage) => void
+  ratiosAreValid: { [id: string]: boolean }
 }) => {
   const isSaveable = (): boolean => {
     const isValidPackage =
       props.packageName.length > 0 &&
-      Math.max(...Object.values(props.componentRatios)) > 0
+      Object.values(props.ratiosAreValid).every((x) => x) &&
+      Object.values(props.componentRatios).some((x) => Number(x) > 0)
     if (props.editablePackage) {
       const ratioHasChanged =
         Object.keys(props.editablePackage.components).length !==

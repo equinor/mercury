@@ -57,7 +57,11 @@ export const CalculationInput = ({
         mercuryApi
           .computeMultiflash({
             multiflash: {
-              componentComposition: selectedPackage.components,
+              componentComposition: Object.fromEntries(
+                Object.entries(selectedPackage.components).map(
+                  ([id, ratio]) => [id, Number(ratio)]
+                )
+              ),
               temperature: temperature,
               pressure: pressure,
             },
