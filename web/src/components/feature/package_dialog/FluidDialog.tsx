@@ -63,6 +63,9 @@ export const FluidDialog = ({
   const [packageDescription, setPackageDescription] = useState<string>(
     editablePackage?.description ?? ''
   )
+  const [ratiosAreValid, setRatiosAreValid] = useState<{
+    [id: string]: boolean
+  }>({})
 
   return (
     <WideDialog open onClose={close} isDismissable>
@@ -101,6 +104,8 @@ export const FluidDialog = ({
             componentProperties={componentProperties}
             componentRatios={componentRatios}
             setComponentRatios={setComponentRatios}
+            ratiosAreValid={ratiosAreValid}
+            setRatiosAreValid={setRatiosAreValid}
           />
         </FluidPackageForm>
         <ButtonRow>
@@ -116,6 +121,7 @@ export const FluidDialog = ({
               editablePackage={editablePackage}
               savePackage={savePackage}
               close={close}
+              ratiosAreValid={ratiosAreValid}
             />
             <Button
               // TODO: Demo button to remove when done testing

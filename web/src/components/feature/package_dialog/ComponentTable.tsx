@@ -1,6 +1,7 @@
+import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import { TComponentProperties, TComponentRatios } from '../../../types'
+import { TComponentRatios, TComponentProperties } from '../../../types'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -14,33 +15,41 @@ export const ComponentTable = ({
   selectedComponents,
   componentRatios,
   setComponentRatios,
+  ratiosAreValid,
+  setRatiosAreValid,
 }: {
   selectedComponents: TComponentProperties
   componentRatios: TComponentRatios
   setComponentRatios: (componentInput: TComponentRatios) => void
+  ratiosAreValid: { [id: string]: boolean }
+  setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }): JSX.Element => {
   function createTableRows() {
-    return Object.entries(selectedComponents).map(([id, names], index) => (
-      <Table.Row key={index}>
+    return Object.entries(selectedComponents).map(([id, names], rowIndex) => (
+      <Table.Row key={rowIndex}>
         <Table.Cell
-          data-testid={`Component-${index}`}
+          data-testid={`Component-${rowIndex}`}
         >{`${names.altName} (${names.chemicalFormula})`}</Table.Cell>
-        <Table.Cell data-testid={`Ratio (mol)-${index}`}>
+        <Table.Cell data-testid={`Ratio (mol)-${rowIndex}`}>
           <Input
             id={`${names.chemicalFormula}-input`}
-            value={componentRatios[id] ?? 0}
-            min={0}
-            type="number"
+            value={componentRatios[id] ?? ''}
+            pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
+            variant={ratiosAreValid[id] === false ? 'warning' : 'default'}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const ratio = Number(event.target.value)
+              const newRatiosAreValid = { ...ratiosAreValid }
+              newRatiosAreValid[id] =
+                event.target.checkValidity() &&
+                !isNaN(Number(event.target.value))
+              setRatiosAreValid(newRatiosAreValid)
+
               const newRatios = { ...componentRatios }
-              if (ratio === 0) {
+              if (event.target.value === '') {
                 delete newRatios[id]
-                setComponentRatios(newRatios)
               } else {
-                newRatios[id] = ratio
-                setComponentRatios(newRatios)
+                newRatios[id] = event.target.value
               }
+              setComponentRatios(newRatios)
             }}
           />
         </Table.Cell>

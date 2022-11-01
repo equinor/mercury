@@ -3,10 +3,11 @@ import { TComponentRatios } from '../../../types'
 import { formatNumber } from '../../../tableUtils'
 
 function computeComponentRatioSum(componentRatios: TComponentRatios) {
-  return formatNumber(
-    Object.values(componentRatios).reduce((a, b) => a + b, 0),
-    5
-  )
+  const sum = Object.values(componentRatios).reduce((a, b) => a + Number(b), 0)
+  if (isNaN(sum)) {
+    return ''
+  }
+  return formatNumber(sum, 5)
 }
 
 export const ComponentTableSum = ({
