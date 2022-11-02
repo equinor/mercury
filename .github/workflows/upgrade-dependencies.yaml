@@ -22,7 +22,6 @@ jobs:
 
       - name: Upgrade and create PR
         run: |
-          git branch -d chore/upgrade-web-packages
           git checkout -b chore/upgrade-web-packages
           cd web
           yarn up '*'
