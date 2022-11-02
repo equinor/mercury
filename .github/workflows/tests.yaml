@@ -6,8 +6,14 @@ on:
   workflow_call:
     secrets:
       LIBHG_REPO_DEPLOY_KEY:
-        description: 'Deploy key for cloning libhg repository'
+        description: "Deploy key for cloning libhg repository"
         required: true
+    inputs:
+      test-branch:
+        description: "Name of the branch you would like to test"
+        default: ""
+        required: false
+        type: string
 
 env:
   IMAGE_REGISTRY: ghcr.io
@@ -21,18 +27,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+        with:
+          ref: ${{ inputs.test-branch }}
 
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install pre-commit
         run: pip install pre-commit
 
-       # Caches the venv at the end of the job and reloads for quicker pre-commit.
-       # Uses pyproject.toml and pre-commit-config file to create hash.
+        # Caches the venv at the end of the job and reloads for quicker pre-commit.
+        # Uses pyproject.toml and pre-commit-config file to create hash.
       - name: Cache venv
         uses: actions/cache@v3
         id: cache
