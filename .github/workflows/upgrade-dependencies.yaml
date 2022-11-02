@@ -27,7 +27,7 @@ jobs:
 
       - name: Upgrade and create PR
         run: |
-          git checkout -b chore/upgrade-web-packages
+          git checkout -b chore-upgrade-web-packages
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cd web
@@ -41,6 +41,6 @@ jobs:
   run-tests:
     name: Run tests
     needs: upgrade-web
-    uses: equinor/mercury/.github/workflows/tests.yaml@chore/upgrade-web-packages
+    uses: equinor/mercury/.github/workflows/tests.yaml@chore-upgrade-web-packages
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
