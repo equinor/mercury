@@ -22,9 +22,10 @@ jobs:
 
       - name: Upgrade and create PR
         run: |
+          git branch -d chore/upgrade-web-packages
           git checkout -b chore/upgrade-web-packages
           cd web
-          yarn upgrade --latest
+          yarn up '*'
           git add .
           git commit -m "chore: Upgrade web packages"
           git push -u origin HEAD
