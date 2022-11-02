@@ -1,6 +1,7 @@
 name: "Upgrade dependencies"
 on:
   workflow_dispatch:
+  workflow_call:
   schedule:
     - cron: "0 2 * * 1" # Every Monday at UTC 2.00
 

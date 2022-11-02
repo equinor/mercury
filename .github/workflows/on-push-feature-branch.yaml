@@ -12,3 +12,5 @@ jobs:
     uses: ./.github/workflows/tests.yaml
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+  upgrade:
+    uses: ./.github/workflows/upgrade-dependencies.yaml
