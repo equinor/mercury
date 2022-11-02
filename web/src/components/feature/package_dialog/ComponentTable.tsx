@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import { TComponentRatios, TComponentProperties } from '../../../types'
+import { TComponentProperties, TComponentRatios } from '../../../types'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -55,9 +55,7 @@ export const ComponentTable = ({
           <Table.Head sticky>
             <Table.Row>
               <Table.Cell key={`Component`}>{`Component`}</Table.Cell>
-              <Table.Cell
-                key={`Feed value (mol)`}
-              >{`Feed value (mol)`}</Table.Cell>
+              <Table.Cell key={`Mole fractions`}>{`Mole fractions`}</Table.Cell>
             </Table.Row>
           </Table.Head>
           <Table.Body>{createTableRows()}</Table.Body>
