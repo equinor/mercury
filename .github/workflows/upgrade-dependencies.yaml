@@ -38,5 +38,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run tests
-        uses: ./.github/workflows/tests.yaml@chore/upgrade-web-packages
+  run-tests:
+    name: Run tests
+    uses: ./.github/workflows/tests.yaml@chore/upgrade-web-packages
