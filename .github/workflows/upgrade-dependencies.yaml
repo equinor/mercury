@@ -40,4 +40,4 @@ jobs:
 
   run-tests:
     name: Run tests
-    uses: ./.github/workflows/tests.yaml@chore/upgrade-web-packages
+    uses: equinor/mercury/.github/workflows/tests.yaml@chore/upgrade-web-packages
