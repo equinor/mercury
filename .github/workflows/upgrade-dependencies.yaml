@@ -26,6 +26,8 @@ jobs:
       - name: Upgrade and create PR
         run: |
           git checkout -b chore/upgrade-web-packages
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           cd web
           yarn up "*"
           git add .
