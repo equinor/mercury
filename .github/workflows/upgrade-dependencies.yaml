@@ -41,6 +41,6 @@ jobs:
   run-tests:
     name: Run tests
     needs: upgrade-web
-    uses: equinor/mercury/.github/workflows/tests.yaml@chore-upgrade-web-packages
+    uses: equinor/mercury/.github/workflows/tests.yaml@main
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
