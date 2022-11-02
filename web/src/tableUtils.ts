@@ -11,6 +11,9 @@ export function formatNumber(
   precision = 4,
   threshold = 4
 ): string {
+  if (number === 0) {
+    return (0).toString()
+  }
   if (number < 1 / 10 ** (threshold - 1) || number > 10 ** threshold) {
     return number.toExponential(precision).replace('e', 'E')
   } else {

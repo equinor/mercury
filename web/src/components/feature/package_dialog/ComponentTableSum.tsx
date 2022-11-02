@@ -5,7 +5,7 @@ import { formatNumber } from '../../../tableUtils'
 function computeComponentRatioSum(componentRatios: TComponentRatios) {
   return formatNumber(
     Object.values(componentRatios).reduce((a, b) => a + b, 0),
-    3
+    5
   )
 }
 
