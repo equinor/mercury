@@ -1,0 +1,30 @@
+name: "Upgrade dependencies"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * 1" # Every Monday at UTC 2.00
+
+jobs:
+  upgrade-web:
+    name: Upgrade web
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@main
+      - name: "Setup node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: web/yarn.lock
+
+      - name: Upgrade and create PR
+        run: |
+          git checkout -b chore/upgrade-web-packages
+          cd web
+          yarn upgrade --latest
+          git add .
+          git commit -m "chore: Upgrade web packages"
+          git push -u origin HEAD
+          gh pr create --base main --title "Upgrade web packages" --body "Created by Github action"
