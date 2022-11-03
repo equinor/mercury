@@ -35,14 +35,6 @@ jobs:
           git add .
           git commit -m "chore: Upgrade web packages"
           git push -u origin HEAD
+          gh pr create --base main --title "Upgrade web packages" --body "Created by Github action"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  run-tests:
-    name: Run tests
-    needs: upgrade-web
-    uses: ./.github/workflows/tests.yaml
-    with:
-      test-branch: "chore/upgrade-web-packages"
-    secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
