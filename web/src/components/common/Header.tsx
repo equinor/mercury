@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { TopBar, Icon, Popover, Button } from '@equinor/eds-core-react'
+import { Button, Icon, Popover, TopBar } from '@equinor/eds-core-react'
 import { account_circle, grid_on, info_circle } from '@equinor/eds-icons'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { AUTH_DISABLED } from '../../constants'
+import axios, { AxiosResponse } from 'axios'
 
 const Icons = styled.div`
   display: flex;
@@ -16,10 +17,28 @@ const Icons = styled.div`
 export const Header = (): JSX.Element => {
   const [isUserInfoOpen, setUserInfoOpen] = useState(false)
   const [isAboutOpen, setAboutOpen] = useState(false)
+  const [version, setVersion] = useState<string>('Null')
   const { tokenData, logOut } = useContext(AuthContext)
 
   const accountRefElement = useRef<HTMLButtonElement>(null)
   const infoRefElement = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    axios
+      .get('version.txt')
+      .then((response: AxiosResponse<string>) => {
+        const responseSubString = response.data.substring(
+          response.data.indexOf('tag:')
+        )
+        setVersion(
+          responseSubString.substring(
+            responseSubString.indexOf('v') + 1,
+            responseSubString.indexOf(',')
+          )
+        )
+      })
+      .catch(() => null)
+  }, [])
 
   return (
     <>
@@ -86,8 +105,7 @@ export const Header = (): JSX.Element => {
           <Popover.Title>About</Popover.Title>
         </Popover.Header>
         <Popover.Content>
-          {/*TODO: Read from public 'version.txt' file*/}
-          <p>Version: 0.0.1-rc1</p>
+          <p>Version: {version}</p>
           <p>Person of contact: Eleni Pantelli (elp@equinor.com)</p>
         </Popover.Content>
         <Popover.Actions>
