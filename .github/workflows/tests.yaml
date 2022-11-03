@@ -2,6 +2,16 @@ name: "Test"
 on:
   # Workflow dispatch is used for manual triggers
   workflow_dispatch:
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY:
+        description: "Deploy key for cloning libhg repository"
+        required: true
+    inputs:
+      test-branch:
+        description: "Name of the branch you would like to test"
+        default: ""
+        required: false
+        type: string
   # Workflow call is used for called from another workflow
   workflow_call:
     secrets:
