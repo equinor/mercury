@@ -1,0 +1,35 @@
+name: "Audit API dependencies"
+on:
+  workflow_call:
+
+jobs:
+  pip-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Cache venv
+        uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ~/work/mercury/mercury/api/.venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('api/pyproject.toml') }}
+
+      - name: Set up venv
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          pip install poetry
+          poetry config virtualenvs.in-project true
+          cd api
+          poetry install
+
+      - uses: pypa/gh-action-pip-audit@v1.0.1
+        with:
+          virtual-environment: api/.venv/
