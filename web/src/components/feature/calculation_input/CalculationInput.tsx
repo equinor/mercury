@@ -91,6 +91,16 @@ export const CalculationInput = ({
     if (mode === 'edit' && selectedPackage !== undefined) {
       oldPackages = oldPackages.filter((x) => x.name !== selectedPackage.name)
     }
+
+    const packageNameConflict = oldPackages.find(
+      (x) => x.name === newPackage?.name
+    )
+    if (packageNameConflict) {
+      const overwrite: boolean = window.confirm(
+        `A package named '${newPackage?.name}' already exists.\nOk to overwrite?`
+      )
+      if (!overwrite) return
+    }
     oldPackages = oldPackages.filter((x) => x.name !== newPackage?.name)
     setSelectedPackage(newPackage)
     setPackages(newPackage ? [...oldPackages, newPackage] : oldPackages)
