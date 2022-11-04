@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/api"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "npm"
+    directory: "/web/"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: "monthly"
