@@ -6,7 +6,7 @@ on:
   workflow_call:
     secrets:
       LIBHG_REPO_DEPLOY_KEY:
-        description: 'Deploy key for cloning libhg repository'
+        description: "Deploy key for cloning libhg repository"
         required: true
 
 env:
@@ -26,13 +26,13 @@ jobs:
         id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
       - name: Install pre-commit
         run: pip install pre-commit
 
-       # Caches the venv at the end of the job and reloads for quicker pre-commit.
-       # Uses pyproject.toml and pre-commit-config file to create hash.
+        # Caches the venv at the end of the job and reloads for quicker pre-commit.
+        # Uses pyproject.toml and pre-commit-config file to create hash.
       - name: Cache venv
         uses: actions/cache@v3
         id: cache
@@ -92,3 +92,6 @@ jobs:
 
       - name: yarn tests
         run: docker run --rm web-dev yarn test-ci
+
+  pip-audit:
+    uses: ./.github/workflows/audit-api-dependencies.yaml

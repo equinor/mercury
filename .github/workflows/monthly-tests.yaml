@@ -1,0 +1,9 @@
+name: "Scheduled dependency check"
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 2 1 * *" # First day of every month at UTC 2.00
+
+jobs:
+  pip-audit:
+    uses: ./.github/workflows/audit-api-dependencies.yaml
