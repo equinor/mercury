@@ -95,7 +95,7 @@ export const CalculationInput = ({
     const packageNameConflict = oldPackages.find(
       (x) => x.name === newPackage?.name
     )
-    if (mode === 'new' && packageNameConflict) {
+    if (packageNameConflict) {
       const overwrite: boolean = window.confirm(
         `A package named '${newPackage?.name}' already exists.\nOk to overwrite?`
       )
