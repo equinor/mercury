@@ -78,7 +78,7 @@ jobs:
           echo "Tagging with ${{ inputs.image-tag }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
-          echo "$(git log -n 1 --format=format:'%h% %>(12) %cs %aN%  %s %d')"
+          printf "$(git log -n 1 --format=format:'%h% %>(12) %cs %aN%  %s %d')" > ./api/src/version.txt
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $API_IMAGE \
           --target prod \
