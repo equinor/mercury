@@ -10,7 +10,7 @@ const ComponentSelectorContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 4px;
-  max-width: 500px;
+  max-width: 420px;
 `
 
 type TComponentProperty = {
