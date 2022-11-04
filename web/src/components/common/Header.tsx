@@ -92,7 +92,10 @@ export const Header = (): JSX.Element => {
             Logout
           </Button>
           <Button
-            onClick={() => localStorage.removeItem('packages')}
+            onClick={() => {
+              localStorage.removeItem('packages')
+              window.location.reload()
+            }}
             color={'secondary'}
             variant={'outlined'}
           >
