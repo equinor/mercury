@@ -22,12 +22,14 @@ const FluidPackageForm = styled.div`
   display: flex;
   flex-flow: row wrap;
   gap: 30px;
+  justify-content: space-between;
 `
 
 const FirstColumn = styled.div`
   display: flex;
   flex-flow: column nowrap;
   gap: 30px;
+  width: 40%;
 `
 
 const ButtonRow = styled.div`
@@ -98,6 +100,7 @@ export const FluidDialog = ({
                 setPackageDescription(event.target.value)
               }
               multiline
+              rows={6}
             />
           </FirstColumn>
           <ComponentSelector
