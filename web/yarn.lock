@@ -1850,21 +1850,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equinor/eds-core-react@npm:^0.24.0":
-  version: 0.24.0
-  resolution: "@equinor/eds-core-react@npm:0.24.0"
+"@equinor/eds-core-react@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "@equinor/eds-core-react@npm:0.26.0"
   dependencies:
     "@babel/runtime": ^7.19.0
     "@equinor/eds-icons": 0.15.0
-    "@equinor/eds-tokens": 0.8.0
-    "@equinor/eds-utils": 0.5.0
+    "@equinor/eds-tokens": 0.9.0
+    "@equinor/eds-utils": 0.7.0
     "@floating-ui/react-dom-interactions": ^0.10.1
     downshift: ^6.1.12
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
     styled-components: ">=4.2"
-  checksum: fc7d14a11774ef2c4a8a5eea07f66578438d2735c986a9358d9f661d1208d77c2caf43e0a8d9e891c8f6711f47c1a2649767acc6ae97b7da7979ba5591b572e2
+  checksum: a01b8d6dd84f0d752e0d1f6da7d03b465ba4d7cf0fcb04df2f11d96be4787f4ab7497d848449c634086e988f3a9648c73f641795ad4b3940ef320a10ec9d6a5f
   languageName: node
   linkType: hard
 
@@ -1875,19 +1875,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equinor/eds-tokens@npm:0.8.0, @equinor/eds-tokens@npm:^0.8.0":
+"@equinor/eds-tokens@npm:0.9.0":
+  version: 0.9.0
+  resolution: "@equinor/eds-tokens@npm:0.9.0"
+  checksum: 94e04e46c5a734538b823eeb3ec49238b234e866f7bd17fa63eafd6524d87a120080ffc8faaa2a823131dcb9ef12fed5f06ff123f8b8a2dbdae16c6080286c02
+  languageName: node
+  linkType: hard
+
+"@equinor/eds-tokens@npm:^0.8.0":
   version: 0.8.0
   resolution: "@equinor/eds-tokens@npm:0.8.0"
   checksum: 0b5604b2d3e4710634b1ed0ee73ebf1c9ea28a19db67b13ac2382ac36b93338f6a600350abac4599cf3ef94217ecb200e8876cc8518219d9f23e36cf25f9c72e
   languageName: node
   linkType: hard
 
-"@equinor/eds-utils@npm:0.5.0":
-  version: 0.5.0
-  resolution: "@equinor/eds-utils@npm:0.5.0"
+"@equinor/eds-utils@npm:0.7.0":
+  version: 0.7.0
+  resolution: "@equinor/eds-utils@npm:0.7.0"
   dependencies:
     "@babel/runtime": ^7.19.0
-    "@equinor/eds-tokens": 0.8.0
+    "@equinor/eds-tokens": 0.9.0
     "@popperjs/core": 2.11.6
     babel-jest: ^29.1.2
     react-popper: 2.3.0
@@ -1895,7 +1902,7 @@ __metadata:
     react: ">=16.8"
     react-dom: ">=16.8"
     styled-components: ">=4.2"
-  checksum: 668da1375d6bb2ec6c0812e93b63700446a8a8fcd672662def3fe4f15cce9350e7702fb53b899af67af9b48fab456907153fa33b5b5beb639c3756c9e4a217bb
+  checksum: 9727ee2f3dd8ea4158ee6db6f76b6c59dd2f6cc0084d09843dba45b647b65f986e554cf53de9c7a332bcf43b37b1f5d4a2dba42cff4fe2f5a4e0465540e748fa
   languageName: node
   linkType: hard
 
@@ -13024,7 +13031,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:."
   dependencies:
-    "@equinor/eds-core-react": ^0.24.0
+    "@equinor/eds-core-react": ^0.26.0
     "@equinor/eds-icons": ^0.15.0
     "@equinor/eds-tokens": ^0.8.0
     "@testing-library/jest-dom": ^5.16.5
