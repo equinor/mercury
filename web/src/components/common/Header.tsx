@@ -99,7 +99,7 @@ export const Header = (): JSX.Element => {
             color={'secondary'}
             variant={'outlined'}
           >
-            Reset application
+            Reset application data
           </Button>
         </Popover.Actions>
       </Popover>
