@@ -1,5 +1,11 @@
 import styled from 'styled-components'
-import { Button, Dialog, TextField, Typography } from '@equinor/eds-core-react'
+import {
+  Button,
+  Dialog,
+  TextField,
+  Typography,
+  Autocomplete,
+} from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useState } from 'react'
@@ -49,11 +55,13 @@ export const FluidDialog = ({
   componentProperties,
   editablePackage,
   savePackage,
+  packages,
 }: {
   close: () => void
   componentProperties: TComponentProperties
   editablePackage?: TPackage
   savePackage: (x?: TPackage) => void
+  packages: TPackage[]
 }) => {
   // Array of components containing input from user
   const [componentRatios, setComponentRatios] = useState<TComponentRatios>(
@@ -101,6 +109,15 @@ export const FluidDialog = ({
               }
               multiline
               rows={6}
+            />
+            <Autocomplete
+              label="Template"
+              options={packages}
+              optionLabel={(option) => option.name}
+              onOptionsChange={(changes) => {
+                setComponentRatios(changes.selectedItems[0].components)
+              }}
+              autoWidth
             />
           </FirstColumn>
           <ComponentSelector

@@ -156,6 +156,7 @@ export const CalculationInput = ({
           close={() => setIsNewOpen(false)}
           componentProperties={componentProperties}
           savePackage={(x) => savePackage('new', x)}
+          packages={packages}
         />
       )}
       {isEditOpen && (
@@ -164,6 +165,7 @@ export const CalculationInput = ({
           componentProperties={componentProperties}
           editablePackage={selectedPackage}
           savePackage={(x) => savePackage('edit', x)}
+          packages={packages}
         />
       )}
     </>
