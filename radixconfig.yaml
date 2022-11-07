@@ -29,7 +29,9 @@ spec:
       environmentConfig:
         - environment: prod
           imageTagName: production
+          monitoring: true
         - environment: dev
+          monitoring: true
           imageTagName: latest
       variables:
         LOGGING_LEVEL: "debug"
