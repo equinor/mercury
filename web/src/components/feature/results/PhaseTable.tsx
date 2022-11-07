@@ -12,26 +12,38 @@ function getRows(results: TResults): string[][] {
   const mercury =
     results.componentFractions['5'] ??
     Array(Object.keys(results.phaseValues).length).fill(0)
-  return Object.entries(results.phaseValues).map(([phase, values], index) => [
-    phase,
-    formatNumber(values['percentage']),
-    formatNumber(values['mercury']) + getCorrectUnit(phase),
-    formatNumber(mercury[index]) + ' mol/mol',
-    formatNumber(phPhaseFlowFactor * values['percentage'] * mercury[index]) +
-      ' g/d',
-  ])
+  return [
+    [
+      'Fractions',
+      ...Object.values(results.phaseValues).map((x) =>
+        formatNumber(x['percentage'])
+      ),
+    ],
+    [
+      'Concentration (μg)',
+      ...Object.entries(results.phaseValues).map(
+        ([phase, x]) => formatNumber(x['mercury']) + getCorrectUnit(phase)
+      ),
+    ],
+    [
+      'Concentration (mol)',
+      ...mercury.map((x) => formatNumber(x) + ' mol/mol'),
+    ],
+    [
+      'Mercury Flow',
+      ...Object.values(results.phaseValues).map(
+        (x, index) =>
+          formatNumber(phPhaseFlowFactor * x['percentage'] * mercury[index]) +
+          ' g/d'
+      ),
+    ],
+  ]
 }
 
 export const PhaseTable = (props: { results: TResults }) => {
   return (
     <DynamicTable
-      headers={[
-        'Phases',
-        'Fractions',
-        'Concentration (μg)',
-        'Concentration (mol)',
-        'Mercury Flow',
-      ]}
+      headers={['', ...Object.keys(props.results.phaseValues)]}
       rows={getRows(props.results)}
       density={'comfortable'}
     />
