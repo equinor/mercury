@@ -5,13 +5,14 @@ import click
 import uvicorn
 from fastapi import APIRouter, FastAPI, Security
 from starlette.requests import Request
-from starlette.responses import Response
+from starlette.responses import RedirectResponse, Response
 
 from authentication.authentication import auth_with_jwt
 from common.utils.logger import logger
 from config import config
 from features.component import component_feature
 from features.health_check import health_check_feature
+from features.metrics import metrics_feature
 from features.multiflash import multiflash_feature
 from features.whoami import whoami_feature
 
@@ -23,6 +24,7 @@ prefix = f"{server_root}/{version}"
 def create_app() -> FastAPI:
     public_routes = APIRouter()
     public_routes.include_router(health_check_feature.router)
+    public_routes.include_router(metrics_feature.router)
 
     authenticated_routes = APIRouter(tags=["mercury"])
     authenticated_routes.include_router(whoami_feature.router)
@@ -41,6 +43,13 @@ def create_app() -> FastAPI:
         logger.debug(f"{request.method} {request.url.path} - {milliseconds}ms - {response.status_code}")
         response.headers["X-Process-Time"] = str(process_time)
         return response
+
+    @app.get("/", operation_id="redirect_to_docs", response_class=RedirectResponse, include_in_schema=False)
+    def redirect_to_docs():
+        """
+        Redirects any requests to the servers root ('/') to '/docs'
+        """
+        return RedirectResponse(url="/docs")
 
     return app
 
