@@ -1875,10 +1875,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equinor/eds-tokens@npm:0.8.0, @equinor/eds-tokens@npm:^0.8.0":
+"@equinor/eds-tokens@npm:0.8.0":
   version: 0.8.0
   resolution: "@equinor/eds-tokens@npm:0.8.0"
   checksum: 0b5604b2d3e4710634b1ed0ee73ebf1c9ea28a19db67b13ac2382ac36b93338f6a600350abac4599cf3ef94217ecb200e8876cc8518219d9f23e36cf25f9c72e
+  languageName: node
+  linkType: hard
+
+"@equinor/eds-tokens@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "@equinor/eds-tokens@npm:0.9.0"
+  checksum: 94e04e46c5a734538b823eeb3ec49238b234e866f7bd17fa63eafd6524d87a120080ffc8faaa2a823131dcb9ef12fed5f06ff123f8b8a2dbdae16c6080286c02
   languageName: node
   linkType: hard
 
@@ -13026,7 +13033,7 @@ __metadata:
   dependencies:
     "@equinor/eds-core-react": ^0.24.0
     "@equinor/eds-icons": ^0.15.0
-    "@equinor/eds-tokens": ^0.8.0
+    "@equinor/eds-tokens": ^0.9.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
     "@testing-library/user-event": ^14.4.3
