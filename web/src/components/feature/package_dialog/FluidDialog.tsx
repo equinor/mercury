@@ -77,8 +77,6 @@ export const FluidDialog = ({
     [id: string]: boolean
   }>({})
 
-  const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
-
   return (
     <WideDialog open onClose={close} isDismissable>
       <Dialog.Header>
@@ -118,9 +116,7 @@ export const FluidDialog = ({
               optionLabel={(option) => option.name}
               onOptionsChange={(changes) => {
                 setComponentRatios(changes.selectedItems[0].components)
-                setSelectedPackage(changes.selectedItems[0])
               }}
-              selectedOptions={selectedPackage ? [selectedPackage] : []}
               autoWidth
             />
           </FirstColumn>
