@@ -21,7 +21,7 @@ requests = "^2.28.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.19.0"
-flake8 = "^4.0.1"
+flake8 = "^5.0.4"
 black = "^22.3.0"
 isort = "^5.10.1"
 bandit = "^1.7.4"
