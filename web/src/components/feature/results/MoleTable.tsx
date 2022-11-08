@@ -16,7 +16,7 @@ function getRows(
 ): string[][] {
   return Object.entries(results.componentFractions).map(
     ([compId, fractions]) => [
-      componentProperties[compId].altName,
+      componentProperties.find((x) => x.id === compId)?.altName ?? '',
       fullPrecision
         ? results.feedFractions[compId].toString()
         : formatNumber(results.feedFractions[compId]),

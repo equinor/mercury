@@ -25,29 +25,31 @@ export const ComponentTable = ({
   setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }): JSX.Element => {
   function createTableRows() {
-    return Object.entries(selectedComponents).map(([id, names], rowIndex) => (
+    return selectedComponents.map((component, rowIndex) => (
       <Table.Row key={rowIndex}>
         <Table.Cell
           data-testid={`Component-${rowIndex}`}
-        >{`${names.altName} (${names.chemicalFormula})`}</Table.Cell>
+        >{`${component.altName} (${component.chemicalFormula})`}</Table.Cell>
         <Table.Cell data-testid={`Ratio (mol)-${rowIndex}`}>
           <Input
-            id={`${names.chemicalFormula}-input`}
-            value={componentRatios[id] ?? ''}
+            id={`${component.chemicalFormula}-input`}
+            value={componentRatios[component.id] ?? ''}
             pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
-            variant={ratiosAreValid[id] === false ? 'warning' : undefined}
+            variant={
+              ratiosAreValid[component.id] === false ? 'warning' : undefined
+            }
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const newRatiosAreValid = { ...ratiosAreValid }
-              newRatiosAreValid[id] =
+              newRatiosAreValid[component.id] =
                 event.target.checkValidity() &&
                 !isNaN(Number(event.target.value))
               setRatiosAreValid(newRatiosAreValid)
 
               const newRatios = { ...componentRatios }
               if (event.target.value === '') {
-                delete newRatios[id]
+                delete newRatios[component.id]
               } else {
-                newRatios[id] = event.target.value
+                newRatios[component.id] = event.target.value
               }
               setComponentRatios(newRatios)
             }}

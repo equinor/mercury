@@ -13,7 +13,8 @@ function computeFeedMolecularWeight(
     ? Object.entries(componentRatios)
         .map(
           ([id, ratio]) =>
-            componentProperties[id].molecularWeight * Number(ratio)
+            Number(ratio) *
+            (componentProperties.find((x) => x.id === id)?.molecularWeight ?? 0)
         )
         .reduce((a, b) => a + b)
     : 1
