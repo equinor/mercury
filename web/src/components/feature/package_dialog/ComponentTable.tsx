@@ -35,7 +35,7 @@ export const ComponentTable = ({
             id={`${names.chemicalFormula}-input`}
             value={componentRatios[id] ?? ''}
             pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
-            variant={ratiosAreValid[id] === false ? 'warning' : 'default'}
+            variant={ratiosAreValid[id] === false ? 'warning' : undefined}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const newRatiosAreValid = { ...ratiosAreValid }
               newRatiosAreValid[id] =

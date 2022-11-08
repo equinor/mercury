@@ -9,7 +9,7 @@ function computeFeedMolecularWeight(
   componentProperties: TComponentProperties,
   componentRatios: TComponentRatios
 ): number {
-  return componentRatios !== {}
+  return Object.keys(componentRatios).length !== 0
     ? Object.entries(componentRatios)
         .map(
           ([id, ratio]) =>
