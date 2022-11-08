@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { Button, Icon, Popover, TopBar } from '@equinor/eds-core-react'
-import { account_circle, grid_on, info_circle } from '@equinor/eds-icons'
+import {
+  account_circle,
+  external_link,
+  grid_on,
+  info_circle,
+} from '@equinor/eds-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { AUTH_DISABLED } from '../../constants'
@@ -49,6 +54,9 @@ export const Header = (): JSX.Element => {
         </TopBar.Header>
         <TopBar.Actions>
           <Icons>
+            <Button variant="ghost" href="https://github.com/equinor/mercury">
+              Github <Icon data={external_link} />
+            </Button>
             <Button
               variant="ghost_icon"
               onClick={() => setUserInfoOpen(!isUserInfoOpen)}
