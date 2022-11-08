@@ -57,7 +57,7 @@ jobs:
           echo "Tagging with ${{ inputs.image-tag }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $WEB_IMAGE
-          printf "$(git log -n 1 --format=format:'%h% %>(12) %cs %aN%  %s %d')" > ./web/public/version.txt
+          printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./web/public/version.txt
           DOCKER_BUILDKIT=1 docker build \
           --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
           --build-arg AUTH_ENABLED=1 \
@@ -78,7 +78,7 @@ jobs:
           echo "Tagging with ${{ inputs.image-tag }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
-          printf "$(git log -n 1 --format=format:'%h% %>(12) %cs %aN%  %s %d')" > ./api/src/version.txt
+          printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./api/src/version.txt
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $API_IMAGE \
           --target prod \
