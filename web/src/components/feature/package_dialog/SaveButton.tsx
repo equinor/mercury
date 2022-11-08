@@ -33,7 +33,8 @@ export const SaveButton = (props: {
     const isValidPackage =
       props.packageName.length > 0 &&
       Object.values(props.ratiosAreValid).every((x) => x) &&
-      Object.values(props.componentRatios).some((x) => Number(x) > 0)
+      Object.values(props.componentRatios).some((x) => Number(x) > 0) &&
+      !!props.componentRatios['5']
     if (props.editablePackage) {
       const ratioHasChanged =
         Object.keys(props.editablePackage.components).length !==
