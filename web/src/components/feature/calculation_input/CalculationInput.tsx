@@ -35,7 +35,7 @@ export const CalculationInput = ({
   componentProperties,
 }: {
   mercuryApi: MercuryAPI
-  setResult: (result: TResults) => void
+  setResult: (result: TResults | undefined) => void
   componentProperties: TComponentProperties
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
@@ -54,6 +54,7 @@ export const CalculationInput = ({
       onClick={() => {
         if (selectedPackage === undefined) return
         setCalculating(true)
+        setResult(undefined)
         mercuryApi
           .computeMultiflash({
             multiflash: {
