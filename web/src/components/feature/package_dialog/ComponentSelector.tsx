@@ -13,13 +13,6 @@ const ComponentSelectorContainer = styled.div`
   max-width: 420px;
 `
 
-type TComponentProperty = {
-  name: string
-  formula: string
-  weight: number
-  id: string
-}
-
 export const ComponentSelector = ({
   componentProperties,
   componentRatios,
@@ -33,19 +26,13 @@ export const ComponentSelector = ({
   ratiosAreValid: { [id: string]: boolean }
   setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }) => {
-  const options: TComponentProperty[] = Object.entries(componentProperties).map(
-    ([key, entry]) => ({
-      name: entry.altName,
-      formula: entry.chemicalFormula,
-      weight: entry.molecularWeight,
-      id: key,
-    })
-  )
   const initials = Object.keys(componentRatios).length
-    ? options.filter((option) => componentRatios[option.id])
-    : options.filter((option) => preSelectedComponents.includes(option.id))
+    ? componentProperties.filter((option) => componentRatios[option.id])
+    : componentProperties.filter((option) =>
+        preSelectedComponents.includes(option.id)
+      )
   const [selectedComponents, setSelectedComponents] =
-    useState<TComponentProperty[]>(initials)
+    useState<TComponentProperties>(initials)
   return (
     <ComponentSelectorContainer>
       <Autocomplete
@@ -68,21 +55,14 @@ export const ComponentSelector = ({
         }}
         label="Add components"
         multiple
-        options={options}
+        options={componentProperties}
         initialSelectedOptions={initials}
-        optionLabel={(option) => `${option.name} (${option.formula})`}
+        optionLabel={(option) =>
+          `${option.altName} (${option.chemicalFormula})`
+        }
       />
       <ComponentTable
-        selectedComponents={Object.fromEntries(
-          selectedComponents.map((x) => [
-            x.id,
-            {
-              altName: x.name,
-              chemicalFormula: x.formula,
-              molecularWeight: x.weight,
-            },
-          ])
-        )}
+        selectedComponents={selectedComponents}
         componentRatios={componentRatios}
         setComponentRatios={setComponentRatios}
         ratiosAreValid={ratiosAreValid}

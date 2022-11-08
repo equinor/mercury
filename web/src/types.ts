@@ -1,8 +1,8 @@
 import { ComponentProperties, MultiflashResponse } from './api/generated'
 
-export type TComponentProperties = {
-  [id: string]: ComponentProperties
-}
+export type TComponentProperties = (ComponentProperties & {
+  id: string
+})[]
 export type TResults = MultiflashResponse & {
   cubicFeedFlow: number
 }
