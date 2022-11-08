@@ -51,7 +51,10 @@ export const Header = (): JSX.Element => {
           <Icons>
             <Button
               variant="ghost_icon"
-              onClick={() => setUserInfoOpen(!isUserInfoOpen)}
+              onClick={() => {
+                setUserInfoOpen(!isUserInfoOpen)
+                setAboutOpen(false)
+              }}
               id="account-anchor"
               ref={accountRefElement}
             >
@@ -59,7 +62,10 @@ export const Header = (): JSX.Element => {
             </Button>
             <Button
               variant="ghost_icon"
-              onClick={() => setAboutOpen(!isAboutOpen)}
+              onClick={() => {
+                setUserInfoOpen(false)
+                setAboutOpen(!isAboutOpen)
+              }}
               id="info-anchor"
               ref={infoRefElement}
             >
