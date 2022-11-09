@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import {
+  Autocomplete,
   Button,
   Dialog,
   TextField,
   Typography,
-  Autocomplete,
 } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useState } from 'react'
-import { TPackage, TComponentProperty, TComponentRatios } from '../../../types'
+import { TComponentProperty, TComponentRatios, TPackage } from '../../../types'
 import { demoFeedComponentRatios } from '../../../constants'
 import { SaveButton } from './SaveButton'
 
