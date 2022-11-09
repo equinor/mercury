@@ -30,6 +30,14 @@ export const preSelectedComponents: Array<string> = [
   '605',
 ]
 
+export const orderedComponents: Array<string> = [
+  '5', // Mercury
+  '4', // H2S
+  '3', // Water
+  '6', // MEG
+  '31', // TEG
+]
+
 export const demoFeedComponentRatios = {
   '3': '0.062202',
   '2': '0.0047',
