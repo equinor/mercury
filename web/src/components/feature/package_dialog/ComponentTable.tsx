@@ -24,6 +24,24 @@ export const ComponentTable = ({
   ratiosAreValid: { [id: string]: boolean }
   setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }): JSX.Element => {
+  function handleOnChange(
+    event: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) {
+    const ratio = event.target.value
+    const newRatiosAreValid = { ...ratiosAreValid }
+    newRatiosAreValid[id] =
+      event.target.checkValidity() && !isNaN(Number(ratio))
+    setRatiosAreValid(newRatiosAreValid)
+    const newRatios = { ...componentRatios }
+    if (ratio === '') {
+      delete newRatios[id]
+    } else {
+      newRatios[id] = ratio
+    }
+    setComponentRatios(newRatios)
+  }
+
   function createTableRows() {
     return selectedComponents.map((component, rowIndex) => (
       <Table.Row key={rowIndex}>
@@ -36,23 +54,14 @@ export const ComponentTable = ({
             value={componentRatios[component.id] ?? ''}
             pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
             variant={
-              ratiosAreValid[component.id] === false ? 'warning' : undefined
+              ratiosAreValid[component.id] === false ||
+              (component.id === '5' && !(Number(componentRatios['5']) > 0))
+                ? 'warning'
+                : undefined
             }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              const newRatiosAreValid = { ...ratiosAreValid }
-              newRatiosAreValid[component.id] =
-                event.target.checkValidity() &&
-                !isNaN(Number(event.target.value))
-              setRatiosAreValid(newRatiosAreValid)
-
-              const newRatios = { ...componentRatios }
-              if (event.target.value === '') {
-                delete newRatios[component.id]
-              } else {
-                newRatios[component.id] = event.target.value
-              }
-              setComponentRatios(newRatios)
-            }}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleOnChange(event, component.id)
+            }
           />
         </Table.Cell>
       </Table.Row>
