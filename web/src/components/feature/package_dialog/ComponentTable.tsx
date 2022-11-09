@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import { TComponentRatios, TComponentProperties } from '../../../types'
+import { TComponentRatios, TComponentProperty } from '../../../types'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ export const ComponentTable = ({
   ratiosAreValid,
   setRatiosAreValid,
 }: {
-  selectedComponents: TComponentProperties
+  selectedComponents: TComponentProperty[]
   componentRatios: TComponentRatios
   setComponentRatios: (componentInput: TComponentRatios) => void
   ratiosAreValid: { [id: string]: boolean }

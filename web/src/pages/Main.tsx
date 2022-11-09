@@ -9,7 +9,7 @@ import { AxiosResponse } from 'axios'
 import { ComponentResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/results/PhaseTable'
 import { MercuryWarning } from '../components/feature/results/MercuryWarning'
-import { TComponentProperties, TResults } from '../types'
+import { TComponentProperty, TResults } from '../types'
 
 const Results = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const DividerWithLargeSpacings = styled(Divider)`
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [componentProperties, setComponentProperties] =
-    useState<TComponentProperties>()
+    useState<TComponentProperty[]>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [result, setResult] = useState<TResults>()
 

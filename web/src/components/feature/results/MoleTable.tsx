@@ -1,6 +1,6 @@
 import { DynamicTable } from '../../common/DynamicTable'
 import { formatNumber } from '../../../tableUtils'
-import { TComponentProperties, TResults } from '../../../types'
+import { TComponentProperty, TResults } from '../../../types'
 import { useState } from 'react'
 import { Switch } from '@equinor/eds-core-react'
 import styled from 'styled-components'
@@ -11,7 +11,7 @@ const MoleTableWrapper = styled.div`
 
 function getRows(
   results: TResults,
-  componentProperties: TComponentProperties,
+  componentProperties: TComponentProperty[],
   fullPrecision: boolean
 ): string[][] {
   return Object.entries(results.componentFractions).map(
@@ -31,7 +31,7 @@ function getRows(
 // TODO: Get type from generated API
 export const MoleTable = (props: {
   results: TResults
-  componentProperties: TComponentProperties
+  componentProperties: TComponentProperty[]
 }) => {
   const [fullPrecision, setFullPrecision] = useState<boolean>(false)
   return (

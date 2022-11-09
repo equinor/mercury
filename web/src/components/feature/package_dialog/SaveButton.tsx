@@ -1,12 +1,8 @@
 import { Button } from '@equinor/eds-core-react'
-import {
-  TComponentProperties,
-  TComponentRatios,
-  TPackage,
-} from '../../../types'
+import { TComponentProperty, TComponentRatios, TPackage } from '../../../types'
 
 function computeFeedMolecularWeight(
-  componentProperties: TComponentProperties,
+  componentProperties: TComponentProperty[],
   componentRatios: TComponentRatios
 ): number {
   return Object.keys(componentRatios).length !== 0
@@ -21,7 +17,7 @@ function computeFeedMolecularWeight(
 }
 
 export const SaveButton = (props: {
-  componentProperties: TComponentProperties
+  componentProperties: TComponentProperty[]
   packageName: string
   packageDescription: string
   componentRatios: TComponentRatios

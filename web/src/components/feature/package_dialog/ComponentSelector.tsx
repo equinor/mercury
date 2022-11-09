@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../../constants'
-import { TComponentProperties, TComponentRatios } from '../../../types'
+import { TComponentProperty, TComponentRatios } from '../../../types'
 import { ComponentTableSum } from './ComponentTableSum'
 
 const ComponentSelectorContainer = styled.div`
@@ -20,7 +20,7 @@ export const ComponentSelector = ({
   ratiosAreValid,
   setRatiosAreValid,
 }: {
-  componentProperties: TComponentProperties
+  componentProperties: TComponentProperty[]
   componentRatios: TComponentRatios
   setComponentRatios: (componentInput: TComponentRatios) => void
   ratiosAreValid: { [id: string]: boolean }
@@ -32,7 +32,7 @@ export const ComponentSelector = ({
         preSelectedComponents.includes(option.id)
       )
   const [selectedComponents, setSelectedComponents] =
-    useState<TComponentProperties>(initials)
+    useState<TComponentProperty[]>(initials)
   return (
     <ComponentSelectorContainer>
       <Autocomplete
