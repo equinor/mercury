@@ -6,10 +6,11 @@ import { MoleTable } from '../components/feature/results/MoleTable'
 import { CalculationInput } from '../components/feature/calculation_input/CalculationInput'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
-import { ComponentResponse } from '../api/generated'
+import { ComponentProperties, ComponentResponse } from '../api/generated'
 import { PhaseTable } from '../components/feature/results/PhaseTable'
 import { MercuryWarning } from '../components/feature/results/MercuryWarning'
 import { TComponentProperty, TResults } from '../types'
+import { orderedComponents } from '../constants'
 
 const Results = styled.div`
   display: flex;
@@ -32,6 +33,15 @@ const DividerWithLargeSpacings = styled(Divider)`
   margin-top: 40px;
 `
 
+const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
+  const remainingComponents = Object.keys(components).filter(
+    (id) => !orderedComponents.includes(id)
+  )
+  return [...orderedComponents, ...remainingComponents]
+    .filter((id) => components[id])
+    .map((id) => ({ id: id, ...components[id] }))
+}
+
 export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const { mercuryApi } = props
   const [componentProperties, setComponentProperties] =
@@ -44,12 +54,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     mercuryApi
       .getComponents()
       .then((response: AxiosResponse<ComponentResponse>) =>
-        setComponentProperties(
-          Object.entries(response.data.components).map(([id, data]) => ({
-            id: id,
-            ...data,
-          }))
-        )
+        setComponentProperties(toSortedArray(response.data.components))
       )
       .finally(() => setIsLoading(false))
   }, [mercuryApi])

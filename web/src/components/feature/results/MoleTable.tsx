@@ -14,18 +14,18 @@ function getRows(
   componentProperties: TComponentProperty[],
   fullPrecision: boolean
 ): string[][] {
-  return Object.entries(results.componentFractions).map(
-    ([compId, fractions]) => [
-      componentProperties.find((x) => x.id === compId)?.altName ?? '',
+  return componentProperties
+    .filter((x) => x.id in results.componentFractions)
+    .map((x) => [
+      x.altName,
       fullPrecision
-        ? results.feedFractions[compId].toString()
-        : formatNumber(results.feedFractions[compId]),
-      ...fractions.map((x) => {
+        ? results.feedFractions[x.id].toString()
+        : formatNumber(results.feedFractions[x.id]),
+      ...results.componentFractions[x.id].map((x) => {
         if (fullPrecision) return x.toString()
         return formatNumber(x, 2, 3)
       }),
-    ]
-  )
+    ])
 }
 
 // TODO: Get type from generated API
