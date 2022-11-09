@@ -7,7 +7,7 @@ import { MultiflashResponse } from '../../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
 import MercuryAPI from '../../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentProperties, TPackage, TResults } from '../../../types'
+import { TComponentProperty, TPackage, TResults } from '../../../types'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
 
@@ -36,7 +36,7 @@ export const CalculationInput = ({
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: TResults | undefined) => void
-  componentProperties: TComponentProperties
+  componentProperties: TComponentProperty[]
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)

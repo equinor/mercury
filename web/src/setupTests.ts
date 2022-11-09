@@ -3,7 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
-import { TComponentProperties, TResults } from './types'
+import { TComponentProperty, TResults } from './types'
 
 export const mockComponentRatios = {
   '3': 0.062202,
@@ -74,7 +74,7 @@ export const mockResults: TResults = {
   cubicFeedFlow: 1000,
 }
 
-export const mockComponentProperties: TComponentProperties = [
+export const mockComponentProperties: TComponentProperty[] = [
   {
     id: '1',
     chemicalFormula: 'CO2',

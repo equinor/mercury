@@ -9,11 +9,7 @@ import {
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useState } from 'react'
-import {
-  TPackage,
-  TComponentProperties,
-  TComponentRatios,
-} from '../../../types'
+import { TPackage, TComponentProperty, TComponentRatios } from '../../../types'
 import { demoFeedComponentRatios } from '../../../constants'
 import { SaveButton } from './SaveButton'
 
@@ -58,7 +54,7 @@ export const FluidDialog = ({
   packages,
 }: {
   close: () => void
-  componentProperties: TComponentProperties
+  componentProperties: TComponentProperty[]
   editablePackage?: TPackage
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
