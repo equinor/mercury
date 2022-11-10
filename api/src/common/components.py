@@ -24,6 +24,16 @@ COMPONENTS = {
         "alt_name": "Mercury",
         "molecular_weight": 200.59,
     },
+    "6": {
+        "chemical_formula": "MEG",
+        "alt_name": "ethane-1-2-diol",
+        "molecular_weight": 62.068,
+    },
+    "31": {
+        "chemical_formula": "TEG",
+        "alt_name": "2-[2-(2-Hydroxyethoxy)ethoxy]ethanol",
+        "molecular_weight": 150.174,
+    },
     "101": {
         "chemical_formula": "CH4",
         "alt_name": "Methane",
