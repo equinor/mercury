@@ -1,7 +1,7 @@
 import { EdsProvider, Table } from '@equinor/eds-core-react'
 import { TComponentRatios } from '../../types'
 import { formatNumber } from '../../tableUtils'
-import { usePackageDialog } from './context/PackageDialogContext'
+import { usePackageDialogContext } from './context/PackageDialogContext'
 
 function computeComponentRatioSum(componentRatios: TComponentRatios) {
   const sum = Object.values(componentRatios).reduce((a, b) => a + Number(b), 0)
@@ -12,7 +12,7 @@ function computeComponentRatioSum(componentRatios: TComponentRatios) {
 }
 
 export const ComponentTableSum = (): JSX.Element => {
-  const state = usePackageDialog()
+  const { state } = usePackageDialogContext()
   return (
     <EdsProvider density={'compact'}>
       <Table>

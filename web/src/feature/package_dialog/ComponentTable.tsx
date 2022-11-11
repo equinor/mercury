@@ -1,10 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import {
-  usePackageDialog,
-  usePackageDialogDispatch,
-} from './context/PackageDialogContext'
+import { usePackageDialogContext } from './context/PackageDialogContext'
 import { setAreValid, setRatios } from './context/actions'
 
 const ComponentTableContainer = styled.div`
@@ -16,8 +13,7 @@ const ComponentTableContainer = styled.div`
 `
 
 export const ComponentTable = (): JSX.Element => {
-  const dispatch = usePackageDialogDispatch()
-  const state = usePackageDialog()
+  const { state, dispatch } = usePackageDialogContext()
   function handleOnChange(
     event: React.ChangeEvent<HTMLInputElement>,
     id: string

@@ -3,32 +3,27 @@ import { TPackageDialog } from '../../../types'
 import { packageDialogReducer } from './reducer'
 import { Action } from './actions'
 
-const PackageDialogContext = createContext({} as TPackageDialog)
-const PackageDialogDispatchContext = createContext(
-  (() => ({})) as React.Dispatch<Action>
-)
+type Dispatch = (action: Action) => void
+const PackageDialogContext = createContext<{
+  state: TPackageDialog
+  dispatch: Dispatch
+}>({ state: {} as TPackageDialog, dispatch: () => ({}) })
 
 export function PackageDialogProvider(props: { children: React.ReactNode }) {
-  const [packageDialog, dispatch] = useReducer(
+  const [state, dispatch] = useReducer(
     packageDialogReducer,
     initialPackageDialog
   )
 
   return (
-    <PackageDialogContext.Provider value={packageDialog}>
-      <PackageDialogDispatchContext.Provider value={dispatch}>
-        {props.children}
-      </PackageDialogDispatchContext.Provider>
+    <PackageDialogContext.Provider value={{ state, dispatch }}>
+      {props.children}
     </PackageDialogContext.Provider>
   )
 }
 
-export function usePackageDialog() {
+export function usePackageDialogContext() {
   return useContext(PackageDialogContext)
-}
-
-export function usePackageDialogDispatch() {
-  return useContext(PackageDialogDispatchContext)
 }
 
 const initialPackageDialog: TPackageDialog = {

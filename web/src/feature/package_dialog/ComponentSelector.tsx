@@ -1,9 +1,6 @@
 import { Autocomplete } from '@equinor/eds-core-react'
 import { TComponentProperty } from '../../types'
-import {
-  usePackageDialog,
-  usePackageDialogDispatch,
-} from './context/PackageDialogContext'
+import { usePackageDialogContext } from './context/PackageDialogContext'
 import { setAreValid, setRatios, setSelected } from './context/actions'
 
 export const ComponentSelector = ({
@@ -11,8 +8,7 @@ export const ComponentSelector = ({
 }: {
   componentProperties: TComponentProperty[]
 }) => {
-  const dispatch = usePackageDialogDispatch()
-  const state = usePackageDialog()
+  const { state, dispatch } = usePackageDialogContext()
   return (
     <Autocomplete
       onOptionsChange={({ selectedItems }) => {

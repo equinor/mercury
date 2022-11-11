@@ -1,6 +1,6 @@
 import { Button } from '@equinor/eds-core-react'
 import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
-import { usePackageDialog } from './context/PackageDialogContext'
+import { usePackageDialogContext } from './context/PackageDialogContext'
 
 function computeFeedMolecularWeight(
   componentProperties: TComponentProperty[],
@@ -23,7 +23,7 @@ export const SaveButton = (props: {
   close: () => void
   savePackage: (x?: TPackage) => void
 }) => {
-  const state = usePackageDialog()
+  const { state } = usePackageDialogContext()
   const isSaveable = (): boolean => {
     const isValidPackage =
       state.name.length > 0 &&

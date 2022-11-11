@@ -12,10 +12,7 @@ import { useEffect } from 'react'
 import { TComponentProperty, TPackage } from '../../types'
 import { demoFeedComponentRatios } from '../../constants'
 import { SaveButton } from './SaveButton'
-import {
-  usePackageDialog,
-  usePackageDialogDispatch,
-} from './context/PackageDialogContext'
+import { usePackageDialogContext } from './context/PackageDialogContext'
 import {
   setDescription,
   setName,
@@ -59,7 +56,7 @@ const ButtonGroup = styled.div`
   gap: 16px;
 `
 
-const ComponentSelectorContainer = styled.div`
+const SecondColumn = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 4px;
@@ -79,8 +76,7 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  const dispatch = usePackageDialogDispatch()
-  const state = usePackageDialog()
+  const { state, dispatch } = usePackageDialogContext()
 
   const initials = Object.keys(state.ratios).length
     ? componentProperties.filter((option) => state.ratios[option.id])
@@ -148,11 +144,11 @@ export const FluidDialog = ({
               autoWidth
             />
           </FirstColumn>
-          <ComponentSelectorContainer>
+          <SecondColumn>
             <ComponentSelector componentProperties={componentProperties} />
             <ComponentTable />
             <ComponentTableSum />
-          </ComponentSelectorContainer>
+          </SecondColumn>
         </FluidPackageForm>
         <ButtonRow>
           <ButtonGroup>
