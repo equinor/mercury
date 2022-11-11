@@ -25,4 +25,5 @@ export type TPackageDialog = {
   areValid: {
     [id: string]: boolean
   }
+  selected: TComponentProperty[]
 }

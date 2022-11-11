@@ -16,7 +16,15 @@ import {
   usePackageDialog,
   usePackageDialogDispatch,
 } from './context/PackageDialogContext'
-import { setDescription, setName, setRatios } from './context/actions'
+import {
+  setDescription,
+  setName,
+  setRatios,
+  setSelected,
+} from './context/actions'
+import { preSelectedComponents } from '../../constants'
+import { ComponentTable } from './ComponentTable'
+import { ComponentTableSum } from './ComponentTableSum'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -51,6 +59,13 @@ const ButtonGroup = styled.div`
   gap: 16px;
 `
 
+const ComponentSelectorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  max-width: 420px;
+`
+
 export const FluidDialog = ({
   close,
   componentProperties,
@@ -67,14 +82,21 @@ export const FluidDialog = ({
   const dispatch = usePackageDialogDispatch()
   const state = usePackageDialog()
 
+  const initials = Object.keys(state.ratios).length
+    ? componentProperties.filter((option) => state.ratios[option.id])
+    : componentProperties.filter((option) =>
+        preSelectedComponents.includes(option.id)
+      )
+
   useEffect(() => {
     if (editablePackage !== undefined) {
       dispatch(setName(editablePackage.name))
       dispatch(setDescription(editablePackage.description))
       dispatch(setRatios(editablePackage.components))
     }
+    dispatch(setSelected(initials))
     console.log('useEffect')
-  }, [dispatch, editablePackage])
+  }, [])
 
   return (
     <WideDialog open onClose={close} isDismissable>
@@ -115,11 +137,22 @@ export const FluidDialog = ({
               optionLabel={(option) => option.name}
               onOptionsChange={(changes) => {
                 dispatch(setRatios(changes.selectedItems[0].components))
+                dispatch(
+                  setSelected(
+                    componentProperties.filter(
+                      (x) => changes.selectedItems[0].components[x.id]
+                    )
+                  )
+                )
               }}
               autoWidth
             />
           </FirstColumn>
-          <ComponentSelector componentProperties={componentProperties} />
+          <ComponentSelectorContainer>
+            <ComponentSelector componentProperties={componentProperties} />
+            <ComponentTable />
+            <ComponentTableSum />
+          </ComponentSelectorContainer>
         </FluidPackageForm>
         <ButtonRow>
           <ButtonGroup>

@@ -36,4 +36,5 @@ const initialPackageDialog: TPackageDialog = {
   description: '',
   ratios: {},
   areValid: {},
+  selected: [],
 }

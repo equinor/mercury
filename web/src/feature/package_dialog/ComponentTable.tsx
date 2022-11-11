@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import { TComponentProperty } from '../../types'
 import {
   usePackageDialog,
   usePackageDialogDispatch,
@@ -16,11 +15,7 @@ const ComponentTableContainer = styled.div`
   margin-top: 15px;
 `
 
-export const ComponentTable = ({
-  selectedComponents,
-}: {
-  selectedComponents: TComponentProperty[]
-}): JSX.Element => {
+export const ComponentTable = (): JSX.Element => {
   const dispatch = usePackageDialogDispatch()
   const state = usePackageDialog()
   function handleOnChange(
@@ -42,7 +37,7 @@ export const ComponentTable = ({
   }
 
   function createTableRows() {
-    return selectedComponents.map((component, rowIndex) => (
+    return state.selected.map((component, rowIndex) => (
       <Table.Row key={rowIndex}>
         <Table.Cell
           data-testid={`Component-${rowIndex}`}

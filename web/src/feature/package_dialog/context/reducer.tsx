@@ -27,6 +27,12 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
         areValid: action.payload.value,
       }
     }
+    case ActionType.SetSelected: {
+      return {
+        ...state,
+        selected: action.payload.value,
+      }
+    }
     default: {
       throw Error('Unhandled action: ' + action)
     }

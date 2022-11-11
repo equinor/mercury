@@ -1,13 +1,19 @@
-import { TComponentRatios } from '../../../types'
+import { TComponentProperty, TComponentRatios } from '../../../types'
 
 export enum ActionType {
   SetName,
   SetDescription,
   SetRatios,
   SetAreValid,
+  SetSelected,
 }
 
-export type Action = SetName | SetDescription | SetRatios | SetAreValid
+export type Action =
+  | SetName
+  | SetDescription
+  | SetRatios
+  | SetAreValid
+  | SetSelected
 
 export interface SetName {
   type: ActionType.SetName
@@ -69,6 +75,22 @@ export interface SetAreValid {
 export const setAreValid = (value: { [id: string]: boolean }): SetAreValid => {
   return {
     type: ActionType.SetAreValid,
+    payload: {
+      value: value,
+    },
+  }
+}
+
+export interface SetSelected {
+  type: ActionType.SetSelected
+  payload: {
+    value: TComponentProperty[]
+  }
+}
+
+export const setSelected = (value: TComponentProperty[]): SetSelected => {
+  return {
+    type: ActionType.SetSelected,
     payload: {
       value: value,
     },
