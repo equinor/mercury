@@ -8,7 +8,7 @@ import {
 } from '@equinor/eds-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
-import { AUTH_DISABLED } from '../../constants'
+import { AUTH_DISABLED } from '../constants'
 import axios, { AxiosResponse } from 'axios'
 
 const Icons = styled.div`

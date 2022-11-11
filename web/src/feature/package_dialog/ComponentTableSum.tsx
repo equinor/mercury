@@ -1,6 +1,6 @@
 import { EdsProvider, Table } from '@equinor/eds-core-react'
-import { TComponentRatios } from '../../../types'
-import { formatNumber } from '../../../tableUtils'
+import { TComponentRatios } from '../../types'
+import { formatNumber } from '../../tableUtils'
 
 function computeComponentRatioSum(componentRatios: TComponentRatios) {
   const sum = Object.values(componentRatios).reduce((a, b) => a + Number(b), 0)

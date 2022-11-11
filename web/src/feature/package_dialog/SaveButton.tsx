@@ -1,5 +1,5 @@
 import { Button } from '@equinor/eds-core-react'
-import { TComponentProperty, TComponentRatios, TPackage } from '../../../types'
+import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
 
 function computeFeedMolecularWeight(
   componentProperties: TComponentProperty[],

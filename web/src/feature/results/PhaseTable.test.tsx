@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { PhaseTable } from './PhaseTable'
 import '@testing-library/jest-dom/extend-expect'
-import { mockResults } from '../../../setupTests'
+import { mockResults } from '../../setupTests'
 
 test('renders without crashing and displaying correct values in table', async () => {
   render(<PhaseTable results={mockResults} />)
