@@ -8,10 +8,15 @@ import {
 } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
-import { useState } from 'react'
-import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
+import { useEffect } from 'react'
+import { TComponentProperty, TPackage } from '../../types'
 import { demoFeedComponentRatios } from '../../constants'
 import { SaveButton } from './SaveButton'
+import {
+  usePackageDialog,
+  usePackageDialogDispatch,
+} from './context/PackageDialogContext'
+import { setDescription, setName, setRatios } from './context/actions'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -59,19 +64,17 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  // Array of components containing input from user
-  const [componentRatios, setComponentRatios] = useState<TComponentRatios>(
-    editablePackage?.components ?? {}
-  )
-  const [packageName, setPackageName] = useState<string>(
-    editablePackage?.name ?? ''
-  )
-  const [packageDescription, setPackageDescription] = useState<string>(
-    editablePackage?.description ?? ''
-  )
-  const [ratiosAreValid, setRatiosAreValid] = useState<{
-    [id: string]: boolean
-  }>({})
+  const dispatch = usePackageDialogDispatch()
+  const state = usePackageDialog()
+
+  useEffect(() => {
+    if (editablePackage !== undefined) {
+      dispatch(setName(editablePackage.name))
+      dispatch(setDescription(editablePackage.description))
+      dispatch(setRatios(editablePackage.components))
+    }
+    console.log('useEffect')
+  }, [dispatch, editablePackage])
 
   return (
     <WideDialog open onClose={close} isDismissable>
@@ -90,18 +93,18 @@ export const FluidDialog = ({
               id="fluid-package-name"
               placeholder="Fluid package"
               label="Name"
-              value={packageName}
+              value={state.name}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPackageName(event.target.value)
+                dispatch(setName(event.target.value))
               }
             />
             <TextField
               id="fluid-package-description"
               placeholder="Description"
               label="Description"
-              value={packageDescription}
+              value={state.description}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPackageDescription(event.target.value)
+                dispatch(setDescription(event.target.value))
               }
               multiline
               rows={6}
@@ -111,18 +114,12 @@ export const FluidDialog = ({
               options={packages}
               optionLabel={(option) => option.name}
               onOptionsChange={(changes) => {
-                setComponentRatios(changes.selectedItems[0].components)
+                dispatch(setRatios(changes.selectedItems[0].components))
               }}
               autoWidth
             />
           </FirstColumn>
-          <ComponentSelector
-            componentProperties={componentProperties}
-            componentRatios={componentRatios}
-            setComponentRatios={setComponentRatios}
-            ratiosAreValid={ratiosAreValid}
-            setRatiosAreValid={setRatiosAreValid}
-          />
+          <ComponentSelector componentProperties={componentProperties} />
         </FluidPackageForm>
         <ButtonRow>
           <ButtonGroup>
@@ -131,20 +128,16 @@ export const FluidDialog = ({
             </Button>
             <SaveButton
               componentProperties={componentProperties}
-              packageName={packageName}
-              packageDescription={packageDescription}
-              componentRatios={componentRatios}
               editablePackage={editablePackage}
               savePackage={savePackage}
               close={close}
-              ratiosAreValid={ratiosAreValid}
             />
             <Button
               // TODO: Demo button to remove when done testing
               onClick={() => {
-                setPackageName('Demo data')
-                setPackageDescription('')
-                setComponentRatios(demoFeedComponentRatios)
+                dispatch(setName('Demo data'))
+                dispatch(setDescription(''))
+                dispatch(setRatios(demoFeedComponentRatios))
               }}
             >
               Demo data

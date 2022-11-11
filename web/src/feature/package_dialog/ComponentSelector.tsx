@@ -3,8 +3,13 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
 import { preSelectedComponents } from '../../constants'
-import { TComponentProperty, TComponentRatios } from '../../types'
+import { TComponentProperty } from '../../types'
 import { ComponentTableSum } from './ComponentTableSum'
+import {
+  usePackageDialog,
+  usePackageDialogDispatch,
+} from './context/PackageDialogContext'
+import { setAreValid, setRatios } from './context/actions'
 
 const ComponentSelectorContainer = styled.div`
   display: flex;
@@ -15,19 +20,13 @@ const ComponentSelectorContainer = styled.div`
 
 export const ComponentSelector = ({
   componentProperties,
-  componentRatios,
-  setComponentRatios,
-  ratiosAreValid,
-  setRatiosAreValid,
 }: {
   componentProperties: TComponentProperty[]
-  componentRatios: TComponentRatios
-  setComponentRatios: (componentInput: TComponentRatios) => void
-  ratiosAreValid: { [id: string]: boolean }
-  setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }) => {
-  const initials = Object.keys(componentRatios).length
-    ? componentProperties.filter((option) => componentRatios[option.id])
+  const dispatch = usePackageDialogDispatch()
+  const state = usePackageDialog()
+  const initials = Object.keys(state.ratios).length
+    ? componentProperties.filter((option) => state.ratios[option.id])
     : componentProperties.filter((option) =>
         preSelectedComponents.includes(option.id)
       )
@@ -37,17 +36,21 @@ export const ComponentSelector = ({
     <ComponentSelectorContainer>
       <Autocomplete
         onOptionsChange={({ selectedItems }) => {
-          setComponentRatios(
-            Object.fromEntries(
-              Object.entries(componentRatios).filter(([compId]) =>
-                selectedItems.find((x) => x.id === compId)
+          dispatch(
+            setRatios(
+              Object.fromEntries(
+                Object.entries(state.ratios).filter(([compId]) =>
+                  selectedItems.find((x) => x.id === compId)
+                )
               )
             )
           )
-          setRatiosAreValid(
-            Object.fromEntries(
-              Object.entries(ratiosAreValid).filter(([compId]) =>
-                selectedItems.find((x) => x.id === compId)
+          dispatch(
+            setAreValid(
+              Object.fromEntries(
+                Object.entries(state.areValid).filter(([compId]) =>
+                  selectedItems.find((x) => x.id === compId)
+                )
               )
             )
           )
@@ -61,14 +64,8 @@ export const ComponentSelector = ({
           `${option.altName} (${option.chemicalFormula})`
         }
       />
-      <ComponentTable
-        selectedComponents={selectedComponents}
-        componentRatios={componentRatios}
-        setComponentRatios={setComponentRatios}
-        ratiosAreValid={ratiosAreValid}
-        setRatiosAreValid={setRatiosAreValid}
-      />
-      <ComponentTableSum componentRatios={componentRatios} />
+      <ComponentTable selectedComponents={selectedComponents} />
+      <ComponentTableSum />
     </ComponentSelectorContainer>
   )
 }

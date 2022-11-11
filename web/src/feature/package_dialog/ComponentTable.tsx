@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import { TComponentRatios, TComponentProperty } from '../../types'
+import { TComponentProperty } from '../../types'
+import {
+  usePackageDialog,
+  usePackageDialogDispatch,
+} from './context/PackageDialogContext'
+import { setAreValid, setRatios } from './context/actions'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -13,33 +18,27 @@ const ComponentTableContainer = styled.div`
 
 export const ComponentTable = ({
   selectedComponents,
-  componentRatios,
-  setComponentRatios,
-  ratiosAreValid,
-  setRatiosAreValid,
 }: {
   selectedComponents: TComponentProperty[]
-  componentRatios: TComponentRatios
-  setComponentRatios: (componentInput: TComponentRatios) => void
-  ratiosAreValid: { [id: string]: boolean }
-  setRatiosAreValid: (x: { [id: string]: boolean }) => void
 }): JSX.Element => {
+  const dispatch = usePackageDialogDispatch()
+  const state = usePackageDialog()
   function handleOnChange(
     event: React.ChangeEvent<HTMLInputElement>,
     id: string
   ) {
     const ratio = event.target.value
-    const newRatiosAreValid = { ...ratiosAreValid }
+    const newRatiosAreValid = { ...state.areValid }
     newRatiosAreValid[id] =
       event.target.checkValidity() && !isNaN(Number(ratio))
-    setRatiosAreValid(newRatiosAreValid)
-    const newRatios = { ...componentRatios }
+    dispatch(setAreValid(newRatiosAreValid))
+    const newRatios = { ...state.ratios }
     if (ratio === '') {
       delete newRatios[id]
     } else {
       newRatios[id] = ratio
     }
-    setComponentRatios(newRatios)
+    dispatch(setRatios(newRatios))
   }
 
   function createTableRows() {
@@ -51,11 +50,11 @@ export const ComponentTable = ({
         <Table.Cell data-testid={`Ratio (mol)-${rowIndex}`}>
           <Input
             id={`${component.chemicalFormula}-input`}
-            value={componentRatios[component.id] ?? ''}
+            value={state.ratios[component.id] ?? ''}
             pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
             variant={
-              ratiosAreValid[component.id] === false ||
-              (component.id === '5' && !(Number(componentRatios['5']) > 0))
+              state.areValid[component.id] === false ||
+              (component.id === '5' && !(Number(state.ratios['5']) > 0))
                 ? 'warning'
                 : undefined
             }

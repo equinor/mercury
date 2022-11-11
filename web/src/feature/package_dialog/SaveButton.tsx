@@ -1,5 +1,6 @@
 import { Button } from '@equinor/eds-core-react'
 import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
+import { usePackageDialog } from './context/PackageDialogContext'
 
 function computeFeedMolecularWeight(
   componentProperties: TComponentProperty[],
@@ -18,30 +19,27 @@ function computeFeedMolecularWeight(
 
 export const SaveButton = (props: {
   componentProperties: TComponentProperty[]
-  packageName: string
-  packageDescription: string
-  componentRatios: TComponentRatios
   editablePackage?: TPackage
   close: () => void
   savePackage: (x?: TPackage) => void
-  ratiosAreValid: { [id: string]: boolean }
 }) => {
+  const state = usePackageDialog()
   const isSaveable = (): boolean => {
     const isValidPackage =
-      props.packageName.length > 0 &&
-      Object.values(props.ratiosAreValid).every((x) => x) &&
-      Object.values(props.componentRatios).some((x) => Number(x) > 0) &&
-      Number(props.componentRatios['5']) > 0
+      state.name.length > 0 &&
+      Object.values(state.areValid).every((x) => x) &&
+      Object.values(state.ratios).some((x) => Number(x) > 0) &&
+      Number(state.ratios['5']) > 0
     if (props.editablePackage) {
       const ratioHasChanged =
         Object.keys(props.editablePackage.components).length !==
-          Object.keys(props.componentRatios).length ||
+          Object.keys(state.ratios).length ||
         !Object.entries(props.editablePackage.components).every(
-          ([compId, ratio]) => ratio === props.componentRatios[compId]
+          ([compId, ratio]) => ratio === state.ratios[compId]
         )
       const hasChanged =
-        props.packageName !== props.editablePackage.name ||
-        props.packageDescription !== props.editablePackage.description ||
+        state.name !== props.editablePackage.name ||
+        state.description !== props.editablePackage.description ||
         ratioHasChanged
       return isValidPackage && hasChanged
     } else {
@@ -52,12 +50,12 @@ export const SaveButton = (props: {
     <Button
       onClick={() => {
         props.savePackage({
-          name: props.packageName,
-          description: props.packageDescription,
-          components: props.componentRatios,
+          name: state.name,
+          description: state.description,
+          components: state.ratios,
           molecularWeightSum: computeFeedMolecularWeight(
             props.componentProperties,
-            props.componentRatios
+            state.ratios
           ),
         })
         props.close()

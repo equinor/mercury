@@ -10,6 +10,7 @@ import { FeedFlowInput } from './FeedFlowInput'
 import { TComponentProperty, TPackage, TResults } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
+import { PackageDialogProvider } from '../package_dialog/context/PackageDialogContext'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -153,21 +154,25 @@ export const CalculationInput = ({
         </Form>
       </Card>
       {isNewOpen && (
-        <FluidDialog
-          close={() => setIsNewOpen(false)}
-          componentProperties={componentProperties}
-          savePackage={(x) => savePackage('new', x)}
-          packages={packages}
-        />
+        <PackageDialogProvider>
+          <FluidDialog
+            close={() => setIsNewOpen(false)}
+            componentProperties={componentProperties}
+            savePackage={(x) => savePackage('new', x)}
+            packages={packages}
+          />
+        </PackageDialogProvider>
       )}
       {isEditOpen && (
-        <FluidDialog
-          close={() => setIsEditOpen(false)}
-          componentProperties={componentProperties}
-          editablePackage={selectedPackage}
-          savePackage={(x) => savePackage('edit', x)}
-          packages={packages}
-        />
+        <PackageDialogProvider>
+          <FluidDialog
+            close={() => setIsEditOpen(false)}
+            componentProperties={componentProperties}
+            editablePackage={selectedPackage}
+            savePackage={(x) => savePackage('edit', x)}
+            packages={packages}
+          />
+        </PackageDialogProvider>
       )}
     </>
   )
