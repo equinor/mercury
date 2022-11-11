@@ -5,7 +5,7 @@ import {
   maxTemperature,
   minPressure,
   minTemperature,
-} from '../../../constants'
+} from '../../constants'
 
 export const TempOrPressureInput = (props: {
   value: number

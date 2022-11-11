@@ -2,8 +2,8 @@ import { Autocomplete } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { ComponentTable } from './ComponentTable'
-import { preSelectedComponents } from '../../../constants'
-import { TComponentProperty, TComponentRatios } from '../../../types'
+import { preSelectedComponents } from '../../constants'
+import { TComponentProperty, TComponentRatios } from '../../types'
 import { ComponentTableSum } from './ComponentTableSum'
 
 const ComponentSelectorContainer = styled.div`

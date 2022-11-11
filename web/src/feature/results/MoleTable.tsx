@@ -1,6 +1,6 @@
 import { DynamicTable } from '../../common/DynamicTable'
-import { formatNumber } from '../../../tableUtils'
-import { TComponentProperty, TResults } from '../../../types'
+import { formatNumber } from '../../tableUtils'
+import { TComponentProperty, TResults } from '../../types'
 import { useState } from 'react'
 import { Switch } from '@equinor/eds-core-react'
 import styled from 'styled-components'

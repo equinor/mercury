@@ -9,8 +9,8 @@ import {
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useState } from 'react'
-import { TComponentProperty, TComponentRatios, TPackage } from '../../../types'
-import { demoFeedComponentRatios } from '../../../constants'
+import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
+import { demoFeedComponentRatios } from '../../constants'
 import { SaveButton } from './SaveButton'
 
 const WideDialog = styled(Dialog)`
