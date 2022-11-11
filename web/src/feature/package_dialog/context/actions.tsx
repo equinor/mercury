@@ -1,9 +1,13 @@
+import { TComponentRatios } from '../../../types'
+
 export enum ActionType {
   SetName,
   SetDescription,
+  SetRatios,
+  SetAreValid,
 }
 
-export type Action = SetName | SetDescription
+export type Action = SetName | SetDescription | SetRatios | SetAreValid
 
 export interface SetName {
   type: ActionType.SetName
@@ -31,6 +35,40 @@ export interface SetDescription {
 export const setDescription = (value: string): SetDescription => {
   return {
     type: ActionType.SetDescription,
+    payload: {
+      value: value,
+    },
+  }
+}
+
+export interface SetRatios {
+  type: ActionType.SetRatios
+  payload: {
+    value: TComponentRatios
+  }
+}
+
+export const setRatios = (value: TComponentRatios): SetRatios => {
+  return {
+    type: ActionType.SetRatios,
+    payload: {
+      value: value,
+    },
+  }
+}
+
+export interface SetAreValid {
+  type: ActionType.SetAreValid
+  payload: {
+    value: {
+      [id: string]: boolean
+    }
+  }
+}
+
+export const setAreValid = (value: { [id: string]: boolean }): SetAreValid => {
+  return {
+    type: ActionType.SetAreValid,
     payload: {
       value: value,
     },

@@ -34,4 +34,6 @@ export function usePackageDialogDispatch() {
 const initialPackageDialog: TPackageDialog = {
   name: '',
   description: '',
+  ratios: {},
+  areValid: {},
 }

@@ -15,6 +15,18 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
         description: action.payload.value,
       }
     }
+    case ActionType.SetRatios: {
+      return {
+        ...state,
+        ratios: action.payload.value,
+      }
+    }
+    case ActionType.SetAreValid: {
+      return {
+        ...state,
+        areValid: action.payload.value,
+      }
+    }
     default: {
       throw Error('Unhandled action: ' + action)
     }
