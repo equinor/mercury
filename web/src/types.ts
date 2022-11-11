@@ -17,3 +17,8 @@ export type TPackage = {
   components: TComponentRatios
   molecularWeightSum: number
 }
+
+export type TPackageDialog = {
+  name: string
+  description: string
+}
