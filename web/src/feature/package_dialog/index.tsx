@@ -1,4 +1,6 @@
-import { Button } from '@equinor/eds-core-react'
+import styled from 'styled-components'
+import { Button, Dialog, Typography } from '@equinor/eds-core-react'
+import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { TComponentProperty, TPackage, TPackageDialog } from '../../types'
 import { SaveButton } from './SaveButton'
@@ -7,10 +9,49 @@ import { ComponentTableSum } from './ComponentTableSum'
 import { NameField } from './NameField'
 import { DescriptionField } from './DescriptionField'
 import { TemplateSelector } from './TemplateSelector'
-import { Dialog } from '../../common/Dialog'
 import { DemoButton } from './DemoButton'
 import { PackageDialogProvider } from './context/PackageDialogContext'
 import { preSelectedComponents } from '../../constants'
+
+const WideDialog = styled(Dialog)`
+  width: auto;
+  @media (min-width: 900px) {
+    min-width: 800px;
+  }
+`
+
+const FluidPackageForm = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+  justify-content: space-between;
+`
+
+const FirstColumn = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 30px;
+  width: 40%;
+`
+
+const SecondColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  max-width: 420px;
+`
+
+const ButtonRow = styled.div`
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+  padding-top: 16px;
+`
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 16px;
+`
 
 export const PackageDialog = ({
   close,
@@ -48,36 +89,46 @@ export const PackageDialog = ({
 
   return (
     <PackageDialogProvider initial={initial}>
-      <Dialog
-        close={close}
-        header={`${
-          editablePackage === undefined ? 'Create' : 'Edit'
-        } fluid package`}
-        columns={[
-          [
-            <NameField key={'nameField'} />,
-            <DescriptionField key={'descriptionField'} />,
-            <TemplateSelector
-              key={'templateSelector'}
-              packages={packages}
-              componentProperties={componentProperties}
-            />,
-          ],
-          [
-            <ComponentSelector
-              key={'compSelector'}
-              componentProperties={componentProperties}
-            />,
-            <ComponentTable key={'compTable'} />,
-            <ComponentTableSum key={'compSum'} />,
-          ],
-        ]}
-        leftButtons={
-          editablePackage === undefined
-            ? []
-            : [
+      <WideDialog open onClose={close} isDismissable>
+        <Dialog.Header>
+          <Typography
+            variant="h6"
+            color={tokens.colors.infographic.primary__moss_green_100.hex}
+          >
+            {editablePackage === undefined ? 'Create' : 'Edit'} fluid package
+          </Typography>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <FluidPackageForm>
+            <FirstColumn>
+              <NameField />
+              <DescriptionField />
+              <TemplateSelector
+                packages={packages}
+                componentProperties={componentProperties}
+              />
+            </FirstColumn>
+            <SecondColumn>
+              <ComponentSelector componentProperties={componentProperties} />
+              <ComponentTable />
+              <ComponentTableSum />
+            </SecondColumn>
+          </FluidPackageForm>
+          <ButtonRow>
+            <ButtonGroup>
+              <Button variant="outlined" onClick={close}>
+                Cancel
+              </Button>
+              <SaveButton
+                componentProperties={componentProperties}
+                editablePackage={editablePackage}
+                savePackage={savePackage}
+              />
+              <DemoButton />
+            </ButtonGroup>
+            <ButtonGroup>
+              {editablePackage !== undefined && (
                 <Button
-                  key={'delete'}
                   color="danger"
                   variant="outlined"
                   onClick={() => {
@@ -85,23 +136,12 @@ export const PackageDialog = ({
                   }}
                 >
                   Delete
-                </Button>,
-              ]
-        }
-        rightButtons={[
-          <Button key={'cancel'} variant="outlined" onClick={close}>
-            Cancel
-          </Button>,
-          <SaveButton
-            key={'save'}
-            componentProperties={componentProperties}
-            editablePackage={editablePackage}
-            savePackage={savePackage}
-          />,
-          // TODO: Demo button to remove when done testing
-          <DemoButton key={'demo'} />,
-        ]}
-      />
+                </Button>
+              )}
+            </ButtonGroup>
+          </ButtonRow>
+        </Dialog.CustomContent>
+      </WideDialog>
     </PackageDialogProvider>
   )
 }
