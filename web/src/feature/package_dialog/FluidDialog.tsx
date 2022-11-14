@@ -2,18 +2,11 @@ import styled from 'styled-components'
 import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
-import { useEffect } from 'react'
 import { TComponentProperty, TPackage } from '../../types'
 import { demoFeedComponentRatios } from '../../constants'
 import { SaveButton } from './SaveButton'
 import { usePackageDialogContext } from './context/PackageDialogContext'
-import {
-  setDescription,
-  setName,
-  setRatios,
-  setSelected,
-} from './context/actions'
-import { preSelectedComponents } from '../../constants'
+import { setDescription, setName, setRatios } from './context/actions'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
 import { NameField } from './NameField'
@@ -74,24 +67,6 @@ export const FluidDialog = ({
   packages: TPackage[]
 }) => {
   const { dispatch } = usePackageDialogContext()
-
-  const initials = editablePackage
-    ? componentProperties.filter(
-        (option) => editablePackage.components[option.id]
-      )
-    : componentProperties.filter((option) =>
-        preSelectedComponents.includes(option.id)
-      )
-
-  useEffect(() => {
-    if (editablePackage !== undefined) {
-      dispatch(setName(editablePackage.name))
-      dispatch(setDescription(editablePackage.description))
-      dispatch(setRatios(editablePackage.components))
-    }
-    dispatch(setSelected(initials))
-    console.log('useEffect')
-  }, [])
 
   return (
     <WideDialog open onClose={close} isDismissable>

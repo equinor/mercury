@@ -9,11 +9,11 @@ const PackageDialogContext = createContext<{
   dispatch: Dispatch
 }>({ state: {} as TPackageDialog, dispatch: () => ({}) })
 
-export function PackageDialogProvider(props: { children: React.ReactNode }) {
-  const [state, dispatch] = useReducer(
-    packageDialogReducer,
-    initialPackageDialog
-  )
+export function PackageDialogProvider(props: {
+  children: React.ReactNode
+  initial: TPackageDialog
+}) {
+  const [state, dispatch] = useReducer(packageDialogReducer, props.initial)
 
   return (
     <PackageDialogContext.Provider value={{ state, dispatch }}>
@@ -24,12 +24,4 @@ export function PackageDialogProvider(props: { children: React.ReactNode }) {
 
 export function usePackageDialogContext() {
   return useContext(PackageDialogContext)
-}
-
-const initialPackageDialog: TPackageDialog = {
-  name: '',
-  description: '',
-  ratios: {},
-  areValid: {},
-  selected: [],
 }
