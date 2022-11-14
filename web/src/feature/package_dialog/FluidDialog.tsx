@@ -1,16 +1,16 @@
 import { Button } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
-import { TComponentProperty, TPackage } from '../../types'
-import { demoFeedComponentRatios } from '../../constants'
+import { TComponentProperty, TPackage, TPackageDialog } from '../../types'
 import { SaveButton } from './SaveButton'
-import { usePackageDialogContext } from './context/PackageDialogContext'
-import { setDescription, setName, setRatios } from './context/actions'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
 import { NameField } from './NameField'
 import { DescriptionField } from './DescriptionField'
 import { TemplateSelector } from './TemplateSelector'
 import { Dialog } from '../../common/Dialog'
+import { DemoButton } from './DemoButton'
+import { PackageDialogProvider } from './context/PackageDialogContext'
+import { preSelectedComponents } from '../../constants'
 
 export const FluidDialog = ({
   close,
@@ -25,71 +25,83 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  const { dispatch } = usePackageDialogContext()
+  const initial: TPackageDialog =
+    editablePackage === undefined
+      ? {
+          name: '',
+          description: '',
+          ratios: {},
+          areValid: {},
+          selected: componentProperties.filter((option) =>
+            preSelectedComponents.includes(option.id)
+          ),
+        }
+      : {
+          name: editablePackage.name,
+          description: editablePackage.description,
+          ratios: editablePackage.components,
+          areValid: {},
+          selected: componentProperties.filter(
+            (option) => editablePackage.components[option.id]
+          ),
+        }
 
   return (
-    <Dialog
-      close={close}
-      header={`${
-        editablePackage === undefined ? 'Create' : 'Edit'
-      } fluid package`}
-      columns={[
-        [
-          <NameField key={'nameField'} />,
-          <DescriptionField key={'descriptionField'} />,
-          <TemplateSelector
-            key={'templateSelector'}
-            packages={packages}
+    <PackageDialogProvider initial={initial}>
+      <Dialog
+        close={close}
+        header={`${
+          editablePackage === undefined ? 'Create' : 'Edit'
+        } fluid package`}
+        columns={[
+          [
+            <NameField key={'nameField'} />,
+            <DescriptionField key={'descriptionField'} />,
+            <TemplateSelector
+              key={'templateSelector'}
+              packages={packages}
+              componentProperties={componentProperties}
+            />,
+          ],
+          [
+            <ComponentSelector
+              key={'compSelector'}
+              componentProperties={componentProperties}
+            />,
+            <ComponentTable key={'compTable'} />,
+            <ComponentTableSum key={'compSum'} />,
+          ],
+        ]}
+        leftButtons={
+          editablePackage === undefined
+            ? []
+            : [
+                <Button
+                  key={'delete'}
+                  color="danger"
+                  variant="outlined"
+                  onClick={() => {
+                    savePackage()
+                  }}
+                >
+                  Delete
+                </Button>,
+              ]
+        }
+        rightButtons={[
+          <Button key={'cancel'} variant="outlined" onClick={close}>
+            Cancel
+          </Button>,
+          <SaveButton
+            key={'save'}
             componentProperties={componentProperties}
+            editablePackage={editablePackage}
+            savePackage={savePackage}
           />,
-        ],
-        [
-          <ComponentSelector
-            key={'compSelector'}
-            componentProperties={componentProperties}
-          />,
-          <ComponentTable key={'compTable'} />,
-          <ComponentTableSum key={'compSum'} />,
-        ],
-      ]}
-      leftButtons={
-        editablePackage === undefined
-          ? []
-          : [
-              <Button
-                key={'delete'}
-                color="danger"
-                variant="outlined"
-                onClick={() => {
-                  savePackage()
-                }}
-              >
-                Delete
-              </Button>,
-            ]
-      }
-      rightButtons={[
-        <Button key={'cancel'} variant="outlined" onClick={close}>
-          Cancel
-        </Button>,
-        <SaveButton
-          key={'save'}
-          componentProperties={componentProperties}
-          editablePackage={editablePackage}
-          savePackage={savePackage}
-        />,
-        <Button
-          key={'demo'}
           // TODO: Demo button to remove when done testing
-          onClick={() => {
-            dispatch(setName('Demo data'))
-            dispatch(setDescription(''))
-            dispatch(setRatios(demoFeedComponentRatios))
-          }}
-        >
-          Demo data
-        </Button>,
-      ]}
-    />
+          <DemoButton key={'demo'} />,
+        ]}
+      />
+    </PackageDialogProvider>
   )
 }

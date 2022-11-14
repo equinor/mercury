@@ -10,8 +10,6 @@ import { FeedFlowInput } from './FeedFlowInput'
 import { TComponentProperty, TPackage, TResults } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
-import { PackageDialogProvider } from '../package_dialog/context/PackageDialogContext'
-import { preSelectedComponents } from '../../constants'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -157,45 +155,21 @@ export const CalculationInput = ({
         </Form>
       </Card>
       {isNewOpen && (
-        <PackageDialogProvider
-          initial={{
-            name: '',
-            description: '',
-            ratios: {},
-            areValid: {},
-            selected: componentProperties.filter((option) =>
-              preSelectedComponents.includes(option.id)
-            ),
-          }}
-        >
-          <FluidDialog
-            close={() => setIsNewOpen(false)}
-            componentProperties={componentProperties}
-            savePackage={(x) => savePackage('new', x)}
-            packages={packages}
-          />
-        </PackageDialogProvider>
+        <FluidDialog
+          close={() => setIsNewOpen(false)}
+          componentProperties={componentProperties}
+          savePackage={(x) => savePackage('new', x)}
+          packages={packages}
+        />
       )}
       {isEditOpen && (
-        <PackageDialogProvider
-          initial={{
-            name: selectedPackage?.name ?? '',
-            description: selectedPackage?.description ?? '',
-            ratios: selectedPackage?.components ?? {},
-            selected: componentProperties.filter(
-              (option) => selectedPackage?.components[option.id]
-            ),
-            areValid: {},
-          }}
-        >
-          <FluidDialog
-            close={() => setIsEditOpen(false)}
-            componentProperties={componentProperties}
-            editablePackage={selectedPackage}
-            savePackage={(x) => savePackage('edit', x)}
-            packages={packages}
-          />
-        </PackageDialogProvider>
+        <FluidDialog
+          close={() => setIsEditOpen(false)}
+          componentProperties={componentProperties}
+          editablePackage={selectedPackage}
+          savePackage={(x) => savePackage('edit', x)}
+          packages={packages}
+        />
       )}
     </>
   )
