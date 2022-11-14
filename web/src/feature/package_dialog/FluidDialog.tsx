@@ -128,7 +128,6 @@ export const FluidDialog = ({
               componentProperties={componentProperties}
               editablePackage={editablePackage}
               savePackage={savePackage}
-              close={close}
             />
             <Button
               // TODO: Demo button to remove when done testing
@@ -147,7 +146,6 @@ export const FluidDialog = ({
               variant="outlined"
               onClick={() => {
                 savePackage()
-                close()
               }}
             >
               Delete

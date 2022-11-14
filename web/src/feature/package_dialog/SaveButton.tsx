@@ -20,7 +20,6 @@ function computeFeedMolecularWeight(
 export const SaveButton = (props: {
   componentProperties: TComponentProperty[]
   editablePackage?: TPackage
-  close: () => void
   savePackage: (x?: TPackage) => void
 }) => {
   const { state } = usePackageDialogContext()
@@ -58,7 +57,6 @@ export const SaveButton = (props: {
             state.ratios
           ),
         })
-        props.close()
       }}
       disabled={!isSaveable()}
     >
