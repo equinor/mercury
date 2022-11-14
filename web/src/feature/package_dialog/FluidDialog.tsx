@@ -1,11 +1,5 @@
 import styled from 'styled-components'
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  TextField,
-  Typography,
-} from '@equinor/eds-core-react'
+import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
 import { useEffect } from 'react'
@@ -22,6 +16,9 @@ import {
 import { preSelectedComponents } from '../../constants'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
+import { NameField } from './NameField'
+import { DescriptionField } from './DescriptionField'
+import { TemplateSelector } from './TemplateSelector'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -76,10 +73,12 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  const { state, dispatch } = usePackageDialogContext()
+  const { dispatch } = usePackageDialogContext()
 
-  const initials = Object.keys(state.ratios).length
-    ? componentProperties.filter((option) => state.ratios[option.id])
+  const initials = editablePackage
+    ? componentProperties.filter(
+        (option) => editablePackage.components[option.id]
+      )
     : componentProperties.filter((option) =>
         preSelectedComponents.includes(option.id)
       )
@@ -107,41 +106,11 @@ export const FluidDialog = ({
       <Dialog.CustomContent>
         <FluidPackageForm>
           <FirstColumn>
-            <TextField
-              id="fluid-package-name"
-              placeholder="Fluid package"
-              label="Name"
-              value={state.name}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setName(event.target.value))
-              }
-            />
-            <TextField
-              id="fluid-package-description"
-              placeholder="Description"
-              label="Description"
-              value={state.description}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                dispatch(setDescription(event.target.value))
-              }
-              multiline
-              rows={6}
-            />
-            <Autocomplete
-              label="Template"
-              options={packages}
-              optionLabel={(option) => option.name}
-              onOptionsChange={(changes) => {
-                dispatch(setRatios(changes.selectedItems[0].components))
-                dispatch(
-                  setSelected(
-                    componentProperties.filter(
-                      (x) => changes.selectedItems[0].components[x.id]
-                    )
-                  )
-                )
-              }}
-              autoWidth
+            <NameField />
+            <DescriptionField />
+            <TemplateSelector
+              packages={packages}
+              componentProperties={componentProperties}
             />
           </FirstColumn>
           <SecondColumn>
