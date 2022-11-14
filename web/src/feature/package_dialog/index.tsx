@@ -12,7 +12,7 @@ import { DemoButton } from './DemoButton'
 import { PackageDialogProvider } from './context/PackageDialogContext'
 import { preSelectedComponents } from '../../constants'
 
-export const FluidDialog = ({
+export const PackageDialog = ({
   close,
   componentProperties,
   editablePackage,
