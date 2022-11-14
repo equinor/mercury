@@ -1,7 +1,7 @@
 import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
 import { Card } from '../../common/Card'
 import styled from 'styled-components'
-import { PackageDialog } from '../package_dialog'
+import { FluidDialog } from '../package_dialog/FluidDialog'
 import { useState } from 'react'
 import { MultiflashResponse } from '../../api/generated'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -155,7 +155,7 @@ export const CalculationInput = ({
         </Form>
       </Card>
       {isNewOpen && (
-        <PackageDialog
+        <FluidDialog
           close={() => setIsNewOpen(false)}
           componentProperties={componentProperties}
           savePackage={(x) => savePackage('new', x)}
@@ -163,7 +163,7 @@ export const CalculationInput = ({
         />
       )}
       {isEditOpen && (
-        <PackageDialog
+        <FluidDialog
           close={() => setIsEditOpen(false)}
           componentProperties={componentProperties}
           editablePackage={selectedPackage}

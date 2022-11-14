@@ -53,7 +53,7 @@ const ButtonGroup = styled.div`
   gap: 16px;
 `
 
-export const PackageDialog = ({
+export const FluidDialog = ({
   close,
   componentProperties,
   editablePackage,
