@@ -4,7 +4,7 @@ export class MercuryAPI extends MercuryApi {
   constructor(token?: string) {
     const configuration = new Configuration({
       accessToken: token,
-      basePath: `${window.location.protocol}//${window.location.hostname}/`,
+      basePath: `${window.location.protocol}//${window.location.hostname}/api`,
     })
     super(configuration)
   }

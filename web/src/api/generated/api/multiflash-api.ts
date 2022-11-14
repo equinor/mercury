@@ -42,7 +42,7 @@ export const MultiflashApiAxiosParamCreator = function (configuration?: Configur
         computeMultiflash: async (multiflash: Multiflash, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'multiflash' is not null or undefined
             assertParamExists('computeMultiflash', 'multiflash', multiflash)
-            const localVarPath = `/api/v1/multiflash`;
+            const localVarPath = `/multiflash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

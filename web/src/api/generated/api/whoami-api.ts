@@ -33,7 +33,7 @@ export const WhoamiApiAxiosParamCreator = function (configuration?: Configuratio
          * @throws {RequiredError}
          */
         whoami: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/whoami/`;
+            const localVarPath = `/whoami/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

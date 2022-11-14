@@ -44,7 +44,7 @@ export const MercuryApiAxiosParamCreator = function (configuration?: Configurati
         computeMultiflash: async (multiflash: Multiflash, options: any = {}): Promise<RequestArgs> => {
             // verify required parameter 'multiflash' is not null or undefined
             assertParamExists('computeMultiflash', 'multiflash', multiflash)
-            const localVarPath = `/api/v1/multiflash`;
+            const localVarPath = `/multiflash`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -81,7 +81,7 @@ export const MercuryApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         getComponents: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/components`;
+            const localVarPath = `/components`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -115,7 +115,7 @@ export const MercuryApiAxiosParamCreator = function (configuration?: Configurati
          * @throws {RequiredError}
          */
         whoami: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/whoami/`;
+            const localVarPath = `/whoami/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

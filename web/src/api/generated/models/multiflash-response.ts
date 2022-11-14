@@ -33,7 +33,7 @@ export interface MultiflashResponse {
      */
     componentFractions: { [key: string]: Array<number>; };
     /**
-     * 
+     * Ratio of components in the feed (guaranteed to sum to 1)
      * @type {{ [key: string]: number; }}
      * @memberof MultiflashResponse
      */
