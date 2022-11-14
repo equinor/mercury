@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-import { Button, Dialog, Typography } from '@equinor/eds-core-react'
-import { tokens } from '@equinor/eds-tokens'
+import { Button } from '@equinor/eds-core-react'
 import { ComponentSelector } from './ComponentSelector'
 import { TComponentProperty, TPackage } from '../../types'
 import { demoFeedComponentRatios } from '../../constants'
@@ -12,46 +10,7 @@ import { ComponentTableSum } from './ComponentTableSum'
 import { NameField } from './NameField'
 import { DescriptionField } from './DescriptionField'
 import { TemplateSelector } from './TemplateSelector'
-
-const WideDialog = styled(Dialog)`
-  width: auto;
-  @media (min-width: 900px) {
-    min-width: 800px;
-  }
-`
-
-const FluidPackageForm = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  gap: 30px;
-  justify-content: space-between;
-`
-
-const FirstColumn = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 30px;
-  width: 40%;
-`
-
-const ButtonRow = styled.div`
-  display: flex;
-  flex-flow: row-reverse nowrap;
-  justify-content: space-between;
-  padding-top: 16px;
-`
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 16px;
-`
-
-const SecondColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 4px;
-  max-width: 420px;
-`
+import { Dialog } from '../../common/Dialog'
 
 export const FluidDialog = ({
   close,
@@ -69,65 +28,68 @@ export const FluidDialog = ({
   const { dispatch } = usePackageDialogContext()
 
   return (
-    <WideDialog open onClose={close} isDismissable>
-      <Dialog.Header>
-        <Typography
-          variant="h6"
-          color={tokens.colors.infographic.primary__moss_green_100.hex}
+    <Dialog
+      close={close}
+      header={`${
+        editablePackage === undefined ? 'Create' : 'Edit'
+      } fluid package`}
+      columns={[
+        [
+          <NameField key={'nameField'} />,
+          <DescriptionField key={'descriptionField'} />,
+          <TemplateSelector
+            key={'templateSelector'}
+            packages={packages}
+            componentProperties={componentProperties}
+          />,
+        ],
+        [
+          <ComponentSelector
+            key={'compSelector'}
+            componentProperties={componentProperties}
+          />,
+          <ComponentTable key={'compTable'} />,
+          <ComponentTableSum key={'compSum'} />,
+        ],
+      ]}
+      leftButtons={
+        editablePackage === undefined
+          ? []
+          : [
+              <Button
+                key={'delete'}
+                color="danger"
+                variant="outlined"
+                onClick={() => {
+                  savePackage()
+                }}
+              >
+                Delete
+              </Button>,
+            ]
+      }
+      rightButtons={[
+        <Button key={'cancel'} variant="outlined" onClick={close}>
+          Cancel
+        </Button>,
+        <SaveButton
+          key={'save'}
+          componentProperties={componentProperties}
+          editablePackage={editablePackage}
+          savePackage={savePackage}
+        />,
+        <Button
+          key={'demo'}
+          // TODO: Demo button to remove when done testing
+          onClick={() => {
+            dispatch(setName('Demo data'))
+            dispatch(setDescription(''))
+            dispatch(setRatios(demoFeedComponentRatios))
+          }}
         >
-          {`${editablePackage === undefined ? 'Create' : 'Edit'} fluid package`}
-        </Typography>
-      </Dialog.Header>
-      <Dialog.CustomContent>
-        <FluidPackageForm>
-          <FirstColumn>
-            <NameField />
-            <DescriptionField />
-            <TemplateSelector
-              packages={packages}
-              componentProperties={componentProperties}
-            />
-          </FirstColumn>
-          <SecondColumn>
-            <ComponentSelector componentProperties={componentProperties} />
-            <ComponentTable />
-            <ComponentTableSum />
-          </SecondColumn>
-        </FluidPackageForm>
-        <ButtonRow>
-          <ButtonGroup>
-            <Button variant="outlined" onClick={close}>
-              Cancel
-            </Button>
-            <SaveButton
-              componentProperties={componentProperties}
-              editablePackage={editablePackage}
-              savePackage={savePackage}
-            />
-            <Button
-              // TODO: Demo button to remove when done testing
-              onClick={() => {
-                dispatch(setName('Demo data'))
-                dispatch(setDescription(''))
-                dispatch(setRatios(demoFeedComponentRatios))
-              }}
-            >
-              Demo data
-            </Button>
-          </ButtonGroup>
-          {editablePackage !== undefined && (
-            <Button
-              color="danger"
-              variant="outlined"
-              onClick={() => {
-                savePackage()
-              }}
-            >
-              Delete
-            </Button>
-          )}
-        </ButtonRow>
-      </Dialog.CustomContent>
-    </WideDialog>
+          Demo data
+        </Button>,
+      ]}
+    />
   )
 }
