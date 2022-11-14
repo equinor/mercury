@@ -5,7 +5,7 @@ from entities.ComponentResponse import ComponentProperties
 
 
 def test_components_feature(test_app):
-    response = test_app.get("/api/v1/components")
+    response = test_app.get("/components")
     results = response.json()
     components = results["components"]
     # using sets as sets do not care about ordering

@@ -13,7 +13,7 @@ from test_data.multiflash_data import MultiflashInput, MultiflashOutput
     ],
 )
 def test_compute_multiflash_feature(test_app, multiflash_input: dict, multiflash_expected_output: dict):
-    response = test_app.post("/api/v1/multiflash", json=multiflash_input)
+    response = test_app.post("/multiflash", json=multiflash_input)
     results = response.json()
     computed_phase_values = results["phaseValues"]
     computed_component_fractions = results["componentFractions"]

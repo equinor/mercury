@@ -16,10 +16,6 @@ from features.metrics import metrics_feature
 from features.multiflash import multiflash_feature
 from features.whoami import whoami_feature
 
-server_root = "/api"
-version = "v1"
-prefix = f"{server_root}/{version}"
-
 
 def create_app() -> FastAPI:
     public_routes = APIRouter()
@@ -31,8 +27,8 @@ def create_app() -> FastAPI:
     authenticated_routes.include_router(multiflash_feature.router)
     authenticated_routes.include_router(component_feature.router)
     app = FastAPI(title="Mercury", description="")
-    app.include_router(authenticated_routes, prefix=prefix, dependencies=[Security(auth_with_jwt)])
-    app.include_router(public_routes, prefix=prefix)
+    app.include_router(authenticated_routes, dependencies=[Security(auth_with_jwt)])
+    app.include_router(public_routes)
 
     @app.middleware("http")
     async def add_process_time_header(request: Request, call_next: Callable) -> Response:

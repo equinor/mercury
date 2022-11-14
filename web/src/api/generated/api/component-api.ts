@@ -35,7 +35,7 @@ export const ComponentApiAxiosParamCreator = function (configuration?: Configura
          * @throws {RequiredError}
          */
         getComponents: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/v1/components`;
+            const localVarPath = `/components`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;

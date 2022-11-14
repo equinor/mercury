@@ -21,19 +21,19 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 /**
- * HealthCheckApi - axios parameter creator
+ * MetricsApi - axios parameter creator
  * @export
  */
-export const HealthCheckApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MetricsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get
+         * @summary Collect application metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getHealthCheckGet: async (options: any = {}): Promise<RequestArgs> => {
-            const localVarPath = `/health-check`;
+        getMetricsGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/metrics`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -60,59 +60,59 @@ export const HealthCheckApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * HealthCheckApi - functional programming interface
+ * MetricsApi - functional programming interface
  * @export
  */
-export const HealthCheckApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = HealthCheckApiAxiosParamCreator(configuration)
+export const MetricsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MetricsApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Get
+         * @summary Collect application metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getHealthCheckGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getHealthCheckGet(options);
+        async getMetricsGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getMetricsGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * HealthCheckApi - factory interface
+ * MetricsApi - factory interface
  * @export
  */
-export const HealthCheckApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = HealthCheckApiFp(configuration)
+export const MetricsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MetricsApiFp(configuration)
     return {
         /**
          * 
-         * @summary Get
+         * @summary Collect application metrics
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getHealthCheckGet(options?: any): AxiosPromise<string> {
-            return localVarFp.getHealthCheckGet(options).then((request) => request(axios, basePath));
+        getMetricsGet(options?: any): AxiosPromise<string> {
+            return localVarFp.getMetricsGet(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * HealthCheckApi - object-oriented interface
+ * MetricsApi - object-oriented interface
  * @export
- * @class HealthCheckApi
+ * @class MetricsApi
  * @extends {BaseAPI}
  */
-export class HealthCheckApi extends BaseAPI {
+export class MetricsApi extends BaseAPI {
     /**
      * 
-     * @summary Get
+     * @summary Collect application metrics
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof HealthCheckApi
+     * @memberof MetricsApi
      */
-    public getHealthCheckGet(options?: any) {
-        return HealthCheckApiFp(this.configuration).getHealthCheckGet(options).then((request) => request(this.axios, this.basePath));
+    public getMetricsGet(options?: any) {
+        return MetricsApiFp(this.configuration).getMetricsGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
