@@ -18,9 +18,6 @@ export const ComponentTable = (): JSX.Element => {
     id: string
   ) {
     const ratio = event.target.value
-    const newIsRatioValid = { ...state.isRatioValid }
-    newIsRatioValid[id] = event.target.checkValidity() && !isNaN(Number(ratio))
-    dispatch({ type: 'setIsRatioValid', value: newIsRatioValid })
     const newRatios = { ...state.ratios }
     if (ratio === '') {
       delete newRatios[id]
@@ -40,7 +37,6 @@ export const ComponentTable = (): JSX.Element => {
           <Input
             id={`${component.chemicalFormula}-input`}
             value={state.ratios[component.id] ?? ''}
-            pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
             variant={
               state.isRatioValid[component.id] === false ||
               (component.id === '5' && !(Number(state.ratios['5']) > 0))

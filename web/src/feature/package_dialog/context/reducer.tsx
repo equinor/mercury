@@ -16,15 +16,17 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
       }
     }
     case 'setRatios': {
+      const regex = /^\d+(\.\d+)?([eE][-+]?\d+)?$/
+      const valids = Object.fromEntries(
+        Object.entries(action.value).map(([key, ratio]) => [
+          key,
+          regex.test(ratio) && !isNaN(Number(ratio)),
+        ])
+      )
       return {
         ...state,
         ratios: action.value,
-      }
-    }
-    case 'setIsRatioValid': {
-      return {
-        ...state,
-        isRatioValid: action.value,
+        isRatioValid: valids,
       }
     }
     case 'setSelectedComponents': {

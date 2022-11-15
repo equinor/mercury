@@ -10,7 +10,6 @@ export type Action =
   | { type: 'setName'; value: string }
   | { type: 'setDescription'; value: string }
   | { type: 'setRatios'; value: TComponentRatios }
-  | { type: 'setIsRatioValid'; value: { [id: string]: boolean } }
   | { type: 'setSelectedComponents'; value: TComponentProperty[] }
 
 const PackageDialogContext = createContext<{

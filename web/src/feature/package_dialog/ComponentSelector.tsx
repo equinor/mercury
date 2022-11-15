@@ -19,14 +19,6 @@ export const ComponentSelector = ({
             )
           ),
         })
-        dispatch({
-          type: 'setIsRatioValid',
-          value: Object.fromEntries(
-            Object.entries(state.isRatioValid).filter(([compId]) =>
-              selectedItems.find((x) => x.id === compId)
-            )
-          ),
-        })
         dispatch({ type: 'setSelectedComponents', value: selectedItems })
       }}
       label="Add components"
