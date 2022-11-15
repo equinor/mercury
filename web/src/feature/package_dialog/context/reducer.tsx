@@ -21,10 +21,10 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
         ratios: action.value,
       }
     }
-    case 'setAreValid': {
+    case 'setAreRatioValid': {
       return {
         ...state,
-        areValid: action.value,
+        areRatioValid: action.value,
       }
     }
     case 'setSelected': {

@@ -22,7 +22,7 @@ export type TPackageDialog = {
   name: string
   description: string
   ratios: TComponentRatios
-  areValid: {
+  areRatioValid: {
     [id: string]: boolean
   }
   selected: TComponentProperty[]

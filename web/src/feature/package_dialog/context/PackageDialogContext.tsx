@@ -10,7 +10,7 @@ export type Action =
   | { type: 'setName'; value: string }
   | { type: 'setDescription'; value: string }
   | { type: 'setRatios'; value: TComponentRatios }
-  | { type: 'setAreValid'; value: { [id: string]: boolean } }
+  | { type: 'setAreRatioValid'; value: { [id: string]: boolean } }
   | { type: 'setSelected'; value: TComponentProperty[] }
 
 type Dispatch = (action: Action) => void
