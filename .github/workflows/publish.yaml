@@ -1,26 +1,30 @@
 name: "Publish container images"
 on:
   workflow_dispatch:
-  workflow_call:  # Workflow is meant to be called from another workflow, with the image tag as input
+  workflow_call: # Workflow is meant to be called from another workflow, with the image tag as input
     inputs:
       image-tag:
-        description: 'Which tag to set for the produced docker images'
-        default: 'latest'
+        description: "Which tag to set for the produced docker images"
+        default: "latest"
         required: true
         type: string
       oauth-redirect-url:
-        description: 'Redirect url for oauth. Should be the public url to access the web app'
-        default: 'https://proxy-mercury-dev.radix.equinor.com'
+        description: "Redirect url for oauth. Should be the public url to access the web app"
+        default: "https://proxy-mercury-dev.radix.equinor.com"
         required: true
+        type: string
+      release-tag:
+        description: "GitHub release tag, if relevant"
+        default: ""
+        required: false
         type: string
     secrets:
       CR_SECRET:
-        description: 'Secret to authenticate if using an other container registry than Github'
+        description: "Secret to authenticate if using an other container registry than Github"
         required: false
       LIBHG_REPO_DEPLOY_KEY:
-        description: 'Deploy key for cloning libhg repository'
+        description: "Deploy key for cloning libhg repository"
         required: true
-
 
 env:
   IMAGE_REGISTRY: ghcr.io
@@ -45,7 +49,9 @@ jobs:
           --tag ${NGINX_IMAGE} \
           ./nginx
           docker tag $NGINX_IMAGE $NGINX_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $NGINX_IMAGE $NGINX_IMAGE:${{ inputs.release-tag }}; fi;
           docker push $NGINX_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker push $NGINX_IMAGE:${{ inputs.release-tag }}; fi;
 
   build-and-publish-web-master:
     runs-on: ubuntu-latest
@@ -66,7 +72,9 @@ jobs:
           --tag ${WEB_IMAGE} \
           ./web
           docker tag $WEB_IMAGE $WEB_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $WEB_IMAGE $WEB_IMAGE:${{ inputs.release-tag }}; fi;
           docker push $WEB_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker push $WEB_IMAGE:${{ inputs.release-tag }}; fi;
 
   build-and-publish-api-master:
     runs-on: ubuntu-latest
@@ -86,4 +94,6 @@ jobs:
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
           docker tag $API_IMAGE $API_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $API_IMAGE $API_IMAGE:${{ inputs.release-tag }}; fi;
           docker push $API_IMAGE:${{ inputs.image-tag }}
+          if [ -n "${{ inputs.release-tag }}" ]; then docker push $API_IMAGE:${{ inputs.release-tag }}; fi;

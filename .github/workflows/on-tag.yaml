@@ -1,9 +1,9 @@
-name: "New tag"
+name: "On tag: release main to prod"
 on:
   workflow_dispatch:
   push:
     tags:
-      - v*
+      - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
   tests:
@@ -11,36 +11,31 @@ jobs:
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
-  publish-prod-tag:
-    needs: tests
-    uses: ./.github/workflows/publish.yaml
-    with:
-      image-tag: production
-      oauth-redirect-url: https://proxy-mercury-dev.radix.equinor.com
-
   set-tag-ref:
     runs-on: ubuntu-latest
     outputs:
-      tag-ref: ${{ steps.tag-ref.outputs.tag-ref }}
-      oauth-redirect-url: https://proxy-mercury-dev.radix.equinor.com
+      tag-ref: ${{ steps.get-tag-ref.outputs.tag-ref }}
     steps:
       - uses: actions/checkout@master
-      - id: create-ref
+      - id: get-tag-ref
         run: |
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
-          echo "::set-output name=tag-ref::TAG_REF"
+          echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
 
-  publish-tag-ref:
+  publish-image:
     needs: [set-tag-ref, tests]
     uses: ./.github/workflows/publish.yaml
     with:
-      image-tag: ${{ needs.set-tag-ref.outputs.tag-ref }}
-      oauth-redirect-url: https://proxy-mercury-dev.radix.equinor.com
+      image-tag: production
+      release-tag: ${{ needs.set-tag-ref.outputs.tag-ref }}
+      oauth-redirect-url: https://proxy-mercury-prod.radix.equinor.com
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   deploy:
-    needs: publish-prod-tag
+    needs: publish-image
     uses: ./.github/workflows/deploy.yaml
     with:
-      radix-environment: 'prod'
+      radix-environment: "prod"
     secrets:
       APP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.APP_SERVICE_ACCOUNT_TOKEN }}
