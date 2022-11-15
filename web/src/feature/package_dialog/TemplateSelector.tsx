@@ -17,7 +17,7 @@ export const TemplateSelector = (props: {
         const template = changes.selectedItems[0]
         dispatch({ type: 'setRatios', value: template?.components ?? {} })
         dispatch({
-          type: 'setSelected',
+          type: 'setSelectedComponents',
           value: template
             ? props.componentProperties.filter((x) => template.components[x.id])
             : props.componentProperties.filter((option) =>

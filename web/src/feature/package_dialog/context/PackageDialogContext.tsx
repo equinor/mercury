@@ -11,12 +11,11 @@ export type Action =
   | { type: 'setDescription'; value: string }
   | { type: 'setRatios'; value: TComponentRatios }
   | { type: 'setAreRatioValid'; value: { [id: string]: boolean } }
-  | { type: 'setSelected'; value: TComponentProperty[] }
+  | { type: 'setSelectedComponents'; value: TComponentProperty[] }
 
-type Dispatch = (action: Action) => void
 const PackageDialogContext = createContext<{
   state: TPackageDialog
-  dispatch: Dispatch
+  dispatch: (action: Action) => void
 }>({ state: {} as TPackageDialog, dispatch: () => ({}) })
 
 export function PackageDialogProvider(props: {

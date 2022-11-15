@@ -73,7 +73,7 @@ export const FluidDialog = ({
           description: '',
           ratios: {},
           areRatioValid: {},
-          selected: componentProperties.filter((option) =>
+          selectedComponents: componentProperties.filter((option) =>
             preSelectedComponents.includes(option.id)
           ),
         }
@@ -82,7 +82,7 @@ export const FluidDialog = ({
           description: editablePackage.description,
           ratios: editablePackage.components,
           areRatioValid: {},
-          selected: componentProperties.filter(
+          selectedComponents: componentProperties.filter(
             (option) => editablePackage.components[option.id]
           ),
         }

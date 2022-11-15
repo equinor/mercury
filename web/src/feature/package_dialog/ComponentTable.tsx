@@ -31,7 +31,7 @@ export const ComponentTable = (): JSX.Element => {
   }
 
   function createTableRows() {
-    return state.selected.map((component, rowIndex) => (
+    return state.selectedComponents.map((component, rowIndex) => (
       <Table.Row key={rowIndex}>
         <Table.Cell
           data-testid={`Component-${rowIndex}`}

@@ -27,12 +27,12 @@ export const ComponentSelector = ({
             )
           ),
         })
-        dispatch({ type: 'setSelected', value: selectedItems })
+        dispatch({ type: 'setSelectedComponents', value: selectedItems })
       }}
       label="Add components"
       multiple
       options={componentProperties}
-      selectedOptions={state.selected}
+      selectedOptions={state.selectedComponents}
       optionLabel={(option) => `${option.altName} (${option.chemicalFormula})`}
     />
   )
