@@ -26,7 +26,7 @@ export const SaveButton = (props: {
   const isSaveable = (): boolean => {
     const isValidPackage =
       state.name.length > 0 &&
-      Object.values(state.areRatioValid).every((x) => x) &&
+      Object.values(state.isRatioValid).every((x) => x) &&
       Object.values(state.ratios).some((x) => Number(x) > 0) &&
       Number(state.ratios['5']) > 0
     if (props.editablePackage) {

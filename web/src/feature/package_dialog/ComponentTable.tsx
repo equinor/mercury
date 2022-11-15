@@ -18,9 +18,9 @@ export const ComponentTable = (): JSX.Element => {
     id: string
   ) {
     const ratio = event.target.value
-    const newAreRatioValid = { ...state.areRatioValid }
-    newAreRatioValid[id] = event.target.checkValidity() && !isNaN(Number(ratio))
-    dispatch({ type: 'setAreRatioValid', value: newAreRatioValid })
+    const newIsRatioValid = { ...state.isRatioValid }
+    newIsRatioValid[id] = event.target.checkValidity() && !isNaN(Number(ratio))
+    dispatch({ type: 'setIsRatioValid', value: newIsRatioValid })
     const newRatios = { ...state.ratios }
     if (ratio === '') {
       delete newRatios[id]
@@ -42,7 +42,7 @@ export const ComponentTable = (): JSX.Element => {
             value={state.ratios[component.id] ?? ''}
             pattern="^\d+(\.\d+)?([eE][-+]?\d+)?$"
             variant={
-              state.areRatioValid[component.id] === false ||
+              state.isRatioValid[component.id] === false ||
               (component.id === '5' && !(Number(state.ratios['5']) > 0))
                 ? 'warning'
                 : undefined

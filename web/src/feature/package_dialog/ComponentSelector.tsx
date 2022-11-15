@@ -20,9 +20,9 @@ export const ComponentSelector = ({
           ),
         })
         dispatch({
-          type: 'setAreRatioValid',
+          type: 'setIsRatioValid',
           value: Object.fromEntries(
-            Object.entries(state.areRatioValid).filter(([compId]) =>
+            Object.entries(state.isRatioValid).filter(([compId]) =>
               selectedItems.find((x) => x.id === compId)
             )
           ),
