@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
 import { usePackageDialogContext } from './context/PackageDialogContext'
-import { setAreValid, setRatios } from './context/actions'
 
 const ComponentTableContainer = styled.div`
   display: flex;
@@ -22,14 +21,14 @@ export const ComponentTable = (): JSX.Element => {
     const newRatiosAreValid = { ...state.areValid }
     newRatiosAreValid[id] =
       event.target.checkValidity() && !isNaN(Number(ratio))
-    dispatch(setAreValid(newRatiosAreValid))
+    dispatch({ type: 'setAreValid', value: newRatiosAreValid })
     const newRatios = { ...state.ratios }
     if (ratio === '') {
       delete newRatios[id]
     } else {
       newRatios[id] = ratio
     }
-    dispatch(setRatios(newRatios))
+    dispatch({ type: 'setRatios', value: newRatios })
   }
 
   function createTableRows() {

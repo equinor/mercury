@@ -1,6 +1,6 @@
 import { Autocomplete } from '@equinor/eds-core-react'
+import { preSelectedComponents } from '../../constants'
 import { TComponentProperty, TPackage } from '../../types'
-import { setRatios, setSelected } from './context/actions'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 export const TemplateSelector = (props: {
@@ -14,14 +14,16 @@ export const TemplateSelector = (props: {
       options={props.packages}
       optionLabel={(option) => option.name}
       onOptionsChange={(changes) => {
-        dispatch(setRatios(changes.selectedItems[0].components))
-        dispatch(
-          setSelected(
-            props.componentProperties.filter(
-              (x) => changes.selectedItems[0].components[x.id]
-            )
-          )
-        )
+        const template = changes.selectedItems[0]
+        dispatch({ type: 'setRatios', value: template?.components ?? {} })
+        dispatch({
+          type: 'setSelected',
+          value: template
+            ? props.componentProperties.filter((x) => template.components[x.id])
+            : props.componentProperties.filter((option) =>
+                preSelectedComponents.includes(option.id)
+              ),
+        })
       }}
       autoWidth
     />

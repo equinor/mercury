@@ -1,5 +1,4 @@
 import { TextField } from '@equinor/eds-core-react'
-import { setName } from './context/actions'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 export const NameField = () => {
@@ -11,7 +10,7 @@ export const NameField = () => {
       label="Name"
       value={state.name}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-        dispatch(setName(event.target.value))
+        dispatch({ type: 'setName', value: event.target.value })
       }
     />
   )

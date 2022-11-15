@@ -1,5 +1,4 @@
 import { TextField } from '@equinor/eds-core-react'
-import { setDescription } from './context/actions'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 export const DescriptionField = () => {
@@ -11,7 +10,7 @@ export const DescriptionField = () => {
       label="Description"
       value={state.description}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-        dispatch(setDescription(event.target.value))
+        dispatch({ type: 'setDescription', value: event.target.value })
       }
       multiline
       rows={6}

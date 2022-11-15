@@ -1,7 +1,6 @@
 import { Autocomplete } from '@equinor/eds-core-react'
 import { TComponentProperty } from '../../types'
 import { usePackageDialogContext } from './context/PackageDialogContext'
-import { setAreValid, setRatios, setSelected } from './context/actions'
 
 export const ComponentSelector = ({
   componentProperties,
@@ -12,25 +11,23 @@ export const ComponentSelector = ({
   return (
     <Autocomplete
       onOptionsChange={({ selectedItems }) => {
-        dispatch(
-          setRatios(
-            Object.fromEntries(
-              Object.entries(state.ratios).filter(([compId]) =>
-                selectedItems.find((x) => x.id === compId)
-              )
+        dispatch({
+          type: 'setRatios',
+          value: Object.fromEntries(
+            Object.entries(state.ratios).filter(([compId]) =>
+              selectedItems.find((x) => x.id === compId)
             )
-          )
-        )
-        dispatch(
-          setAreValid(
-            Object.fromEntries(
-              Object.entries(state.areValid).filter(([compId]) =>
-                selectedItems.find((x) => x.id === compId)
-              )
+          ),
+        })
+        dispatch({
+          type: 'setAreValid',
+          value: Object.fromEntries(
+            Object.entries(state.areValid).filter(([compId]) =>
+              selectedItems.find((x) => x.id === compId)
             )
-          )
-        )
-        dispatch(setSelected(selectedItems))
+          ),
+        })
+        dispatch({ type: 'setSelected', value: selectedItems })
       }}
       label="Add components"
       multiple

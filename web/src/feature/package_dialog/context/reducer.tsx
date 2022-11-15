@@ -1,36 +1,36 @@
 import { TPackageDialog } from '../../../types'
-import { Action, ActionType } from './actions'
+import { Action } from './PackageDialogContext'
 
 export function packageDialogReducer(state: TPackageDialog, action: Action) {
   switch (action.type) {
-    case ActionType.SetName: {
+    case 'setName': {
       return {
         ...state,
-        name: action.payload.value,
+        name: action.value,
       }
     }
-    case ActionType.SetDescription: {
+    case 'setDescription': {
       return {
         ...state,
-        description: action.payload.value,
+        description: action.value,
       }
     }
-    case ActionType.SetRatios: {
+    case 'setRatios': {
       return {
         ...state,
-        ratios: action.payload.value,
+        ratios: action.value,
       }
     }
-    case ActionType.SetAreValid: {
+    case 'setAreValid': {
       return {
         ...state,
-        areValid: action.payload.value,
+        areValid: action.value,
       }
     }
-    case ActionType.SetSelected: {
+    case 'setSelected': {
       return {
         ...state,
-        selected: action.payload.value,
+        selected: action.value,
       }
     }
     default: {
