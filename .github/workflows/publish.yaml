@@ -34,6 +34,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: "Build and Publish nginx"
+        shell: bash
         run: |
           echo "Building nginx image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
@@ -43,11 +44,11 @@ jobs:
           --tag ${NGINX_IMAGE} \
           ./nginx
           IFS=','
-          for tag in ${{ inputs.image-tags }}
+          for image-tag in ${{ inputs.image-tags }}
           do
-            echo "Tagging with $tag"
-            docker tag $NGINX_IMAGE $NGINX_IMAGE:$tag
-            docker push $NGINX_IMAGE:$tag
+            echo "Tagging with $image-tag"
+            docker tag $NGINX_IMAGE $NGINX_IMAGE:$image-tag
+            docker push $NGINX_IMAGE:$image-tag
           done
 
   build-and-publish-web:
@@ -56,6 +57,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: "Build and Publish Web"
+        shell: bash
         run: |
           echo "Building web image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
@@ -69,11 +71,11 @@ jobs:
           --tag ${WEB_IMAGE} \
           ./web
           IFS=','
-          for tag in ${{ inputs.image-tags }}
+          for image-tag in ${{ inputs.image-tags }}
           do
-            echo "Tagging with $tag"
-            docker tag $WEB_IMAGE $WEB_IMAGE:$tag
-            docker push $WEB_IMAGE:$tag
+            echo "Tagging with $image-tag"
+            docker tag $WEB_IMAGE $WEB_IMAGE:$image-tag
+            docker push $WEB_IMAGE:$image-tag
           done
 
   build-and-publish-api:
@@ -82,6 +84,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: "Build and Publish API"
+        shell: bash
         run: |
           echo "Building api image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
@@ -94,9 +97,9 @@ jobs:
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
           IFS=','
-          for tag in ${{ inputs.image-tags }}
+          for image-tag in ${{ inputs.image-tags }}
           do
-            echo "Tagging with $tag"
-            docker tag $API_IMAGE $API_IMAGE:$tag
-            docker push $API_IMAGE:$tag
+            echo "Tagging with $image-tag"
+            docker tag $API_IMAGE $API_IMAGE:$image-tag
+            docker push $API_IMAGE:$image-tag
           done
