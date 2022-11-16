@@ -44,11 +44,11 @@ jobs:
           --tag ${NGINX_IMAGE} \
           ./nginx
           IFS=','
-          for image-tag in ${{ inputs.image-tags }}
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
           do
-            echo "Tagging with $image-tag"
-            docker tag $NGINX_IMAGE $NGINX_IMAGE:$image-tag
-            docker push $NGINX_IMAGE:$image-tag
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $NGINX_IMAGE $NGINX_IMAGE:$IMAGE_TAG
+            docker push $NGINX_IMAGE:$IMAGE_TAG
           done
 
   build-and-publish-web:
@@ -71,11 +71,11 @@ jobs:
           --tag ${WEB_IMAGE} \
           ./web
           IFS=','
-          for image-tag in ${{ inputs.image-tags }}
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
           do
-            echo "Tagging with $image-tag"
-            docker tag $WEB_IMAGE $WEB_IMAGE:$image-tag
-            docker push $WEB_IMAGE:$image-tag
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $WEB_IMAGE $WEB_IMAGE:$IMAGE_TAG
+            docker push $WEB_IMAGE:$IMAGE_TAG
           done
 
   build-and-publish-api:
@@ -97,9 +97,9 @@ jobs:
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
           IFS=','
-          for image-tag in ${{ inputs.image-tags }}
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
           do
-            echo "Tagging with $image-tag"
-            docker tag $API_IMAGE $API_IMAGE:$image-tag
-            docker push $API_IMAGE:$image-tag
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $API_IMAGE $API_IMAGE:$IMAGE_TAG
+            docker push $API_IMAGE:$IMAGE_TAG
           done
