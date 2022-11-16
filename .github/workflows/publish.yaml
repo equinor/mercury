@@ -1,26 +1,24 @@
 name: "Publish container images"
 on:
   workflow_dispatch:
-  workflow_call:  # Workflow is meant to be called from another workflow, with the image tag as input
+  workflow_call: # Workflow is meant to be called from another workflow, with the image tag as input
     inputs:
-      image-tag:
-        description: 'Which tag to set for the produced docker images'
-        default: 'latest'
+      image-tags:
+        description: "Which tag to give the images. Supports multiple tags if comma separated, ie 'tag1,tag2'"
         required: true
         type: string
       oauth-redirect-url:
-        description: 'Redirect url for oauth. Should be the public url to access the web app'
-        default: 'https://proxy-mercury-dev.radix.equinor.com'
+        description: "Redirect url for oauth. Should be the public url to access the web app"
+        default: "https://proxy-mercury-dev.radix.equinor.com"
         required: true
         type: string
     secrets:
       CR_SECRET:
-        description: 'Secret to authenticate if using an other container registry than Github'
+        description: "Secret to authenticate if using an other container registry than Github"
         required: false
       LIBHG_REPO_DEPLOY_KEY:
-        description: 'Deploy key for cloning libhg repository'
+        description: "Deploy key for cloning libhg repository"
         required: true
-
 
 env:
   IMAGE_REGISTRY: ghcr.io
@@ -30,31 +28,38 @@ env:
   NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
 
 jobs:
-  build-and-publish-nginx-master:
+  build-and-publish-nginx:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
       - name: "Build and Publish nginx"
+        shell: bash
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building nginx image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $NGINX_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from ${NGINX_IMAGE} \
           --tag ${NGINX_IMAGE} \
           ./nginx
-          docker tag $NGINX_IMAGE $NGINX_IMAGE:${{ inputs.image-tag }}
-          docker push $NGINX_IMAGE:${{ inputs.image-tag }}
+          IFS=','
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
+          do
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $NGINX_IMAGE $NGINX_IMAGE:$IMAGE_TAG
+            docker push $NGINX_IMAGE:$IMAGE_TAG
+          done
 
-  build-and-publish-web-master:
+  build-and-publish-web:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
       - name: "Build and Publish Web"
+        shell: bash
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building web image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $WEB_IMAGE
           printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./web/public/version.txt
@@ -65,17 +70,23 @@ jobs:
           --cache-from ${WEB_IMAGE} \
           --tag ${WEB_IMAGE} \
           ./web
-          docker tag $WEB_IMAGE $WEB_IMAGE:${{ inputs.image-tag }}
-          docker push $WEB_IMAGE:${{ inputs.image-tag }}
+          IFS=','
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
+          do
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $WEB_IMAGE $WEB_IMAGE:$IMAGE_TAG
+            docker push $WEB_IMAGE:$IMAGE_TAG
+          done
 
-  build-and-publish-api-master:
+  build-and-publish-api:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
 
       - name: "Build and Publish API"
+        shell: bash
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building api image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
           printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./api/src/version.txt
@@ -85,5 +96,10 @@ jobs:
           --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
-          docker tag $API_IMAGE $API_IMAGE:${{ inputs.image-tag }}
-          docker push $API_IMAGE:${{ inputs.image-tag }}
+          IFS=','
+          for IMAGE_TAG in {${{ inputs.image-tags }}}
+          do
+            echo "Tagging with $IMAGE_TAG"
+            docker tag $API_IMAGE $API_IMAGE:$IMAGE_TAG
+            docker push $API_IMAGE:$IMAGE_TAG
+          done
