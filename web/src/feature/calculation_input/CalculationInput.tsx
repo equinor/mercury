@@ -105,6 +105,8 @@ export const CalculationInput = ({
     oldPackages = oldPackages.filter((x) => x.name !== newPackage?.name)
     setSelectedPackage(newPackage)
     setPackages(newPackage ? [...oldPackages, newPackage] : oldPackages)
+    setIsEditOpen(false)
+    setIsNewOpen(false)
   }
 
   return (

@@ -1,17 +1,17 @@
 import styled from 'styled-components'
-import {
-  Autocomplete,
-  Button,
-  Dialog,
-  TextField,
-  Typography,
-} from '@equinor/eds-core-react'
+import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import { ComponentSelector } from './ComponentSelector'
-import { useState } from 'react'
-import { TComponentProperty, TComponentRatios, TPackage } from '../../types'
-import { demoFeedComponentRatios } from '../../constants'
+import { TComponentProperty, TPackage, TPackageDialog } from '../../types'
 import { SaveButton } from './SaveButton'
+import { ComponentTable } from './ComponentTable'
+import { ComponentTableSum } from './ComponentTableSum'
+import { NameField } from './NameField'
+import { DescriptionField } from './DescriptionField'
+import { TemplateSelector } from './TemplateSelector'
+import { DemoButton } from './DemoButton'
+import { PackageDialogProvider } from './context/PackageDialogContext'
+import { preSelectedComponents } from '../../constants'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -32,6 +32,13 @@ const FirstColumn = styled.div`
   flex-flow: column nowrap;
   gap: 30px;
   width: 40%;
+`
+
+const SecondColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  max-width: 420px;
 `
 
 const ButtonRow = styled.div`
@@ -59,111 +66,82 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  // Array of components containing input from user
-  const [componentRatios, setComponentRatios] = useState<TComponentRatios>(
-    editablePackage?.components ?? {}
-  )
-  const [packageName, setPackageName] = useState<string>(
-    editablePackage?.name ?? ''
-  )
-  const [packageDescription, setPackageDescription] = useState<string>(
-    editablePackage?.description ?? ''
-  )
-  const [ratiosAreValid, setRatiosAreValid] = useState<{
-    [id: string]: boolean
-  }>({})
+  const initial: TPackageDialog =
+    editablePackage === undefined
+      ? {
+          name: '',
+          description: '',
+          ratios: {},
+          isRatioValid: {},
+          selectedComponents: componentProperties.filter((option) =>
+            preSelectedComponents.includes(option.id)
+          ),
+        }
+      : {
+          name: editablePackage.name,
+          description: editablePackage.description,
+          ratios: editablePackage.components,
+          isRatioValid: {},
+          selectedComponents: componentProperties.filter(
+            (option) => editablePackage.components[option.id]
+          ),
+        }
 
   return (
-    <WideDialog open onClose={close} isDismissable>
-      <Dialog.Header>
-        <Typography
-          variant="h6"
-          color={tokens.colors.infographic.primary__moss_green_100.hex}
-        >
-          {`${editablePackage === undefined ? 'Create' : 'Edit'} fluid package`}
-        </Typography>
-      </Dialog.Header>
-      <Dialog.CustomContent>
-        <FluidPackageForm>
-          <FirstColumn>
-            <TextField
-              id="fluid-package-name"
-              placeholder="Fluid package"
-              label="Name"
-              value={packageName}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPackageName(event.target.value)
-              }
-            />
-            <TextField
-              id="fluid-package-description"
-              placeholder="Description"
-              label="Description"
-              value={packageDescription}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setPackageDescription(event.target.value)
-              }
-              multiline
-              rows={6}
-            />
-            <Autocomplete
-              label="Template"
-              options={packages}
-              optionLabel={(option) => option.name}
-              onOptionsChange={(changes) => {
-                setComponentRatios(changes.selectedItems[0].components)
-              }}
-              autoWidth
-            />
-          </FirstColumn>
-          <ComponentSelector
-            componentProperties={componentProperties}
-            componentRatios={componentRatios}
-            setComponentRatios={setComponentRatios}
-            ratiosAreValid={ratiosAreValid}
-            setRatiosAreValid={setRatiosAreValid}
-          />
-        </FluidPackageForm>
-        <ButtonRow>
-          <ButtonGroup>
-            <Button variant="outlined" onClick={close}>
-              Cancel
-            </Button>
-            <SaveButton
-              componentProperties={componentProperties}
-              packageName={packageName}
-              packageDescription={packageDescription}
-              componentRatios={componentRatios}
-              editablePackage={editablePackage}
-              savePackage={savePackage}
-              close={close}
-              ratiosAreValid={ratiosAreValid}
-            />
-            <Button
-              // TODO: Demo button to remove when done testing
-              onClick={() => {
-                setPackageName('Demo data')
-                setPackageDescription('')
-                setComponentRatios(demoFeedComponentRatios)
-              }}
-            >
-              Demo data
-            </Button>
-          </ButtonGroup>
-          {editablePackage !== undefined && (
-            <Button
-              color="danger"
-              variant="outlined"
-              onClick={() => {
-                savePackage()
-                close()
-              }}
-            >
-              Delete
-            </Button>
-          )}
-        </ButtonRow>
-      </Dialog.CustomContent>
-    </WideDialog>
+    <PackageDialogProvider initial={initial}>
+      <WideDialog open onClose={close} isDismissable>
+        <Dialog.Header>
+          <Typography
+            variant="h6"
+            color={tokens.colors.infographic.primary__moss_green_100.hex}
+          >
+            {editablePackage === undefined ? 'Create' : 'Edit'} fluid package
+          </Typography>
+        </Dialog.Header>
+        <Dialog.CustomContent>
+          <FluidPackageForm>
+            <FirstColumn>
+              <NameField />
+              <DescriptionField />
+              <TemplateSelector
+                packages={packages}
+                componentProperties={componentProperties}
+              />
+            </FirstColumn>
+            <SecondColumn>
+              <ComponentSelector componentProperties={componentProperties} />
+              <ComponentTable />
+              <ComponentTableSum />
+            </SecondColumn>
+          </FluidPackageForm>
+          <ButtonRow>
+            <ButtonGroup>
+              <Button variant="outlined" onClick={close}>
+                Cancel
+              </Button>
+              <SaveButton
+                componentProperties={componentProperties}
+                editablePackage={editablePackage}
+                savePackage={savePackage}
+              />
+              <DemoButton />
+            </ButtonGroup>
+            <ButtonGroup>
+              {editablePackage !== undefined && (
+                <Button
+                  color="danger"
+                  variant="outlined"
+                  onClick={() => {
+                    savePackage()
+                  }}
+                >
+                  Delete
+                </Button>
+              )}
+            </ButtonGroup>
+          </ButtonRow>
+        </Dialog.CustomContent>
+      </WideDialog>
+    </PackageDialogProvider>
   )
 }

@@ -17,3 +17,13 @@ export type TPackage = {
   components: TComponentRatios
   molecularWeightSum: number
 }
+
+export type TPackageDialog = {
+  name: string
+  description: string
+  ratios: TComponentRatios
+  isRatioValid: {
+    [id: string]: boolean
+  }
+  selectedComponents: TComponentProperty[]
+}
