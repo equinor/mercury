@@ -3,20 +3,14 @@ on:
   workflow_dispatch:
   workflow_call: # Workflow is meant to be called from another workflow, with the image tag as input
     inputs:
-      image-tag:
-        description: "Which tag to set for the produced docker images"
-        default: "latest"
+      image-tags:
+        description: "Which tag to give the images. Supports multiple tags if commaseparated, ie 'tag1,tag2'"
         required: true
         type: string
       oauth-redirect-url:
         description: "Redirect url for oauth. Should be the public url to access the web app"
         default: "https://proxy-mercury-dev.radix.equinor.com"
         required: true
-        type: string
-      release-tag:
-        description: "GitHub release tag, if relevant"
-        default: ""
-        required: false
         type: string
     secrets:
       CR_SECRET:
@@ -41,17 +35,20 @@ jobs:
 
       - name: "Build and Publish nginx"
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building nginx image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $NGINX_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from ${NGINX_IMAGE} \
           --tag ${NGINX_IMAGE} \
           ./nginx
-          docker tag $NGINX_IMAGE $NGINX_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $NGINX_IMAGE $NGINX_IMAGE:${{ inputs.release-tag }}; fi;
-          docker push $NGINX_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker push $NGINX_IMAGE:${{ inputs.release-tag }}; fi;
+          IFS=','
+          for tag in ${{ inputs.image-tags }}
+          do
+            echo "Tagging with $tag"
+            docker tag $NGINX_IMAGE $NGINX_IMAGE:$tag
+            docker push $NGINX_IMAGE:$tag
+          done
 
   build-and-publish-web:
     runs-on: ubuntu-latest
@@ -60,7 +57,7 @@ jobs:
 
       - name: "Build and Publish Web"
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building web image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $WEB_IMAGE
           printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./web/public/version.txt
@@ -71,10 +68,13 @@ jobs:
           --cache-from ${WEB_IMAGE} \
           --tag ${WEB_IMAGE} \
           ./web
-          docker tag $WEB_IMAGE $WEB_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $WEB_IMAGE $WEB_IMAGE:${{ inputs.release-tag }}; fi;
-          docker push $WEB_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker push $WEB_IMAGE:${{ inputs.release-tag }}; fi;
+          IFS=','
+          for tag in ${{ inputs.image-tags }}
+          do
+            echo "Tagging with $tag"
+            docker tag $WEB_IMAGE $WEB_IMAGE:$tag
+            docker push $WEB_IMAGE:$tag
+          done
 
   build-and-publish-api:
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
 
       - name: "Build and Publish API"
         run: |
-          echo "Tagging with ${{ inputs.image-tag }}"
+          echo "Building api image with tag: ${{ inputs.image-tags }}"
           echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
           printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./api/src/version.txt
@@ -93,7 +93,10 @@ jobs:
           --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
-          docker tag $API_IMAGE $API_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker tag $API_IMAGE $API_IMAGE:${{ inputs.release-tag }}; fi;
-          docker push $API_IMAGE:${{ inputs.image-tag }}
-          if [ -n "${{ inputs.release-tag }}" ]; then docker push $API_IMAGE:${{ inputs.release-tag }}; fi;
+          IFS=','
+          for tag in ${{ inputs.image-tags }}
+          do
+            echo "Tagging with $tag"
+            docker tag $API_IMAGE $API_IMAGE:$tag
+            docker push $API_IMAGE:$tag
+          done

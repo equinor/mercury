@@ -26,8 +26,7 @@ jobs:
     needs: [set-tag-ref, tests]
     uses: ./.github/workflows/publish.yaml
     with:
-      image-tag: production
-      release-tag: ${{ needs.set-tag-ref.outputs.tag-ref }}
+      image-tags: production,${{ needs.set-tag-ref.outputs.tag-ref }}
       oauth-redirect-url: https://proxy-mercury-prod.radix.equinor.com
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
