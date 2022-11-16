@@ -4,7 +4,7 @@ on:
   workflow_call: # Workflow is meant to be called from another workflow, with the image tag as input
     inputs:
       image-tags:
-        description: "Which tag to give the images. Supports multiple tags if commaseparated, ie 'tag1,tag2'"
+        description: "Which tag to give the images. Supports multiple tags if comma separated, ie 'tag1,tag2'"
         required: true
         type: string
       oauth-redirect-url:
