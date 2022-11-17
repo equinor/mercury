@@ -44,7 +44,7 @@ jobs:
           --tag ${NGINX_IMAGE} \
           ./nginx
           IFS=','
-          for IMAGE_TAG in `echo ${{ inputs.image-tags }}`
+          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
             docker tag $NGINX_IMAGE $NGINX_IMAGE:$IMAGE_TAG
@@ -71,7 +71,7 @@ jobs:
           --tag ${WEB_IMAGE} \
           ./web
           IFS=','
-          for IMAGE_TAG in `echo ${{ inputs.image-tags }}`
+          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
             docker tag $WEB_IMAGE $WEB_IMAGE:$IMAGE_TAG
@@ -97,7 +97,7 @@ jobs:
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --tag $API_IMAGE ./api
           IFS=','
-          for IMAGE_TAG in `echo ${{ inputs.image-tags }}`
+          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
             docker tag $API_IMAGE $API_IMAGE:$IMAGE_TAG
