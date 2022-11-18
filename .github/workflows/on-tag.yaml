@@ -13,7 +13,6 @@ jobs:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   set-tag-ref:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       tag-ref: ${{ steps.get-tag-ref.outputs.tag-ref }}
@@ -21,6 +20,7 @@ jobs:
       - uses: actions/checkout@master
       - id: get-tag-ref
         run: |
+          echo "Ref: $GITHUB_REF"
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
           echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
 
