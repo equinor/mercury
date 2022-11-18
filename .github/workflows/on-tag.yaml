@@ -20,7 +20,8 @@ jobs:
       - uses: actions/checkout@master
       - id: get-tag-ref
         run: |
-          echo "Ref: $GITHUB_REF"
+          echo "base ref: ${{ github.event.base_ref }}"
+          echo "target commitish: ${{ github.event.release.target_commitish }}"
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
           echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
 
