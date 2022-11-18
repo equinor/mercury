@@ -7,7 +7,7 @@ on:
 
 jobs:
   tests:
-    if: github.ref == 'refs/heads/main'
+    if: github.event.base_ref == 'refs/heads/main'
     uses: ./.github/workflows/tests.yaml
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
@@ -21,7 +21,6 @@ jobs:
       - uses: actions/checkout@master
       - id: get-tag-ref
         run: |
-          echo "base ref: ${{ github.event.base_ref }}"
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
           echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
 
