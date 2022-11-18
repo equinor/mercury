@@ -13,6 +13,7 @@ jobs:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   set-tag-ref:
+    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       tag-ref: ${{ steps.get-tag-ref.outputs.tag-ref }}
@@ -21,7 +22,6 @@ jobs:
       - id: get-tag-ref
         run: |
           echo "base ref: ${{ github.event.base_ref }}"
-          echo "target commitish: ${{ github.event.release.target_commitish }}"
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
           echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
 
