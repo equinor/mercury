@@ -46,11 +46,18 @@ export const CalculationInput = ({
   const [packages, setPackages] = useLocalStorage<TPackage[]>('packages', [])
   const [selectedPackage, setSelectedPackage] = useState<TPackage | undefined>()
   const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
+  const [isTemperatureValid, setIsTemperatureValid] = useState<boolean>(true)
+  const [isPressureValid, setIsPressureValid] = useState<boolean>(true)
 
   const calculate = (
     <Button
       data-testid="computeMf"
-      disabled={calculating || !selectedPackage}
+      disabled={
+        calculating ||
+        !selectedPackage ||
+        !isTemperatureValid ||
+        !isPressureValid
+      }
       onClick={() => {
         if (selectedPackage === undefined) return
         setCalculating(true)
@@ -140,11 +147,15 @@ export const CalculationInput = ({
               value={temperature}
               setValue={setTemperature}
               name="Temperature"
+              isValid={isTemperatureValid}
+              setIsValid={setIsTemperatureValid}
             />
             <TempOrPressureInput
               value={pressure}
               setValue={setPressure}
               name="Pressure"
+              isValid={isPressureValid}
+              setIsValid={setIsPressureValid}
             />
           </FlexContainer>
           <FeedFlowInput
