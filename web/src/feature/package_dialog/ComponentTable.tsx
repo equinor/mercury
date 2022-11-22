@@ -40,7 +40,7 @@ export const ComponentTable = (): JSX.Element => {
             variant={
               state.isRatioValid[component.id] === false ||
               (component.id === '5' && !(Number(state.ratios['5']) > 0))
-                ? 'warning'
+                ? 'error'
                 : undefined
             }
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
