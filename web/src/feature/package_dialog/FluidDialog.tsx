@@ -132,6 +132,10 @@ export const FluidDialog = ({
                   color="danger"
                   variant="outlined"
                   onClick={() => {
+                    const overwrite: boolean = window.confirm(
+                      `Are you sure you want to delete the package?`
+                    )
+                    if (!overwrite) return
                     savePackage()
                   }}
                 >
