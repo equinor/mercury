@@ -29,7 +29,7 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     with:
       image-tags: production,${{ needs.set-tag-ref.outputs.tag-ref }}
-      oauth-redirect-url: https://proxy-mercury-prod.radix.equinor.com
+      oauth-redirect-url: https://mercury.app.radix.equinor.com
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
