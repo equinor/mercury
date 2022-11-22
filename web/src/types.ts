@@ -27,3 +27,5 @@ export type TPackageDialog = {
   }
   selectedComponents: TComponentProperty[]
 }
+
+export type TCalcStatus = 'calculating' | 'done' | 'failure' | undefined

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Divider, Typography } from '@equinor/eds-core-react'
+import { Divider } from '@equinor/eds-core-react'
 import { Header } from '../common/Header'
 import { useEffect, useState } from 'react'
 import { MoleTable } from '../feature/results/MoleTable'
@@ -8,9 +8,9 @@ import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentProperties, ComponentResponse } from '../api/generated'
 import { PhaseTable } from '../feature/results/PhaseTable'
-import { MercuryWarning } from '../feature/results/MercuryWarning'
-import { TComponentProperty, TResults } from '../types'
+import { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { orderedComponents } from '../constants'
+import { Status } from '../feature/Status'
 
 const Results = styled.div`
   display: flex;
@@ -47,6 +47,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [componentProperties, setComponentProperties] =
     useState<TComponentProperty[]>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [calcStatus, setCalcStatus] = useState<TCalcStatus>()
   const [result, setResult] = useState<TResults>()
 
   // Fetch list of components name once on page load
@@ -71,25 +72,19 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
         <CalculationInput
           mercuryApi={mercuryApi}
           setResult={setResult}
+          setCalcStatus={setCalcStatus}
           componentProperties={componentProperties}
         />
         <DividerWithLargeSpacings />
-        {!result && (
-          <Typography variant="body_short" color="primary">
-            Run a calculation to get results
-          </Typography>
-        )}
+        <Status calcStatus={calcStatus} result={result} />
         {result && (
-          <>
-            {'Mercury' in result.phaseValues && <MercuryWarning />}
-            <Results>
-              <PhaseTable results={result} />
-              <MoleTable
-                results={result}
-                componentProperties={componentProperties}
-              />
-            </Results>
-          </>
+          <Results>
+            <PhaseTable results={result} />
+            <MoleTable
+              results={result}
+              componentProperties={componentProperties}
+            />
+          </Results>
         )}
       </Container>
     </>

@@ -4,10 +4,15 @@ import styled from 'styled-components'
 import { FluidDialog } from '../package_dialog/FluidDialog'
 import { useState } from 'react'
 import { MultiflashResponse } from '../../api/generated'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import MercuryAPI from '../../api/MercuryAPI'
 import { FeedFlowInput } from './FeedFlowInput'
-import { TComponentProperty, TPackage, TResults } from '../../types'
+import {
+  TCalcStatus,
+  TComponentProperty,
+  TPackage,
+  TResults,
+} from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
 
@@ -32,10 +37,12 @@ const FluidPackage = styled(FlexContainer)`
 export const CalculationInput = ({
   mercuryApi,
   setResult,
+  setCalcStatus,
   componentProperties,
 }: {
   mercuryApi: MercuryAPI
   setResult: (result: TResults | undefined) => void
+  setCalcStatus: (x: TCalcStatus) => void
   componentProperties: TComponentProperty[]
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
@@ -55,6 +62,7 @@ export const CalculationInput = ({
         if (selectedPackage === undefined) return
         setCalculating(true)
         setResult(undefined)
+        setCalcStatus('calculating')
         mercuryApi
           .computeMultiflash({
             multiflash: {
@@ -69,18 +77,10 @@ export const CalculationInput = ({
           })
           .then((result: AxiosResponse<MultiflashResponse>) => {
             setResult({ ...result.data, cubicFeedFlow: cubicFeedFlow })
+            setCalcStatus('done')
           })
-          .catch((error: AxiosError) =>
-            // TODO: Notify user of failed calculation
-            console.error(
-              `Could not run computation: (${
-                error.response?.data || error.message
-              })`
-            )
-          )
-          .finally(() => {
-            setCalculating(false)
-          })
+          .catch(() => setCalcStatus('failure'))
+          .finally(() => setCalculating(false))
       }}
     >
       {calculating ? <Progress.Circular size={16} color="neutral" /> : <>Run</>}
