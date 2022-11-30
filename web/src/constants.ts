@@ -17,9 +17,9 @@ export const molePerStandardCubicMeter = 42.29256
 
 export const preSelectedComponents: Array<string> = [
   '5',
+  '3',
   '1',
   '2',
-  '3',
   '101',
   '201',
   '301',
@@ -38,20 +38,20 @@ export const orderedComponents: Array<string> = [
   '31', // TEG
 ]
 
-export const demoFeedComponentRatios = {
-  '3': '0.062202',
-  '2': '0.0047',
-  '1': '0.046539',
-  '101': '0.65364',
-  '201': '0.086307',
-  '301': '0.045563',
-  '401': '0.007579',
-  '402': '0.015481',
-  '503': '0.005188',
-  '504': '0.00612',
-  '605': '0.066681',
-  '5': '0.001',
-}
+export const demoFeedComponentRatios = [
+  { id: '3', ratio: '0.062202' },
+  { id: '2', ratio: '0.0047' },
+  { id: '1', ratio: '0.046539' },
+  { id: '101', ratio: '0.65364' },
+  { id: '201', ratio: '0.086307' },
+  { id: '301', ratio: '0.045563' },
+  { id: '401', ratio: '0.007579' },
+  { id: '402', ratio: '0.015481' },
+  { id: '503', ratio: '0.005188' },
+  { id: '504', ratio: '0.00612' },
+  { id: '605', ratio: '0.066681' },
+  { id: '5', ratio: '0.001' },
+]
 
 export const demoComponentInput = {
   '3': {

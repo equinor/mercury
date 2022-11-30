@@ -74,9 +74,7 @@ export const CalculationInput = ({
           .computeMultiflash({
             multiflash: {
               componentComposition: Object.fromEntries(
-                Object.entries(selectedPackage.components).map(
-                  ([id, ratio]) => [id, Number(ratio)]
-                )
+                selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
               ),
               temperature: temperature,
               pressure: pressure,

@@ -18,12 +18,9 @@ export const ComponentTable = (): JSX.Element => {
     id: string
   ) {
     const ratio = event.target.value
-    const newRatios = { ...state.ratios }
-    if (ratio === '') {
-      delete newRatios[id]
-    } else {
-      newRatios[id] = ratio
-    }
+    const newRatios = state.ratios.map((x) =>
+      x.id === id ? { id: id, ratio: ratio } : x
+    )
     dispatch({ type: 'setRatios', value: newRatios })
   }
 
@@ -36,10 +33,11 @@ export const ComponentTable = (): JSX.Element => {
         <Table.Cell data-testid={`Ratio (mol)-${rowIndex}`}>
           <Input
             id={`${component.chemicalFormula}-input`}
-            value={state.ratios[component.id] ?? ''}
+            value={state.ratios.find((x) => x.id === component.id)?.ratio ?? ''}
             variant={
               state.isRatioValid[component.id] === false ||
-              (component.id === '5' && !(Number(state.ratios['5']) > 0))
+              (component.id === '5' &&
+                !(Number(state.ratios.find((x) => x.id === '5')?.ratio) > 0))
                 ? 'error'
                 : undefined
             }
