@@ -1,10 +1,10 @@
 import { EdsProvider, Table } from '@equinor/eds-core-react'
-import { TComponentRatios } from '../../types'
+import { TComponentRatio } from '../../types'
 import { formatNumber } from '../../tableUtils'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
-function computeComponentRatioSum(componentRatios: TComponentRatios) {
-  const sum = Object.values(componentRatios).reduce((a, b) => a + Number(b), 0)
+function computeComponentRatioSum(componentRatios: TComponentRatio[]) {
+  const sum = componentRatios.reduce((a, b) => a + Number(b.ratio), 0)
   if (isNaN(sum)) {
     return ''
   }

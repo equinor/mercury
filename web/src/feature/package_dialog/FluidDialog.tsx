@@ -66,26 +66,20 @@ export const FluidDialog = ({
   savePackage: (x?: TPackage) => void
   packages: TPackage[]
 }) => {
-  const initial: TPackageDialog =
-    editablePackage === undefined
-      ? {
-          name: '',
-          description: '',
-          ratios: {},
-          isRatioValid: {},
-          selectedComponents: componentProperties.filter((option) =>
-            preSelectedComponents.includes(option.id)
-          ),
-        }
-      : {
-          name: editablePackage.name,
-          description: editablePackage.description,
-          ratios: editablePackage.components,
-          isRatioValid: {},
-          selectedComponents: componentProperties.filter(
-            (option) => editablePackage.components[option.id]
-          ),
-        }
+  const initial: TPackageDialog = {
+    name: editablePackage?.name ?? '',
+    description: editablePackage?.description ?? '',
+    ratios:
+      editablePackage?.components ??
+      preSelectedComponents.map((x) => ({ id: x, ratio: '' })),
+    isRatioValid: {},
+    selectedComponents: (
+      editablePackage?.components.map((x) => x.id) ?? preSelectedComponents
+    )
+      .map((x) => componentProperties.find((prop) => prop.id === x))
+      .filter((x): x is TComponentProperty => !!x),
+    componentProperties: componentProperties,
+  }
 
   return (
     <PackageDialogProvider initial={initial}>
@@ -103,13 +97,10 @@ export const FluidDialog = ({
             <FirstColumn>
               <NameField />
               <DescriptionField />
-              <TemplateSelector
-                packages={packages}
-                componentProperties={componentProperties}
-              />
+              <TemplateSelector packages={packages} />
             </FirstColumn>
             <SecondColumn>
-              <ComponentSelector componentProperties={componentProperties} />
+              <ComponentSelector />
               <ComponentTable />
               <ComponentTableSum />
             </SecondColumn>
@@ -120,7 +111,6 @@ export const FluidDialog = ({
                 Cancel
               </Button>
               <SaveButton
-                componentProperties={componentProperties}
                 editablePackage={editablePackage}
                 savePackage={savePackage}
               />

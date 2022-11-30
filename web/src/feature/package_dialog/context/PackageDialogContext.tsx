@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react'
 import {
   TComponentProperty,
-  TComponentRatios,
+  TComponentRatio,
   TPackageDialog,
 } from '../../../types'
 import { packageDialogReducer } from './reducer'
@@ -9,7 +9,7 @@ import { packageDialogReducer } from './reducer'
 export type Action =
   | { type: 'setName'; value: string }
   | { type: 'setDescription'; value: string }
-  | { type: 'setRatios'; value: TComponentRatios }
+  | { type: 'setRatios'; value: TComponentRatio[] }
   | { type: 'setSelectedComponents'; value: TComponentProperty[] }
 
 const PackageDialogContext = createContext<{

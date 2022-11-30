@@ -6,26 +6,28 @@ export type TComponentProperty = ComponentProperties & {
 export type TResults = MultiflashResponse & {
   cubicFeedFlow: number
 }
-export type TComponentRatios = {
-  [id: string]: string
+export type TComponentRatio = {
+  id: string
+  ratio: string
 }
 export type TFeedUnit = 'kg/d' | 'Sm3/d'
 export type TFeedFlow = { unit: TFeedUnit; value: number }
 export type TPackage = {
   name: string
   description: string
-  components: TComponentRatios
+  components: TComponentRatio[]
   molecularWeightSum: number
 }
 
 export type TPackageDialog = {
   name: string
   description: string
-  ratios: TComponentRatios
+  ratios: TComponentRatio[]
   isRatioValid: {
     [id: string]: boolean
   }
   selectedComponents: TComponentProperty[]
+  componentProperties: TComponentProperty[]
 }
 
 export type TCalcStatus = 'calculating' | 'done' | 'failure' | undefined
