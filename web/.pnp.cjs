@@ -29,7 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@equinor/eds-core-react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:0.26.0"],\
-            ["@equinor/eds-icons", "npm:0.16.0"],\
+            ["@equinor/eds-icons", "npm:0.17.0"],\
             ["@equinor/eds-tokens", "npm:0.9.0"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:13.4.0"],\
@@ -3474,10 +3474,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           ],\
           "linkType": "HARD"\
         }],\
-        ["npm:0.16.0", {\
-          "packageLocation": "./.yarn/cache/@equinor-eds-icons-npm-0.16.0-183a488be9-18979c6c97.zip/node_modules/@equinor/eds-icons/",\
+        ["npm:0.17.0", {\
+          "packageLocation": "./.yarn/cache/@equinor-eds-icons-npm-0.17.0-35ce6628f9-c9bd850e79.zip/node_modules/@equinor/eds-icons/",\
           "packageDependencies": [\
-            ["@equinor/eds-icons", "npm:0.16.0"]\
+            ["@equinor/eds-icons", "npm:0.17.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -17579,7 +17579,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["web", "workspace:."],\
             ["@equinor/eds-core-react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:0.26.0"],\
-            ["@equinor/eds-icons", "npm:0.16.0"],\
+            ["@equinor/eds-icons", "npm:0.17.0"],\
             ["@equinor/eds-tokens", "npm:0.9.0"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:13.4.0"],\
