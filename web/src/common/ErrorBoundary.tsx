@@ -1,5 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from 'react'
-import { Typography, Icon } from '@equinor/eds-core-react'
+import { Typography, Icon, List } from '@equinor/eds-core-react'
 import { account_circle } from '@equinor/eds-icons'
 
 interface Props {
@@ -12,7 +12,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: true,
+    hasError: false,
   }
 
   public static getDerivedStateFromError(_: Error): State {
@@ -29,15 +29,23 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <>
           <Typography variant={'h3'}>Ops... Something went wrong 😞</Typography>
-          <Typography varant={'body_short'}>
-            You could try resetting the application by clicking the{' '}
-            <Icon data={account_circle} /> icon, and then &quot;reset
-            application data&quot;.
+          <Typography variant={'body_short'}>
+            You should try the following:
           </Typography>
-          <Typography varant={'body_short'}>
-            This will cause you to lose application data. If that is not a good
-            option you should contact support (team-hermes@equinor.com).
-          </Typography>
+          <List variant="numbered" style={{ lineHeight: '2.25rem' }}>
+            <List.Item>Refresh the page (F5)</List.Item>
+            <List.Item>
+              Resetting the application by clicking the{' '}
+              <Icon data={account_circle} /> icon, and then{' '}
+              <i>&quot;reset application data&quot;</i>.
+            </List.Item>
+            <List.Item>
+              Contact technical support by email at{' '}
+              <a href={'mailto:fg_team_hermes@equinor.com'}>
+                fg_team_hermes@equinor.com
+              </a>
+            </List.Item>
+          </List>
         </>
       )
     }

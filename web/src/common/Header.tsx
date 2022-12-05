@@ -107,7 +107,7 @@ export const Header = (): JSX.Element => {
         <Popover.Content>
           <VersionText />
           <p>Person of contact: Eleni Pantelli (elp@equinor.com)</p>
-          <p>Technical Support: team-hermes@equinor.com</p>
+          <p>Technical Support: fg_team_hermes@equinor.com</p>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={() => setAboutOpen(false)}>Close</Button>
