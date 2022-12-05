@@ -11,6 +11,7 @@ import { PhaseTable } from '../feature/results/PhaseTable'
 import { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { orderedComponents } from '../constants'
 import { Status } from '../feature/Status'
+import ErrorBoundary from '../common/ErrorBoundary'
 
 const Results = styled.div`
   display: flex;
@@ -69,23 +70,25 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
     <>
       <Header />
       <Container>
-        <CalculationInput
-          mercuryApi={mercuryApi}
-          setResult={setResult}
-          setCalcStatus={setCalcStatus}
-          componentProperties={componentProperties}
-        />
-        <DividerWithLargeSpacings />
-        <Status calcStatus={calcStatus} result={result} />
-        {result && (
-          <Results>
-            <PhaseTable results={result} />
-            <MoleTable
-              results={result}
-              componentProperties={componentProperties}
-            />
-          </Results>
-        )}
+        <ErrorBoundary>
+          <CalculationInput
+            mercuryApi={mercuryApi}
+            setResult={setResult}
+            setCalcStatus={setCalcStatus}
+            componentProperties={componentProperties}
+          />
+          <DividerWithLargeSpacings />
+          <Status calcStatus={calcStatus} result={result} />
+          {result && (
+            <Results>
+              <PhaseTable results={result} />
+              <MoleTable
+                results={result}
+                componentProperties={componentProperties}
+              />
+            </Results>
+          )}
+        </ErrorBoundary>
       </Container>
     </>
   )
