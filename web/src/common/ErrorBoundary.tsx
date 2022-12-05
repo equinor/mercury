@@ -12,7 +12,7 @@ interface State {
 
 class ErrorBoundary extends Component<Props, State> {
   public state: State = {
-    hasError: false,
+    hasError: true,
   }
 
   public static getDerivedStateFromError(_: Error): State {
@@ -36,7 +36,7 @@ class ErrorBoundary extends Component<Props, State> {
           </Typography>
           <Typography varant={'body_short'}>
             This will cause you to lose application data. If that is not a good
-            option you should contact support.
+            option you should contact support (team-hermes@equinor.com).
           </Typography>
         </>
       )
