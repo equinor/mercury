@@ -1,9 +1,10 @@
-import { EdsProvider, Table } from '@equinor/eds-core-react'
+import { EdsProvider, Table, Typography } from '@equinor/eds-core-react'
 
 type TDynamicTableInput = {
   headers: string[]
   rows: string[][]
   density: 'comfortable' | 'compact'
+  caption: string
 }
 export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   function createTableRows() {
@@ -24,6 +25,9 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   return (
     <EdsProvider density={props.density}>
       <Table>
+        <Table.Caption>
+          <Typography variant="h3">{props.caption}</Typography>
+        </Table.Caption>
         <Table.Head>
           <Table.Row>
             {props.headers.map((header) => (

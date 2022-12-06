@@ -46,6 +46,7 @@ export const MoleTable = (props: {
         ]}
         rows={getRows(props.results, props.componentProperties, fullPrecision)}
         density={'compact'}
+        caption="Phase Equilibrium results"
       />
       <Switch
         label="full precision"
