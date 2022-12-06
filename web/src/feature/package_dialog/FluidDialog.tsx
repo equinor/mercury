@@ -9,7 +9,6 @@ import { ComponentTableSum } from './ComponentTableSum'
 import { NameField } from './NameField'
 import { DescriptionField } from './DescriptionField'
 import { TemplateSelector } from './TemplateSelector'
-import { DemoButton } from './DemoButton'
 import { PackageDialogProvider } from './context/PackageDialogContext'
 import { preSelectedComponents } from '../../constants'
 
@@ -114,7 +113,6 @@ export const FluidDialog = ({
                 editablePackage={editablePackage}
                 savePackage={savePackage}
               />
-              <DemoButton />
             </ButtonGroup>
             <ButtonGroup>
               {editablePackage !== undefined && (
