@@ -7,7 +7,7 @@ export const TemplateSelector = (props: { packages: TPackage[] }) => {
   const { dispatch } = usePackageDialogContext()
   return (
     <Autocomplete
-      label="Template"
+      label="Use existing fluid as template"
       options={props.packages}
       optionLabel={(option) => option.name}
       onOptionsChange={(changes) => {
