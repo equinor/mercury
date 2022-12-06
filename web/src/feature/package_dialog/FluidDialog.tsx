@@ -86,7 +86,7 @@ export const FluidDialog = ({
       <WideDialog open onClose={close} isDismissable>
         <Dialog.Header>
           <Typography
-            variant="h6"
+            variant="h3"
             color={tokens.colors.infographic.primary__moss_green_100.hex}
           >
             {editablePackage === undefined ? 'Create' : 'Edit'} fluid package
@@ -97,7 +97,9 @@ export const FluidDialog = ({
             <FirstColumn>
               <NameField />
               <DescriptionField />
-              <TemplateSelector packages={packages} />
+              {editablePackage === undefined && (
+                <TemplateSelector packages={packages} />
+              )}
             </FirstColumn>
             <SecondColumn>
               <ComponentSelector />

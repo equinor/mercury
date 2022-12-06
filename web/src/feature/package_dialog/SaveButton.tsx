@@ -59,7 +59,7 @@ export const SaveButton = (props: {
       }}
       disabled={!isSaveable()}
     >
-      Save
+      {props.editablePackage ? 'Update' : 'Create'}
     </Button>
   )
 }
