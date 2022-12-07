@@ -2,12 +2,12 @@ import styled from 'styled-components'
 import { Divider } from '@equinor/eds-core-react'
 import { Header } from '../common/Header'
 import { useEffect, useState } from 'react'
-import { MoleTable } from '../feature/results/MoleTable'
+import { PhaseEquilibriumTable } from '../feature/results/PhaseEquilibriumTable'
 import { CalculationInput } from '../feature/calculation_input/CalculationInput'
 import MercuryAPI from '../api/MercuryAPI'
 import { AxiosResponse } from 'axios'
 import { ComponentProperties, ComponentResponse } from '../api/generated'
-import { PhaseTable } from '../feature/results/PhaseTable'
+import { HgDistributionTable } from '../feature/results/HgDistributionTable'
 import { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { orderedComponents } from '../constants'
 import { Status } from '../feature/Status'
@@ -81,8 +81,8 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
           <Status calcStatus={calcStatus} result={result} />
           {result && (
             <Results>
-              <PhaseTable results={result} />
-              <MoleTable
+              <HgDistributionTable results={result} />
+              <PhaseEquilibriumTable
                 results={result}
                 componentProperties={componentProperties}
               />
