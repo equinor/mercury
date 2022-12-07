@@ -34,7 +34,7 @@ function getRows(results: TResults): string[][] {
   ]
 }
 
-export const PhaseTable = (props: { results: TResults }) => {
+export const HgDistributionTable = (props: { results: TResults }) => {
   return (
     <DynamicTable
       subtables={[

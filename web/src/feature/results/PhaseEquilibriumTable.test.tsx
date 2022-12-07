@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
-import { MoleTable } from './MoleTable'
+import { PhaseEquilibriumTable } from './PhaseEquilibriumTable'
 import '@testing-library/jest-dom/extend-expect'
 import { mockComponentProperties, mockResults } from '../../setupTests'
 
 test('renders without crashing and displaying correct values in table', async () => {
   render(
-    <MoleTable
+    <PhaseEquilibriumTable
       componentProperties={mockComponentProperties}
       results={mockResults}
     />

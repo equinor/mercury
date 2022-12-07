@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Switch } from '@equinor/eds-core-react'
 import styled from 'styled-components'
 
-const MoleTableWrapper = styled.div`
+const Wrapper = styled.div`
   text-align: right;
 `
 
@@ -29,13 +29,13 @@ function getRows(
 }
 
 // TODO: Get type from generated API
-export const MoleTable = (props: {
+export const PhaseEquilibriumTable = (props: {
   results: TResults
   componentProperties: TComponentProperty[]
 }) => {
   const [fullPrecision, setFullPrecision] = useState<boolean>(false)
   return (
-    <MoleTableWrapper>
+    <Wrapper>
       <DynamicTable
         subtables={[
           {
@@ -75,6 +75,6 @@ export const MoleTable = (props: {
         checked={fullPrecision}
         onChange={(event) => setFullPrecision(event.target.checked)}
       />
-    </MoleTableWrapper>
+    </Wrapper>
   )
 }
