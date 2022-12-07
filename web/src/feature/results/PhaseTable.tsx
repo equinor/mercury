@@ -14,12 +14,6 @@ function getRows(results: TResults): string[][] {
     Array(Object.keys(results.phaseValues).length).fill(0)
   return [
     [
-      'Fractions',
-      ...Object.values(results.phaseValues).map((x) =>
-        formatNumber(x['percentage'])
-      ),
-    ],
-    [
       'Concentration (μg)',
       ...Object.entries(results.phaseValues).map(
         ([phase, x]) => formatNumber(x['mercury']) + getCorrectUnit(phase)

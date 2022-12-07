@@ -4,7 +4,8 @@ type TDynamicTableInput = {
   headers: string[]
   rows: string[][]
   density: 'comfortable' | 'compact'
-  caption: string
+  caption?: string
+  style?: React.CSSProperties
 }
 export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   function createTableRows() {
@@ -24,10 +25,12 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
 
   return (
     <EdsProvider density={props.density}>
-      <Table>
-        <Table.Caption>
-          <Typography variant="h3">{props.caption}</Typography>
-        </Table.Caption>
+      <Table style={props.style}>
+        {props.caption && (
+          <Table.Caption>
+            <Typography variant="h3">{props.caption}</Typography>
+          </Table.Caption>
+        )}
         <Table.Head>
           <Table.Row>
             {props.headers.map((header) => (
