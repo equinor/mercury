@@ -45,7 +45,9 @@ export const MoleTable = (props: {
                 'Fractions',
                 '',
                 ...Object.values(props.results.phaseValues).map((x) =>
-                  formatNumber(x['percentage'])
+                  fullPrecision
+                    ? x['percentage'].toString()
+                    : formatNumber(x['percentage'])
                 ),
               ],
             ],
