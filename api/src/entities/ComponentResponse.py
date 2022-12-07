@@ -35,7 +35,7 @@ class ComponentResponse(BaseModel):
         schema_extra = {
             "example": {
                 "components": {
-                    "1": {"chemicalFormula": "CO2", "altName": "Carbondioxide", "molecularWeight": 44.01},
+                    "1": {"chemicalFormula": "CO2", "altName": "Carbon Dioxide", "molecularWeight": 44.01},
                     "2": {"chemicalFormula": "N2", "altName": "Nitrogen", "molecularWeight": 28.014},
                     "3": {"chemicalFormula": "H2O", "altName": "Water", "molecularWeight": 18.015},
                     "101": {"chemicalFormula": "CH4", "altName": "Methane", "molecularWeight": 16.043},

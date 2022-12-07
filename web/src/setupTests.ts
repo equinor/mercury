@@ -78,7 +78,7 @@ export const mockComponentProperties: TComponentProperty[] = [
   {
     id: '1',
     chemicalFormula: 'CO2',
-    altName: 'Carbondioxide',
+    altName: 'Carbon Dioxide',
     molecularWeight: 44.01,
   },
   {

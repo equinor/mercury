@@ -1,7 +1,7 @@
 COMPONENTS = {
     "1": {
         "chemical_formula": "CO2",
-        "alt_name": "Carbondioxide",
+        "alt_name": "Carbon Dioxide",
         "molecular_weight": 44.01,
     },
     "2": {
