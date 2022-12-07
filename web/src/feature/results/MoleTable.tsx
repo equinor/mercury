@@ -37,29 +37,36 @@ export const MoleTable = (props: {
   return (
     <MoleTableWrapper>
       <DynamicTable
-        headers={['', ...Object.keys(props.results.phaseValues)]}
-        rows={[
-          [
-            'Fractions',
-            ...Object.values(props.results.phaseValues).map((x) =>
-              formatNumber(x['percentage'])
+        subtables={[
+          {
+            headers: ['', '', ...Object.keys(props.results.phaseValues)],
+            rows: [
+              [
+                'Fractions',
+                '',
+                ...Object.values(props.results.phaseValues).map((x) =>
+                  formatNumber(x['percentage'])
+                ),
+              ],
+            ],
+          },
+          {
+            headers: [
+              'Components',
+              'Feed ratio',
+              ...Object.keys(props.results.phaseValues).map(
+                (phase) => `${phase} (mol)`
+              ),
+            ],
+            rows: getRows(
+              props.results,
+              props.componentProperties,
+              fullPrecision
             ),
-          ],
+          },
         ]}
         density={'compact'}
         caption="Phase Equilibrium results"
-        style={{ width: '100%' }}
-      />
-      <DynamicTable
-        headers={[
-          'Components',
-          'Feed ratio',
-          ...Object.keys(props.results.phaseValues).map(
-            (phase) => `${phase} (mol)`
-          ),
-        ]}
-        rows={getRows(props.results, props.componentProperties, fullPrecision)}
-        density={'compact'}
       />
       <Switch
         label="full precision"

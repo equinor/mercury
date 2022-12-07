@@ -37,8 +37,12 @@ function getRows(results: TResults): string[][] {
 export const PhaseTable = (props: { results: TResults }) => {
   return (
     <DynamicTable
-      headers={['', ...Object.keys(props.results.phaseValues)]}
-      rows={getRows(props.results)}
+      subtables={[
+        {
+          headers: ['', ...Object.keys(props.results.phaseValues)],
+          rows: getRows(props.results),
+        },
+      ]}
       density={'comfortable'}
       caption="Mercury distribution results"
     />
