@@ -14,12 +14,6 @@ function getRows(results: TResults): string[][] {
     Array(Object.keys(results.phaseValues).length).fill(0)
   return [
     [
-      'Fractions',
-      ...Object.values(results.phaseValues).map((x) =>
-        formatNumber(x['percentage'])
-      ),
-    ],
-    [
       'Concentration (μg)',
       ...Object.entries(results.phaseValues).map(
         ([phase, x]) => formatNumber(x['mercury']) + getCorrectUnit(phase)
@@ -43,8 +37,12 @@ function getRows(results: TResults): string[][] {
 export const PhaseTable = (props: { results: TResults }) => {
   return (
     <DynamicTable
-      headers={['', ...Object.keys(props.results.phaseValues)]}
-      rows={getRows(props.results)}
+      subtables={[
+        {
+          headers: ['', ...Object.keys(props.results.phaseValues)],
+          rows: getRows(props.results),
+        },
+      ]}
       density={'comfortable'}
       caption="Mercury distribution results"
     />
