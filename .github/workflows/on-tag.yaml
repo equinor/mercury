@@ -6,29 +6,40 @@ on:
       - "v[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-  tests:
-    if: github.event.base_ref == 'refs/heads/main'
-    uses: ./.github/workflows/tests.yaml
-    secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
-
-  set-tag-ref:
-    if: github.event.base_ref == 'refs/heads/main'
+  get-refs:
     runs-on: ubuntu-latest
     outputs:
       tag-ref: ${{ steps.get-tag-ref.outputs.tag-ref }}
+      main-head-sha: ${{ steps.get-main-head-sha.outputs.main-head-sha }}
+      trigger-sha: ${{ steps.get-trigger-sha.outputs.trigger-sha }}
     steps:
       - uses: actions/checkout@master
+        with:
+          ref: "main"
       - id: get-tag-ref
         run: |
           TAG_REF=$(echo $GITHUB_REF | cut -d / -f 3)
           echo "tag-ref=$TAG_REF" >> $GITHUB_OUTPUT
+      - id: get-main-head-sha
+        run: |
+          MAIN_HEAD_SHA=$(git log -1 --format=format:'%H')
+          echo "main-head-sha=$MAIN_HEAD_SHA" >> $GITHUB_OUTPUT
+      - id: get-trigger-sha
+        run: |
+          echo "trigger-sha=$GITHUB_SHA" >> $GITHUB_OUTPUT
+
+  tests:
+    needs: get-refs
+    if: needs.get-refs.outputs.main-head-sha == needs.get-refs.outputs.trigger-sha
+    uses: ./.github/workflows/tests.yaml
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   publish-image:
-    needs: [set-tag-ref, tests]
+    needs: tests
     uses: ./.github/workflows/publish.yaml
     with:
-      image-tags: production,${{ needs.set-tag-ref.outputs.tag-ref }}
+      image-tags: production,${{ needs.get-refs.outputs.tag-ref }}
       oauth-redirect-url: https://mercury.app.radix.equinor.com
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
