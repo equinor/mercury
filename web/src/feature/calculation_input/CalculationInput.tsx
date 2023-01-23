@@ -81,7 +81,23 @@ export const CalculationInput = ({
             },
           })
           .then((result: AxiosResponse<MultiflashResponse>) => {
-            setResult({ ...result.data, cubicFeedFlow: cubicFeedFlow })
+            setResult({
+              phaseValues: Object.entries(result.data.phaseValues).map(
+                ([phase, data]) => ({
+                  phase: phase,
+                  percentage: data['percentage'],
+                  mercury: data['mercury'],
+                })
+              ),
+              cubicFeedFlow: cubicFeedFlow,
+              componentFractions: Object.entries(
+                result.data.componentFractions
+              ).map(([id, fractions]) => ({
+                id: id,
+                phaseFractions: fractions,
+                feedFraction: result.data.feedFractions[id],
+              })),
+            })
             setCalcStatus('done')
           })
           .catch(() => setCalcStatus('failure'))

@@ -15,13 +15,22 @@ function getRows(
   fullPrecision: boolean
 ): string[][] {
   return componentProperties
-    .filter((x) => x.id in results.componentFractions)
-    .map((x) => [
-      x.altName,
+    .filter((prop) => results.componentFractions.find((x) => x.id === prop.id))
+    .map((prop) => [
+      prop.altName,
       fullPrecision
-        ? results.feedFractions[x.id].toString()
-        : formatNumber(results.feedFractions[x.id]),
-      ...results.componentFractions[x.id].map((x) => {
+        ? results.componentFractions
+            .find((fractions) => fractions.id === prop.id)
+            ?.feedFraction.toString()
+        : formatNumber(
+            results.componentFractions.find(
+              (fractions) => fractions.id === prop.id
+            )?.feedFraction ?? 0
+          ),
+      ...(
+        results.componentFractions.find((fractions) => fractions.id === prop.id)
+          ?.phaseFractions ?? Array(results.phaseValues.length).fill(0)
+      ).map((x) => {
         if (fullPrecision) return x.toString()
         return formatNumber(x, 2, 3)
       }),
@@ -39,15 +48,15 @@ export const PhaseEquilibriumTable = (props: {
       <DynamicTable
         subtables={[
           {
-            headers: ['', '', ...Object.keys(props.results.phaseValues)],
+            headers: ['', '', ...props.results.phaseValues.map((x) => x.phase)],
             rows: [
               [
                 'Fractions',
                 '',
-                ...Object.values(props.results.phaseValues).map((x) =>
+                ...props.results.phaseValues.map((x) =>
                   fullPrecision
-                    ? x['percentage'].toString()
-                    : formatNumber(x['percentage'])
+                    ? x.percentage.toString()
+                    : formatNumber(x.percentage)
                 ),
               ],
             ],
@@ -56,9 +65,7 @@ export const PhaseEquilibriumTable = (props: {
             headers: [
               'Components',
               'Feed ratio',
-              ...Object.keys(props.results.phaseValues).map(
-                (phase) => `${phase} (mol)`
-              ),
+              ...props.results.phaseValues.map((x) => `${x.phase} (mol)`),
             ],
             rows: getRows(
               props.results,
