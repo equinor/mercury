@@ -14,27 +14,17 @@ function getRows(
   componentProperties: TComponentProperty[],
   fullPrecision: boolean
 ): string[][] {
-  return componentProperties
-    .filter((prop) => results.componentFractions.find((x) => x.id === prop.id))
-    .map((prop) => [
-      prop.altName,
-      fullPrecision
-        ? results.componentFractions
-            .find((fractions) => fractions.id === prop.id)
-            ?.feedFraction.toString()
-        : formatNumber(
-            results.componentFractions.find(
-              (fractions) => fractions.id === prop.id
-            )?.feedFraction ?? 0
-          ),
-      ...(
-        results.componentFractions.find((fractions) => fractions.id === prop.id)
-          ?.phaseFractions ?? Array(results.phaseValues.length).fill(0)
-      ).map((x) => {
-        if (fullPrecision) return x.toString()
-        return formatNumber(x, 2, 3)
-      }),
-    ])
+  return results.componentFractions.map(
+    ({ id, phaseFractions, feedFraction }) => {
+      return [
+        componentProperties.find((x) => x.id === id)?.altName ?? '',
+        fullPrecision ? feedFraction.toString() : formatNumber(feedFraction),
+        ...phaseFractions.map((x) =>
+          fullPrecision ? x.toString() : formatNumber(x, 2, 3)
+        ),
+      ]
+    }
+  )
 }
 
 // TODO: Get type from generated API
