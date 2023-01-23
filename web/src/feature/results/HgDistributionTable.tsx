@@ -10,13 +10,13 @@ function getRows(results: TResults): string[][] {
   const phPhaseFlowFactor =
     results.cubicFeedFlow * molePerStandardCubicMeter * mercuryMolecularWeight
   const mercury =
-    results.componentFractions['5'] ??
-    Array(Object.keys(results.phaseValues).length).fill(0)
+    results.componentFractions.find((x) => x.id === '5')?.phaseFractions ??
+    Array(results.phaseValues.length).fill(0)
   return [
     [
       'Concentration (μg)',
-      ...Object.entries(results.phaseValues).map(
-        ([phase, x]) => formatNumber(x['mercury']) + getCorrectUnit(phase)
+      ...results.phaseValues.map(
+        (x) => formatNumber(x.mercury) + getCorrectUnit(x.phase)
       ),
     ],
     [
@@ -25,9 +25,9 @@ function getRows(results: TResults): string[][] {
     ],
     [
       'Mercury Flow',
-      ...Object.values(results.phaseValues).map(
+      ...results.phaseValues.map(
         (x, index) =>
-          formatNumber(phPhaseFlowFactor * x['percentage'] * mercury[index]) +
+          formatNumber(phPhaseFlowFactor * x.percentage * mercury[index]) +
           ' g/d'
       ),
     ],
@@ -39,7 +39,7 @@ export const HgDistributionTable = (props: { results: TResults }) => {
     <DynamicTable
       subtables={[
         {
-          headers: ['', ...Object.keys(props.results.phaseValues)],
+          headers: ['', ...props.results.phaseValues.map((x) => x.phase)],
           rows: getRows(props.results),
         },
       ]}

@@ -14,7 +14,10 @@ export const Status = (props: {
     case 'calculating':
       return <Progress.Linear />
     case 'done':
-      if (props.result && 'Mercury' in props.result.phaseValues) {
+      if (
+        props.result &&
+        props.result.phaseValues.find((x) => x.phase === 'Mercury')
+      ) {
         return (
           <EdsBanner>
             <EdsBanner.Icon variant="warning">

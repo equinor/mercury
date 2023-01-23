@@ -1,10 +1,16 @@
-import { ComponentProperties, MultiflashResponse } from './api/generated'
+import { ComponentProperties } from './api/generated'
 
 export type TComponentProperty = ComponentProperties & {
   id: string
 }
 
-export type TResults = MultiflashResponse & {
+export type TResults = {
+  phaseValues: { phase: string; percentage: number; mercury: number }[]
+  componentFractions: {
+    id: string
+    phaseFractions: number[]
+    feedFraction: number
+  }[]
   cubicFeedFlow: number
 }
 
