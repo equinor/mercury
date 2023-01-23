@@ -90,13 +90,17 @@ export const CalculationInput = ({
                 })
               ),
               cubicFeedFlow: cubicFeedFlow,
-              componentFractions: Object.entries(
-                result.data.componentFractions
-              ).map(([id, fractions]) => ({
-                id: id,
-                phaseFractions: fractions,
-                feedFraction: result.data.feedFractions[id],
-              })),
+              componentFractions: selectedPackage.components
+                .filter(
+                  (x) =>
+                    x.id in result.data.componentFractions &&
+                    x.id in result.data.feedFractions
+                )
+                .map((x) => ({
+                  id: x.id,
+                  phaseFractions: result.data.componentFractions[x.id],
+                  feedFraction: result.data.feedFractions[x.id],
+                })),
             })
             setCalcStatus('done')
           })
