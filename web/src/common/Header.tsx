@@ -19,6 +19,18 @@ const Icons = styled.div`
   }
 `
 
+const CheckMarkUnorderedListElement = styled.li`
+  &:before {
+    content: '\\2713';
+    margin-left: -20px;
+    margin-right: 10px;
+  }
+`
+
+const NoBulletUnorderedList = styled.ul`
+  list-style: none;
+`
+
 export const Header = (): JSX.Element => {
   const [isUserInfoOpen, setUserInfoOpen] = useState(false)
   const [isAboutOpen, setAboutOpen] = useState(false)
@@ -37,7 +49,11 @@ export const Header = (): JSX.Element => {
         </TopBar.Header>
         <TopBar.Actions>
           <Icons>
-            <Button variant="ghost" href="https://github.com/equinor/mercury">
+            <Button
+              variant="ghost"
+              target="_blank"
+              href="https://github.com/equinor/mercury"
+            >
               Github <Icon data={external_link} />
             </Button>
             <Button
@@ -124,9 +140,11 @@ export const Header = (): JSX.Element => {
             been qualified for mercury calculations through the research
             activity “Mercury distribution in the oil & gas value chain”{' '}
             <a
+              target="_blank"
               href={
                 'https://colab.equinor.com/technologies/75C06E9B-49E4-4746-940E-EE6E33ED7F3E/summary'
               }
+              rel="noreferrer"
             >
               colab link
             </a>
@@ -141,91 +159,111 @@ export const Header = (): JSX.Element => {
           <p>
             <b>Offshore applications:</b> -30 to 110°C, 1 to 160 bara.
           </p>
+          <NoBulletUnorderedList>
+            <CheckMarkUnorderedListElement>
+              The model can be used for hydrocarbon systems with an overall
+              uncertainty of 50% for gas systems and an order of magnitude for
+              liquid systems. For the gas systems, the model tends to
+              underpredict mercury concentration, while for condensate systems
+              the model tends to overpredict with values up to appr. 10 times
+              higher (non-stabilized).
+            </CheckMarkUnorderedListElement>
 
-          <p>
-            The model can be used for hydrocarbon systems with an overall
-            uncertainty of 50% for gas systems and an order of magnitude for
-            liquid systems. For the gas systems, the model tends to underpredict
-            mercury concentration, while for condensate systems the model tends
-            to overpredict with values up to appr. 10 times higher
-            (non-stabilized).
-          </p>
-
-          <p>
-            The model can be used for produced water calculations, with
-            estimated uncertainty an order of magnitude (overestimation).
-          </p>
+            <CheckMarkUnorderedListElement>
+              The model can be used for produced water calculations, with
+              estimated uncertainty an order of magnitude (overestimation).
+            </CheckMarkUnorderedListElement>
+          </NoBulletUnorderedList>
 
           <p>
             <b>Onshore applications:</b> -50 to 150°C, 1 to 90 bara.
           </p>
 
-          <p>
-            The model can be used for hydrocarbon/Hg calculations, and it will
-            provide realistic and representative Hg concentrations and
-            distribution. For gas systems, the model tends to predict higher
-            concentrations but in the same order of magnitude as the
-            measurements. For hydrocarbon liquid systems, the model tends to
-            predict higher Hg concentrations, which can be up to an order of
-            magnitude higher.
-          </p>
+          <NoBulletUnorderedList>
+            <CheckMarkUnorderedListElement>
+              The model can be used for hydrocarbon/Hg calculations, and it will
+              provide realistic and representative Hg concentrations and
+              distribution. For gas systems, the model tends to predict higher
+              concentrations but in the same order of magnitude as the
+              measurements. For hydrocarbon liquid systems, the model tends to
+              predict higher Hg concentrations, which can be up to an order of
+              magnitude higher.
+            </CheckMarkUnorderedListElement>
+          </NoBulletUnorderedList>
           <p>
             It is also possible to use the model for glycol systems (MEG and
             TEG) but the uncertainty of the model is not defined for such
             calculations.
           </p>
 
-          <p>
-            The architecture contract for the calculator can be found{' '}
-            <a
-              href={
-                'https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md'
-              }
-            >
-              here
-            </a>
-          </p>
+          <ul>
+            <li>
+              The architecture contract for the calculator can be found{' '}
+              <a
+                target="_blank"
+                href={
+                  'https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md'
+                }
+                rel="noreferrer"
+              >
+                here
+              </a>
+            </li>
 
-          <p>
-            Test fluids for calculations can be found{' '}
-            <a
-              href={
-                'https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py'
-              }
-            >
-              here
-            </a>
-          </p>
+            <li>
+              Test fluids for calculations are available as{' '}
+              <a
+                target="_blank"
+                href={
+                  'https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py'
+                }
+                rel="noreferrer"
+              >
+                python code{' '}
+              </a>
+              and as a{' '}
+              <a
+                target="_blank"
+                href={
+                  'https://statoilsrm.sharepoint.com/:x:/r/sites/ts-96446/Shared%20Documents/Web%20tool%20for%20Hg%20calculations/Test%20fluids%20for%20mercury%20calculator.xlsx?d=wb4db1e09572d470e926fb53444beaa21&csf=1&web=1&e=YUhpF9'
+                }
+                rel="noreferrer"
+              >
+                excel sheet
+              </a>
+            </li>
 
-          <p>
-            For technical support please contact: fg_team_hermes@equinor.com
-          </p>
+            <li>
+              For technical support please contact: fg_team_hermes@equinor.com
+            </li>
+          </ul>
 
           <p>
             <b>References</b>
           </p>
-
-          <p>
-            Voutsas E, Magoulas K, Tassios D. Universal mixing rule for cubic
-            equations of state applicable to symmetric and asymmetric systems:
-            results with the Peng−Robinson equation of state. Ind Eng Chem Res
-            2004; 43(19):6238–46.
-          </p>
-          <p>
-            Novak N, Louli V, Skouras S, Voutsas E. Prediction of dew points and
-            liquid dropouts of gas condensate mixtures. Fluid Phase Equilibria
-            2018; 457:62–73.
-          </p>
-          <p>
-            Koulocheris V, Louli V, Panteli E, Skouras S, Voutsas E, Modelling
-            of elemental mercury solubility in natural gas components, Fuel 233
-            (2018) 558-564.
-          </p>
-          <p>
-            Koulocheris V, Plakia A, Louli V, Panteli E, Voutsas E, Calculating
-            the chemical and phase equilibria of mercury in natural gas, Fluid
-            Phase Equilibria, 544-545 (2021) 113089.{' '}
-          </p>
+          <ol>
+            <li>
+              Voutsas E, Magoulas K, Tassios D. Universal mixing rule for cubic
+              equations of state applicable to symmetric and asymmetric systems:
+              results with the Peng−Robinson equation of state. Ind Eng Chem Res
+              2004; 43(19):6238–46.
+            </li>
+            <li>
+              Novak N, Louli V, Skouras S, Voutsas E. Prediction of dew points
+              and liquid dropouts of gas condensate mixtures. Fluid Phase
+              Equilibria 2018; 457:62–73.
+            </li>
+            <li>
+              Koulocheris V, Louli V, Panteli E, Skouras S, Voutsas E, Modelling
+              of elemental mercury solubility in natural gas components, Fuel
+              233 (2018) 558-564.
+            </li>
+            <li>
+              Koulocheris V, Plakia A, Louli V, Panteli E, Voutsas E,
+              Calculating the chemical and phase equilibria of mercury in
+              natural gas, Fluid Phase Equilibria, 544-545 (2021) 113089.{' '}
+            </li>
+          </ol>
         </Popover.Content>
         <Popover.Actions>
           <Button onClick={() => setAboutOpen(false)}>Close</Button>
