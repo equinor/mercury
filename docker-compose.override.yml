@@ -30,6 +30,7 @@ services:
         CLIENT_ID: $CLIENT_ID
         TENANT_ID: $TENANT_ID
         REDIRECT_URI: http://localhost/
+        APP_INSIGHT_CON_STRING: $APPINSIGHTS_CONSTRING
     image: web-dev
     stdin_open: true
     volumes:

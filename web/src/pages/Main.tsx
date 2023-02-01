@@ -13,6 +13,8 @@ import { orderedComponents } from '../constants'
 import { Status } from '../feature/Status'
 import ErrorBoundary from '../common/ErrorBoundary'
 
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
+
 const Results = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -50,6 +52,11 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [calcStatus, setCalcStatus] = useState<TCalcStatus>()
   const [result, setResult] = useState<TResults>()
+  const appInsights = useAppInsightsContext()
+
+  useEffect(() => {
+    appInsights.trackEvent({ name: 'MainPageLoaded' }, {})
+  }, [])
 
   // Fetch list of components name once on page load
   useEffect(() => {
