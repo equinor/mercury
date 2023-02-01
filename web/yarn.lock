@@ -1736,10 +1736,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equinor/eds-icons@npm:0.17.0, @equinor/eds-icons@npm:^0.17.0":
+"@equinor/eds-icons@npm:0.17.0":
   version: 0.17.0
   resolution: "@equinor/eds-icons@npm:0.17.0"
   checksum: c9bd850e796c26e2479ac1e151e5da059593865c9906a779a7d86a3e2842cf27201659dfc34685b61ecccc5c53b48324b51efa050a9925cc2b381447f2ac06c4
+  languageName: node
+  linkType: hard
+
+"@equinor/eds-icons@npm:^0.18.0":
+  version: 0.18.0
+  resolution: "@equinor/eds-icons@npm:0.18.0"
+  checksum: 8b9db660a250219221b7c3032569b769f096952342d24d4431f316bfc7f8397b404ffce0ad4babc5bef7aaa06eb9dd692d4ea4d86f15134effc6b97dd6e1eb0f
   languageName: node
   linkType: hard
 
@@ -12910,7 +12917,7 @@ __metadata:
   resolution: "web@workspace:."
   dependencies:
     "@equinor/eds-core-react": ^0.28.0
-    "@equinor/eds-icons": ^0.17.0
+    "@equinor/eds-icons": ^0.18.0
     "@equinor/eds-tokens": ^0.9.0
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^13.4.0
