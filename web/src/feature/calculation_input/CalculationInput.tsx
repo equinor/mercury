@@ -15,10 +15,7 @@ import {
 } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
-import {
-  useAppInsightsContext,
-  useTrackEvent,
-} from '@microsoft/applicationinsights-react-js'
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
 const FlexContainer = styled.div`
   display: flex;
