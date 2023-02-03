@@ -14,12 +14,12 @@ class ApplicationException(Exception):
 
 
 class EntityNotFoundException(ApplicationException):
-    def __init__(self, message: str = None):
+    def __init__(self, message: str | None = None):
         super().__init__(message)
 
 
 class BadRequest(ApplicationException):
-    def __init__(self, message: str = None):
+    def __init__(self, message: str | None = None):
         super().__init__(message)
 
 

@@ -4,6 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
 import { TComponentProperty, TResults } from './types'
+import { TextEncoder } from 'util'
 
 export const mockComponentRatios = {
   '3': 0.062202,
@@ -303,3 +304,5 @@ export const mockComponentProperties: TComponentProperty[] = [
     molecularWeight: 142.285,
   },
 ]
+
+global.TextEncoder = TextEncoder
