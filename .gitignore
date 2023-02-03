@@ -5,6 +5,7 @@ build/
 /id_ed25519
 /id_ed25519.pub
 /web/node_modules/
+.yarn-integrity
 
 # Yarn 2
 web/.yarn/*

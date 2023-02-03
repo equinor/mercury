@@ -3,7 +3,7 @@
 Mercury calculator - API and Webapp
 
 ## About
-This calculator performs phase equilibrium calculations for mercury. It can be used to provide mercury distribution results for hydrocarbon mixtures at different temperatures and pressures. Depending on the corresponding conditions used, the calculator can provide results up to 4 separate phases: Hydrocarbon Gas/Hydrocarbon Liquid/Aqueous/Pure liquid Mercury. 
+This calculator performs phase equilibrium calculations for mercury. It can be used to provide mercury distribution results for hydrocarbon mixtures at different temperatures and pressures. Depending on the corresponding conditions used, the calculator can provide results up to 4 separate phases: Hydrocarbon Gas/Hydrocarbon Liquid/Aqueous/Pure Mercury (liquid or solid).
 
 The core of the calculator is the UMR model (1-4). This model has been qualified for mercury calculations through the research activity “Mercury distribution in the oil & gas value chain” [colab link](https://colab.equinor.com/technologies/75C06E9B-49E4-4746-940E-EE6E33ED7F3E/summary).  
 
@@ -22,11 +22,11 @@ __Onshore applications:__ -50 to 150°C, 1 to 90 bara.
 It is also possible to use the model for glycol systems (MEG and TEG) but the uncertainty of the model is not defined for such calculations. 
  
 
-- The architecture contract for the calculator can be found [here](https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md)  
+- The architecture contract for the calculator can be found [here](https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md) (requires sign in)
 
 - Test fluids for calculations can be found [here](https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py)
 
-- For technical support please contact: fg_team_hermes@equinor.com    
+- For technical support and improvement suggestions please contact: fg_team_hermes@equinor.com
  
 
 __References__ 

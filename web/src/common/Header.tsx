@@ -132,7 +132,7 @@ export const Header = (): JSX.Element => {
             hydrocarbon mixtures at different temperatures and pressures.
             Depending on the corresponding conditions used, the calculator can
             provide results up to 4 separate phases: Hydrocarbon Gas/Hydrocarbon
-            Liquid/Aqueous/Pure liquid Mercury.
+            Liquid/Aqueous/Pure Mercury (liquid or solid).
           </p>
 
           <p>
@@ -208,6 +208,7 @@ export const Header = (): JSX.Element => {
               >
                 here
               </a>
+              (requires sign in)
             </li>
 
             <li>
@@ -234,7 +235,8 @@ export const Header = (): JSX.Element => {
             </li>
 
             <li>
-              For technical support please contact: fg_team_hermes@equinor.com
+              For technical support and improvement suggestions please contact:
+              fg_team_hermes@equinor.com
             </li>
           </ul>
 
