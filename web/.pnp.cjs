@@ -4262,7 +4262,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
             ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
             ["@types/history", null],\
-            ["@types/react", "npm:18.0.26"],\
+            ["@types/react", "npm:18.0.27"],\
             ["@types/tslib", null],\
             ["history", null],\
             ["react", "npm:18.2.0"],\
