@@ -30,6 +30,7 @@ jobs:
       oauth-redirect-url: https://mercury.app.radix.equinor.com
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      APP_INSIGHT_CON_STRING: ${{ secrets.APP_INSIGHT_CON_STRING_PROD }}
 
   deploy:
     needs: publish-image

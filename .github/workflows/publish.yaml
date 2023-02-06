@@ -19,7 +19,9 @@ on:
       LIBHG_REPO_DEPLOY_KEY:
         description: "Deploy key for cloning libhg repository"
         required: true
-
+      APP_INSIGHT_CON_STRING:
+        description: "Connection string for Azure Application Insight"
+        required: true
 env:
   IMAGE_REGISTRY: ghcr.io
   REGISTRY_USER: $GITHUB_ACTOR
@@ -68,6 +70,7 @@ jobs:
           DOCKER_BUILDKIT=1 docker build \
           --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
           --build-arg AUTH_ENABLED=1 \
+          --build-arg APP_INSIGHT_CON_STRING=${{ secrets.APP_INSIGHT_CON_STRING }}\
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --cache-from ${WEB_IMAGE} \
           --tag ${WEB_IMAGE} \

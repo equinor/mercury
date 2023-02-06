@@ -15,4 +15,7 @@ web/.yarn/*
 !web/.yarn/releases
 !web/.yarn/sdks
 !web/.yarn/versions
+
+# Other
 .idea
+.mypy_cache

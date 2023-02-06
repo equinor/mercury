@@ -31,6 +31,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@equinor/eds-core-react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:0.29.1"],\
             ["@equinor/eds-icons", "npm:0.18.0"],\
             ["@equinor/eds-tokens", "npm:0.9.0"],\
+            ["@microsoft/applicationinsights-react-js", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0"],\
+            ["@microsoft/applicationinsights-web", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:2.8.9"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:13.4.0"],\
             ["@testing-library/user-event", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.4.3"],\
@@ -4086,6 +4088,241 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@leichtgewicht-ip-codec-npm-2.0.4-dd4d657af8-468de1f04d.zip/node_modules/@leichtgewicht/ip-codec/",\
           "packageDependencies": [\
             ["@leichtgewicht/ip-codec", "npm:2.0.4"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-analytics-js", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-analytics-js-npm-2.8.9-79304bfb75-87ca8a3510.zip/node_modules/@microsoft/applicationinsights-analytics-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-analytics-js", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-analytics-js-virtual-34208a07a5/0/cache/@microsoft-applicationinsights-analytics-js-npm-2.8.9-79304bfb75-87ca8a3510.zip/node_modules/@microsoft/applicationinsights-analytics-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-analytics-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-channel-js", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-channel-js-npm-2.8.9-41229ab509-41df06f9fe.zip/node_modules/@microsoft/applicationinsights-channel-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-channel-js", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-channel-js-virtual-e3010562e0/0/cache/@microsoft-applicationinsights-channel-js-npm-2.8.9-41229ab509-41df06f9fe.zip/node_modules/@microsoft/applicationinsights-channel-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-channel-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-common", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-common-npm-2.8.9-38320bdd15-6b1aa9fd59.zip/node_modules/@microsoft/applicationinsights-common/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-common", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-common-virtual-65ca924bac/0/cache/@microsoft-applicationinsights-common-npm-2.8.9-38320bdd15-6b1aa9fd59.zip/node_modules/@microsoft/applicationinsights-common/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-core-js", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-core-js-npm-2.8.9-98cea3c981-8066707bb0.zip/node_modules/@microsoft/applicationinsights-core-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-core-js", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-core-js-virtual-aa6acd8f5a/0/cache/@microsoft-applicationinsights-core-js-npm-2.8.9-98cea3c981-8066707bb0.zip/node_modules/@microsoft/applicationinsights-core-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-dependencies-js", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-dependencies-js-npm-2.8.9-990c32c5e5-6592acf07f.zip/node_modules/@microsoft/applicationinsights-dependencies-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-dependencies-js", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-dependencies-js-virtual-dd9b7d797b/0/cache/@microsoft-applicationinsights-dependencies-js-npm-2.8.9-990c32c5e5-6592acf07f.zip/node_modules/@microsoft/applicationinsights-dependencies-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-dependencies-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-properties-js", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-properties-js-npm-2.8.9-1c1d88aedd-5e2f3b000e.zip/node_modules/@microsoft/applicationinsights-properties-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-properties-js", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-properties-js-virtual-440da4bfbc/0/cache/@microsoft-applicationinsights-properties-js-npm-2.8.9-1c1d88aedd-5e2f3b000e.zip/node_modules/@microsoft/applicationinsights-properties-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-properties-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-react-js", [\
+        ["npm:3.4.0", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-react-js-npm-3.4.0-f4c5c3c822-4647731e87.zip/node_modules/@microsoft/applicationinsights-react-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-react-js", "npm:3.4.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-react-js-virtual-ef3d537b32/0/cache/@microsoft-applicationinsights-react-js-npm-3.4.0-f4c5c3c822-4647731e87.zip/node_modules/@microsoft/applicationinsights-react-js/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-react-js", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/history", null],\
+            ["@types/react", "npm:18.0.27"],\
+            ["@types/tslib", null],\
+            ["history", null],\
+            ["react", "npm:18.2.0"],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/history",\
+            "@types/react",\
+            "@types/tslib",\
+            "history",\
+            "react",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-shims", [\
+        ["npm:2.0.2", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-shims-npm-2.0.2-e502932b97-838e1b6620.zip/node_modules/@microsoft/applicationinsights-shims/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/applicationinsights-web", [\
+        ["npm:2.8.9", {\
+          "packageLocation": "./.yarn/cache/@microsoft-applicationinsights-web-npm-2.8.9-230db9b5d1-d89f0cc0c2.zip/node_modules/@microsoft/applicationinsights-web/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-web", "npm:2.8.9"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:2.8.9", {\
+          "packageLocation": "./.yarn/__virtual__/@microsoft-applicationinsights-web-virtual-c620767591/0/cache/@microsoft-applicationinsights-web-npm-2.8.9-230db9b5d1-d89f0cc0c2.zip/node_modules/@microsoft/applicationinsights-web/",\
+          "packageDependencies": [\
+            ["@microsoft/applicationinsights-web", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-analytics-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-channel-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-common", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-core-js", "virtual:ef3d537b32dcd32d63586a762e261d32ba70ab5207bf3aa27ef75b0b52e3b0fc04e86c23f8bd679723434fd349fd463320f14d09cee40ea760b25beb6e8b2581#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-dependencies-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-properties-js", "virtual:c62076759182b14dadbd581ad82e77b8973c30fcf1b36b3dfc5ac72ca52c470cdf9122f3d63a7bb35037b4a4ae675037cbcb2a9a8660275887850e4612a9605c#npm:2.8.9"],\
+            ["@microsoft/applicationinsights-shims", "npm:2.0.2"],\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"],\
+            ["@types/tslib", null],\
+            ["tslib", null]\
+          ],\
+          "packagePeers": [\
+            "@types/tslib",\
+            "tslib"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@microsoft/dynamicproto-js", [\
+        ["npm:1.1.7", {\
+          "packageLocation": "./.yarn/cache/@microsoft-dynamicproto-js-npm-1.1.7-5e2d5e97bd-60446aaa7d.zip/node_modules/@microsoft/dynamicproto-js/",\
+          "packageDependencies": [\
+            ["@microsoft/dynamicproto-js", "npm:1.1.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -18033,6 +18270,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@equinor/eds-core-react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:0.29.1"],\
             ["@equinor/eds-icons", "npm:0.18.0"],\
             ["@equinor/eds-tokens", "npm:0.9.0"],\
+            ["@microsoft/applicationinsights-react-js", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:3.4.0"],\
+            ["@microsoft/applicationinsights-web", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:2.8.9"],\
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:13.4.0"],\
             ["@testing-library/user-event", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.4.3"],\

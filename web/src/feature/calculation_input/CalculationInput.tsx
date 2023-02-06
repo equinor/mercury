@@ -15,6 +15,7 @@ import {
 } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -55,6 +56,7 @@ export const CalculationInput = ({
   const [cubicFeedFlow, setCubicFeedFlow] = useState<number>(1000)
   const [isTemperatureValid, setIsTemperatureValid] = useState<boolean>(true)
   const [isPressureValid, setIsPressureValid] = useState<boolean>(true)
+  const appInsights = useAppInsightsContext()
 
   const calculate = (
     <Button
@@ -68,18 +70,20 @@ export const CalculationInput = ({
       onClick={() => {
         if (selectedPackage === undefined) return
         setCalculating(true)
+        appInsights.trackEvent({ name: 'CalculationStarted' })
         setResult(undefined)
         setCalcStatus('calculating')
+        const requestParameters = {
+          multiflash: {
+            componentComposition: Object.fromEntries(
+              selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
+            ),
+            temperature: temperature,
+            pressure: pressure,
+          },
+        }
         mercuryApi
-          .computeMultiflash({
-            multiflash: {
-              componentComposition: Object.fromEntries(
-                selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
-              ),
-              temperature: temperature,
-              pressure: pressure,
-            },
-          })
+          .computeMultiflash(requestParameters)
           .then((result: AxiosResponse<MultiflashResponse>) => {
             setResult({
               phaseValues: Object.entries(result.data.phaseValues).map(
@@ -104,7 +108,13 @@ export const CalculationInput = ({
             })
             setCalcStatus('done')
           })
-          .catch(() => setCalcStatus('failure'))
+          .catch(() => {
+            appInsights.trackEvent(
+              { name: 'CalculationFailed' },
+              requestParameters
+            )
+            setCalcStatus('failure')
+          })
           .finally(() => setCalculating(false))
       }}
     >

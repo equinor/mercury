@@ -1,14 +1,11 @@
-import time
-from typing import Callable
-
 import click
 import uvicorn
 from fastapi import APIRouter, FastAPI, Security
-from starlette.requests import Request
-from starlette.responses import RedirectResponse, Response
+from starlette.middleware import Middleware
+from starlette.responses import RedirectResponse
 
 from authentication.authentication import auth_with_jwt
-from common.utils.logger import logger
+from common.middleware import OpenCensusRequestLoggingMiddleware, TimerHeaderMiddleware
 from config import config
 from features.component import component_feature
 from features.health_check import health_check_feature
@@ -30,15 +27,13 @@ def create_app() -> FastAPI:
     app.include_router(authenticated_routes, dependencies=[Security(auth_with_jwt)])
     app.include_router(public_routes)
 
-    @app.middleware("http")
-    async def add_process_time_header(request: Request, call_next: Callable) -> Response:
-        start_time = time.time()
-        response: Response = await call_next(request)
-        process_time = time.time() - start_time
-        milliseconds = int(round(process_time * 1000))
-        logger.debug(f"{request.method} {request.url.path} - {milliseconds}ms - {response.status_code}")
-        response.headers["X-Process-Time"] = str(process_time)
-        return response
+    middleware = [Middleware(TimerHeaderMiddleware)]
+
+    if config.APPINSIGHTS_CONSTRING:
+        middleware.append(Middleware(OpenCensusRequestLoggingMiddleware))
+        print("################ INFO ################")
+        print("#  Azure AppInsight logging enabled  #")
+        print("################ INFO ################")
 
     @app.get("/", operation_id="redirect_to_docs", response_class=RedirectResponse, include_in_schema=False)
     def redirect_to_docs():

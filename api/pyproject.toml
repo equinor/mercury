@@ -17,6 +17,7 @@ cryptography = "^39.0.0"
 # Not a direct dependecy, but needed to get certificates
 certifi = "^2022.12.7"
 requests = "^2.28.1"
+opencensus-ext-azure = "^1.1.8"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^2.20.0"
