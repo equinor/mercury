@@ -25,13 +25,13 @@ jobs:
   publish-image:
     needs: [set-tag-ref, tests]
     uses: ./.github/workflows/publish.yaml
+    environment: Prod
     with:
       image-tags: production,${{ needs.set-tag-ref.outputs.tag-ref }}
       oauth-redirect-url: https://mercury.app.radix.equinor.com
-      app_insight_con_string: ${{ secrets.APP_INSIGHT_CON_STRING_DEV }}
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
-
+      APP_INSIGHT_CON_STRING: ${{ secrets.APP_INSIGHT_CON_STRING }}
   deploy:
     needs: publish-image
     uses: ./.github/workflows/deploy.yaml
