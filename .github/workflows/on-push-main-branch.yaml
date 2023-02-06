@@ -28,13 +28,12 @@ jobs:
   publish-latest:
     needs: tests
     uses: ./.github/workflows/publish.yaml
-    environment: Dev
     with:
       image-tags: latest
       oauth-redirect-url: "https://proxy-mercury-dev.radix.equinor.com"
+      environment: Dev
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
-      APP_INSIGHT_CON_STRING: ${{ secrets.APP_INSIGHT_CON_STRING }}
 
   deploy:
     needs: publish-latest
