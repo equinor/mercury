@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - test-ci-2
     paths-ignore:
       - "CHANGELOG.md"
 
@@ -40,3 +41,5 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     with:
       radix-environment: "dev"
+    secrets:
+      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
