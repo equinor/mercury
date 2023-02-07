@@ -36,3 +36,5 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     with:
       radix-environment: "prod"
+    secrets:
+      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
