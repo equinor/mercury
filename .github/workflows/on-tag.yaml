@@ -28,7 +28,7 @@ jobs:
     with:
       image-tags: production,${{ needs.set-tag-ref.outputs.tag-ref }}
       oauth-redirect-url: https://mercury.app.radix.equinor.com
-      environment: Prod
+      app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
   deploy:

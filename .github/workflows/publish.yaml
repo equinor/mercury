@@ -12,7 +12,7 @@ on:
         default: "https://proxy-mercury-dev.radix.equinor.com"
         required: true
         type: string
-      environment:
+      app_insight_con_string:
         type: string
         required: true
     secrets:
@@ -55,7 +55,6 @@ jobs:
           done
 
   build-and-publish-web:
-    environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -72,7 +71,7 @@ jobs:
           DOCKER_BUILDKIT=1 docker build \
           --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
           --build-arg AUTH_ENABLED=1 \
-          --build-arg APP_INSIGHT_CON_STRING=${{ vars.APP_INSIGHT_CON_STRING }} \
+          --build-arg APP_INSIGHT_CON_STRING="${{ inputs.app_insight_con_string }}" \
           --build-arg BUILDKIT_INLINE_CACHE=1 \
           --cache-from ${WEB_IMAGE} \
           --tag ${WEB_IMAGE} \
