@@ -81,6 +81,7 @@ export const CalculationInput = ({
           ),
           temperature: temperature,
           pressure: pressure,
+          cubicFeedFlow: cubicFeedFlow,
         }
         setLastInput(input)
         mercuryApi

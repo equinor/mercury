@@ -90,6 +90,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
             <Status calcStatus={calcStatus} result={result} />
             {result && (
               <Results>
+                {/*TODO: Make use of cubicFeedFlow in LastInputContext here: */}
                 <HgDistributionTable results={result} />
                 <PhaseEquilibriumTable
                   results={result}

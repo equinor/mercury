@@ -1,8 +1,9 @@
 import { createContext, useContext, useState } from 'react'
 import { Multiflash } from '../../api/generated'
+import { TLastInput } from '../../types'
 
 const LastInputContext = createContext<
-  | { lastInput: Multiflash; setLastInput: (input: Multiflash) => void }
+  | { lastInput: Multiflash; setLastInput: (input: TLastInput) => void }
   | undefined
 >(undefined)
 
@@ -11,8 +12,9 @@ function LastInputProvider({ children }: { children: React.ReactNode }) {
     componentComposition: {},
     temperature: 15,
     pressure: 1,
+    cubicFeedFlow: 1000,
   }
-  const [lastInput, setLastInput] = useState<Multiflash>(initial as Multiflash)
+  const [lastInput, setLastInput] = useState<TLastInput>(initial as TLastInput)
 
   return (
     <LastInputContext.Provider value={{ lastInput, setLastInput }}>
