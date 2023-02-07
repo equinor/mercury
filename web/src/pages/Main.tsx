@@ -12,6 +12,7 @@ import { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { orderedComponents } from '../constants'
 import { Status } from '../feature/Status'
 import ErrorBoundary from '../common/ErrorBoundary'
+import { LastInputProvider } from './context/LastInputContext'
 
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
@@ -52,12 +53,12 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [calcStatus, setCalcStatus] = useState<TCalcStatus>()
   const [result, setResult] = useState<TResults>()
+
   const appInsights = useAppInsightsContext()
 
   useEffect(() => {
     appInsights.trackEvent({ name: 'MainPageLoaded' }, {})
   }, [])
-
   // Fetch list of components name once on page load
   useEffect(() => {
     mercuryApi
@@ -78,23 +79,26 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       <Header />
       <Container>
         <ErrorBoundary>
-          <CalculationInput
-            mercuryApi={mercuryApi}
-            setResult={setResult}
-            setCalcStatus={setCalcStatus}
-            componentProperties={componentProperties}
-          />
-          <DividerWithLargeSpacings />
-          <Status calcStatus={calcStatus} result={result} />
-          {result && (
-            <Results>
-              <HgDistributionTable results={result} />
-              <PhaseEquilibriumTable
-                results={result}
-                componentProperties={componentProperties}
-              />
-            </Results>
-          )}
+          <LastInputProvider>
+            <CalculationInput
+              mercuryApi={mercuryApi}
+              setResult={setResult}
+              setCalcStatus={setCalcStatus}
+              componentProperties={componentProperties}
+            />
+            <DividerWithLargeSpacings />
+            <Status calcStatus={calcStatus} result={result} />
+            {result && (
+              <Results>
+                {/*TODO: Make use of cubicFeedFlow in LastInputContext here: */}
+                <HgDistributionTable results={result} />
+                <PhaseEquilibriumTable
+                  results={result}
+                  componentProperties={componentProperties}
+                />
+              </Results>
+            )}
+          </LastInputProvider>
         </ErrorBoundary>
       </Container>
     </>

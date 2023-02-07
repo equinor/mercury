@@ -15,6 +15,7 @@ import {
 } from '../../types'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { TempOrPressureInput } from './TempOrPressureInput'
+import { useLastInputContext } from '../../pages/context/LastInputContext'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
 const FlexContainer = styled.div`
@@ -48,6 +49,7 @@ export const CalculationInput = ({
 }) => {
   const [isNewOpen, setIsNewOpen] = useState<boolean>(false)
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false)
+  const { setLastInput } = useLastInputContext()
   const [temperature, setTemperature] = useState<number>(15)
   const [pressure, setPressure] = useState<number>(1)
   const [calculating, setCalculating] = useState<boolean>(false)
@@ -73,17 +75,19 @@ export const CalculationInput = ({
         appInsights.trackEvent({ name: 'CalculationStarted' })
         setResult(undefined)
         setCalcStatus('calculating')
-        const requestParameters = {
-          multiflash: {
-            componentComposition: Object.fromEntries(
-              selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
-            ),
-            temperature: temperature,
-            pressure: pressure,
-          },
+        const input = {
+          componentComposition: Object.fromEntries(
+            selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
+          ),
+          temperature: temperature,
+          pressure: pressure,
+          cubicFeedFlow: cubicFeedFlow,
         }
+        setLastInput(input)
         mercuryApi
-          .computeMultiflash(requestParameters)
+          .computeMultiflash({
+            multiflash: input,
+          })
           .then((result: AxiosResponse<MultiflashResponse>) => {
             setResult({
               phaseValues: Object.entries(result.data.phaseValues).map(
@@ -109,10 +113,7 @@ export const CalculationInput = ({
             setCalcStatus('done')
           })
           .catch(() => {
-            appInsights.trackEvent(
-              { name: 'CalculationFailed' },
-              requestParameters
-            )
+            appInsights.trackEvent({ name: 'CalculationFailed' }, input)
             setCalcStatus('failure')
           })
           .finally(() => setCalculating(false))

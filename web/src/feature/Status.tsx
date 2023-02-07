@@ -5,11 +5,14 @@ import {
   warning_outlined,
 } from '@equinor/eds-icons'
 import { TCalcStatus, TResults } from '../types'
+import { useLastInputContext } from '../pages/context/LastInputContext'
 
 export const Status = (props: {
   calcStatus: TCalcStatus
   result: TResults | undefined
 }) => {
+  const { lastInput } = useLastInputContext()
+
   switch (props.calcStatus) {
     case 'calculating':
       return <Progress.Linear />
@@ -18,14 +21,13 @@ export const Status = (props: {
         props.result &&
         props.result.phaseValues.find((x) => x.phase === 'Mercury')
       ) {
+        const state = lastInput.temperature < -38.83 ? 'Solid' : 'Liquid'
         return (
           <EdsBanner>
             <EdsBanner.Icon variant="warning">
               <Icon data={warning_outlined} />
             </EdsBanner.Icon>
-            <EdsBanner.Message>
-              Liquid mercury has been formed
-            </EdsBanner.Message>
+            <EdsBanner.Message>{`${state} mercury has been formed`}</EdsBanner.Message>
           </EdsBanner>
         )
       } else {
