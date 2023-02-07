@@ -113,10 +113,7 @@ export const CalculationInput = ({
             setCalcStatus('done')
           })
           .catch(() => {
-            appInsights.trackEvent(
-              { name: 'CalculationFailed' },
-              requestParameters
-            )
+            appInsights.trackEvent({ name: 'CalculationFailed' }, input)
             setCalcStatus('failure')
           })
           .finally(() => setCalculating(false))
