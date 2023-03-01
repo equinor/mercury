@@ -11127,12 +11127,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-oauth2-code-pkce@npm:^1.10.3":
-  version: 1.10.3
-  resolution: "react-oauth2-code-pkce@npm:1.10.3"
+"react-oauth2-code-pkce@npm:^1.11.0":
+  version: 1.11.0
+  resolution: "react-oauth2-code-pkce@npm:1.11.0"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: fb81829cfba18c8c04b1e613f81ec1a19752211b03bdf5963814d2364e1c1aee8a1848eb2ddb474e4656d2559869b98fc912f42f17125524579ecc0fa48b74ee
+  checksum: 8e9d44f2c469515ae9fe44f8485356a6e907e3128b4751fcffd6fa8e93244f49b24b779fd1ca25cc37968d19f3fdf604672ec5388fb5bdaf93a5b157446eb5b3
   languageName: node
   linkType: hard
 
@@ -13061,7 +13061,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-is: ^18.2.0
-    react-oauth2-code-pkce: ^1.10.3
+    react-oauth2-code-pkce: ^1.11.0
     react-scripts: 5.0.1
     styled-components: ^5.3.6
     typescript: ^4.9.5
