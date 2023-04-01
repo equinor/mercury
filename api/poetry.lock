@@ -720,8 +720,8 @@ files = [
 [package.dependencies]
 msal = ">=0.4.1,<2.0.0"
 portalocker = [
-    {version = ">=1.6,<3", markers = "python_version >= \"3.5\" and platform_system == \"Windows\""},
     {version = ">=1.0,<3", markers = "python_version >= \"3.5\" and platform_system != \"Windows\""},
+    {version = ">=1.6,<3", markers = "python_version >= \"3.5\" and platform_system == \"Windows\""},
 ]
 
 [[package]]
@@ -779,14 +779,14 @@ files = [
 
 [[package]]
 name = "opencensus"
-version = "0.11.1"
+version = "0.11.2"
 description = "A stats collection and distributed tracing framework"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "opencensus-0.11.1-py2.py3-none-any.whl", hash = "sha256:96a4375e97dfc30a5dffcbae6aba32f58e340178e673d0d2db2905ff2df3df20"},
-    {file = "opencensus-0.11.1.tar.gz", hash = "sha256:b52dd6b4013c133a6be9f0ff2e9068c6401d3332b0ecc5faef3dd6c42166f6f3"},
+    {file = "opencensus-0.11.2-py2.py3-none-any.whl", hash = "sha256:7a1a34b87c8db3d9984e97ff05739058342f24de1d700766d59044eee8fb3b3f"},
+    {file = "opencensus-0.11.2.tar.gz", hash = "sha256:6154042a236b9ecdd55a23dfbb2743bb3deacd0687e3e0391ec2e0c74950d66f"},
 ]
 
 [package.dependencies]
@@ -807,20 +807,20 @@ files = [
 
 [[package]]
 name = "opencensus-ext-azure"
-version = "1.1.8"
+version = "1.1.9"
 description = "OpenCensus Azure Monitor Exporter"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "opencensus-ext-azure-1.1.8.tar.gz", hash = "sha256:b29136b67da2645c32e9f3ba58692d63d308120ef2c32d0e048d9a5f5c3a82a4"},
-    {file = "opencensus_ext_azure-1.1.8-py2.py3-none-any.whl", hash = "sha256:662859eb8bdc2d4cd93fd6d0e0c732604d9f8c3d5b8fc70ba6c68b003a40ae65"},
+    {file = "opencensus-ext-azure-1.1.9.tar.gz", hash = "sha256:507608b77e9d8eaab6ffd5ff11b7ceb87f54e4a6a940c4b814331b4d1b034151"},
+    {file = "opencensus_ext_azure-1.1.9-py2.py3-none-any.whl", hash = "sha256:166c858e70fb7b39d01ff7d9f745588c521070ff2cfe177f77b63ee87f5076ac"},
 ]
 
 [package.dependencies]
 azure-core = ">=1.12.0,<2.0.0"
 azure-identity = ">=1.5.0,<2.0.0"
-opencensus = ">=0.11.1,<1.0.0"
+opencensus = ">=0.11.2,<1.0.0"
 psutil = ">=5.6.3"
 requests = ">=2.19.0"
 
@@ -1566,4 +1566,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10.4"
-content-hash = "fed4d39f3ec4721ed219d1302c481000728a8f80b429639802dc4b37f0782068"
+content-hash = "ae93383a63a60688c4c855b8391d4593f7a632d7c8c47f1d9dc80c7e2b6197a6"
