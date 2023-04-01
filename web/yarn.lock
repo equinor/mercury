@@ -2242,35 +2242,48 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-analytics-js@npm:2.8.10":
-  version: 2.8.10
-  resolution: "@microsoft/applicationinsights-analytics-js@npm:2.8.10"
+"@microsoft/applicationinsights-analytics-js@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-analytics-js@npm:2.8.11"
   dependencies:
-    "@microsoft/applicationinsights-common": 2.8.10
-    "@microsoft/applicationinsights-core-js": 2.8.10
+    "@microsoft/applicationinsights-common": 2.8.11
+    "@microsoft/applicationinsights-core-js": 2.8.11
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.7
   peerDependencies:
     tslib: "*"
-  checksum: 8015acd44d0a04c67dfb66fc5c01f1142eefc025f56087f3c1224a63ec9d80227337f21c91160add838ee631c1ac8331c9b0283342c99f3004ed2430e1069ef4
+  checksum: 10d2a583ed014bd9309468fc0e9ccd5ec4d615e7dc644b5b209dfb1a2aaf7ac6cc7a2476ca1049daae50f4bb4f1ff46aaebbec768e4b98c9075d72e61433198f
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-channel-js@npm:2.8.10":
-  version: 2.8.10
-  resolution: "@microsoft/applicationinsights-channel-js@npm:2.8.10"
+"@microsoft/applicationinsights-channel-js@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-channel-js@npm:2.8.11"
   dependencies:
-    "@microsoft/applicationinsights-common": 2.8.10
-    "@microsoft/applicationinsights-core-js": 2.8.10
+    "@microsoft/applicationinsights-common": 2.8.11
+    "@microsoft/applicationinsights-core-js": 2.8.11
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.7
   peerDependencies:
     tslib: "*"
-  checksum: 65d42165f05976f93c6801192dbe3bffb7a19ee410929ad0e045794187ec4884680ae7df7b76b1aabf761026be15a1c8ae7154badd00ef0de5bc0b42cd26df9e
+  checksum: 31d2ffc2e2c10c7a4fc852fe47a40caad0e9e13e3682dfb996a6439ff20c62d5e282d9bdf48886917b6fe5178765e29f1bcaa85fa5d53a485b161d3697534007
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-common@npm:2.8.10, @microsoft/applicationinsights-common@npm:^2.8.10":
+"@microsoft/applicationinsights-common@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-common@npm:2.8.11"
+  dependencies:
+    "@microsoft/applicationinsights-core-js": 2.8.11
+    "@microsoft/applicationinsights-shims": 2.0.2
+    "@microsoft/dynamicproto-js": ^1.1.7
+  peerDependencies:
+    tslib: "*"
+  checksum: aa2792def72467adceec37716baecf473e29df23611994f960a99881b2976e3a48e4a4198cb500899ece078530cea7861a05b0d8844ea5e5139db63f6aa02a59
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-common@npm:^2.8.10":
   version: 2.8.10
   resolution: "@microsoft/applicationinsights-common@npm:2.8.10"
   dependencies:
@@ -2295,31 +2308,43 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-dependencies-js@npm:2.8.10":
-  version: 2.8.10
-  resolution: "@microsoft/applicationinsights-dependencies-js@npm:2.8.10"
+"@microsoft/applicationinsights-core-js@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-core-js@npm:2.8.11"
   dependencies:
-    "@microsoft/applicationinsights-common": 2.8.10
-    "@microsoft/applicationinsights-core-js": 2.8.10
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.7
   peerDependencies:
     tslib: "*"
-  checksum: c1780ce0cf06e82b812de5465335da542e2c08f84e188eab76c78ce6667fd1046f650833172d4968e5b9fed346219c8d543149dd033a5434682e4e41da3ee880
+  checksum: 4ce1633b777f94fdcc42b849dfdd60c2e631ffb426efd34305f09c173c2e1c431b6f9f10691ca5bb830ede46bee7583f33b139a617e13ee098fe967e701541d9
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-properties-js@npm:2.8.10":
-  version: 2.8.10
-  resolution: "@microsoft/applicationinsights-properties-js@npm:2.8.10"
+"@microsoft/applicationinsights-dependencies-js@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-dependencies-js@npm:2.8.11"
   dependencies:
-    "@microsoft/applicationinsights-common": 2.8.10
-    "@microsoft/applicationinsights-core-js": 2.8.10
+    "@microsoft/applicationinsights-common": 2.8.11
+    "@microsoft/applicationinsights-core-js": 2.8.11
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.7
   peerDependencies:
     tslib: "*"
-  checksum: 2eeb280cd2ea384afd01bbff2d98d0269c15e3cfd7b7bd9c335b311f64ae5732fb62ba9072a369e04fee470906b410981e16c5b26c3e73482fa86560152561b0
+  checksum: 58477c20a8bd2e33d129b2063b245e2196fb4b08545b655578bd48b1586cbe15768683a3cf2195396b15869e92975fbe9b98bac1a14fbcade8a8a43d7f630adb
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-properties-js@npm:2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-properties-js@npm:2.8.11"
+  dependencies:
+    "@microsoft/applicationinsights-common": 2.8.11
+    "@microsoft/applicationinsights-core-js": 2.8.11
+    "@microsoft/applicationinsights-shims": 2.0.2
+    "@microsoft/dynamicproto-js": ^1.1.7
+  peerDependencies:
+    tslib: "*"
+  checksum: 07712d154d094d6f56b08f722e0519617b571db37a31ac0a19a749cef3f953d196d5c6241b602e7b530c3df3352d291bf48eb14eb730ded7482f39567c31cbe8
   languageName: node
   linkType: hard
 
@@ -2346,21 +2371,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-web@npm:^2.8.10":
-  version: 2.8.10
-  resolution: "@microsoft/applicationinsights-web@npm:2.8.10"
+"@microsoft/applicationinsights-web@npm:^2.8.11":
+  version: 2.8.11
+  resolution: "@microsoft/applicationinsights-web@npm:2.8.11"
   dependencies:
-    "@microsoft/applicationinsights-analytics-js": 2.8.10
-    "@microsoft/applicationinsights-channel-js": 2.8.10
-    "@microsoft/applicationinsights-common": 2.8.10
-    "@microsoft/applicationinsights-core-js": 2.8.10
-    "@microsoft/applicationinsights-dependencies-js": 2.8.10
-    "@microsoft/applicationinsights-properties-js": 2.8.10
+    "@microsoft/applicationinsights-analytics-js": 2.8.11
+    "@microsoft/applicationinsights-channel-js": 2.8.11
+    "@microsoft/applicationinsights-common": 2.8.11
+    "@microsoft/applicationinsights-core-js": 2.8.11
+    "@microsoft/applicationinsights-dependencies-js": 2.8.11
+    "@microsoft/applicationinsights-properties-js": 2.8.11
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.7
   peerDependencies:
     tslib: "*"
-  checksum: 80738dccb3883cf1e594095823d06699ee515a41d6b65d8b11d4bf463227d811c958c57ff77c016341a452454e14807a55114965110506e573bdb1eb4f8300f6
+  checksum: 6b55b734c8c68ac8697f1a301bdffa7d707f4655df8453d24238d5522820b9479c8386db84ddca49ff669943928e12623076905a1e16d0ff0fc8e6736eecf225
   languageName: node
   linkType: hard
 
@@ -13036,7 +13061,7 @@ __metadata:
     "@equinor/eds-icons": ^0.18.0
     "@equinor/eds-tokens": ^0.9.0
     "@microsoft/applicationinsights-react-js": ^3.4.1
-    "@microsoft/applicationinsights-web": ^2.8.10
+    "@microsoft/applicationinsights-web": ^2.8.11
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^14.4.3
