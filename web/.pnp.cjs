@@ -36,7 +36,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.4.3"],\
-            ["@types/jest", "npm:29.4.0"],\
+            ["@types/jest", "npm:29.5.0"],\
             ["@types/node", "npm:18.14.0"],\
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-dom", "npm:18.0.11"],\
@@ -5135,6 +5135,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-jest-npm-29.4.0-e28b79cadc-2376028236.zip/node_modules/@types/jest/",\
           "packageDependencies": [\
             ["@types/jest", "npm:29.4.0"],\
+            ["expect", "npm:29.3.0"],\
+            ["pretty-format", "npm:29.2.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:29.5.0", {\
+          "packageLocation": "./.yarn/cache/@types-jest-npm-29.5.0-18eef6c3cc-cd877e5c56.zip/node_modules/@types/jest/",\
+          "packageDependencies": [\
+            ["@types/jest", "npm:29.5.0"],\
             ["expect", "npm:29.3.0"],\
             ["pretty-format", "npm:29.2.1"]\
           ],\
@@ -17939,7 +17948,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.16.5"],\
             ["@testing-library/react", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.0.0"],\
             ["@testing-library/user-event", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:14.4.3"],\
-            ["@types/jest", "npm:29.4.0"],\
+            ["@types/jest", "npm:29.5.0"],\
             ["@types/node", "npm:18.14.0"],\
             ["@types/react", "npm:18.0.28"],\
             ["@types/react-dom", "npm:18.0.11"],\
