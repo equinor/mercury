@@ -1726,10 +1726,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@equinor/eds-icons@npm:0.18.0, @equinor/eds-icons@npm:^0.18.0":
+"@equinor/eds-icons@npm:0.18.0":
   version: 0.18.0
   resolution: "@equinor/eds-icons@npm:0.18.0"
   checksum: 8b9db660a250219221b7c3032569b769f096952342d24d4431f316bfc7f8397b404ffce0ad4babc5bef7aaa06eb9dd692d4ea4d86f15134effc6b97dd6e1eb0f
+  languageName: node
+  linkType: hard
+
+"@equinor/eds-icons@npm:^0.19.1":
+  version: 0.19.1
+  resolution: "@equinor/eds-icons@npm:0.19.1"
+  checksum: 2b9513de0dcdf4e2250ddb8f0481c9bfeac16133138c48c8f5a55b2d994c053bea897d404585023920c4ad4751eef8c0467d16549c9cd02b588f40aa0a3fbb46
   languageName: node
   linkType: hard
 
@@ -13033,7 +13040,7 @@ __metadata:
   resolution: "web@workspace:."
   dependencies:
     "@equinor/eds-core-react": ^0.29.1
-    "@equinor/eds-icons": ^0.18.0
+    "@equinor/eds-icons": ^0.19.1
     "@equinor/eds-tokens": ^0.9.0
     "@microsoft/applicationinsights-react-js": ^3.4.1
     "@microsoft/applicationinsights-web": ^2.8.10
