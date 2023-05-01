@@ -14,7 +14,7 @@
     "react-is": "^18.2.0",
     "react-oauth2-code-pkce": "^1.10.3",
     "react-scripts": "5.0.1",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
