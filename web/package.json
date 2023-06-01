@@ -44,6 +44,7 @@
     "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "test-ci": "react-scripts test --watchAll=false",
+    "upgrade": "yarn upgrade-interactive && yarn up && yarn dedupe",
     "eject": "react-scripts eject"
   },
   "jest": {
