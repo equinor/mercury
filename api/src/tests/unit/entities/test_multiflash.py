@@ -71,3 +71,20 @@ def test_multiflash_compute(multiflash_input: dict, multiflash_expected_result: 
     multiflash_result: MultiflashResult = multiflash.compute()
     print(f"Multiflash finished: {timer() - start}")
     assert multiflash_result == multiflash_expected_result
+
+
+@pytest.mark.parametrize(
+    "multiflash_input, multiflash_expected_result",
+    [
+        (MultiflashInput.case_1, MultiflashEntityOutput.case_1),
+    ],
+)
+def test_multiflash_compute_zero_component(multiflash_input: dict, multiflash_expected_result: MultiflashResult):
+    multiflash = Multiflash(**multiflash_input)
+    multiflash_input["component_composition"]["809"] = 0.0
+    multiflash_with_zero = Multiflash(**multiflash_input)
+
+    multiflash_result: MultiflashResult = multiflash.compute()
+    multiflash_result_with_zero = multiflash_with_zero.compute()
+
+    assert multiflash_result == multiflash_result_with_zero == multiflash_expected_result
