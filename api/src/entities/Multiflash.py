@@ -35,11 +35,11 @@ class Multiflash(BaseModel):
         }
 
     @validator("component_composition")
-    def validate_composition(cls, v):
-        ids = list(v.keys())
+    def validate_composition(cls, component_composition):
+        ids = list(component_composition.keys())
         if not set(ids) <= set(COMPONENTS.keys()):
             raise ValueError("component_id input contains unknown component!")
-        return v
+        return {k: v for k, v in component_composition.items() if v != 0}
 
     @property
     def component_ids(self) -> List[str]:
