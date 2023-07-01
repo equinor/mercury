@@ -22,7 +22,7 @@ urllib3 = "^1.26.16"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.2"
-pytest = "^7.3.1"
+pytest = "^7.4.0"
 httpx = "^0.24.1"
 
 
