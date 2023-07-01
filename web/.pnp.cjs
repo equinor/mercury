@@ -57,7 +57,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
-            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.5"],\
+            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.14.0"],\
             ["react-scripts", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:5.0.1"],\
             ["styled-components", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:5.3.11"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
@@ -15863,17 +15863,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["react-oauth2-code-pkce", [\
-        ["npm:1.13.5", {\
-          "packageLocation": "./.yarn/cache/react-oauth2-code-pkce-npm-1.13.5-a5c608f546-1110b2c34b.zip/node_modules/react-oauth2-code-pkce/",\
+        ["npm:1.14.0", {\
+          "packageLocation": "./.yarn/cache/react-oauth2-code-pkce-npm-1.14.0-6103ca9133-d281437e2d.zip/node_modules/react-oauth2-code-pkce/",\
           "packageDependencies": [\
-            ["react-oauth2-code-pkce", "npm:1.13.5"]\
+            ["react-oauth2-code-pkce", "npm:1.14.0"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.5", {\
-          "packageLocation": "./.yarn/__virtual__/react-oauth2-code-pkce-virtual-be25959f38/0/cache/react-oauth2-code-pkce-npm-1.13.5-a5c608f546-1110b2c34b.zip/node_modules/react-oauth2-code-pkce/",\
+        ["virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.14.0", {\
+          "packageLocation": "./.yarn/__virtual__/react-oauth2-code-pkce-virtual-5750436631/0/cache/react-oauth2-code-pkce-npm-1.14.0-6103ca9133-d281437e2d.zip/node_modules/react-oauth2-code-pkce/",\
           "packageDependencies": [\
-            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.5"],\
+            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.14.0"],\
             ["@types/react", "npm:18.2.7"],\
             ["react", "npm:18.2.0"]\
           ],\
@@ -18109,7 +18109,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:18.2.0"],\
             ["react-is", "npm:18.2.0"],\
-            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.13.5"],\
+            ["react-oauth2-code-pkce", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:1.14.0"],\
             ["react-scripts", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:5.0.1"],\
             ["styled-components", "virtual:5f667c73984ed00ed0af2d2ee5bb7487501bcb7981faa0f3174f6b4e10779d128272858d90e1bd616db7bd20b70e6922af9582ba35aeace0a368e003ee8b65c2#npm:5.3.11"],\
             ["typescript", "patch:typescript@npm%3A5.0.4#~builtin<compat/typescript>::version=5.0.4&hash=b5f058"]\
