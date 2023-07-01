@@ -2319,28 +2319,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-common@npm:^2.8.12":
-  version: 2.8.13
-  resolution: "@microsoft/applicationinsights-common@npm:2.8.13"
+"@microsoft/applicationinsights-common@npm:^2.8.14":
+  version: 2.8.14
+  resolution: "@microsoft/applicationinsights-common@npm:2.8.14"
   dependencies:
-    "@microsoft/applicationinsights-core-js": 2.8.13
+    "@microsoft/applicationinsights-core-js": 2.8.14
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.9
   peerDependencies:
     tslib: "*"
-  checksum: 9bfe07fbd6d0f1aa0e252b1a756023d503e1cc133fb9dc426b179eb919666bb9b7a7acb680c61aea1380f2a02977772b355936e3ebe0ce9085d245fbbf3dbd05
+  checksum: 105f393e5dc9eb0532800b6e2d9b01bda6038f67eaca4f972283621d23600dbba4f34eef8dc2f5232fecb5b0607765d71db4255ee5b06aa575b329764fbf647b
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-core-js@npm:2.8.13, @microsoft/applicationinsights-core-js@npm:^2.8.12":
-  version: 2.8.13
-  resolution: "@microsoft/applicationinsights-core-js@npm:2.8.13"
+"@microsoft/applicationinsights-core-js@npm:2.8.14, @microsoft/applicationinsights-core-js@npm:^2.8.14":
+  version: 2.8.14
+  resolution: "@microsoft/applicationinsights-core-js@npm:2.8.14"
   dependencies:
     "@microsoft/applicationinsights-shims": 2.0.2
     "@microsoft/dynamicproto-js": ^1.1.9
   peerDependencies:
     tslib: "*"
-  checksum: 24853aedb617a8e156cfdfc2011113ea02a41a96ffc56f2954dd70525fa365f6187a89aa972f0803a59b7f14d81eafe137ebe40eae861d1070ca2fedb149859e
+  checksum: bd441f26a9eb6542e935cb2bd76511d968d05b8f06bd3fa17d2b37148fb81155dcf7d92cf99befc9d97b84dc8c7e142bbdf916aaa3c466131d92e5d6de4fb8ea
   languageName: node
   linkType: hard
 
@@ -2389,19 +2389,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-react-js@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "@microsoft/applicationinsights-react-js@npm:3.4.2"
+"@microsoft/applicationinsights-react-js@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "@microsoft/applicationinsights-react-js@npm:3.4.3"
   dependencies:
-    "@microsoft/applicationinsights-common": ^2.8.12
-    "@microsoft/applicationinsights-core-js": ^2.8.12
+    "@microsoft/applicationinsights-common": ^2.8.14
+    "@microsoft/applicationinsights-core-js": ^2.8.14
     "@microsoft/applicationinsights-shims": ^2.0.2
     "@microsoft/dynamicproto-js": ^1.1.9
   peerDependencies:
     history: ">= 4.10.1"
     react: ">= 17.0.1"
     tslib: "*"
-  checksum: 5b40aec2123938f72b9813b3ddefdb86d50f442b63dc4d07272a7460ed1b53e622f816844fb82d6a5bdfd9cbd86e53b5f1f57bda85c27509c991deecd0a563a9
+  checksum: 8086f743db2d2227de6a00341d6d02ad473ec077100d64004929e55e0ec5f5f0d3808f0c3960a1326b4e446bea556c28d124a506b8bb37ed614c7ec85e5fa83f
   languageName: node
   linkType: hard
 
@@ -13127,7 +13127,7 @@ __metadata:
     "@equinor/eds-core-react": ^0.31.1
     "@equinor/eds-icons": ^0.19.1
     "@equinor/eds-tokens": ^0.9.1
-    "@microsoft/applicationinsights-react-js": ^3.4.2
+    "@microsoft/applicationinsights-react-js": ^3.4.3
     "@microsoft/applicationinsights-web": ^3.0.2
     "@testing-library/jest-dom": ^5.16.5
     "@testing-library/react": ^14.0.0
