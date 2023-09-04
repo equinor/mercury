@@ -70,21 +70,21 @@ repos:
           ["--config=web/.prettierrc.js", "--ignore-path=web/.prettierignore"]
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: 'v8.33.0'
+    rev: "v8.33.0"
     hooks:
       - id: eslint
         additional_dependencies:
           - eslint
           - eslint-config-react-app
           - typescript
-          - "@typescript-eslint/parser"
-          - "@typescript-eslint/eslint-plugin"
+          - "@typescript-eslint/parser@5"
+          - "@typescript-eslint/eslint-plugin@5"
           - eslint-config-prettier # turns off all rules that might conflict with prettier
           - eslint-plugin-jsx-a11y # checks accessibility rules on jsx elements
           - eslint-plugin-prettier # runs prettier as an eslint rule
           - eslint-plugin-react # react specific linting rules
           - eslint-plugin-react-hooks # enforces the rules of hooks
-        files: ^web\/src\/(?!.*generated).*\.(tsx|js|jsx|ts)$  # *.js, *.jsx, *.ts and *.tsx (excluding 'generated')
+        files: ^web\/src\/(?!.*generated).*\.(tsx|js|jsx|ts)$ # *.js, *.jsx, *.ts and *.tsx (excluding 'generated')
         types: [file]
         args: [--config=web/.eslintrc.json, --fix]
 
@@ -93,11 +93,16 @@ repos:
     hooks:
       - id: flake8
         files: ^api/src/.*\.py$
-        args: [ '--max-line-length=119', '--max-complexity=18', '--select=B,C,E,F,W,T4,B9', '--ignore=E203,E266,E501,W503' ]
-
+        args:
+          [
+            "--max-line-length=119",
+            "--max-complexity=18",
+            "--select=B,C,E,F,W,T4,B9",
+            "--ignore=E203,E266,E501,W503",
+          ]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: 'v0.991'
+    rev: "v0.991"
     hooks:
       - id: mypy
         args: [--config-file=./api/pyproject.toml]
