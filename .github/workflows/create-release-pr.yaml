@@ -18,7 +18,7 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         id: release
         with:
-          release-type: simple
+          release-type: node
           package-name: "Mercury"
           default-branch: "ci/release-please"
           release-as: 1.0.0 # Temp. Remove after initial release-please PR has been merged
