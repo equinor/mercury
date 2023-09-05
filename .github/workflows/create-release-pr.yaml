@@ -21,6 +21,7 @@ jobs:
           release-type: simple
           package-name: "Mercury"
           default-branch: "ci/release-please"
+          release-as: 1.0.0 # Temp. Remove after initial release-please PR has been merged
           extra-files: |
             api/pyproject.toml
             api/src/app.py
