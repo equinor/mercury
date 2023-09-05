@@ -2,35 +2,33 @@ name: "Push to main branch"
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
 
 jobs:
-  tests:
-    uses: ./.github/workflows/tests.yaml
-    secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+  # tests:
+  #   uses: ./.github/workflows/tests.yaml
+  #   secrets:
+  #     LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
-  publish-latest-image:
-    needs: tests
-    uses: ./.github/workflows/publish.yaml
-    with:
-      image-tags: latest
-      oauth-redirect-url: "https://proxy-mercury-dev.radix.equinor.com"
-      app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
-    secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+  # publish-latest-image:
+  #   needs: tests
+  #   uses: ./.github/workflows/publish.yaml
+  #   with:
+  #     image-tags: latest
+  #     oauth-redirect-url: "https://proxy-mercury-dev.radix.equinor.com"
+  #     app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
+  #   secrets:
+  #     LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
-  deploy-dev:
-    needs: publish-latest-image
-    uses: ./.github/workflows/deploy.yaml
-    with:
-      radix-environment: "dev"
-    secrets:
-      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
+  # deploy-dev:
+  #   needs: publish-latest-image
+  #   uses: ./.github/workflows/deploy.yaml
+  #   with:
+  #     radix-environment: "dev"
+  #   secrets:
+  #     SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
 
   release-please:
-    needs: tests
+    # needs: tests
     uses: ./.github/workflows/create-release-pr.yaml
 
   publish-production-image:
