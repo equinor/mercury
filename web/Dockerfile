@@ -10,7 +10,7 @@ ENV REACT_APP_APP_INSIGHT_CON_STRING=$APP_INSIGHT_CON_STRING
 
 WORKDIR /code
 COPY ./ ./
-RUN yarn install --immutable --immutable-cache
+RUN yarn install
 
 FROM base as development
 CMD ["yarn", "start"]
