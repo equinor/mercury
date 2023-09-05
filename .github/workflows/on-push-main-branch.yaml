@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - "CHANGELOG.md"
 
 jobs:
   tests:
@@ -13,19 +11,7 @@ jobs:
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
-  generate-changelog:
-    if: ${{ false }} # disable for now
-    needs: tests
-    uses: ./.github/workflows/generate-changelog.yaml
-
-  docs:
-    if: ${{ false }} # disable for now
-    needs: generate-changelog
-    uses: ./.github/workflows/publish-docs.yaml
-    with:
-      message: "Warning: This is the development version."
-
-  publish-latest:
+  publish-latest-image:
     needs: tests
     uses: ./.github/workflows/publish.yaml
     with:
@@ -35,10 +21,33 @@ jobs:
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
-  deploy:
-    needs: publish-latest
+  deploy-dev:
+    needs: publish-latest-image
     uses: ./.github/workflows/deploy.yaml
     with:
       radix-environment: "dev"
+    secrets:
+      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
+
+  release-please:
+    needs: tests
+    uses: ./.github/workflows/create-release-pr.yaml
+
+  publish-production-image:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.releases_created }}
+    uses: ./.github/workflows/publish.yaml
+    with:
+      image-tags: production,${{ needs.release-please.outputs.tag_name }}
+      oauth-redirect-url: https://mercury.app.radix.equinor.com
+      app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+
+  deploy-prod:
+    needs: publish-production-image
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      radix-environment: "prod"
     secrets:
       SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
