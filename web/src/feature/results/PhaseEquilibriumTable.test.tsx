@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { PhaseEquilibriumTable } from './PhaseEquilibriumTable'
-import '@testing-library/jest-dom/extend-expect'
 import { mockComponentProperties, mockResults } from '../../setupTests'
+import { PhaseEquilibriumTable } from './PhaseEquilibriumTable'
 
 test('renders without crashing and displaying correct values in table', async () => {
   render(
