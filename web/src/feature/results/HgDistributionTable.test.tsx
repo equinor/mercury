@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { HgDistributionTable } from './HgDistributionTable'
-import '@testing-library/jest-dom/extend-expect'
 import { mockResults } from '../../setupTests'
+import { HgDistributionTable } from './HgDistributionTable'
 
 test('renders without crashing and displaying correct values in table', async () => {
   render(<HgDistributionTable results={mockResults} />)
