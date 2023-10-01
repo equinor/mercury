@@ -11,7 +11,7 @@ python = "^3.10.4"
 numpy = "^1.24.3"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 fastapi = "^0.103.1"
-uvicorn = {extras = ["standard"], version = "^0.22.0"}
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
 gunicorn = "^20.1.0"
 cryptography = "^41.0.0" 
 # Not a direct dependecy, but needed to get certificates
