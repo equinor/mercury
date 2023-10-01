@@ -709,13 +709,13 @@ files = [
 
 [[package]]
 name = "opencensus"
-version = "0.11.2"
+version = "0.11.3"
 description = "A stats collection and distributed tracing framework"
 optional = false
 python-versions = "*"
 files = [
-    {file = "opencensus-0.11.2-py2.py3-none-any.whl", hash = "sha256:7a1a34b87c8db3d9984e97ff05739058342f24de1d700766d59044eee8fb3b3f"},
-    {file = "opencensus-0.11.2.tar.gz", hash = "sha256:6154042a236b9ecdd55a23dfbb2743bb3deacd0687e3e0391ec2e0c74950d66f"},
+    {file = "opencensus-0.11.3-py2.py3-none-any.whl", hash = "sha256:9c33d572059f0f0e874fc34c697a39a4193aa9cf3203f7e777df42e9edeea56a"},
+    {file = "opencensus-0.11.3.tar.gz", hash = "sha256:af7a98bd51e63968144d772f346d696ed498a32dbdc4be267cd6011c4ce05da8"},
 ]
 
 [package.dependencies]
@@ -735,19 +735,19 @@ files = [
 
 [[package]]
 name = "opencensus-ext-azure"
-version = "1.1.9"
+version = "1.1.10"
 description = "OpenCensus Azure Monitor Exporter"
 optional = false
 python-versions = "*"
 files = [
-    {file = "opencensus-ext-azure-1.1.9.tar.gz", hash = "sha256:507608b77e9d8eaab6ffd5ff11b7ceb87f54e4a6a940c4b814331b4d1b034151"},
-    {file = "opencensus_ext_azure-1.1.9-py2.py3-none-any.whl", hash = "sha256:166c858e70fb7b39d01ff7d9f745588c521070ff2cfe177f77b63ee87f5076ac"},
+    {file = "opencensus-ext-azure-1.1.10.tar.gz", hash = "sha256:c3fa3472bfbc71d7442375f2c78c1c9b6046cf0d6d2c9408b3944c84f86a30bd"},
+    {file = "opencensus_ext_azure-1.1.10-py2.py3-none-any.whl", hash = "sha256:321730b42ee8b93b932edf4d9207bb3481d7a6f125e9410a5ea6e75b5a13f3a8"},
 ]
 
 [package.dependencies]
 azure-core = ">=1.12.0,<2.0.0"
 azure-identity = ">=1.5.0,<2.0.0"
-opencensus = ">=0.11.2,<1.0.0"
+opencensus = ">=0.11.3,<1.0.0"
 psutil = ">=5.6.3"
 requests = ">=2.19.0"
 
@@ -1459,4 +1459,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10.4"
-content-hash = "18950857dcecfefbe4f0e84a3516908896504922d17bfb206b5f47f3acc76d65"
+content-hash = "43b5c70b0634d42255b3f9f52ea833ad3871a3b53b9baee56b19ec7889100db9"

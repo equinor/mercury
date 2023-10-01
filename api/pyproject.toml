@@ -17,7 +17,7 @@ cryptography = "^41.0.0"
 # Not a direct dependecy, but needed to get certificates
 certifi = "^2023.5.7"
 requests = "^2.31.0"
-opencensus-ext-azure = "^1.1.9"
+opencensus-ext-azure = "^1.1.10"
 urllib3 = "^2.0.3"
 
 [tool.poetry.group.dev.dependencies]
