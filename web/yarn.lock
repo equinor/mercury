@@ -3701,7 +3701,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-common@npm:3.0.2, @microsoft/applicationinsights-common@npm:^3.0.2":
+"@microsoft/applicationinsights-common@npm:3.0.2":
   version: 3.0.2
   resolution: "@microsoft/applicationinsights-common@npm:3.0.2"
   dependencies:
@@ -3715,7 +3715,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-core-js@npm:3.0.2, @microsoft/applicationinsights-core-js@npm:^3.0.2":
+"@microsoft/applicationinsights-common@npm:^3.0.3":
+  version: 3.0.4
+  resolution: "@microsoft/applicationinsights-common@npm:3.0.4"
+  dependencies:
+    "@microsoft/applicationinsights-core-js": 3.0.4
+    "@microsoft/applicationinsights-shims": 3.0.1
+    "@microsoft/dynamicproto-js": ^2.0.2
+    "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
+  peerDependencies:
+    tslib: "*"
+  checksum: 9a585d7fe879ec2897fe2fce12fd7809a8fe9cf241b44ca4c7128eee7b51796b7ada9d22d3e5bee5a5a5d3c24540e73c4f80fda21cdeff026c0aadf27f52eae3
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-core-js@npm:3.0.2":
   version: 3.0.2
   resolution: "@microsoft/applicationinsights-core-js@npm:3.0.2"
   dependencies:
@@ -3726,6 +3740,20 @@ __metadata:
   peerDependencies:
     tslib: "*"
   checksum: 979856ae14dda0227721cea746422701dde69d8a4a32b619f47ab1672b77a4a4031beda8b5c17a1e5a94cecfb6059d7b45df5f75a85835ef3bde6740ed91f4bc
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-core-js@npm:3.0.4, @microsoft/applicationinsights-core-js@npm:^3.0.3":
+  version: 3.0.4
+  resolution: "@microsoft/applicationinsights-core-js@npm:3.0.4"
+  dependencies:
+    "@microsoft/applicationinsights-shims": 3.0.1
+    "@microsoft/dynamicproto-js": ^2.0.2
+    "@nevware21/ts-async": ">= 0.3.0 < 2.x"
+    "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
+  peerDependencies:
+    tslib: "*"
+  checksum: 7b35f26e9925c6f89e2f8d6cbd142d048ecf2bc87ed39f5c15f5a9ef155f6c071a1de67e889c808b5801fd2cf0995d048ef4946fab7a27a74896743173588253
   languageName: node
   linkType: hard
 
@@ -3760,19 +3788,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-react-js@npm:^17.0.0":
-  version: 17.0.0
-  resolution: "@microsoft/applicationinsights-react-js@npm:17.0.0"
+"@microsoft/applicationinsights-react-js@npm:^17.0.2":
+  version: 17.0.2
+  resolution: "@microsoft/applicationinsights-react-js@npm:17.0.2"
   dependencies:
-    "@microsoft/applicationinsights-common": ^3.0.2
-    "@microsoft/applicationinsights-core-js": ^3.0.2
+    "@microsoft/applicationinsights-common": ^3.0.3
+    "@microsoft/applicationinsights-core-js": ^3.0.3
     "@microsoft/applicationinsights-shims": ^3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
+    "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     history: ">= 4.10.1"
     react: ">= 17.0.1"
     tslib: "*"
-  checksum: 3af1cfa49ceac1e59f6ed79276d6d13b9292a9db22a9eec2b49fd77d2026873734d9a27a90c4d153d4df505dec54e2b80b6731990190578bfe04c1dbf410e703
+  checksum: eae034f2dd4bcd8ec1df0fe6648ae85b68e5bee4037847fe29709f18854c5513d8d663c82b1f53fbe7967944731645f375f8c1548eb0a92f99f18a801e763b41
   languageName: node
   linkType: hard
 
@@ -3822,6 +3851,22 @@ __metadata:
   peerDependencies:
     typescript: ">=1"
   checksum: 06a0c5679bb925c1eeb5491ad1e424cefb9da84259f97e84cef52fe4116e864730efc212784fd614540f3a6b5206d7721f02dd3cc9d30f647e2329e2949032c9
+  languageName: node
+  linkType: hard
+
+"@nevware21/ts-async@npm:>= 0.3.0 < 2.x":
+  version: 0.3.0
+  resolution: "@nevware21/ts-async@npm:0.3.0"
+  dependencies:
+    "@nevware21/ts-utils": ">= 0.10.0 < 2.x"
+  checksum: 4380f5af6ad9f2ea0cb287c620a062688d33de80e5c39727a418916a97e838340738971d9c252b6cac5becb071e1ff89c69c538a13c6ea5df4b65bee1c4b030e
+  languageName: node
+  linkType: hard
+
+"@nevware21/ts-utils@npm:>= 0.10.0 < 2.x, @nevware21/ts-utils@npm:>= 0.10.1 < 2.x":
+  version: 0.10.1
+  resolution: "@nevware21/ts-utils@npm:0.10.1"
+  checksum: 4603bd42d44e842c6332761e98f27c8136e2284de25693d08c86711c77d187d1289452ed66eee57ffc6a0f9fc434d5768c6c838678baf102f4e0152c718a00e1
   languageName: node
   linkType: hard
 
@@ -15052,7 +15097,7 @@ __metadata:
     "@equinor/eds-core-react": ^0.32.4
     "@equinor/eds-icons": ^0.19.3
     "@equinor/eds-tokens": ^0.9.2
-    "@microsoft/applicationinsights-react-js": ^17.0.0
+    "@microsoft/applicationinsights-react-js": ^17.0.2
     "@microsoft/applicationinsights-web": ^3.0.2
     "@testing-library/jest-dom": ^6.1.2
     "@testing-library/react": ^14.0.0
