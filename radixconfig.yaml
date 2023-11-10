@@ -62,8 +62,8 @@ spec:
 
   privateImageHubs:
     ghcr.io:
-      username: mariuswinger
-      email: mlw@equinor.com
+      username: soofstad
+      email: stigofstad@gmail.com
 
   dnsAppAlias:
     environment: prod
