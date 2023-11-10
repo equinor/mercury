@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.1](https://github.com/equinor/mercury/compare/v1.0.0...v1.0.1) (2023-11-10)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump fastapi from 0.99.1 to 0.103.1 in /api ([4abd8bb](https://github.com/equinor/mercury/commit/4abd8bb5f9bc998730ca3194cae8416264f2d621))
+* remove yarn pnp ([804610a](https://github.com/equinor/mercury/commit/804610aca54cc7e39e2f2ab5ac8ac1240587a604))
+* upgrade web dependencies ([bf978c0](https://github.com/equinor/mercury/commit/bf978c07114d7b432ac5cb2fdc86170d8bf2695a))
+
+
+### Build System
+
+* bump insecure dependencies ([17395f0](https://github.com/equinor/mercury/commit/17395f02d1be1a465393fbe4fca0936c3da19c0d))
+* lock pydantic to &gt;v2 ([09b260c](https://github.com/equinor/mercury/commit/09b260ccc262ab569b4b1806aad77788b6667b43))
+* update privateImageHub config ([76114fb](https://github.com/equinor/mercury/commit/76114fbbec1fcb2a156c84f4eedcbe84c51f925a))
+
+
+### Continuous Integration
+
+* unlock release-please version ([e9596fd](https://github.com/equinor/mercury/commit/e9596fd2834f6e1782d7d826bffcb99b0d259cac))
+
 ## [1.0.0](https://github.com/equinor/mercury/compare/v0.6.0...v1.0.0) (2023-09-05)
 
 
