@@ -5,17 +5,18 @@ updates:
     open-pull-requests-limit: 100
     schedule:
       interval: "monthly"
-    group:
+    groups:
       back-end:
         update-types:
           - "minor"
           - "patch"
+
   - package-ecosystem: "npm"
     directory: "/web/"
     open-pull-requests-limit: 100
     schedule:
       interval: "monthly"
-    group:
+    groups:
       front-end:
         update-types:
           - "minor"
