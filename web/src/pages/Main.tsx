@@ -58,7 +58,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
 
   useEffect(() => {
     appInsights.trackEvent({ name: 'MainPageLoaded' }, {})
-  }, [])
+  }, [appInsights])
   // Fetch list of components name once on page load
   useEffect(() => {
     mercuryApi
