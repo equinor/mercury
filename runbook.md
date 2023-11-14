@@ -49,15 +49,15 @@ These resources can be recreated by running the [IaC script](https://github.com/
 - Number of calculations
 >
  ```
-AppEvents
-| where Name == "CalculationStarted"
+customEvents
+| where name == "CalculationStarted"
 ```
 
 - Unique visitors
 >
  ```
-AppEvents
-| where Name == "MainPageLoaded"
-| distinct UserId
+customEvents
+| where name == "MainPageLoaded"
+| distinct user_id
 ```
 ## Knowledge base (encountered problems)
