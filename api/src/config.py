@@ -10,13 +10,6 @@ class Config(BaseSettings):
     LOGGER_LEVEL: str = Field("INFO", env="LOGGING_LEVEL", to_lower=True)
     APPINSIGHTS_CONSTRING: str = Field(None, env="APPINSIGHTS_CONSTRING")
 
-    # Database
-    MONGODB_USERNAME: str = Field("dummy", env="MONGODB_USERNAME")
-    MONGODB_PASSWORD: str = Field("dummy", env="MONGODB_PASSWORD")
-    MONGODB_HOSTNAME: str = Field("db", env="MONGODB_HOSTNAME")
-    MONGODB_DATABASE: str = Field("test", env="MONGODB_DATABASE")
-    MONGODB_PORT: int = Field(27017, env="MONGODB_PORT")
-
     # Access control
     APPLICATION_ADMIN = Field("admin", env="APPLICATION_ADMIN")
     APPLICATION_ADMIN_ROLE = Field("admin", env="APPLICATION_ADMIN_ROLE")
