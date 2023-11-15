@@ -6,7 +6,7 @@ import {
   grid_on,
   info_circle,
 } from '@equinor/eds-icons'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { AUTH_DISABLED } from '../constants'
 import { VersionText } from './VersionText'
@@ -14,9 +14,6 @@ import { VersionText } from './VersionText'
 const Icons = styled.div`
   display: flex;
   align-items: center;
-  > * {
-    margin-left: 40px;
-  }
 `
 
 const CheckMarkUnorderedListElement = styled.li`
@@ -32,13 +29,17 @@ const NoBulletUnorderedList = styled.ul`
 `
 
 export const Header = (): JSX.Element => {
+  const accountRefElement = useRef<HTMLButtonElement>(null)
+  const infoRefElement = useRef<HTMLButtonElement>(null)
+
   const [isUserInfoOpen, setUserInfoOpen] = useState(false)
   const [isAboutOpen, setAboutOpen] = useState(false)
 
-  const { tokenData, logOut } = useContext(AuthContext)
+  useEffect(() => {
+    setAboutOpen(true)
+  }, [])
 
-  const accountRefElement = useRef<HTMLButtonElement>(null)
-  const infoRefElement = useRef<HTMLButtonElement>(null)
+  const { tokenData, logOut } = useContext(AuthContext)
 
   return (
     <>
@@ -51,13 +52,6 @@ export const Header = (): JSX.Element => {
           <Icons>
             <Button
               variant="ghost"
-              target="_blank"
-              href="https://github.com/equinor/mercury"
-            >
-              Github <Icon data={external_link} />
-            </Button>
-            <Button
-              variant="ghost_icon"
               onClick={() => {
                 setUserInfoOpen(!isUserInfoOpen)
                 setAboutOpen(false)
@@ -65,10 +59,10 @@ export const Header = (): JSX.Element => {
               id="account-anchor"
               ref={accountRefElement}
             >
-              <Icon data={account_circle} title="user" />
+              Account <Icon data={account_circle} title="user" />
             </Button>
             <Button
-              variant="ghost_icon"
+              variant="ghost"
               onClick={() => {
                 setUserInfoOpen(false)
                 setAboutOpen(!isAboutOpen)
@@ -76,12 +70,23 @@ export const Header = (): JSX.Element => {
               id="info-anchor"
               ref={infoRefElement}
             >
-              <Icon data={info_circle} />
+              Help <Icon data={info_circle} />
+            </Button>
+            <Button
+              variant="ghost"
+              target="_blank"
+              href="https://github.com/equinor/mercury"
+            >
+              Github <Icon data={external_link} />
             </Button>
           </Icons>
         </TopBar.Actions>
       </TopBar>
-      <Popover open={isUserInfoOpen} anchorEl={accountRefElement.current}>
+      <Popover
+        open={isUserInfoOpen}
+        anchorEl={accountRefElement.current}
+        onClose={() => setUserInfoOpen(false)}
+      >
         <Popover.Header>
           <Popover.Title>Logged in user</Popover.Title>
         </Popover.Header>
@@ -116,7 +121,11 @@ export const Header = (): JSX.Element => {
           </Button>
         </Popover.Actions>
       </Popover>
-      <Popover open={isAboutOpen} anchorEl={infoRefElement.current}>
+      <Popover
+        open={isAboutOpen}
+        anchorEl={infoRefElement.current}
+        onClose={() => setAboutOpen(false)}
+      >
         <Popover.Header>
           <Popover.Title>
             About
