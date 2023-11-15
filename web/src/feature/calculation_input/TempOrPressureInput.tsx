@@ -18,6 +18,18 @@ export const TempOrPressureInput = (props: {
   const minValue = props.name === 'Temperature' ? minTemperature : minPressure
   const unit = props.name === 'Temperature' ? 'ºC' : 'bar'
   const min = props.name === 'Temperature' ? absoluteZero : undefined
+  function getHelperText() {
+    if (!props.isValid) return undefined
+    if (props.value > maxValue)
+      return 'The ' + props.name.toLowerCase() + ' is very high'
+    if (props.value < minValue)
+      return 'The ' + props.name.toLowerCase() + ' is very low'
+  }
+  function getVariant() {
+    if (!props.isValid) return 'error'
+    if (props.value > maxValue || props.value < minValue) return 'warning'
+    return undefined
+  }
   return (
     <TextField
       id={props.name.toLowerCase() + '-input'}
@@ -25,22 +37,8 @@ export const TempOrPressureInput = (props: {
       defaultValue={props.value.toString()}
       label={props.name}
       unit={unit}
-      variant={
-        !props.isValid
-          ? 'error'
-          : props.value > maxValue || props.value < minValue
-          ? 'warning'
-          : undefined
-      }
-      helperText={
-        !props.isValid
-          ? undefined
-          : props.value > maxValue
-          ? 'The ' + props.name.toLowerCase() + ' is very high'
-          : props.value < minValue
-          ? 'The ' + props.name.toLowerCase() + ' is very low'
-          : undefined
-      }
+      variant={getVariant()}
+      helperText={getHelperText()}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         //This regex allows negative and positive decimal numbers
         const regex = /^[-+]?\d+(\.\d+)?$/
