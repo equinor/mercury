@@ -41,5 +41,10 @@
       { "ts-ignore": { "descriptionFormat": "^ because .+$" } }
     ],
     "jsx-a11y/click-events-have-key-events": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "18.2.0"
+    }
   }
 }
