@@ -1,5 +1,38 @@
 # Changelog
 
+## [1.1.0](https://github.com/equinor/mercury/compare/v1.0.1...v1.1.0) (2023-11-17)
+
+
+### Features
+
+* make help popover open on load ([b3ae175](https://github.com/equinor/mercury/commit/b3ae175a48091b70415049d788788c8b6081ef3b))
+
+
+### Bug Fixes
+
+* **eslint:** add appinsight as dependency ([0226292](https://github.com/equinor/mercury/commit/0226292b51d524fb26489dc9302e8ed3b77b50be))
+
+
+### Miscellaneous Chores
+
+* add timeout to get requests ([4b2e316](https://github.com/equinor/mercury/commit/4b2e31677affcf47e14cac6197efa3330c6be1af))
+* eslint disable line ([13b9aa1](https://github.com/equinor/mercury/commit/13b9aa16453f6638356a07e9660d12d24da73c19))
+* remove unsued MongoDB config vars ([6633bfb](https://github.com/equinor/mercury/commit/6633bfb90d0d4c0d889d2e4ffebca8e97cfdcfd0))
+* update api dependencies ([c0f17b9](https://github.com/equinor/mercury/commit/c0f17b96d273d649aea3cbb270fcc30e20ffaec7))
+* update CODEOWNERS ([2a21603](https://github.com/equinor/mercury/commit/2a2160371cb914dbb66080f57f5371e7cf843fee))
+* update web dependencies ([8ae1503](https://github.com/equinor/mercury/commit/8ae15038afd28a2d6fab43034b3bf953c5736aea))
+
+
+### Code Refactoring
+
+* remove nested ternaries ([da696ca](https://github.com/equinor/mercury/commit/da696ca325c82b7fe3062436e0671fceeee4a0c2))
+
+
+### Continuous Integration
+
+* adjust eslint pre-commit settings ([f1ab8b7](https://github.com/equinor/mercury/commit/f1ab8b73b6f31a0db6070b0e376d62c3a5cbb859))
+* change group-&gt;groups ([b9c634c](https://github.com/equinor/mercury/commit/b9c634c715638237feff73ee3b2c7e679e6acad1))
+
 ## [1.0.1](https://github.com/equinor/mercury/compare/v1.0.0...v1.0.1) (2023-11-10)
 
 
