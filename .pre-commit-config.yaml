@@ -61,37 +61,13 @@ repos:
         name: isort (python)
         files: ^api/.*\.py$
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
+  - repo: local
     hooks:
-      - id: prettier
-        files: ^web/src/.*\.(ts|tsx|js|css|html|json)$
-        args:
-          ["--config=web/.prettierrc.js", "--ignore-path=web/.prettierignore"]
-
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.53.0"
-    hooks:
-      - id: eslint
-        additional_dependencies:
-          - eslint
-          - eslint-config-react-app
-          - typescript
-          - "@typescript-eslint/parser@5"
-          - "@typescript-eslint/eslint-plugin@5"
-          - eslint-config-prettier # turns off all rules that might conflict with prettier
-          - eslint-plugin-jsx-a11y # checks accessibility rules on jsx elements
-          - eslint-plugin-prettier # runs prettier as an eslint rule
-          - eslint-plugin-react # react specific linting rules
-          - eslint-plugin-react-hooks # enforces the rules of hooks
-        files: ^web/src/(?!.*generated).*\.(tsx|jsx|ts|js)$ # *.js, *.jsx, *.ts and *.tsx (excluding 'generated')
-        types: [file]
-        args: [
-          "--config=web/.eslintrc.json",
-          "--ignore-path=web/.eslintignore",
-          "--quiet", # only output errors
-          "--fix",
-        ]
+      - id: biome
+        name: run biome check (format, lint, sort imports)
+        entry: bash -c 'cd web && yarn dlx -q @biomejs/biome check src --apply'
+        language: system
+        pass_filenames: false
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
