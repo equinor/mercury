@@ -1,11 +1,11 @@
-import { AuthProvider } from 'react-oauth2-code-pkce'
 import { AppInsightsContext } from '@microsoft/applicationinsights-react-js'
+import { AuthProvider } from 'react-oauth2-code-pkce'
 
+import MercuryAPI from './api/MercuryAPI'
+import { reactPlugin } from './applicationInsight'
 import { AUTH_DISABLED, authConfig } from './constants'
 import { LoginPage } from './pages/Login'
-import MercuryAPI from './api/MercuryAPI'
 import { MainPage } from './pages/Main'
-import { reactPlugin } from './applicationInsight'
 
 function App() {
   return AUTH_DISABLED ? (

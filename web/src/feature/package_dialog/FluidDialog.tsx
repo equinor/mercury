@@ -1,16 +1,16 @@
-import styled from 'styled-components'
 import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
-import { ComponentSelector } from './ComponentSelector'
+import styled from 'styled-components'
+import { preSelectedComponents } from '../../constants'
 import { TComponentProperty, TPackage, TPackageDialog } from '../../types'
-import { SaveButton } from './SaveButton'
+import { ComponentSelector } from './ComponentSelector'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
-import { NameField } from './NameField'
 import { DescriptionField } from './DescriptionField'
+import { NameField } from './NameField'
+import { SaveButton } from './SaveButton'
 import { TemplateSelector } from './TemplateSelector'
 import { PackageDialogProvider } from './context/PackageDialogContext'
-import { preSelectedComponents } from '../../constants'
 
 const WideDialog = styled(Dialog)`
   width: auto;
@@ -123,7 +123,7 @@ export const FluidDialog = ({
                   variant="outlined"
                   onClick={() => {
                     const overwrite: boolean = window.confirm(
-                      `Are you sure you want to delete the package?`
+                      'Are you sure you want to delete the package?'
                     )
                     if (!overwrite) return
                     savePackage()

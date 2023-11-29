@@ -16,10 +16,9 @@ export function formatNumber(
   }
   if (number < 1 / 10 ** (threshold - 1) || number > 10 ** threshold) {
     return number.toExponential(precision).replace('e', 'E')
-  } else {
-    // Set precision to given number of digits
-    return number.toPrecision(precision).toString()
   }
+  // Set precision to given number of digits
+  return number.toPrecision(precision).toString()
 }
 
 export function getCorrectUnit(phase: string): string {

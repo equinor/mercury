@@ -1,8 +1,8 @@
-import { AuthContext } from 'react-oauth2-code-pkce'
-import { useContext } from 'react'
-import { MainPage } from './Main'
-import MercuryAPI from '../api/MercuryAPI'
 import { Button } from '@equinor/eds-core-react'
+import { useContext } from 'react'
+import { AuthContext } from 'react-oauth2-code-pkce'
+import MercuryAPI from '../api/MercuryAPI'
+import { MainPage } from './Main'
 
 export const LoginPage = (): JSX.Element => {
   const { token, loginInProgress, login } = useContext(AuthContext)

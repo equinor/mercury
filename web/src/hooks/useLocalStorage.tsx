@@ -27,11 +27,10 @@ function useLocalStorage<T>(
       parsed.version === version
     ) {
       return parsed.data
-    } else {
-      throw TypeError(
-        `The type of stored value "${key}" is outdated. Please reset the application data`
-      )
     }
+    throw TypeError(
+      `The type of stored value "${key}" is outdated. Please reset the application data`
+    )
   })
 
   const setValue = (value: T | ((val: T) => T)): void => {

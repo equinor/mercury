@@ -1,22 +1,22 @@
 import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
-import { Card } from '../../common/Card'
-import styled from 'styled-components'
-import { FluidDialog } from '../package_dialog/FluidDialog'
-import { useState } from 'react'
-import { MultiflashResponse } from '../../api/generated'
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { AxiosResponse } from 'axios'
+import { useState } from 'react'
+import styled from 'styled-components'
 import MercuryAPI from '../../api/MercuryAPI'
-import { FeedFlowInput } from './FeedFlowInput'
+import { MultiflashResponse } from '../../api/generated'
+import { Card } from '../../common/Card'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { useLastInputContext } from '../../pages/context/LastInputContext'
 import {
   TCalcStatus,
   TComponentProperty,
   TPackage,
   TResults,
 } from '../../types'
-import useLocalStorage from '../../hooks/useLocalStorage'
+import { FluidDialog } from '../package_dialog/FluidDialog'
+import { FeedFlowInput } from './FeedFlowInput'
 import { TempOrPressureInput } from './TempOrPressureInput'
-import { useLastInputContext } from '../../pages/context/LastInputContext'
-import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -93,8 +93,8 @@ export const CalculationInput = ({
               phaseValues: Object.entries(result.data.phaseValues).map(
                 ([phase, data]) => ({
                   phase: phase,
-                  percentage: data['percentage'],
-                  mercury: data['mercury'],
+                  percentage: data.percentage,
+                  mercury: data.mercury,
                 })
               ),
               cubicFeedFlow: cubicFeedFlow,

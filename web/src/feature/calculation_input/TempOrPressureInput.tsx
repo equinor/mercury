@@ -21,9 +21,9 @@ export const TempOrPressureInput = (props: {
   function getHelperText() {
     if (!props.isValid) return undefined
     if (props.value > maxValue)
-      return 'The ' + props.name.toLowerCase() + ' is very high'
+      return `The ${props.name.toLowerCase()} is very high`
     if (props.value < minValue)
-      return 'The ' + props.name.toLowerCase() + ' is very low'
+      return `The ${props.name.toLowerCase()} is very low`
   }
   function getVariant() {
     if (!props.isValid) return 'error'
@@ -32,7 +32,7 @@ export const TempOrPressureInput = (props: {
   }
   return (
     <TextField
-      id={props.name.toLowerCase() + '-input'}
+      id={`${props.name.toLowerCase()}-input`}
       min={min}
       defaultValue={props.value.toString()}
       label={props.name}
@@ -43,7 +43,8 @@ export const TempOrPressureInput = (props: {
         //This regex allows negative and positive decimal numbers
         const regex = /^[-+]?\d+(\.\d+)?$/
         props.setIsValid(
-          regex.test(event.target.value) && !isNaN(Number(event.target.value))
+          regex.test(event.target.value) &&
+            !Number.isNaN(Number(event.target.value))
         )
 
         props.setValue(Number(event.target.value))

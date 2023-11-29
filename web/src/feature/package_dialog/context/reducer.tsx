@@ -10,7 +10,8 @@ const areValids = (ratios: TComponentRatio[]) => {
   return Object.fromEntries(
     ratios.map((x) => [
       x.id,
-      (x.ratio.length === 0 || regex.test(x.ratio)) && !isNaN(Number(x.ratio)),
+      (x.ratio.length === 0 || regex.test(x.ratio)) &&
+        !Number.isNaN(Number(x.ratio)),
     ])
   )
 }
@@ -57,7 +58,7 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
       }
     }
     default: {
-      throw Error('Unhandled action: ' + action)
+      throw Error(`Unhandled action: ${action}`)
     }
   }
 }

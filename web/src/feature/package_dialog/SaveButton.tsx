@@ -40,9 +40,8 @@ export const SaveButton = (props: {
         state.description !== props.editablePackage.description ||
         ratioHasChanged
       return isValidPackage && hasChanged
-    } else {
-      return isValidPackage
     }
+    return isValidPackage
   }
   return (
     <Button

@@ -14,10 +14,12 @@ function createTableRows(
   subtableIndex: number
 ) {
   return subtable.rows.map((row, rowIndex) => (
+    // biome-ignore lint/suspicious/noArrayIndexKey:
     <Table.Row key={rowIndex}>
       {row.map((cell, cellIndex) => {
         const id = `${subtableIndex}-${subtable.headers[cellIndex]}-${rowIndex}`
         return (
+          // biome-ignore lint/suspicious/noArrayIndexKey:
           <Table.Cell data-testid={id} key={cellIndex}>
             {cell}
           </Table.Cell>
@@ -34,10 +36,12 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
           <Typography variant="h3">{props.caption}</Typography>
         </Table.Caption>
         {props.subtables.map((subtable, subtableIndex) => (
+          // biome-ignore lint/suspicious/noArrayIndexKey:
           <React.Fragment key={subtableIndex}>
             <Table.Head>
               <Table.Row>
                 {subtable.headers.map((header, headerIndex) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey:
                   <Table.Cell key={headerIndex}>{header}</Table.Cell>
                 ))}
               </Table.Row>
