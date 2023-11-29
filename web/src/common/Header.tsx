@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { Button, Icon, Popover, TopBar } from '@equinor/eds-core-react'
 import {
   account_circle,
@@ -8,6 +7,7 @@ import {
 } from '@equinor/eds-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
+import styled from 'styled-components'
 import { AUTH_DISABLED } from '../constants'
 import { VersionText } from './VersionText'
 

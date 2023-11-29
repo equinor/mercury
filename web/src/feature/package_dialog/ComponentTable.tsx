@@ -1,6 +1,6 @@
+import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
 import React from 'react'
 import styled from 'styled-components'
-import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 const ComponentTableContainer = styled.div`
@@ -26,6 +26,7 @@ export const ComponentTable = (): JSX.Element => {
 
   function createTableRows() {
     return state.selectedComponents.map((component, rowIndex) => (
+      // biome-ignore lint/suspicious/noArrayIndexKey:
       <Table.Row key={rowIndex}>
         <Table.Cell
           data-testid={`Component-${rowIndex}`}
@@ -56,8 +57,8 @@ export const ComponentTable = (): JSX.Element => {
         <Table>
           <Table.Head sticky>
             <Table.Row>
-              <Table.Cell key={`Component`}>{`Component`}</Table.Cell>
-              <Table.Cell key={`Mole fractions`}>{`Mole fractions`}</Table.Cell>
+              <Table.Cell key={'Component'}>{'Component'}</Table.Cell>
+              <Table.Cell key={'Mole fractions'}>{'Mole fractions'}</Table.Cell>
             </Table.Row>
           </Table.Head>
           <Table.Body>{createTableRows()}</Table.Body>

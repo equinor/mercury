@@ -1,6 +1,6 @@
-import { Component, ErrorInfo, ReactNode } from 'react'
-import { Typography, Icon, List } from '@equinor/eds-core-react'
+import { Icon, List, Typography } from '@equinor/eds-core-react'
 import { account_circle } from '@equinor/eds-icons'
+import { Component, ErrorInfo, ReactNode } from 'react'
 
 interface Props {
   children?: ReactNode

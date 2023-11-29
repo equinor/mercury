@@ -1,9 +1,9 @@
 import { DynamicTable } from '../../common/DynamicTable'
-import { formatNumber, getCorrectUnit } from '../../tableUtils'
 import {
   mercuryMolecularWeight,
   molePerStandardCubicMeter,
 } from '../../constants'
+import { formatNumber, getCorrectUnit } from '../../tableUtils'
 import { TResults } from '../../types'
 
 function getRows(results: TResults): string[][] {
@@ -21,14 +21,15 @@ function getRows(results: TResults): string[][] {
     ],
     [
       'Concentration (mol)',
-      ...mercury.map((x) => formatNumber(x) + ' mol/mol'),
+      ...mercury.map((x) => `${formatNumber(x)} mol/mol`),
     ],
     [
       'Mercury Flow',
       ...results.phaseValues.map(
         (x, index) =>
-          formatNumber(phPhaseFlowFactor * x.percentage * mercury[index]) +
-          ' g/d'
+          `${formatNumber(
+            phPhaseFlowFactor * x.percentage * mercury[index]
+          )} g/d`
       ),
     ],
   ]
