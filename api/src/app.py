@@ -23,7 +23,7 @@ def create_app() -> FastAPI:
     authenticated_routes.include_router(whoami_feature.router)
     authenticated_routes.include_router(multiflash_feature.router)
     authenticated_routes.include_router(component_feature.router)
-    app = FastAPI(title="Mercury", description="", version="1.1.0")  # x-release-please-version
+    app = FastAPI(title="Mercury", description="", version="1.1.1")  # x-release-please-version
     app.include_router(authenticated_routes, dependencies=[Security(auth_with_jwt)])
     app.include_router(public_routes)
 

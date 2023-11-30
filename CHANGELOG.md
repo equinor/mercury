@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.1.1](https://github.com/equinor/mercury/compare/v1.1.0...v1.1.1) (2023-11-30)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump cryptography from 41.0.5 to 41.0.6 in /api ([608f380](https://github.com/equinor/mercury/commit/608f38068f1a778e9fa3062f0463bea2c06ccad5))
+* linting, formatting and import sorting ([8499fa5](https://github.com/equinor/mercury/commit/8499fa5b4f54853a7b9b997dcd625d98ae1e4413))
+
+
+### Code Refactoring
+
+* add SECURITY.md ([adbf01a](https://github.com/equinor/mercury/commit/adbf01adaeda468ee64f66d2bb17cfa26f926e14))
+* make license markdown ([19f1402](https://github.com/equinor/mercury/commit/19f140237d8a7e3b9205e186bc14383fafec70c6))
+
+
+### Build System
+
+* rebuild yarn.lock ([85d78ec](https://github.com/equinor/mercury/commit/85d78ec481c1bbd61b405f852ed8a100d2d12940))
+
+
+### Continuous Integration
+
+* switch to biome ([ffbff48](https://github.com/equinor/mercury/commit/ffbff484be057794ca5f983a9616de699dbf8959))
+* use pre-commit action ([b8e3fc5](https://github.com/equinor/mercury/commit/b8e3fc593c075e441e9a3cea95b319d42d69922b))
+
 ## [1.1.0](https://github.com/equinor/mercury/compare/v1.0.1...v1.1.0) (2023-11-17)
 
 
