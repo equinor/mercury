@@ -12,10 +12,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@adobe/css-tools@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@adobe/css-tools@npm:4.3.1"
-  checksum: ad43456379ff391132aff687ece190cb23ea69395e23c9b96690eeabe2468da89a4aaf266e4f8b6eaab53db3d1064107ce0f63c3a974e864f4a04affc768da3f
+"@adobe/css-tools@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "@adobe/css-tools@npm:4.3.2"
+  checksum: 9667d61d55dc3b0a315c530ae84e016ce5267c4dd8ac00abb40108dc98e07b98e3090ce8b87acd51a41a68d9e84dcccb08cdf21c902572a9cf9dcaf830da4ae3
   languageName: node
   linkType: hard
 
@@ -1652,16 +1652,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@biomejs/biome@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/biome@npm:1.3.3"
+"@biomejs/biome@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/biome@npm:1.4.1"
   dependencies:
-    "@biomejs/cli-darwin-arm64": 1.3.3
-    "@biomejs/cli-darwin-x64": 1.3.3
-    "@biomejs/cli-linux-arm64": 1.3.3
-    "@biomejs/cli-linux-x64": 1.3.3
-    "@biomejs/cli-win32-arm64": 1.3.3
-    "@biomejs/cli-win32-x64": 1.3.3
+    "@biomejs/cli-darwin-arm64": 1.4.1
+    "@biomejs/cli-darwin-x64": 1.4.1
+    "@biomejs/cli-linux-arm64": 1.4.1
+    "@biomejs/cli-linux-x64": 1.4.1
+    "@biomejs/cli-win32-arm64": 1.4.1
+    "@biomejs/cli-win32-x64": 1.4.1
   dependenciesMeta:
     "@biomejs/cli-darwin-arm64":
       optional: true
@@ -1677,48 +1677,48 @@ __metadata:
       optional: true
   bin:
     biome: bin/biome
-  checksum: fa417f938868bdb2246097c98d413272fe3e104d3ca2548dca90ccad9e3a2f65da805e078430b726041f99f8166903a14a808bdde35b36252d17cbe2a61757db
+  checksum: 6b016b2b5c48df6af6b74eda75dc9e36a9d2c88911d6a0f1e11dbf25906645ae61bc6366e299aa97c931a96fea9284bdab5e843950110083dc2ce597f70f14b8
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-arm64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-darwin-arm64@npm:1.3.3"
+"@biomejs/cli-darwin-arm64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-darwin-arm64@npm:1.4.1"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-darwin-x64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-darwin-x64@npm:1.3.3"
+"@biomejs/cli-darwin-x64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-darwin-x64@npm:1.4.1"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-arm64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-linux-arm64@npm:1.3.3"
+"@biomejs/cli-linux-arm64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-linux-arm64@npm:1.4.1"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-linux-x64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-linux-x64@npm:1.3.3"
+"@biomejs/cli-linux-x64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-linux-x64@npm:1.4.1"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-arm64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-win32-arm64@npm:1.3.3"
+"@biomejs/cli-win32-arm64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-win32-arm64@npm:1.4.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@biomejs/cli-win32-x64@npm:1.3.3":
-  version: 1.3.3
-  resolution: "@biomejs/cli-win32-x64@npm:1.3.3"
+"@biomejs/cli-win32-x64@npm:1.4.1":
+  version: 1.4.1
+  resolution: "@biomejs/cli-win32-x64@npm:1.4.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
@@ -1896,7 +1896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:^1.2.1":
+"@emotion/is-prop-valid@npm:1.2.1":
   version: 1.2.1
   resolution: "@emotion/is-prop-valid@npm:1.2.1"
   dependencies:
@@ -1912,36 +1912,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/unitless@npm:^0.8.0":
-  version: 0.8.1
-  resolution: "@emotion/unitless@npm:0.8.1"
-  checksum: 385e21d184d27853bb350999471f00e1429fa4e83182f46cd2c164985999d9b46d558dc8b9cc89975cb337831ce50c31ac2f33b15502e85c299892e67e7b4a88
+"@emotion/unitless@npm:0.8.0":
+  version: 0.8.0
+  resolution: "@emotion/unitless@npm:0.8.0"
+  checksum: 176141117ed23c0eb6e53a054a69c63e17ae532ec4210907a20b2208f91771821835f1c63dd2ec63e30e22fcc984026d7f933773ee6526dd038e0850919fae7a
   languageName: node
   linkType: hard
 
-"@equinor/eds-core-react@npm:^0.33.1":
-  version: 0.33.1
-  resolution: "@equinor/eds-core-react@npm:0.33.1"
+"@equinor/eds-core-react@npm:^0.35.1":
+  version: 0.35.1
+  resolution: "@equinor/eds-core-react@npm:0.35.1"
   dependencies:
     "@babel/runtime": ^7.23.2
-    "@equinor/eds-icons": ^0.19.3
+    "@equinor/eds-icons": ^0.20.0
     "@equinor/eds-tokens": 0.9.2
     "@equinor/eds-utils": 0.8.3
-    "@floating-ui/react": ^0.25.1
+    "@floating-ui/react": ^0.26.2
     "@tanstack/react-virtual": 3.0.0-beta.54
-    downshift: ^8.2.1
+    downshift: ^8.2.3
   peerDependencies:
     react: ">=16.8"
     react-dom: ">=16.8"
     styled-components: ">=4.2"
-  checksum: be2944c2f7e9ffcc91fa09f3fe63eb4f1b630d62237fc76ed9b26734a20112d503522229c23e4cee809c07d75bcedaec27a9f64fea3d4de21d029be70e5876f7
+  checksum: 3cee3f944805c859f9469486c318a61e8dc74d662405382fe9a2ec275bc84c99a2118daad623904ed500454686e4083bfe4815b95417e96dcc3a78d048db810d
   languageName: node
   linkType: hard
 
-"@equinor/eds-icons@npm:^0.19.3":
-  version: 0.19.3
-  resolution: "@equinor/eds-icons@npm:0.19.3"
-  checksum: ab21f47aa4cf65e781d3bbaebe096bfaed000140bb49d22fdadb1d94bfc6eb05e661d907afddb29463daf8d56c34c33aa7dcec27a384638848e288dc1dc3bf8e
+"@equinor/eds-icons@npm:^0.20.0":
+  version: 0.20.0
+  resolution: "@equinor/eds-icons@npm:0.20.0"
+  checksum: 69b00624ba8f1def5df29bab07da6a464337be0e1ccd9ea9be3e6ffa2e241fe3de6792cb796fd4556642d9897c49aea2570d9625c17567e2fb075a5692b9dc6e
   languageName: node
   linkType: hard
 
@@ -2027,7 +2027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:^2.0.2":
+"@floating-ui/react-dom@npm:^2.0.3":
   version: 2.0.4
   resolution: "@floating-ui/react-dom@npm:2.0.4"
   dependencies:
@@ -2039,21 +2039,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react@npm:^0.25.1":
-  version: 0.25.4
-  resolution: "@floating-ui/react@npm:0.25.4"
+"@floating-ui/react@npm:^0.26.2":
+  version: 0.26.4
+  resolution: "@floating-ui/react@npm:0.26.4"
   dependencies:
-    "@floating-ui/react-dom": ^2.0.2
-    "@floating-ui/utils": ^0.1.1
+    "@floating-ui/react-dom": ^2.0.3
+    "@floating-ui/utils": ^0.1.5
     tabbable: ^6.0.1
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 816a0aa5bfc122c147e073563c0888333bdf58e79972757e37095c788323c8e87ace18d9196d95be8b8f4fe11d90cdeec36b23e5373a791a71a7873bf805590f
+  checksum: 0cf27b223e7c0f6c5f1cf1c8a765d6f7fc58bf9c825930a39bd9ab2700e4d44873ba763135fc0055bc63d6b26e719a2cae287bbdbc35fb8a84992a7708b85efb
   languageName: node
   linkType: hard
 
-"@floating-ui/utils@npm:^0.1.1, @floating-ui/utils@npm:^0.1.3":
+"@floating-ui/utils@npm:^0.1.3, @floating-ui/utils@npm:^0.1.5":
   version: 0.1.6
   resolution: "@floating-ui/utils@npm:0.1.6"
   checksum: b34d4b5470869727f52e312e08272edef985ba5a450a76de0917ba0a9c6f5df2bdbeb99448e2c60f39b177fb8981c772ff1831424e75123471a27ebd5b52c1eb
@@ -2460,70 +2460,70 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-analytics-js@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-analytics-js@npm:3.0.5"
+"@microsoft/applicationinsights-analytics-js@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-analytics-js@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: 845389a3184d43e42bb3f37f9fee99f51330f4749b3ef07bcece0bfdc3b58ddb2678e5839ab41dd13b998c3cf5c9a187e9fbbb47861ba7ec212a1272d3d8e2ab
+  checksum: 2e529782a31a1cfbad186eca5d7c35c5bf83c9090be784c221bd3616bcb9b0dbc813ebcd82d19d79443924ea308310c399826a01a9926f97cf4bcf896cac6c43
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-cfgsync-js@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-cfgsync-js@npm:3.0.5"
+"@microsoft/applicationinsights-cfgsync-js@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-cfgsync-js@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
-    "@microsoft/applicationinsights-shims": 3.0.1
-    "@microsoft/dynamicproto-js": ^2.0.2
-    "@nevware21/ts-async": ">= 0.3.0 < 2.x"
-    "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
-  peerDependencies:
-    tslib: "*"
-  checksum: b724d124122a7c2179bbce9192341d67abec00c4792c2191ae9fd27beb44c249926f27a33ad9a1df3576a5349f8b867562c5c3044b0771a6a5f67ace1fe96ca2
-  languageName: node
-  linkType: hard
-
-"@microsoft/applicationinsights-channel-js@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-channel-js@npm:3.0.5"
-  dependencies:
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-async": ">= 0.3.0 < 2.x"
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: d35c95ac26ae7be3f42da83ffa292d69f143d60757784dcfd1a628e64f776f515a4e507601aeb08db596a17e13d4f10f7966f22738ebb66dcdec3a812c723754
+  checksum: 3fae4297d4ad94369f8a357eed4f994e6bae033fe5d1d0cf984f73879b8313dcf3fe4b95f8e43341531514f6651f21ac44f8758fd421f8f5254f1138b5e354c3
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-common@npm:3.0.5, @microsoft/applicationinsights-common@npm:^3.0.3":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-common@npm:3.0.5"
+"@microsoft/applicationinsights-channel-js@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-channel-js@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-core-js": 3.0.5
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
+    "@microsoft/applicationinsights-shims": 3.0.1
+    "@microsoft/dynamicproto-js": ^2.0.2
+    "@nevware21/ts-async": ">= 0.3.0 < 2.x"
+    "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
+  peerDependencies:
+    tslib: "*"
+  checksum: b297665cf18c9b69de395528fb61099497b08836879600aaba420ce87335515449ab3edd58b38bbe6352446f017ea497e8609662108abc92ad8d2ae2e85ea999
+  languageName: node
+  linkType: hard
+
+"@microsoft/applicationinsights-common@npm:3.0.7, @microsoft/applicationinsights-common@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-common@npm:3.0.7"
+  dependencies:
+    "@microsoft/applicationinsights-core-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: 65001244fdc3c92f7f41d63571af86d81874f09aac1c575a936e4ce4e0248cdcf12a94d7d95f35aad3b6c9457036012473021f212c02fdd0e7dde81d74c1b391
+  checksum: a1618bb6e8573f7b2f295d309f62b671eebb33f8f450cd6ff84ddd2c3e0c06017e66efa25dd03ebc029f93793a818548955b405d4350a4f47a4f4021f476cd5c
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-core-js@npm:3.0.5, @microsoft/applicationinsights-core-js@npm:^3.0.3":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-core-js@npm:3.0.5"
+"@microsoft/applicationinsights-core-js@npm:3.0.7, @microsoft/applicationinsights-core-js@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-core-js@npm:3.0.7"
   dependencies:
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
@@ -2531,47 +2531,47 @@ __metadata:
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: eb26c2d58a97e052b78934273cbb670008e0d0118e629c714b357dedc0840f376186c96b499dc27a1409086e717df345e1cff672967af250b0de7bdf25861398
+  checksum: d25b281e4942cddbfd690cf7b6b2c38825560d8d4e686416d3c471c62369218d1474b9cc89cd021dc8b3d3ff1a58fc395b429d16a85129754179dd3c3f5ea481
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-dependencies-js@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-dependencies-js@npm:3.0.5"
+"@microsoft/applicationinsights-dependencies-js@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-dependencies-js@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-async": ">= 0.3.0 < 2.x"
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: c74ea378a27d4efdcded98ae99facf41d83bb3c512f2207023326407b893f4a759d8c94e6832ce8269ba1aeeb542f3c21a5e408d297f159e88aec3844132b18e
+  checksum: d56b6f8bba282c8e0b758cbac80637c210aa1d710f05c0ab6abd4eac600d453dc6dc87d53d299378a4d2f7deb9d1b39e55746e8085280585b15b6d77ef07fc95
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-properties-js@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-properties-js@npm:3.0.5"
+"@microsoft/applicationinsights-properties-js@npm:3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-properties-js@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: 082fb208f115cdd308ae3ffb3e2102dc10e1fb5f24be71aea5b0d3c35a5aeebb0629faba701516796fac7393eab789c1d1be7905bab923312a73dc1d372685e6
+  checksum: 9f73e36e490d11fa3a4432e11e846bb990100ff150dafe6706187b127c59fdb641ca0d84cae678f4ad8bc0aa59ee318b15289a31f0f85a5c1bf5d9266c2c4b74
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-react-js@npm:^17.0.2":
-  version: 17.0.2
-  resolution: "@microsoft/applicationinsights-react-js@npm:17.0.2"
+"@microsoft/applicationinsights-react-js@npm:^17.0.3":
+  version: 17.0.3
+  resolution: "@microsoft/applicationinsights-react-js@npm:17.0.3"
   dependencies:
-    "@microsoft/applicationinsights-common": ^3.0.3
-    "@microsoft/applicationinsights-core-js": ^3.0.3
+    "@microsoft/applicationinsights-common": ^3.0.7
+    "@microsoft/applicationinsights-core-js": ^3.0.7
     "@microsoft/applicationinsights-shims": ^3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
@@ -2579,7 +2579,7 @@ __metadata:
     history: ">= 4.10.1"
     react: ">= 17.0.1"
     tslib: "*"
-  checksum: eae034f2dd4bcd8ec1df0fe6648ae85b68e5bee4037847fe29709f18854c5513d8d663c82b1f53fbe7967944731645f375f8c1548eb0a92f99f18a801e763b41
+  checksum: 9779cd04da3a776295f4c0f661827617a2f89095c4fc15068370f1a2c5314b11a18712c9c0b5c4e0a2376c405faa5ec313217815bf68e6bdd7a52cd80f4e8b12
   languageName: node
   linkType: hard
 
@@ -2592,24 +2592,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@microsoft/applicationinsights-web@npm:^3.0.5":
-  version: 3.0.5
-  resolution: "@microsoft/applicationinsights-web@npm:3.0.5"
+"@microsoft/applicationinsights-web@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "@microsoft/applicationinsights-web@npm:3.0.7"
   dependencies:
-    "@microsoft/applicationinsights-analytics-js": 3.0.5
-    "@microsoft/applicationinsights-cfgsync-js": 3.0.5
-    "@microsoft/applicationinsights-channel-js": 3.0.5
-    "@microsoft/applicationinsights-common": 3.0.5
-    "@microsoft/applicationinsights-core-js": 3.0.5
-    "@microsoft/applicationinsights-dependencies-js": 3.0.5
-    "@microsoft/applicationinsights-properties-js": 3.0.5
+    "@microsoft/applicationinsights-analytics-js": 3.0.7
+    "@microsoft/applicationinsights-cfgsync-js": 3.0.7
+    "@microsoft/applicationinsights-channel-js": 3.0.7
+    "@microsoft/applicationinsights-common": 3.0.7
+    "@microsoft/applicationinsights-core-js": 3.0.7
+    "@microsoft/applicationinsights-dependencies-js": 3.0.7
+    "@microsoft/applicationinsights-properties-js": 3.0.7
     "@microsoft/applicationinsights-shims": 3.0.1
     "@microsoft/dynamicproto-js": ^2.0.2
     "@nevware21/ts-async": ">= 0.3.0 < 2.x"
     "@nevware21/ts-utils": ">= 0.10.1 < 2.x"
   peerDependencies:
     tslib: "*"
-  checksum: 71d97849e487632ea1a95bd4aea55d0b8a266272fa85afe8d6ac9fb620d9aced0eba444713e15fc31bf138f4baabff912e71ca63cafc72a8ea0e37c73b973bd1
+  checksum: 397b386555d32d0f45bd84ed8c839412cc702f8c04f6d2a4d3a05a16dcb600c67d04e9a5020e00a1a623c18ea5e88763041bda05a8855d6ff47b375197745cbb
   languageName: node
   linkType: hard
 
@@ -3016,11 +3016,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^6.1.2":
-  version: 6.1.4
-  resolution: "@testing-library/jest-dom@npm:6.1.4"
+"@testing-library/jest-dom@npm:^6.1.6":
+  version: 6.1.6
+  resolution: "@testing-library/jest-dom@npm:6.1.6"
   dependencies:
-    "@adobe/css-tools": ^4.3.1
+    "@adobe/css-tools": ^4.3.2
     "@babel/runtime": ^7.9.2
     aria-query: ^5.0.0
     chalk: ^3.0.0
@@ -3042,7 +3042,7 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: c6bd9469554136a25d94b55ea16736d56b8c5d200526023774dbf35ca35551a721257e6734f1b404bbd07ae0a1950f1912b5be60e113db2ff2ff50af14f7085c
+  checksum: 8d1a80678027915228b483a116fb9e358d25e2faffcd9a2c40b371752fbd53b5cb87351215866a43dd09393e7d364c46fc43923566b00ef63bbf3576d47da940
   languageName: node
   linkType: hard
 
@@ -3060,12 +3060,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:^14.4.3":
-  version: 14.5.1
-  resolution: "@testing-library/user-event@npm:14.5.1"
+"@testing-library/user-event@npm:^14.5.2":
+  version: 14.5.2
+  resolution: "@testing-library/user-event@npm:14.5.2"
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
-  checksum: 3e6bc9fd53dfe2f3648190193ed2fd4bca2a1bfb47f68810df3b33f05412526e5fd5c4ef9dc5375635e0f4cdf1859916867b597eed22bda1321e04242ea6c519
+  checksum: d76937dffcf0082fbf3bb89eb2b81a31bf5448048dd61c33928c5f10e33a58e035321d39145cefd469bb5a499c68a5b4086b22f1a44e3e7c7e817dc5f6782867
   languageName: node
   linkType: hard
 
@@ -3301,13 +3301,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.5.4":
-  version: 29.5.10
-  resolution: "@types/jest@npm:29.5.10"
+"@types/jest@npm:^29.5.11":
+  version: 29.5.11
+  resolution: "@types/jest@npm:29.5.11"
   dependencies:
     expect: ^29.0.0
     pretty-format: ^29.0.0
-  checksum: ef385905787db528de9b6beb2688865c0bb276e64256ed60b9a1a6ffc0b75737456cb5e27e952a3241c5845b6a1da487470010dd30f3ca59c8581624c564a823
+  checksum: f892a06ec9f0afa9a61cd7fa316ec614e21d4df1ad301b5a837787e046fcb40dfdf7f264a55e813ac6b9b633cb9d366bd5b8d1cea725e84102477b366df23fdd
   languageName: node
   linkType: hard
 
@@ -3348,12 +3348,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^20.5.9":
+"@types/node@npm:*":
   version: 20.10.1
   resolution: "@types/node@npm:20.10.1"
   dependencies:
     undici-types: ~5.26.4
   checksum: 9dfdcd2496ce535dba0ae496985d6e991a8a5d70a180db3a94c947a2123d99318a95dce4aa2a192f7e57c3afa3fdb44d6fd63e18efd49568950d6c239dadcc39
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.10.6":
+  version: 20.10.6
+  resolution: "@types/node@npm:20.10.6"
+  dependencies:
+    undici-types: ~5.26.4
+  checksum: ada40e4ccbda3697dca88f8d13f4c996c493be6fbc15f5f5d3b91096d56bd700786a2c148a92a2b4c5d1f133379e63f754a786b3aebfc6a7d09fc7ea16dc017b
   languageName: node
   linkType: hard
 
@@ -3399,12 +3408,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.2.7":
+"@types/react-dom@npm:^18.0.0":
   version: 18.2.17
   resolution: "@types/react-dom@npm:18.2.17"
   dependencies:
     "@types/react": "*"
   checksum: 7a4e704ed4be6e0c3ccd8a22ff69386fe548304bf4db090513f42e059ff4c65f7a427790320051524d6578a2e4c9667bb7a80a4c989b72361c019fbe851d9385
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^18.2.18":
+  version: 18.2.18
+  resolution: "@types/react-dom@npm:18.2.18"
+  dependencies:
+    "@types/react": "*"
+  checksum: 8e3da404c980e2b2a76da3852f812ea6d8b9d0e7f5923fbaf3bfbbbfa1d59116ff91c129de8f68e9b7668a67ae34484fe9df74d5a7518cf8591ec07a0c4dad57
   languageName: node
   linkType: hard
 
@@ -3429,7 +3447,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.2.21":
+"@types/react@npm:*":
   version: 18.2.39
   resolution: "@types/react@npm:18.2.39"
   dependencies:
@@ -3437,6 +3455,17 @@ __metadata:
     "@types/scheduler": "*"
     csstype: ^3.0.2
   checksum: 9bcb1f1f060f1bf8f4730fb1c7772d0323a6e707f274efee3b976c40d92af4677df4d88e9135faaacf34e13e02f92ef24eb7d0cbcf7fb75c1883f5623ccb19f4
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^18.2.46":
+  version: 18.2.46
+  resolution: "@types/react@npm:18.2.46"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: cb0e4dc7f41988a059e1246a19ec377101f5b16097ec4bf7000ef3c431ec0c8c873f40e95075821f908db1f4e3352775f0f18cea53dcad14dce67c0f5110f2bd
   languageName: node
   linkType: hard
 
@@ -3516,21 +3545,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/styled-components@npm:^5.1.26":
-  version: 5.1.32
-  resolution: "@types/styled-components@npm:5.1.32"
+"@types/styled-components@npm:^5.1.34":
+  version: 5.1.34
+  resolution: "@types/styled-components@npm:5.1.34"
   dependencies:
     "@types/hoist-non-react-statics": "*"
     "@types/react": "*"
     csstype: ^3.0.2
-  checksum: c08909348aed553a710809c55c0cd0b26b7f0e364c99c5b21c7eca66cf8446bb4a57fff7ad0484646affa692acc181ff51061c9cd7b26bab468960c29eae1901
+  checksum: 7868066a15afe42d8b353953fc196a7f11a9918b1c980f51d21bb9b49e309c7fe2d730be2d3dc48e92ab4de20f44a3c9dfe6cc98b6ea4dd02655e6f8128171b6
   languageName: node
   linkType: hard
 
-"@types/stylis@npm:^4.0.2":
-  version: 4.2.4
-  resolution: "@types/stylis@npm:4.2.4"
-  checksum: 0734b4136192f97f4c8792ea41f1293091dfda53434ede08281fa42689d31f16cd1ad0e058de88c11980c18aae29e62a87027b235b98ab0cb237641b6ec44bcb
+"@types/stylis@npm:4.2.0":
+  version: 4.2.0
+  resolution: "@types/stylis@npm:4.2.0"
+  checksum: 02a47584acd2fcb664f7d8270a69686c83752bdfb855f804015d33116a2b09c0b2ac535213a4a7b6d3a78b2915b22b4024cce067ae979beee0e4f8f5fdbc26a9
   languageName: node
   linkType: hard
 
@@ -4379,14 +4408,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.6.1":
-  version: 1.6.2
-  resolution: "axios@npm:1.6.2"
+"axios@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "axios@npm:1.6.3"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 4a7429e2b784be0f2902ca2680964391eae7236faa3967715f30ea45464b98ae3f1c6f631303b13dfe721b17126b01f486c7644b9ef276bfc63112db9fd379f8
+  checksum: 07ef3bb83fc2dacc1ae2c97f2bbd04ef7701f5655f9037789d79ee78b698ffa50eaa8465c2017d4d3e9ce7d94cb779f730acaab32ce9036d0a4933c1e89df4da
   languageName: node
   linkType: hard
 
@@ -5406,7 +5435,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-to-react-native@npm:^3.2.0":
+"css-to-react-native@npm:3.2.0":
   version: 3.2.0
   resolution: "css-to-react-native@npm:3.2.0"
   dependencies:
@@ -5567,7 +5596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^3.0.2, csstype@npm:^3.1.2":
+"csstype@npm:3.1.2, csstype@npm:^3.0.2":
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: e1a52e6c25c1314d6beef5168da704ab29c5186b877c07d822bd0806717d9a265e8493a2e35ca7e68d0f5d472d43fac1cdce70fd79fd0853dff81f3028d857b5
@@ -5961,9 +5990,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:^8.2.1":
-  version: 8.2.3
-  resolution: "downshift@npm:8.2.3"
+"downshift@npm:^8.2.3":
+  version: 8.3.1
+  resolution: "downshift@npm:8.3.1"
   dependencies:
     "@babel/runtime": ^7.22.15
     compute-scroll-into-view: ^3.0.3
@@ -5972,7 +6001,7 @@ __metadata:
     tslib: ^2.6.2
   peerDependencies:
     react: ">=16.12.0"
-  checksum: d218096d0b8488b6504553e2dd4199e24da96ffcba43e2d97bf9e87a3ed30a8a626bcc191e3c800981f52f2d7673d50bfe5fb34e091d1338e9df0f08a34fc658
+  checksum: 3438ee9ff9662a4558fbe860e22e39269ad54f44d70dd381d4dd440129e648cc09993e2d1c7dbbe70fdbb23a66ec118c76253d689165d48020f9e670d9ce0d67
   languageName: node
   linkType: hard
 
@@ -11177,17 +11206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^7.0.35":
-  version: 7.0.39
-  resolution: "postcss@npm:7.0.39"
-  dependencies:
-    picocolors: ^0.2.1
-    source-map: ^0.6.1
-  checksum: 4ac793f506c23259189064bdc921260d869a115a82b5e713973c5af8e94fbb5721a5cc3e1e26840500d7e1f1fa42a209747c5b1a151918a9bc11f0d7ed9048e3
-  languageName: node
-  linkType: hard
-
-"postcss@npm:^8.3.5, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.31, postcss@npm:^8.4.4":
+"postcss@npm:8.4.31, postcss@npm:^8.3.5, postcss@npm:^8.4.21, postcss@npm:^8.4.23, postcss@npm:^8.4.4":
   version: 8.4.31
   resolution: "postcss@npm:8.4.31"
   dependencies:
@@ -11195,6 +11214,16 @@ __metadata:
     picocolors: ^1.0.0
     source-map-js: ^1.0.2
   checksum: 1d8611341b073143ad90486fcdfeab49edd243377b1f51834dc4f6d028e82ce5190e4f11bb2633276864503654fb7cab28e67abdc0fbf9d1f88cad4a0ff0beea
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^7.0.35":
+  version: 7.0.39
+  resolution: "postcss@npm:7.0.39"
+  dependencies:
+    picocolors: ^0.2.1
+    source-map: ^0.6.1
+  checksum: 4ac793f506c23259189064bdc921260d869a115a82b5e713973c5af8e94fbb5721a5cc3e1e26840500d7e1f1fa42a209747c5b1a151918a9bc11f0d7ed9048e3
   languageName: node
   linkType: hard
 
@@ -11501,12 +11530,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-oauth2-code-pkce@npm:^1.15.2":
-  version: 1.15.2
-  resolution: "react-oauth2-code-pkce@npm:1.15.2"
+"react-oauth2-code-pkce@npm:^1.16.0":
+  version: 1.16.0
+  resolution: "react-oauth2-code-pkce@npm:1.16.0"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: dd2c52378830dbd037537c2d4aece9b8d467a7848f2a19271189c23edb070461fd188577459201fe9f0d170cab47ef1e4d044b5621b8779d5437a14033a317ec
+  checksum: 2d98a8c76d1660ffb2dac28fadb10d4d48f6325c097c7d52a792aabf8293ec5cd747d194858ba58d4125b32aaeaa2230a01cdc4b57b12b1c709a7bba90c8c801
   languageName: node
   linkType: hard
 
@@ -12251,7 +12280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shallowequal@npm:^1.1.0":
+"shallowequal@npm:1.1.0":
   version: 1.1.0
   resolution: "shallowequal@npm:1.1.0"
   checksum: f4c1de0837f106d2dbbfd5d0720a5d059d1c66b42b580965c8f06bb1db684be8783538b684092648c981294bf817869f743a066538771dbecb293df78f765e00
@@ -12730,23 +12759,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-components@npm:^6.1.1":
-  version: 6.1.1
-  resolution: "styled-components@npm:6.1.1"
+"styled-components@npm:^6.1.6":
+  version: 6.1.6
+  resolution: "styled-components@npm:6.1.6"
   dependencies:
-    "@emotion/is-prop-valid": ^1.2.1
-    "@emotion/unitless": ^0.8.0
-    "@types/stylis": ^4.0.2
-    css-to-react-native: ^3.2.0
-    csstype: ^3.1.2
-    postcss: ^8.4.31
-    shallowequal: ^1.1.0
-    stylis: ^4.3.0
-    tslib: ^2.5.0
+    "@emotion/is-prop-valid": 1.2.1
+    "@emotion/unitless": 0.8.0
+    "@types/stylis": 4.2.0
+    css-to-react-native: 3.2.0
+    csstype: 3.1.2
+    postcss: 8.4.31
+    shallowequal: 1.1.0
+    stylis: 4.3.1
+    tslib: 2.5.0
   peerDependencies:
     react: ">= 16.8.0"
     react-dom: ">= 16.8.0"
-  checksum: d062ba473014a551ed76f4876feaccebc06aaa8dc2849c9d72f67420701dbc7d7c9af1dfa5207b2ad5df9b2e122ddf9e5fe6b6b69ba4d93c4c702abdff19435a
+  checksum: 8bcda3719af222ebde8be358d0db4019e6fb03b6f9b19797ec20acc26aad4b1ede83b3820b25b8dd4aa7a1dfa7bb26d82e69f063b8e1f3b0d8a8e6e095f1b643
   languageName: node
   linkType: hard
 
@@ -12762,10 +12791,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylis@npm:^4.3.0":
-  version: 4.3.0
-  resolution: "stylis@npm:4.3.0"
-  checksum: 6120de3f03eacf3b5adc8e7919c4cca991089156a6badc5248752a3088106afaaf74996211a6817a7760ebeadca09004048eea31875bd8d4df51386365c50025
+"stylis@npm:4.3.1":
+  version: 4.3.1
+  resolution: "stylis@npm:4.3.1"
+  checksum: d365f1b008677b2147e8391e9cf20094a4202a5f9789562e7d9d0a3bd6f0b3067d39e8fd17cce5323903a56f6c45388e3d839e9c0bb5a738c91726992b14966d
   languageName: node
   linkType: hard
 
@@ -13154,6 +13183,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.5.0":
+  version: 2.5.0
+  resolution: "tslib@npm:2.5.0"
+  checksum: ae3ed5f9ce29932d049908ebfdf21b3a003a85653a9a140d614da6b767a93ef94f460e52c3d787f0e4f383546981713f165037dc2274df212ea9f8a4541004e1
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -13161,7 +13197,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3, tslib@npm:^2.5.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.0.3, tslib@npm:^2.6.2":
   version: 2.6.2
   resolution: "tslib@npm:2.6.2"
   checksum: 329ea56123005922f39642318e3d1f0f8265d1e7fcb92c633e0809521da75eeaca28d2cf96d7248229deb40e5c19adf408259f4b9640afd20d13aecc1430f3ad
@@ -13291,23 +13327,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2":
-  version: 5.3.2
-  resolution: "typescript@npm:5.3.2"
+"typescript@npm:^5.3.3":
+  version: 5.3.3
+  resolution: "typescript@npm:5.3.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d92534dda639eb825db013203404c1fabca8ac630564283c9e7dc9e64fd9c9346c2de95ecebdf3e6e8c1c32941bca1cfe0da37877611feb9daf8feeaea58d230
+  checksum: 2007ccb6e51bbbf6fde0a78099efe04dc1c3dfbdff04ca3b6a8bc717991862b39fd6126c0c3ebf2d2d98ac5e960bcaa873826bb2bb241f14277034148f41f6a2
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.2.2#~builtin<compat/typescript>":
-  version: 5.3.2
-  resolution: "typescript@patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=77c9e2"
+"typescript@patch:typescript@^5.3.3#~builtin<compat/typescript>":
+  version: 5.3.3
+  resolution: "typescript@patch:typescript@npm%3A5.3.3#~builtin<compat/typescript>::version=5.3.3&hash=77c9e2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: c034461079fbfde3cb584ddee52afccb15b6e32a0ce186d0b2719968786f7ca73e1b07f71fac4163088790b16811c6ccf79680de190664ef66ff0ba9c1fe4a23
+  checksum: f61375590b3162599f0f0d5b8737877ac0a7bc52761dbb585d67e7b8753a3a4c42d9a554c4cc929f591ffcf3a2b0602f65ae3ce74714fd5652623a816862b610
   languageName: node
   linkType: hard
 
@@ -13573,30 +13609,30 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:."
   dependencies:
-    "@biomejs/biome": 1.3.3
-    "@equinor/eds-core-react": ^0.33.1
-    "@equinor/eds-icons": ^0.19.3
+    "@biomejs/biome": 1.4.1
+    "@equinor/eds-core-react": ^0.35.1
+    "@equinor/eds-icons": ^0.20.0
     "@equinor/eds-tokens": ^0.9.2
-    "@microsoft/applicationinsights-react-js": ^17.0.2
-    "@microsoft/applicationinsights-web": ^3.0.5
-    "@testing-library/jest-dom": ^6.1.2
+    "@microsoft/applicationinsights-react-js": ^17.0.3
+    "@microsoft/applicationinsights-web": ^3.0.7
+    "@testing-library/jest-dom": ^6.1.6
     "@testing-library/react": ^14.0.0
-    "@testing-library/user-event": ^14.4.3
-    "@types/jest": ^29.5.4
-    "@types/node": ^20.5.9
-    "@types/react": ^18.2.21
-    "@types/react-dom": ^18.2.7
+    "@testing-library/user-event": ^14.5.2
+    "@types/jest": ^29.5.11
+    "@types/node": ^20.10.6
+    "@types/react": ^18.2.46
+    "@types/react-dom": ^18.2.18
     "@types/react-router": ^5.1.20
     "@types/react-router-dom": ^5.3.3
-    "@types/styled-components": ^5.1.26
-    axios: ^1.6.1
+    "@types/styled-components": ^5.1.34
+    axios: ^1.6.3
     react: ^18.2.0
     react-dom: ^18.2.0
     react-is: ^18.2.0
-    react-oauth2-code-pkce: ^1.15.2
+    react-oauth2-code-pkce: ^1.16.0
     react-scripts: 5.0.1
-    styled-components: ^6.1.1
-    typescript: ^5.2.2
+    styled-components: ^6.1.6
+    typescript: ^5.3.3
   languageName: unknown
   linkType: soft
 
