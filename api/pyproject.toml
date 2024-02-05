@@ -10,7 +10,7 @@ cachetools = "^5.3.1"
 python = "^3.10.4"
 numpy = "^1.26.2"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
-fastapi = "^0.104.1"
+fastapi = "^0.109.1"
 uvicorn = {extras = ["standard"], version = "^0.24.0"}
 gunicorn = "^21.2.0"
 cryptography = "^41.0.6"
