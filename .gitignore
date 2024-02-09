@@ -19,3 +19,4 @@ web/.yarn/*
 # Other
 .idea
 .mypy_cache
+.python-version

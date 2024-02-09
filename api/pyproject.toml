@@ -10,12 +10,9 @@ cachetools = "^5.3.1"
 python = "^3.10.4"
 numpy = "^1.26.2"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
-fastapi = "^0.104.1"
+fastapi = "^0.109.2"
 uvicorn = {extras = ["standard"], version = "^0.24.0"}
 gunicorn = "^21.2.0"
-cryptography = "^41.0.6"
-# Not a direct dependecy, but needed to get certificates
-certifi = "^2023.5.7"
 requests = "^2.31.0"
 opencensus-ext-azure = "^1.1.9"
 urllib3 = "^2.0.7"
