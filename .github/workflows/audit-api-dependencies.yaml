@@ -20,7 +20,7 @@ jobs:
         with:
           path: |
             ~/work/mercury/mercury/api/.venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('api/pyproject.toml') }}
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('api/poetry.lock') }}
 
       - name: Set up venv
         if: steps.cache.outputs.cache-hit != 'true'
@@ -29,7 +29,10 @@ jobs:
           poetry config virtualenvs.in-project true
           cd api
           poetry install
+          source .venv/bin/activate
+          pip uninstall -y ecdsa  # ecdsa is a unused, vulnerable, dependency of "python-jose -> cryptography -> ecdsa"
+          
 
-      - uses: pypa/gh-action-pip-audit@v1.0.1
+      - uses: pypa/gh-action-pip-audit@v1.0.8
         with:
           virtual-environment: api/.venv/

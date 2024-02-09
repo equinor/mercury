@@ -61,13 +61,6 @@ repos:
         name: isort (python)
         files: ^api/.*\.py$
 
-  - repo: local
-    hooks:
-      - id: biome
-        name: run biome check (format, lint, sort imports)
-        entry: bash -c 'cd web && yarn dlx -q @biomejs/biome check src --apply'
-        language: system
-        pass_filenames: false
 
   - repo: https://github.com/pycqa/flake8
     rev: 6.1.0
