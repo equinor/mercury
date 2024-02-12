@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.2](https://github.com/equinor/mercury/compare/v1.1.1...v1.1.2) (2024-02-12)
+
+
+### Miscellaneous Chores
+
+* bump deps ([17bbdc8](https://github.com/equinor/mercury/commit/17bbdc84ec8b4a75a5bb2ea9ddb2cc004cb60afd))
+* **deps:** bump the back-end group in /api with 2 updates ([21c9402](https://github.com/equinor/mercury/commit/21c9402f8a5adb0dc6f258202a4552e4d650645d))
+
+
+### Continuous Integration
+
+* replace multiple tools with ruff ([cb30eb6](https://github.com/equinor/mercury/commit/cb30eb6a5c1b453b8cb5817160153b3919f983c4))
+
 ## [1.1.1](https://github.com/equinor/mercury/compare/v1.1.0...v1.1.1) (2023-11-30)
 
 
