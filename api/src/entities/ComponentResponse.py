@@ -1,5 +1,3 @@
-from typing import Dict
-
 from pydantic import BaseModel, Field
 
 
@@ -25,7 +23,7 @@ class ComponentResponse(BaseModel):
     Model for containing the response of getting the component dictionary.
     """
 
-    components: Dict[str, ComponentProperties] = Field(
+    components: dict[str, ComponentProperties] = Field(
         ...,
         description="Dictionary of component_ids as string and ComponentProperties as value",
     )
