@@ -1,6 +1,7 @@
 import functools
 import traceback
-from typing import Callable, Type, TypeVar
+from collections.abc import Callable
+from typing import TypeVar
 
 from pydantic import ValidationError
 from requests import HTTPError
@@ -13,7 +14,7 @@ from common.utils.logger import logger
 TResponse = TypeVar("TResponse", bound=Response)
 
 
-def create_response(response_class: Type[TResponse]) -> Callable[..., Callable[..., TResponse | PlainTextResponse]]:
+def create_response(response_class: type[TResponse]) -> Callable[..., Callable[..., TResponse | PlainTextResponse]]:
     def func_wrapper(func) -> Callable[..., TResponse | PlainTextResponse]:
         @functools.wraps(func)
         def wrapper_decorator(*args, **kwargs) -> TResponse | PlainTextResponse:

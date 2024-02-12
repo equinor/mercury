@@ -32,7 +32,7 @@ def fetch_openid_configuration() -> dict:
         }
     except Exception as error:
         logger.error(f"Failed to fetch OpenId Connect configuration for '{config.OAUTH_WELL_KNOWN}': {error}")
-        raise credentials_exception
+        raise credentials_exception from error
 
 
 def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
@@ -52,7 +52,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
             user = User(user_id=payload["sub"], **payload)
     except JWTError as error:
         logger.warning(f"Faild to decode JWT: {error}")
-        raise credentials_exception
+        raise credentials_exception from error
 
     if user is None:
         raise credentials_exception

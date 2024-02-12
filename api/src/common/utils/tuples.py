@@ -1,4 +1,4 @@
-from typing import Dict, List, NamedTuple
+from typing import NamedTuple
 
 import numpy as np
 
@@ -51,9 +51,9 @@ class MultiflashResult(NamedTuple):
     feed_molecular_weight - float with the total molecular weight for the given input feed.
     """
 
-    phase_values: Dict[PhaseLabels, PhaseValues]
-    component_fractions: Dict[str, ComponentFractions]
-    feed_fractions: List[float]
+    phase_values: dict[PhaseLabels, PhaseValues]
+    component_fractions: dict[str, ComponentFractions]
+    feed_fractions: list[float]
 
     def __eq__(self, other) -> bool:
         if not set(self.phase_values.keys()) == set(other.phase_values.keys()):

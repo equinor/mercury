@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 import libhg
 import numpy as np
 from pydantic import BaseModel, Field, validator
@@ -15,7 +13,7 @@ class Multiflash(BaseModel):
     Model for the computing multiphase flash calculation input.
     """
 
-    component_composition: Dict[str, float] = Field(
+    component_composition: dict[str, float] = Field(
         ...,
         description="The component ids (as string parsed numbers) and the percentage of each component in the feed",
         alias="componentComposition",
@@ -42,15 +40,15 @@ class Multiflash(BaseModel):
         return {k: v for k, v in component_composition.items() if v != 0}
 
     @property
-    def component_ids(self) -> List[str]:
+    def component_ids(self) -> list[str]:
         return list(self.component_composition.keys())
 
     @property
-    def component_ids_as_ints(self) -> List[int]:
+    def component_ids_as_ints(self) -> list[int]:
         return [int(x) for x in self.component_ids]
 
     @property
-    def feed_composition(self) -> List[float]:
+    def feed_composition(self) -> list[float]:
         return list(self.component_composition.values())
 
     @property
@@ -58,7 +56,7 @@ class Multiflash(BaseModel):
         return len(self.component_ids)
 
     @property
-    def normalized_feed_composition(self) -> List[float]:
+    def normalized_feed_composition(self) -> list[float]:
         return list(np.array(self.feed_composition) / np.sum(self.feed_composition))
 
     @staticmethod
@@ -66,7 +64,7 @@ class Multiflash(BaseModel):
         phase_labels: NDArrayBytes,
         phase_fractions: NDArrayFloat,
         mercury_concentrations: NDArrayFloat,
-    ) -> Dict[PhaseLabels, PhaseValues]:
+    ) -> dict[PhaseLabels, PhaseValues]:
         """
         Converts phase related output from libhg.compute_multiflash (phase_labels, phase_fractions,
         mercury_concentration) to dictionary where keys are PhaseLabel objects and values are PhaseValues tuples.
@@ -85,7 +83,7 @@ class Multiflash(BaseModel):
         mole_fractions: NDArrayFloat,
         mass_fractions: NDArrayFloat,
         columns_to_keep: tuple = (1, 2, 3, 4),
-    ) -> Dict[str, ComponentFractions]:
+    ) -> dict[str, ComponentFractions]:
         """
         Converts fraction related output from libhg.compute_multiflash (mole_fractions, mass_fractions) into dictionary
         where the keys are component id and the values are ComponentFractions tuples.

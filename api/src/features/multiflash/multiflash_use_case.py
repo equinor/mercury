@@ -1,5 +1,3 @@
-from typing import Dict, List
-
 from pydantic import BaseModel, Field
 
 from common.utils.enums import PhaseLabels
@@ -12,18 +10,18 @@ from entities.Multiflash import (
 
 
 class MultiflashResponse(BaseModel):
-    phase_values: Dict[PhaseLabels, Dict[str, float]] = Field(
+    phase_values: dict[PhaseLabels, dict[str, float]] = Field(
         ...,
         description="Phase labels (vapor, liquid, aqueous, mercury) with "
         "their fraction of unity and mercury concentration",
         alias="phaseValues",
     )
-    component_fractions: Dict[str, List[float]] = Field(
+    component_fractions: dict[str, list[float]] = Field(
         ...,
         description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)",
         alias="componentFractions",
     )
-    feed_fractions: Dict[str, float] = Field(
+    feed_fractions: dict[str, float] = Field(
         ..., description="Ratio of components in the feed (guaranteed to sum to 1)", alias="feedFractions"
     )
 
@@ -51,9 +49,9 @@ class MultiflashResponse(BaseModel):
     @classmethod
     def from_values(
         cls,
-        phase_values: Dict[PhaseLabels, PhaseValues],
-        component_fractions: Dict[str, ComponentFractions],
-        feed_fractions: List[float],
+        phase_values: dict[PhaseLabels, PhaseValues],
+        component_fractions: dict[str, ComponentFractions],
+        feed_fractions: list[float],
     ) -> "MultiflashResponse":
         # convert phase_values to dictionary
         new_phase_values = {label: value._asdict() for label, value in phase_values.items()}
@@ -63,9 +61,7 @@ class MultiflashResponse(BaseModel):
             for component_id in component_fractions.keys()
         }
         # feed fractions to dictionary:
-        new_feed_fractions = {
-            component_id: feed_ratio for component_id, feed_ratio in zip(component_fractions.keys(), feed_fractions)
-        }
+        new_feed_fractions = dict(zip(component_fractions.keys(), feed_fractions, strict=False))
         return MultiflashResponse(
             phase_values=new_phase_values,
             component_fractions=new_component_fractions,
@@ -73,11 +69,11 @@ class MultiflashResponse(BaseModel):
         )
 
     @property
-    def phase_labels(self) -> List[PhaseLabels]:
+    def phase_labels(self) -> list[PhaseLabels]:
         return list(self.phase_values.keys())
 
     @property
-    def phase_fractions(self) -> List[float]:
+    def phase_fractions(self) -> list[float]:
         return [value["percentage"] for key, value in self.phase_values.items()]
 
 
