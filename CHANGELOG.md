@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/equinor/mercury/compare/v1.1.2...v1.1.3) (2024-02-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump cryptography from 42.0.2 to 42.0.4 in /api ([3daa50d](https://github.com/equinor/mercury/commit/3daa50d69cbec2aac0e3560bc4c195b3af5ca501))
+
 ## [1.1.2](https://github.com/equinor/mercury/compare/v1.1.1...v1.1.2) (2024-02-12)
 
 
