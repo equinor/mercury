@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.3](https://github.com/equinor/mercury/compare/v1.1.2...v1.1.3) (2024-06-06)
+
+
+### Miscellaneous Chores
+
+* bump dependencies ([29604f7](https://github.com/equinor/mercury/commit/29604f7feb938cce0471fad1cb45a9d0772d394b))
+* **deps-dev:** bump httpx ([fcd56fd](https://github.com/equinor/mercury/commit/fcd56fd221ad36d67d53a6fc36361263040f9c41))
+* **deps-dev:** bump pytest from 7.4.4 to 8.2.2 in /api ([a45fd9e](https://github.com/equinor/mercury/commit/a45fd9e9da961b561a302dfa918a4b5086a79219))
+* **deps:** bump cryptography from 42.0.2 to 42.0.4 in /api ([3daa50d](https://github.com/equinor/mercury/commit/3daa50d69cbec2aac0e3560bc4c195b3af5ca501))
+
 ## [1.1.2](https://github.com/equinor/mercury/compare/v1.1.1...v1.1.2) (2024-02-12)
 
 
