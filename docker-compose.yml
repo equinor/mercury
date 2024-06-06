@@ -12,6 +12,7 @@ services:
 
   api:
     image: ghcr.io/equinor/mercury-api
+    restart: unless-stopped
     # Platform flag necessary to work on M1 Mac:
     platform: linux/x86_64
     build:
