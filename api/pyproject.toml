@@ -9,11 +9,11 @@ license = "MIT"
 cachetools = "^5.3.1"
 python = "^3.10.4"
 numpy = "^1.26.2"
-python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 fastapi = "^0.111.0"
 requests = "^2.31.0"
 opencensus-ext-azure = "^1.1.9"
 pydantic = "^1.10.13"
+pyjwt = "^2.8.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.2"

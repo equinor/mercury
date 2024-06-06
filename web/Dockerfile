@@ -1,4 +1,3 @@
-# Fails to build styled-components with node 18
 FROM node:22-alpine as base
 ARG AUTH_ENABLED=0
 ARG REDIRECT_URI=https://proxy-mercury-dev.radix.equinor.com
