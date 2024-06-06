@@ -58,6 +58,6 @@ customEvents
  ```
 customEvents
 | where name == "MainPageLoaded"
-| distinct user_id
+| distinct user_Id
 ```
 ## Knowledge base (encountered problems)
