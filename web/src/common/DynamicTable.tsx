@@ -32,7 +32,7 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
   return (
     <EdsProvider density={props.density}>
       <Table>
-        <Table.Caption>
+        <Table.Caption captionSide="top">
           <Typography variant="h3">{props.caption}</Typography>
         </Table.Caption>
         {props.subtables.map((subtable, subtableIndex) => (
