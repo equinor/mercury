@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.4](https://github.com/equinor/mercury/compare/v1.1.3...v1.1.4) (2024-06-24)
+
+
+### Bug Fixes
+
+* typescript errors with eds ([48d4e18](https://github.com/equinor/mercury/commit/48d4e18e156c855a5bf33eec51d0b55aaf114559))
+
+
+### Miscellaneous Chores
+
+* **deps:** bump azure-identity from 1.16.0 to 1.16.1 in /api ([43bb1f5](https://github.com/equinor/mercury/commit/43bb1f5a923b85fe6bc80636fc1a08f0ee9434cb))
+* **deps:** bump braces from 3.0.2 to 3.0.3 in /web ([47882c7](https://github.com/equinor/mercury/commit/47882c7d8d00d846b5232c0f92135f0993801874))
+* **deps:** bump urllib3 from 2.2.1 to 2.2.2 in /api ([34d141c](https://github.com/equinor/mercury/commit/34d141c2119e3f3cf5abf6d4babecfcd91b396b5))
+* **deps:** bump ws from 7.5.9 to 7.5.10 in /web ([0704882](https://github.com/equinor/mercury/commit/070488274c4cef43238e2405d0e984b2ba6cf1c7))
+
 ## [1.1.3](https://github.com/equinor/mercury/compare/v1.1.2...v1.1.3) (2024-06-06)
 
 
