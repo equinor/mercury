@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@master
 
       - name: 'Az CLI login'
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
           creds: '{"clientId":"0cd10735-a40c-4ff6-84c8-74e3b54ed93f","clientSecret":"${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}","tenantId":"3aa4a235-b6e2-48d5-9195-7fcf05b459b0"}'
           allow-no-subscriptions: true
