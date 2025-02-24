@@ -33,6 +33,6 @@ jobs:
           pip uninstall -y ecdsa  # ecdsa is a unused, vulnerable, dependency of "python-jose -> cryptography -> ecdsa"
           
 
-      - uses: pypa/gh-action-pip-audit@v1.0.8
+      - uses: pypa/gh-action-pip-audit@v1.1.0
         with:
           virtual-environment: api/.venv/
