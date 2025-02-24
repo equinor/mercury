@@ -40,7 +40,7 @@ jobs:
     #  run: pwd && ls ${{ github.workspace }}/diagrams
 
     - name: Download CHANGELOG
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: CHANGELOG
 
