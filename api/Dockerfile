@@ -9,8 +9,17 @@ RUN apt-get update && \
     pip install numpy=="1.23.0"
 
 # Install Intel Fortran compiler
-RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB | gpg --dearmor > /usr/share/keyrings/oneAPI-keyring.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/oneAPI-keyring.gpg] https://apt.repos.intel.com/oneapi all main " > /etc/apt/sources.list.d/oneAPI.list
+#RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB | gpg --dearmor > /usr/share/keyrings/oneAPI-keyring.gpg
+#RUN echo "deb [signed-by=/usr/share/keyrings/oneAPI-keyring.gpg] https://apt.repos.intel.com/oneapi all main " > /etc/apt/sources.list.d/oneAPI.list
+#RUN apt-get update && \
+#    apt-get install -y --no-install-recommends \
+#    build-essential openssh-client && \
+#    rm -rf /var/lib/apt/lists/*
+
+# Install Intel Fortran compiler
+RUN apt-get install -y gpg-agent wget
+RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+RUN echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     build-essential openssh-client intel-oneapi-compiler-fortran && \
@@ -32,7 +41,9 @@ RUN mv gpa-libhg/libhg ./libhg
 # Load env variables, compile fortran library and create python .so file
 SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
-RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
+RUN pip install fmodpy
+RUN cd libhg && source /opt/intel/oneapi/setvars.sh &&  ./compile.sh
+RUN pip uninstall -y fmodpy
 
 FROM python:3.10-slim as base
 ENV PYTHONUNBUFFERED=1
