@@ -21,3 +21,23 @@ updates:
         update-types:
           - "minor"
           - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: ".github/workflows"
+    open-pull-requests-limit: 100
+    schedule:
+      # Check for updates to GitHub Actions every week
+      interval: "monthly"
+
+  - package-ecosystem: "docker"
+    directories:
+      - "/web"
+      - "/api"
+    open-pull-requests-limit: 100
+    schedule:
+      interval: "monthly"
+    groups:
+      dockerfile:
+        update-types:
+          - "minor"
+          - "patch"
