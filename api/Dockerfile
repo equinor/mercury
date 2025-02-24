@@ -1,4 +1,4 @@
-FROM python:3.10-slim as dependencies
+FROM python:3.13-slim as dependencies
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
@@ -34,7 +34,7 @@ SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
 RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
 
-FROM python:3.10-slim as base
+FROM python:3.13-slim as base
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
