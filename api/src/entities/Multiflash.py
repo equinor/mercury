@@ -1,4 +1,6 @@
 import libhg
+
+
 import numpy as np
 from pydantic import BaseModel, Field, validator
 
@@ -6,7 +8,6 @@ from common.components import COMPONENTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
-
 
 class Multiflash(BaseModel):
     """
