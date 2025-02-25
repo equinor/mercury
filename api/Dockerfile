@@ -13,7 +13,7 @@ RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-P
 RUN echo "deb [signed-by=/usr/share/keyrings/oneAPI-keyring.gpg] https://apt.repos.intel.com/oneapi all main " > /etc/apt/sources.list.d/oneAPI.list
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    build-essential openssh-client intel-oneapi-compiler-fortran && \
+    build-essential openssh-client intel-oneapi-compiler-fortran=2024.0.0 && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone libhg fortran repo
