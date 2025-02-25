@@ -3,14 +3,14 @@ set -eux
 
 export LDFLAGS="-static-intel"
 
-rm *.mod
+rm -f *.mod
 
 ifort -c thermclc@proc.f90
 ifort -c UNIFACfast.f90 thermclc.f90
 
 echo "Compiling object files..."
 echo ""
-ifort -fPIC -static -c -static-intel multiflash.f90 Stability.f90 MIXRULESfast.f90 UNIFACfast.f90 thermclc.f90
+ifort -fPIC -static -c -static-intel Stability.f90 multiflash.f90 MIXRULESfast.f90 UNIFACfast.f90 thermclc.f90
 
 ar rc my_lib.a thermclc.o multiflash.o Stability.o MIXRULESfast.o UNIFACfast.o
 
