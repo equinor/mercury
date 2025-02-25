@@ -1,12 +1,13 @@
-FROM python:3.10-slim as base
+FROM intel/oneapi-hpckit:2024.0.1-devel-ubuntu22.04 as dependencies
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-WORKDIR /code
+WORKDIR /build
 
 # Installing build dependencies. Including f2py(Fortan to python, included in numpy)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
     curl ca-certificates gnupg2 git openssh-client procps && \
-    pip install numpy=="1.23.0"
+    apt-get install python3-pip -y && \
+    pip install numpy==2.2.3
 
 # Install Intel Fortran compiler
 #RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB | gpg --dearmor > /usr/share/keyrings/oneAPI-keyring.gpg
@@ -17,15 +18,16 @@ RUN apt-get update && \
 #    rm -rf /var/lib/apt/lists/*
 
 # Install Intel Fortran compiler
-RUN apt-get install -y gpg-agent wget
-RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
-RUN echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
+RUN apt-get install -y gpg-agent
+#RUN wget -O- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor | tee /usr/share/keyrings/oneapi-archive-keyring.gpg > /dev/null
+#RUN echo "deb [signed-by=/usr/share/keyrings/oneapi-archive-keyring.gpg] https://apt.repos.intel.com/oneapi all main" | tee /etc/apt/sources.list.d/oneAPI.list
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    build-essential openssh-client intel-oneapi-compiler-fortran && \
+    openssh-client && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone libhg fortran repo
+FROM dependencies as build
 ARG LIBHG_REPO_DEPLOY_KEY
 ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
@@ -40,16 +42,18 @@ RUN mv gpa-libhg/libhg ./libhg
 # Load env variables, compile fortran library and create python .so file
 SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
-RUN pip install fmodpy
-RUN cd libhg && source /opt/intel/oneapi/setvars.sh &&  ./compile.sh && cd ..
+RUN cd libhg && source /opt/intel/oneapi/setvars.sh &&  ./compile.sh
+
+FROM python:3.10-slim as base
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
 ENTRYPOINT ["/code/init.sh"]
 CMD ["api"]
 EXPOSE 5000
+WORKDIR /code
 
-
+COPY --from=build /build/libhg.so /usr/local/lib/
 # Install poetry
 RUN pip install --upgrade pip && \
     pip install poetry && \
@@ -63,7 +67,7 @@ COPY poetry.lock poetry.lock
 FROM base as development
 RUN poetry install
 COPY ./src .
-USER 0
+USER 1000
 
 FROM base as prod
 RUN poetry install --no-dev
