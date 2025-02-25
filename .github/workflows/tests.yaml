@@ -50,10 +50,10 @@ jobs:
           --tag api-dev ./api
 
       - name: Pytest Unit tests
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
 
       - name: Pytest Integration tests
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
 
   test-web:
     runs-on: ubuntu-latest

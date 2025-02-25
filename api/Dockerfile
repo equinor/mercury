@@ -1,6 +1,6 @@
-FROM python:3.10-slim as dependencies
+FROM python:3.10-slim as base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-WORKDIR /build
+WORKDIR /code
 
 # Installing build dependencies. Including f2py(Fortan to python, included in numpy)
 RUN apt-get update && \
@@ -26,7 +26,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone libhg fortran repo
-FROM dependencies as build
 ARG LIBHG_REPO_DEPLOY_KEY
 ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
@@ -42,19 +41,15 @@ RUN mv gpa-libhg/libhg ./libhg
 SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
 RUN pip install fmodpy
-RUN cd libhg && source /opt/intel/oneapi/setvars.sh &&  ./compile.sh
-RUN pip uninstall -y fmodpy
-
-FROM python:3.10-slim as base
+RUN cd libhg && source /opt/intel/oneapi/setvars.sh &&  ./compile.sh && cd ..
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
 ENTRYPOINT ["/code/init.sh"]
 CMD ["api"]
 EXPOSE 5000
-WORKDIR /code
 
-COPY --from=build /build/libhg.so /usr/local/lib/
+
 # Install poetry
 RUN pip install --upgrade pip && \
     pip install poetry && \
@@ -68,7 +63,7 @@ COPY poetry.lock poetry.lock
 FROM base as development
 RUN poetry install
 COPY ./src .
-USER 1000
+USER 0
 
 FROM base as prod
 RUN poetry install --no-dev

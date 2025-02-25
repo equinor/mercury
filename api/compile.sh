@@ -19,9 +19,16 @@ echo ""
 # Set the F2PY environment variable to use ifx
 # f2py --fcompiler=g95 -c mercury.f90 -m libhg my_lib.a
 
-python3 -c "import fmodpy; fmodpy.fimport('mercury.f90', dependencies=['libhg', 'my_lib.a'])"
 
-cp libhg.cpython-310-x86_64-linux-gnu.so libhg.so
-cp libhg.so ../libhg.so
+#cp libhg.cpython-310-x86_64-linux-gnu.so libhg.so
+#cp libhg.so ../libhg.so
+#
+#rm libhg.cpython-310-x86_64-linux-gnu.so
 
-rm libhg.cpython-310-x86_64-linux-gnu.so
+#fmodpy.config.f_compiler = "/opt/intel/oneapi/compiler/2025.0/bin/ifx"
+#fmodpy.config.f_compiler_args = ["-c", "mercury.f90"]
+#libhg = fmodpy.fimport('mercury.f90', dependencies=['my_lib.a'])
+
+python3 -m fmodpy "mercury.f90" f_compiler="ifx" name='libhg' dependencies='my_lib.a'
+
+ls -l
