@@ -4,17 +4,17 @@ WORKDIR /build
 
 # Installing build dependencies. Including f2py(Fortan to python, included in numpy)
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    curl ca-certificates gnupg2 git openssh-client procps && \
-    pip install numpy=="1.23.0"
+  apt-get install -y --no-install-recommends \
+  curl ca-certificates gnupg2 git openssh-client procps && \
+  pip install numpy=="1.23"
 
 # Install Intel Fortran compiler
 RUN curl -fsSL https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB | gpg --dearmor > /usr/share/keyrings/oneAPI-keyring.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/oneAPI-keyring.gpg] https://apt.repos.intel.com/oneapi all main " > /etc/apt/sources.list.d/oneAPI.list
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-    build-essential openssh-client intel-oneapi-compiler-fortran && \
-    rm -rf /var/lib/apt/lists/*
+  apt-get install -y --no-install-recommends \
+  build-essential openssh-client intel-oneapi-compiler-fortran && \
+  rm -rf /var/lib/apt/lists/*
 
 # Clone libhg fortran repo
 FROM dependencies as build
@@ -46,8 +46,8 @@ WORKDIR /code
 COPY --from=build /build/libhg.so /usr/local/lib/
 # Install poetry
 RUN pip install --upgrade pip && \
-    pip install poetry && \
-    poetry config virtualenvs.create false
+  pip install poetry && \
+  poetry config virtualenvs.create false
 
 # Install python dependencies
 COPY pyproject.toml pyproject.toml

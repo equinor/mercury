@@ -1,14 +1,15 @@
 [tool.poetry]
 name = "mercury"
-version = "1.1.4" # x-release-please-version
+version = "1.1.4"                                       # x-release-please-version
 description = "Mercury composition calculator REST API"
 authors = ["Your Name <you@example.com>"]
 license = "MIT"
+package-mode = false
 
 [tool.poetry.dependencies]
 cachetools = "^5.3.1"
 python = "^3.10.4"
-numpy = "^2.2.3"
+numpy = "1.23.*"
 fastapi = "^0.111.0"
 requests = "^2.31.0"
 opencensus-ext-azure = "^1.1.9"
@@ -24,27 +25,27 @@ httpx = "^0.27.0"
 [tool.ruff]
 src = ["src"]
 target-version = "py310"
-line-length = 120  # This is the prefered line-length. ruff will _try_ to make this
+line-length = 120        # This is the prefered line-length. ruff will _try_ to make this
 
 lint.select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "S",  # Bandit
-    "C",  # flake8-comprehensions
-    "B",  # flake8-bugbear
-    "UP", # automatically upgrade syntax for newer versions of the language
-    "RUF", # ruff specific rules
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "I",   # isort
+  "S",   # Bandit
+  "C",   # flake8-comprehensions
+  "B",   # flake8-bugbear
+  "UP",  # automatically upgrade syntax for newer versions of the language
+  "RUF", # ruff specific rules
 ]
 
 lint.ignore = [
-    "W191", # conflict with ruff formatter
-    "B008",  # do not perform function calls in argument defaults
-    "E501",  # line too long (ruff formater is doing the best it can. Fix them yourself if you dont like the line length)
-    "C901",  # Code complexity
-    "RUF012", # Pydantic class variables
-    "S101",  # Use of "assert"
+  "W191",   # conflict with ruff formatter
+  "B008",   # do not perform function calls in argument defaults
+  "E501",   # line too long (ruff formater is doing the best it can. Fix them yourself if you dont like the line length)
+  "C901",   # Code complexity
+  "RUF012", # Pydantic class variables
+  "S101",   # Use of "assert"
 ]
 
 [build-system]
