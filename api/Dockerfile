@@ -33,9 +33,9 @@ RUN apt-get install -y gpg-agent
 #    openssh-client
 
 # Clone libhg fortran repo
-FROM dependencies as build
-ARG LIBHG_REPO_DEPLOY_KEY
-ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
+#FROM dependencies as build
+#ARG LIBHG_REPO_DEPLOY_KEY
+#ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 # RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
 # RUN chmod -R 600 /root/.ssh
 # RUN ssh-keyscan github.com > ~/.ssh/known_hosts
@@ -46,21 +46,21 @@ ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 # RUN mv gpa-libhg/libhg ./libhg
 
 # Load env variables, compile fortran library and create python .so file
-SHELL ["/bin/bash", "-c"]
-COPY libhg ./libhg
-COPY compile.sh ./libhg/
-RUN cd libhg && ./compile.sh
+#SHELL ["/bin/bash", "-c"]
+#COPY libhg ./libhg
+#COPY compile.sh ./libhg/
+#RUN cd libhg && ./compile.sh
 
 FROM python:3.10-slim as base
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
+ENV LD_LIBRARY_PATH="/code/lib:$LD_LIBRARY_PATH"
 ENTRYPOINT ["/code/init.sh"]
 CMD ["api"]
 EXPOSE 5000
 WORKDIR /code
 
-COPY --from=build /build/libhg.so /usr/local/lib/
 # Install poetry
 RUN pip install --upgrade pip && \
     pip install poetry && \
@@ -69,7 +69,8 @@ RUN pip install --upgrade pip && \
 # Install python dependencies
 COPY pyproject.toml pyproject.toml
 COPY poetry.lock poetry.lock
-
+COPY ./lib ./lib
+COPY ./libhg.so ./libhg.so
 
 FROM base as development
 RUN poetry install
