@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      
+
       - name: Run pre-commit
         id: pre-commit
         uses: pre-commit/action@v3.0.0
@@ -50,10 +50,10 @@ jobs:
           --tag api-dev ./api
 
       - name: Pytest Unit tests
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
 
       - name: Pytest Integration tests
-        run: docker-compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
+        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
 
   test-web:
     runs-on: ubuntu-latest
