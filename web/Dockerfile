@@ -1,4 +1,4 @@
-FROM node:22-alpine as base
+FROM node:23-alpine as base
 ARG AUTH_ENABLED=0
 ARG REDIRECT_URI=https://proxy-mercury-dev.radix.equinor.com
 ARG APP_INSIGHT_CON_STRING=""
@@ -17,7 +17,7 @@ CMD ["yarn", "start"]
 FROM base as build
 RUN yarn build
 
-FROM node:18-alpine as prod
+FROM node:23-alpine as prod
 RUN npm install -g serve
 COPY --from=build /code/build /code/build
 USER 1000
