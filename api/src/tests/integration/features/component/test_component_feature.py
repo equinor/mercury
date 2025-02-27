@@ -11,5 +11,5 @@ def test_components_feature(test_app):
     # using sets as sets do not care about ordering
     assert set(components.keys()) == set(COMPONENTS.keys())
     for key, value in components.items():
-        assert value == ComponentProperties(**COMPONENTS[key]).dict(by_alias=True)
+        assert value == ComponentProperties(**COMPONENTS[key]).model_dump(by_alias=True)
     assert response.status_code == HTTP_200_OK

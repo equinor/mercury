@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class ComponentProperties(BaseModel):
@@ -12,10 +12,10 @@ class ComponentProperties(BaseModel):
     molecular_weight: float = Field(
         ..., description="Molecular weight of the component (g/mol)", alias="molecularWeight"
     )
-
-    class Config:
-        allow_population_by_field_name = True
-        schema_extra = {"example": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59}}
+    model_config = ConfigDict(
+        populate_by_name=True,
+        json_schema_extra={"example": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59}},
+    )
 
 
 class ComponentResponse(BaseModel):
@@ -28,9 +28,9 @@ class ComponentResponse(BaseModel):
         description="Dictionary of component_ids as string and ComponentProperties as value",
     )
 
-    class Config:
-        allow_mutation = False
-        schema_extra = {
+    model_config = ConfigDict(
+        frozen=True,
+        json_schema_extra={
             "example": {
                 "components": {
                     "1": {"chemicalFormula": "CO2", "altName": "Carbon Dioxide", "molecularWeight": 44.01},
@@ -40,4 +40,5 @@ class ComponentResponse(BaseModel):
                     "5": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59},
                 },
             }
-        }
+        },
+    )

@@ -7,7 +7,7 @@ from jwt import PyJWKClient
 
 from authentication.mock_token_generator import mock_rsa_public_key
 from authentication.models import User
-from common.exceptions import credentials_exception
+from common.exceptions import UnauthorizedException
 from common.utils.logger import logger
 from config import config, default_user
 
@@ -28,14 +28,14 @@ def fetch_openid_configuration() -> PyJWKClient:
 
     except Exception as error:
         logger.error(f"Failed to fetch OpenId Connect configuration for '{config.OAUTH_WELL_KNOWN}': {error}")
-        raise credentials_exception from error
+        raise UnauthorizedException from error
 
 
 def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
     if not config.AUTH_ENABLED:
         return default_user
     if not jwt_token:
-        raise credentials_exception
+        raise UnauthorizedException
     # If TEST_TOKEN is true, we are running tests. Use the self-signed keys. If not, get keys from auth server.
     key = (
         mock_rsa_public_key
@@ -43,9 +43,9 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
         else fetch_openid_configuration().get_signing_key_from_jwt(jwt_token).key
     )
     if not key:
-        raise credentials_exception
+        raise UnauthorizedException
     try:
-        payload = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.AUTH_AUDIENCE)
+        payload = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
         if config.MICROSOFT_AUTH_PROVIDER in payload["iss"]:
             # Azure AD uses an oid string to uniquely identify users. Each user has a unique oid value.
             user = User(user_id=payload["oid"], **payload)
@@ -53,8 +53,8 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
             user = User(user_id=payload["sub"], **payload)
     except jwt.exceptions.InvalidTokenError as error:
         logger.warning(f"Faild to decode JWT: {error}")
-        raise credentials_exception from error
+        raise UnauthorizedException from error
 
     if user is None:
-        raise credentials_exception
+        raise UnauthorizedException
     return user

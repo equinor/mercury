@@ -1,4 +1,4 @@
-FROM python:3.10-slim as dependencies
+FROM python:3.10-slim AS dependencies
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
@@ -17,7 +17,7 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 # Clone libhg fortran repo
-FROM dependencies as build
+FROM dependencies AS build
 ARG LIBHG_REPO_DEPLOY_KEY
 ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
@@ -34,7 +34,7 @@ SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
 RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
 
-FROM python:3.10-slim as base
+FROM python:3.10-slim AS base
 ENV PYTHONUNBUFFERED=1
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONPATH=/usr/local/lib/
@@ -54,12 +54,12 @@ COPY pyproject.toml pyproject.toml
 COPY poetry.lock poetry.lock
 
 
-FROM base as development
+FROM base AS development
 RUN poetry install
 COPY ./src .
 USER 1000
 
-FROM base as prod
+FROM base AS prod
 RUN poetry install --no-dev
 COPY ./src .
 USER 1000

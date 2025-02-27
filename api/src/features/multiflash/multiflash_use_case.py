@@ -1,5 +1,6 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
+from common.telemetry import tracer
 from common.utils.enums import PhaseLabels
 from entities.Multiflash import (
     ComponentFractions,
@@ -25,10 +26,10 @@ class MultiflashResponse(BaseModel):
         ..., description="Ratio of components in the feed (guaranteed to sum to 1)", alias="feedFractions"
     )
 
-    class Config:
-        allow_mutation = False
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        frozen=True,
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "phaseValues": {
                     "Mercury": {"percentage": 0.13710670215621407, "mercury": 1000000000},
@@ -44,7 +45,8 @@ class MultiflashResponse(BaseModel):
                 },
                 "feedFractions": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
             }
-        }
+        },
+    )
 
     @classmethod
     def from_values(
@@ -77,6 +79,7 @@ class MultiflashResponse(BaseModel):
         return [value["percentage"] for key, value in self.phase_values.items()]
 
 
+@tracer.start_as_current_span("compute_multiflash_use_case")
 def compute_multiflash_use_case(multiflash: Multiflash) -> MultiflashResponse:
     multiflash_result: MultiflashResult = multiflash.compute()
     return MultiflashResponse.from_values(*multiflash_result)

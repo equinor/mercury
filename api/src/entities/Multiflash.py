@@ -1,6 +1,6 @@
 import libhg
 import numpy as np
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from common.components import COMPONENTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
@@ -21,18 +21,19 @@ class Multiflash(BaseModel):
     temperature: float = Field(..., description="Temperature (in Celsius) for computation", gt=-273.15)
     pressure: float = Field(..., description="Pressure (in bar) for computation")
 
-    class Config:
-        allow_mutation = False
-        allow_population_by_field_name = True
-        schema_extra = {
+    model_config = ConfigDict(
+        frozen=True,
+        populate_by_name=True,
+        json_schema_extra={
             "example": {
                 "componentComposition": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},
                 "temperature": 37,
                 "pressure": 20,
             }
-        }
+        },
+    )
 
-    @validator("component_composition")
+    @field_validator("component_composition")
     def validate_composition(cls, component_composition):
         ids = list(component_composition.keys())
         if not set(ids) <= set(COMPONENTS.keys()):
@@ -104,7 +105,7 @@ class Multiflash(BaseModel):
             mole_fractions,
             mass_fractions,
             mercury_concentrations,
-        ) = libhg.compute_multiflash(
+        ) = libhg.compute_multiflash(  # type: ignore
             num_comp=self.number_of_components,
             components=self.component_ids_as_ints,
             temperature=self.temperature,

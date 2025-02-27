@@ -1,9 +1,10 @@
 from fastapi import APIRouter
 from fastapi.responses import PlainTextResponse
 
+from common.exception_handling import ExceptionHandlingRoute
 from config import config
 
-router = APIRouter(tags=["metrics"])
+router = APIRouter(tags=["metrics"], route_class=ExceptionHandlingRoute)
 
 
 class Metrics:

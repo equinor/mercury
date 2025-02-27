@@ -12,7 +12,7 @@ class TestWhoami:
     def test_whoami(self, test_app):
         config.AUTH_ENABLED = True
         config.TEST_TOKEN = True
-        user = User(user_id=1, username="foo", roles=["a"])
+        user = User(user_id="1", username="foo", roles=["a"])
         headers = {"Authorization": f"Bearer {generate_mock_token(user)}"}
         response = test_app.get("/whoami", headers=headers)
         data = response.json()
