@@ -60,6 +60,6 @@ COPY ./src .
 USER 1000
 
 FROM base AS prod
-RUN poetry install --no-dev
+RUN poetry install --only=main
 COPY ./src .
 USER 1000
