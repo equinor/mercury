@@ -23,7 +23,7 @@ jobs:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@main
 
-    - uses: actions/setup-java@v3
+    - uses: actions/setup-java@v4
       with:
          # See https://github.com/actions/setup-java for available options
         distribution: 'temurin'
@@ -40,7 +40,7 @@ jobs:
     #  run: pwd && ls ${{ github.workspace }}/diagrams
 
     - name: Download CHANGELOG
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: CHANGELOG
 
