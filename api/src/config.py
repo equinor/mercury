@@ -1,28 +1,28 @@
-from pydantic import BaseSettings, Field
+from pydantic_settings import BaseSettings
 
 from authentication.models import User
 
 
 class Config(BaseSettings):
-    ENVIRONMENT: str = Field("local", env="ENVIRONMENT")
+    ENVIRONMENT: str = "local"
 
     # Logging
-    LOGGER_LEVEL: str = Field("INFO", env="LOGGING_LEVEL", to_lower=True)
-    APPINSIGHTS_CONSTRING: str = Field(None, env="APPINSIGHTS_CONSTRING")
+    LOGGER_LEVEL: str = "INFO"
+    APPINSIGHTS_CONSTRING: str | None = None
 
     # Access control
-    APPLICATION_ADMIN = Field("admin", env="APPLICATION_ADMIN")
-    APPLICATION_ADMIN_ROLE = Field("admin", env="APPLICATION_ADMIN_ROLE")
+    APPLICATION_ADMIN: str = "admin"
+    APPLICATION_ADMIN_ROLE: str = "admin"
 
     # Authentication
-    AUTH_ENABLED: bool = Field(False, env="AUTH_ENABLED")
+    AUTH_ENABLED: bool = False
     JWT_SELF_SIGNING_ISSUER: str = "APPLICATION"  # Which value will be used to sign self-signed JWT's
     TEST_TOKEN: bool = False  # This value should only be changed at runtime by test setup
-    OAUTH_WELL_KNOWN: str = Field(None, env="OAUTH_WELL_KNOWN")
-    OAUTH_TOKEN_ENDPOINT: str = Field("", env="OAUTH_TOKEN_ENDPOINT")
-    OAUTH_AUTH_ENDPOINT: str = Field("", env="OAUTH_AUTH_ENDPOINT")
-    OAUTH_CLIENT_ID = Field("", env="OAUTH_CLIENT_ID")
-    AUTH_AUDIENCE: str = Field("TEST", env="OAUTH_AUDIENCE")
+    OAUTH_WELL_KNOWN: str | None = None
+    OAUTH_TOKEN_ENDPOINT: str = ""
+    OAUTH_AUTH_ENDPOINT: str = ""
+    OAUTH_CLIENT_ID: str = ""
+    OAUTH_AUDIENCE: str = "TEST"
     MICROSOFT_AUTH_PROVIDER: str = "login.microsoftonline.com"
 
 

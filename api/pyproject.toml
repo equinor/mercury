@@ -10,11 +10,13 @@ package-mode = false
 cachetools = "^5.3.1"
 python = "^3.10.4"
 numpy = "1.23.*"
-fastapi = "^0.111.0"
+fastapi = {extras = ["standard"], version = "^0.115.8"}
 requests = "^2.31.0"
-opencensus-ext-azure = "^1.1.9"
-pydantic = "^1.10.13"
+pydantic = "^2.10"
 pyjwt = "^2.8.0"
+azure-monitor-opentelemetry = "^1.6.5"
+opentelemetry-instrumentation-fastapi = "^0.51b0"
+pydantic-settings = "^2.8.1"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.3.2"
