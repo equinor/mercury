@@ -8,10 +8,9 @@ on:
         default: 'test'
         required: true
         type: string
-    secrets:
-      SERVICE_PRINCIPAL_CLIENT_SECRET:
-        description: "Secret to authenticate to azure as a service principal"
-        required: true
+
+permissions:
+  id-token: write
 
 env:
   RADIX_APP: mercury
@@ -26,13 +25,19 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
+      # You'll need an app registration with a Federated Credential for this to
+      # work. Note that the credential will need to specify a branch name. This
+      # step will therefore fail for all branches not mentioned in the credentials
       - name: 'Az CLI login'
         uses: azure/login@v2
         with:
-          creds: '{"clientId":"0cd10735-a40c-4ff6-84c8-74e3b54ed93f","clientSecret":"${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}","tenantId":"3aa4a235-b6e2-48d5-9195-7fcf05b459b0"}'
+          client-id: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f #app registration Application ID
+          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
           allow-no-subscriptions: true
 
-      - name: 'Get Azure principal token for Radix'
+      - name: Get Azure principal token for Radix
+        # The resource 6dae42f8-4368-4678-94ff-3960e28e3630 is a fixed Application ID,
+        # corresponding to the Azure Kubernetes Service AAD Server.
         run: |
           token=$(az account get-access-token --resource 6dae42f8-4368-4678-94ff-3960e28e3630 --query=accessToken -otsv)
           echo "::add-mask::$token"
