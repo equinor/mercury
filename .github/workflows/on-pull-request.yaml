@@ -1,11 +1,7 @@
-name: "On push to branches"
+name: "On PR updated"
 on:
-  workflow_dispatch:
-  push:
-    branches-ignore:
-      - main
-    tags-ignore:
-      - v*
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   tests:
