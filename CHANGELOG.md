@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.6](https://github.com/equinor/mercury/compare/v1.1.5...v1.1.6) (2025-02-28)
+
+
+### Bug Fixes
+
+* reduce the number of worker connections ([617c052](https://github.com/equinor/mercury/commit/617c052339c682c453da4d4699e5d2697bd03d49))
+
 ## [1.1.5](https://github.com/equinor/mercury/compare/v1.1.4...v1.1.5) (2025-02-28)
 
 
