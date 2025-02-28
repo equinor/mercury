@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.5](https://github.com/equinor/mercury/compare/v1.1.4...v1.1.5) (2025-02-28)
+
+
+### Bug Fixes
+
+* bump pydantic and fastapi ([3a40678](https://github.com/equinor/mercury/commit/3a4067864e495e843ff9499362454c0a676d2a4c))
+* install poetry without dev ([ea96db6](https://github.com/equinor/mercury/commit/ea96db63b6acf6dfbe2b0d1e6cb3820733bf59eb))
+* poetry lock ([3a40678](https://github.com/equinor/mercury/commit/3a4067864e495e843ff9499362454c0a676d2a4c))
+* pre-commit ([3a40678](https://github.com/equinor/mercury/commit/3a4067864e495e843ff9499362454c0a676d2a4c))
+* replace opencensus and export telemetry with exception handling ([3a40678](https://github.com/equinor/mercury/commit/3a4067864e495e843ff9499362454c0a676d2a4c))
+* tet ([3a40678](https://github.com/equinor/mercury/commit/3a4067864e495e843ff9499362454c0a676d2a4c))
+
+
+### Miscellaneous Chores
+
+* bump GH action versions ([dfc37cc](https://github.com/equinor/mercury/commit/dfc37cc0f37c62097353a28a121a3b66a2be6b4c))
+* **deps:** bump numpy from 1.26.4 to 2.2.3 in /api ([7fa9bb1](https://github.com/equinor/mercury/commit/7fa9bb12acc966d85b18bb215dd68089ecb7a8da))
+* **deps:** bump the front-end group in /web with 14 updates ([3330e0e](https://github.com/equinor/mercury/commit/3330e0e0d52967c145c241735d128fce42b62125))
+* poetry 2.0 support ([0cc5f33](https://github.com/equinor/mercury/commit/0cc5f33164272c610fb2c7c19be6d085a60754b2))
+
+
+### Continuous Integration
+
+* add federated credentials for radix deploy ([cb14006](https://github.com/equinor/mercury/commit/cb14006432c91db78e8557ef3db8785c14e85499))
+* added dependabot for github actions and docker ([430d860](https://github.com/equinor/mercury/commit/430d860d93b3a1786bb77278427f913fd9dcb99a))
+* run workflow on release please pr updated ([4e60171](https://github.com/equinor/mercury/commit/4e6017179a953f4919dceb65b49592294bc2f5e7))
+* substitute deprecated ifort compiler with ifx ([1476666](https://github.com/equinor/mercury/commit/14766666ceedf92f0434ca3a2dd70d5df940c78d))
+* update to new docker compose syntax ([fc8128a](https://github.com/equinor/mercury/commit/fc8128a36f1e859f0eab4d104304534e7a5480bd))
+
 ## [1.1.4](https://github.com/equinor/mercury/compare/v1.1.3...v1.1.4) (2024-06-24)
 
 
