@@ -26,8 +26,6 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     with:
       radix-environment: "dev"
-    secrets:
-      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
 
   release-please:
     needs: tests
@@ -49,5 +47,3 @@ jobs:
     uses: ./.github/workflows/deploy.yaml
     with:
       radix-environment: "prod"
-    secrets:
-      SERVICE_PRINCIPAL_CLIENT_SECRET: ${{ secrets.SERVICE_PRINCIPAL_CLIENT_SECRET }}
