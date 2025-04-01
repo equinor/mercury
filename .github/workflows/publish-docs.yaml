@@ -59,7 +59,7 @@ jobs:
     - name: GitHub Pages
       if: ${{ false }}  # disable for now
       # if: github.ref == 'refs/heads/main'
-      uses: crazy-max/ghaction-github-pages@v2.6.0
+      uses: crazy-max/ghaction-github-pages@v4.2.0
       with:
         build_dir: site/
       env:
