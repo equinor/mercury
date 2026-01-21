@@ -16,7 +16,7 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     with:
       image-tags: latest
-      oauth-redirect-url: "https://proxy-mercury-dev.radix.equinor.com"
+      oauth-redirect-url: https://proxy-mercury-dev.radix.equinor.com
       app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
@@ -28,8 +28,17 @@ jobs:
       radix-environment: "dev"
 
   release-please:
+    runs-on: ubuntu-latest
     needs: tests
-    uses: ./.github/workflows/create-release-pr.yaml
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
 
   publish-production-image:
     needs: release-please
