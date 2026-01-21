@@ -7,12 +7,18 @@ on:
 
 jobs:
   tests:
+    permissions:
+      contents: read
+      packages: read
     uses: ./.github/workflows/tests.yaml
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   publish-latest-image:
     needs: tests
+    permissions:
+      contents: read
+      packages: write
     uses: ./.github/workflows/publish.yaml
     with:
       image-tags: latest
