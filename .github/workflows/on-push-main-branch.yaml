@@ -34,7 +34,7 @@ jobs:
       id-token: write
     uses: ./.github/workflows/deploy.yaml
     with:
-      image-tags: "latest"
+      image-tag: "latest"
       radix-environment: "dev"
 
   release-please:
