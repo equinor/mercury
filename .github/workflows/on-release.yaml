@@ -1,0 +1,32 @@
+name: "Deploy release"
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      release-tag:
+        description: "release tag"
+        required: true
+        type: string
+
+jobs:
+  publish-release-image:
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/publish.yaml
+    with:
+      image-tags: ${{ inputs.release-tag }}
+      oauth-redirect-url: https://mercury.app.radix.equinor.com
+      app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+
+  deploy-prod:
+    needs: publish-release-image
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      image-tag: ${{ inputs.release-tag }}
+      radix-environment: "prod"
