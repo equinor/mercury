@@ -9,10 +9,13 @@ on:
         description: "Deploy key for cloning libhg repository"
         required: true
 
+permissions:
+  contents: read
+  packages: read
+
 env:
   IMAGE_REGISTRY: ghcr.io
   REGISTRY_USER: $GITHUB_ACTOR
-  MERCURY_BASE_PATH: $GITHUB_WORKSPACE
   API_IMAGE: ghcr.io/equinor/mercury-api
   WEB_IMAGE: ghcr.io/equinor/mercury-web
 
@@ -20,7 +23,8 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
 
       - name: Set up python
         id: setup-python
@@ -37,17 +41,21 @@ jobs:
   test-api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
 
-      - name: Build API test image
+      - name: "Setup: login to image registry"
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+
+      - name: "Setup: build API test image"
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $API_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $API_IMAGE \
           --target development \
           --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
-          --tag api-dev ./api
+          --tag api-dev \
+          ./api
 
       - name: Pytest Unit tests
         run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
@@ -58,17 +66,21 @@ jobs:
   test-web:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
 
-      - name: Build Web test image
+      - name: "Setup: login to image registry"
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+
+      - name: "Setup: build Web test image"
         run: |
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
           docker pull $WEB_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $WEB_IMAGE \
           --target development \
           --build-arg AUTH_ENABLED=0 \
-          --tag web-dev ./web
+          --tag web-dev \
+          ./web
 
       - name: yarn tests
         run: docker run --rm web-dev yarn test-ci
