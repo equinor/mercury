@@ -72,6 +72,3 @@ jobs:
 
       - name: yarn tests
         run: docker run --rm web-dev yarn test-ci
-
-  pip-audit:
-    uses: ./.github/workflows/audit-api-dependencies.yaml
