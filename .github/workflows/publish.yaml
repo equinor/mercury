@@ -23,91 +23,131 @@ on:
         description: "Deploy key for cloning libhg repository"
         required: true
 
+permissions:
+  contents: read
+  packages: write
+
 env:
   IMAGE_REGISTRY: ghcr.io
   REGISTRY_USER: $GITHUB_ACTOR
+  NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
   API_IMAGE: ghcr.io/equinor/mercury-api
   WEB_IMAGE: ghcr.io/equinor/mercury-web
-  NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
 
 jobs:
   build-and-publish-nginx:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
 
-      - name: "Build and Publish nginx"
-        shell: bash
+      - name: "Setup: login to image registry"
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+
+      - name: "Setup: build nginx"
         run: |
           echo "Building nginx image with tag: ${{ inputs.image-tags }}"
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
-          docker pull $NGINX_IMAGE
+          docker pull $NGINX_IMAGE || echo "No NGINX image found"
           DOCKER_BUILDKIT=1 docker build \
-          --cache-from ${NGINX_IMAGE} \
-          --tag ${NGINX_IMAGE} \
-          ./nginx
+            --cache-from ${NGINX_IMAGE}:latest \
+            --tag ${NGINX_IMAGE}:latest \
+            ./nginx
+
+      - name: "Run: publish nginx"
+        run: |
           IFS=','
           for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
-            docker tag $NGINX_IMAGE $NGINX_IMAGE:$IMAGE_TAG
+            docker tag $NGINX_IMAGE:latest $NGINX_IMAGE:$IMAGE_TAG
             docker push $NGINX_IMAGE:$IMAGE_TAG
           done
 
   build-and-publish-web:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
-      - name: "Build and Publish Web"
-        shell: bash
+      - name: "Setup: login to image registry"
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+
+      - name: "Setup: get version info"
+        id: version
         run: |
-          echo "Building web image with tag: ${{ inputs.image-tags }}"
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
-          docker pull $WEB_IMAGE
-          printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./web/public/version.txt
+          echo "hash=$(git log -n 1 --format=format:'%h')" >> $GITHUB_OUTPUT
+          echo "date=$(git log -n 1 --format=format:'%cs')" >> $GITHUB_OUTPUT
+          VERSION=$(git describe --tags --exact-match 2>/dev/null || echo "")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: "Setup: show version info"
+        run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
+
+      - name: "Setup: build web"
+        run: |
+          docker pull $WEB_IMAGE || echo "No web image found"
+          printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./web/public/version.txt
           DOCKER_BUILDKIT=1 docker build \
-          --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
-          --build-arg AUTH_ENABLED=1 \
-          --build-arg APP_INSIGHT_CON_STRING="${{ inputs.app_insight_con_string }}" \
-          --build-arg BUILDKIT_INLINE_CACHE=1 \
-          --cache-from ${WEB_IMAGE} \
-          --tag ${WEB_IMAGE} \
-          ./web
+            --cache-from ${WEB_IMAGE}:latest \
+            --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
+            --build-arg AUTH_ENABLED=1 \
+            --build-arg APP_INSIGHT_CON_STRING="${{ inputs.app_insight_con_string }}" \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
+            --tag ${WEB_IMAGE}:latest \
+            ./web
+
+      - name: "Run: publish web"
+        run: |
           IFS=','
           for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
-            docker tag $WEB_IMAGE $WEB_IMAGE:$IMAGE_TAG
+            docker tag $WEB_IMAGE:latest $WEB_IMAGE:$IMAGE_TAG
             docker push $WEB_IMAGE:$IMAGE_TAG
           done
 
   build-and-publish-api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
-      - name: "Build and Publish API"
-        shell: bash
+      - name: "Setup: login to image registry"
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+
+      - name: "Setup: get version info"
+        id: version
         run: |
-          echo "Building api image with tag: ${{ inputs.image-tags }}"
-          echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
-          docker pull $API_IMAGE
-          printf "$(git log -n 1 --format=format:'hash: %h%ndate: %cs%nrefs: %d' --decorate=short --decorate-refs=refs/tags | sed 's/ (tag: \([^\s]*\))/\1/')" > ./api/src/version.txt
+          echo "hash=$(git log -n 1 --format=format:'%h')" >> $GITHUB_OUTPUT
+          echo "date=$(git log -n 1 --format=format:'%cs')" >> $GITHUB_OUTPUT
+          VERSION=$(git describe --tags --exact-match 2>/dev/null || echo "")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: "Setup: show version info"
+        run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
+
+      - name: "Setup: build API"
+        run: |
+          docker pull $API_IMAGE || echo "No API image found"
+          printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./api/src/version.txt
           DOCKER_BUILDKIT=1 docker build \
-          --cache-from $API_IMAGE \
-          --target prod \
-          --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
-          --build-arg BUILDKIT_INLINE_CACHE=1 \
-          --tag $API_IMAGE ./api
+            --cache-from $API_IMAGE:latest \
+            --target prod \
+            --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
+            --tag $API_IMAGE:latest \
+            ./api
+
+      - name: "Run: publish API"
+        run: |
           IFS=','
           for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
-            docker tag $API_IMAGE $API_IMAGE:$IMAGE_TAG
+            docker tag $API_IMAGE:latest $API_IMAGE:$IMAGE_TAG
             docker push $API_IMAGE:$IMAGE_TAG
           done
