@@ -29,8 +29,12 @@ jobs:
 
   deploy-dev:
     needs: publish-latest-image
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/deploy.yaml
     with:
+      image-tags: "latest"
       radix-environment: "dev"
 
   release-please:
@@ -61,7 +65,11 @@ jobs:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   deploy-prod:
-    needs: publish-production-image
+    needs: publish-release-image
+    permissions:
+      contents: read
+      id-token: write
     uses: ./.github/workflows/deploy.yaml
     with:
+      image-tags: ${{ steps.release.outputs.tag_name }}
       radix-environment: "prod"

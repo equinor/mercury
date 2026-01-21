@@ -1,60 +1,55 @@
-name: "Deploy"
+name: "Deploy image to radix"
 on:
   workflow_dispatch:
-  workflow_call: # Workflow is meant to be called from another workflow
     inputs:
       radix-environment:
-        description: 'Which radix environment to deploy into'
-        default: 'test'
+        description: "Which radix environment to deploy into"
+        default: "test"
+        required: true
+        type: string
+      image-tag:
+        description: "Which image tag to deploy."
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      radix-environment:
+        description: "Which radix environment to deploy into"
+        default: "test"
+        required: true
+        type: string
+      image-tag:
+        description: "Which image tag to deploy."
         required: true
         type: string
 
 permissions:
+  contents: read
   id-token: write
 
 env:
   RADIX_APP: mercury
-  RADIX_USER: mlw@equinor.com
-  # Fixed id for Equinor Radix AKS resource in Azure
-  RADIX_RESOUCE_ID: 6dae42f8-4368-4678-94ff-3960e28e3630
-
+  AZURE_CLIENT_ID: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f
 
 jobs:
   deploy-on-radix:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: "Setup: check out repository"
+        uses: actions/checkout@master
 
-      # You'll need an app registration with a Federated Credential for this to
-      # work. Note that the credential will need to specify a branch name. This
-      # step will therefore fail for all branches not mentioned in the credentials
-      - name: 'Az CLI login'
-        uses: azure/login@v2
+      - name: "Setup: radix CLI (RX)"
+        uses: equinor/radix-github-actions@v2
         with:
-          client-id: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f #app registration Application ID
-          tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
-          allow-no-subscriptions: true
+          azure_client_id: ${{ env.AZURE_CLIENT_ID }}
 
-      - name: Get Azure principal token for Radix
-        # The resource 6dae42f8-4368-4678-94ff-3960e28e3630 is a fixed Application ID,
-        # corresponding to the Azure Kubernetes Service AAD Server.
-        run: |
-          token=$(az account get-access-token --resource 6dae42f8-4368-4678-94ff-3960e28e3630 --query=accessToken -otsv)
-          echo "::add-mask::$token"
-          echo "APP_SERVICE_ACCOUNT_TOKEN=$token" >> $GITHUB_ENV
-
-      - name: Deploy on Radix
-        uses: equinor/radix-github-actions@master
-        env:
-          APP_SERVICE_ACCOUNT_TOKEN: ${{ env.APP_SERVICE_ACCOUNT_TOKEN }}
-        with:
-          args: >
-            create job
-            deploy
-            --application $RADIX_APP
-            --environment ${{ inputs.radix-environment }}
-            --user $RADIX_USER
-            --context production
-            --from-config
-            --token-environment
-            --follow
+      - name: "Run: deploy to Radix"
+        run: >
+          rx create pipeline-job deploy
+          --application ${{ env.RADIX_APP }}
+          --environment ${{ inputs.radix-environment }}
+          --follow
+          --from-config
+          --image-tag-name api=${{ inputs.image-tag }}
+          --image-tag-name proxy=${{ inputs.image-tag }}
+          --image-tag-name web=${{ inputs.image-tag }}

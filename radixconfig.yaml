@@ -62,8 +62,8 @@ spec:
 
   privateImageHubs:
     ghcr.io:
-      username: soofstad
-      email: stigofstad@gmail.com
+      username: eoaksnes
+      email: eoaksnes@gmail.com
 
   dnsAppAlias:
     environment: prod
