@@ -5,7 +5,6 @@ from fastapi import Security
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from jwt import PyJWKClient
 
-from authentication.mock_token_generator import mock_rsa_public_key
 from authentication.models import User
 from common.exceptions import UnauthorizedException
 from common.utils.logger import logger
@@ -19,7 +18,7 @@ oauth2_scheme = OAuth2AuthorizationCodeBearer(
 
 
 @cached(cache=TTLCache(maxsize=32, ttl=86400))
-def fetch_openid_configuration() -> PyJWKClient:
+def get_JWK_client() -> PyJWKClient:
     try:
         oid_conf_response = requests.get(config.OAUTH_WELL_KNOWN, timeout=30)
         oid_conf_response.raise_for_status()
@@ -36,12 +35,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
         return default_user
     if not jwt_token:
         raise UnauthorizedException
-    # If TEST_TOKEN is true, we are running tests. Use the self-signed keys. If not, get keys from auth server.
-    key = (
-        mock_rsa_public_key
-        if config.TEST_TOKEN
-        else fetch_openid_configuration().get_signing_key_from_jwt(jwt_token).key
-    )
+    key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key
     if not key:
         raise UnauthorizedException
     try:

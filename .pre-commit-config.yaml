@@ -14,7 +14,7 @@ repos:
       - id: mixed-line-ending
         exclude: ^.*\.(lock)$||^docs\/
       - id: detect-private-key
-        exclude: api/src/authentication/mock_token_generator.py
+        exclude: api/src/tests/integration/mock_token_generator.py
         exclude_types:
           - markdown
 
@@ -25,7 +25,7 @@ repos:
         always_run: true
 
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.2.1'
+    rev: "v0.2.1"
     hooks:
       - id: ruff-format
         name: Code formatting

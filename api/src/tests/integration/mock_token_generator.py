@@ -1,10 +1,18 @@
 import jwt
+from fastapi import Security
 
+from authentication.authentication import oauth2_scheme
 from authentication.models import User
-from config import default_user
+from common.exceptions import UnauthorizedException
+from config import config, default_user
 
-# Generated with: 'openssl req  -nodes -new -x509  -keyout server.key -out server.cert'
-mock_rsa_private_key = """
+
+def get_mock_rsa_private_key() -> str:
+    """
+    Used for testing.
+    Generated with: 'openssl req  -nodes -new -x509  -keyout server.key -out server.cert'.
+    """
+    return """
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfsOW9ih/oBUwl
 LEH4t2C2GZeq3/dEXCkK54CNPZv979rir0nQQ5pLVcoohoVFe+QwC746xg8t7/YP
@@ -35,9 +43,13 @@ Ps2+z0zvD9eqCcQ4YrrqXGM=
 -----END PRIVATE KEY-----
 """
 
-# Python-jose require public keys instead of x509 certs.
-# Convert cert to pub key with: 'openssl x509 -pubkey -noout < server.cert'
-mock_rsa_public_key = """
+
+def get_mock_rsa_public_key() -> str:
+    """
+    Used for testing.
+    Convert cert to pub key with: 'openssl x509 -pubkey -noout < server.cert'
+    """
+    return """
 -----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA37DlvYof6AVMJSxB+Ldg
 thmXqt/3RFwpCueAjT2b/e/a4q9J0EOaS1XKKIaFRXvkMAu+OsYPLe/2D3Fh8HB1
@@ -59,11 +71,24 @@ def generate_mock_token(user: User = default_user):
     payload = {
         "name": user.full_name,
         "preferred_username": user.email,
-        "scp": "FoR_test_scope",
+        "scp": "testing",
         "sub": user.user_id,
         "roles": user.roles,
         "iss": "mock-auth-server",
         "aud": "TEST",
     }
-    token = jwt.encode(payload, mock_rsa_private_key, algorithm="RS256")
-    return token
+    return jwt.encode(payload, get_mock_rsa_private_key(), algorithm="RS256")
+
+
+def mock_auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
+    if not config.AUTH_ENABLED:
+        return default_user
+    try:
+        payload = jwt.decode(jwt_token, get_mock_rsa_public_key(), algorithms=["RS256"], audience="TEST")
+        print(payload)
+        user = User(user_id=payload["sub"], **payload)
+    except jwt.exceptions.InvalidTokenError as error:
+        raise UnauthorizedException from error
+    if user is None:
+        raise UnauthorizedException
+    return user
