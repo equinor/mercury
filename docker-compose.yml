@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   nginx:
     restart: unless-stopped
@@ -15,12 +13,16 @@ services:
     restart: unless-stopped
     build:
       context: api
-      args:
-        LIBHG_REPO_DEPLOY_KEY: $LIBHG_REPO_DEPLOY_KEY
       cache_from:
         - ghcr.io/equinor/mercury-api:latest
+      secrets:
+        - libhg-repo-deploy-key
 
   web:
     build: ./web
     image: ghcr.io/equinor/mercury-web
     restart: unless-stopped
+
+secrets:
+  libhg-repo-deploy-key:
+    environment: "LIBHG_REPO_DEPLOY_KEY"

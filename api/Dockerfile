@@ -18,12 +18,12 @@ RUN apt-get update && \
 
 # Clone libhg fortran repo
 FROM dependencies AS build
-ARG LIBHG_REPO_DEPLOY_KEY
 ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
-RUN mkdir /root/.ssh && echo "$LIBHG_REPO_DEPLOY_KEY" > /root/.ssh/id_ed25519
-RUN chmod -R 600 /root/.ssh
-RUN ssh-keyscan github.com > ~/.ssh/known_hosts
-RUN git clone git@github.com:equinor/gpa-libhg.git
+RUN --mount=type=secret,id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
+  mkdir /root/.ssh && echo "${LIBHG_REPO_DEPLOY_KEY}" > /root/.ssh/id_ed25519 && \
+  chmod -R 600 /root/.ssh && \
+  ssh-keyscan github.com > ~/.ssh/known_hosts && \
+  git clone git@github.com:equinor/gpa-libhg.git
 
 # Pulls latest stabile commit from libhg repository:
 RUN git -C gpa-libhg checkout $GITHASH
@@ -56,6 +56,8 @@ COPY poetry.lock poetry.lock
 
 FROM base AS development
 RUN poetry install
+
+
 COPY ./src .
 USER 1000
 

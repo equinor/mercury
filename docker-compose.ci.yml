@@ -1,10 +1,6 @@
-version: "3.8"
-
 services:
   api:
     image: api-dev
     environment:
       ENVIRONMENT: local
       AUTH_ENABLED: "False"
-
-

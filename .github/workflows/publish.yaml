@@ -131,13 +131,15 @@ jobs:
         run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
 
       - name: "Setup: build API"
+        env:
+          LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
         run: |
           docker pull $API_IMAGE || echo "No API image found"
           printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./api/src/version.txt
           DOCKER_BUILDKIT=1 docker build \
             --cache-from $API_IMAGE:latest \
             --target prod \
-            --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
+            --secret id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --tag $API_IMAGE:latest \
             ./api

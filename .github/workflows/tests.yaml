@@ -48,12 +48,14 @@ jobs:
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
 
       - name: "Setup: build API test image"
+        env:
+          LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
         run: |
           docker pull $API_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $API_IMAGE \
           --target development \
-          --build-arg LIBHG_REPO_DEPLOY_KEY="${{ secrets.LIBHG_REPO_DEPLOY_KEY }}" \
+          --secret id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
           --tag api-dev \
           ./api
 
