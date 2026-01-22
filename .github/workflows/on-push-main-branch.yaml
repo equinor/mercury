@@ -65,3 +65,5 @@ jobs:
     uses: ./.github/workflows/on-release.yaml
     with:
       release-tag: ${{ needs.release-please.outputs.tag_name }}
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}

@@ -7,6 +7,10 @@ on:
         description: "release tag"
         required: true
         type: string
+    secrets:
+      LIBHG_REPO_DEPLOY_KEY:
+        description: "Deploy key for cloning libhg repository"
+        required: true
 
 jobs:
   publish-release-image:
