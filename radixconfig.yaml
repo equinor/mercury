@@ -62,9 +62,8 @@ spec:
 
   privateImageHubs:
     ghcr.io:
-      # TODO: Substitute with new token
-      username: soofstad
-      email: stigofstad@gmail.com
+      username: mariuswinger
+      email: 89073985+mariuswinger@users.noreply.github.com
 
   dnsAppAlias:
     environment: prod
