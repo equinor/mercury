@@ -62,8 +62,9 @@ spec:
 
   privateImageHubs:
     ghcr.io:
-      username: eoaksnes
-      email: eoaksnes@gmail.com
+      # TODO: Substitute with new token
+      username: soofstad
+      email: stigofstad@gmail.com
 
   dnsAppAlias:
     environment: prod
