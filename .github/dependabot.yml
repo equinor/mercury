@@ -2,7 +2,6 @@ version: 2
 updates:
   - package-ecosystem: "pip"
     directory: "/api"
-    open-pull-requests-limit: 100
     schedule:
       interval: "monthly"
     groups:
@@ -13,7 +12,6 @@ updates:
 
   - package-ecosystem: "npm"
     directory: "/web/"
-    open-pull-requests-limit: 100
     schedule:
       interval: "monthly"
     groups:
@@ -24,16 +22,14 @@ updates:
 
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
-    open-pull-requests-limit: 100
     schedule:
-      # Check for updates to GitHub Actions every week
       interval: "monthly"
 
   - package-ecosystem: "docker"
     directories:
       - "/web"
       - "/api"
-    open-pull-requests-limit: 100
+      - "/nginx"
     schedule:
       interval: "monthly"
     groups:
@@ -41,3 +37,4 @@ updates:
         update-types:
           - "minor"
           - "patch"
+
