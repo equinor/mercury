@@ -1,3 +1,0 @@
-hash: local-dev
-date: 1992-09-06
-refs: local

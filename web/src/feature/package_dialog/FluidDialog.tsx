@@ -2,15 +2,15 @@ import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 import { preSelectedComponents } from '../../constants'
-import { TComponentProperty, TPackage, TPackageDialog } from '../../types'
+import type { TComponentProperty, TPackage, TPackageDialog } from '../../types'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
+import { PackageDialogProvider } from './context/PackageDialogContext'
 import { DescriptionField } from './DescriptionField'
 import { NameField } from './NameField'
 import { SaveButton } from './SaveButton'
 import { TemplateSelector } from './TemplateSelector'
-import { PackageDialogProvider } from './context/PackageDialogContext'
 
 const WideDialog = styled(Dialog)`
   width: auto;

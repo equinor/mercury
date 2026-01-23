@@ -4,7 +4,7 @@ import { AuthContext } from 'react-oauth2-code-pkce'
 import MercuryAPI from '../api/MercuryAPI'
 import { MainPage } from './Main'
 
-export const LoginPage = (): JSX.Element => {
+export const LoginPage = () => {
   const { token, loginInProgress, login } = useContext(AuthContext)
 
   if (loginInProgress) return <></>

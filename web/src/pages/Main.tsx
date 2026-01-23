@@ -1,20 +1,19 @@
 import { Divider } from '@equinor/eds-core-react'
-import { AxiosResponse } from 'axios'
+import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
+import type { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import MercuryAPI from '../api/MercuryAPI'
-import { ComponentProperties, ComponentResponse } from '../api/generated'
+import type { ComponentProperties, ComponentResponse } from '../api/generated'
+import type MercuryAPI from '../api/MercuryAPI'
 import ErrorBoundary from '../common/ErrorBoundary'
 import { Header } from '../common/Header'
 import { orderedComponents } from '../constants'
-import { Status } from '../feature/Status'
 import { CalculationInput } from '../feature/calculation_input/CalculationInput'
 import { HgDistributionTable } from '../feature/results/HgDistributionTable'
 import { PhaseEquilibriumTable } from '../feature/results/PhaseEquilibriumTable'
-import { TCalcStatus, TComponentProperty, TResults } from '../types'
+import { Status } from '../feature/Status'
+import type { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { LastInputProvider } from './context/LastInputContext'
-
-import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 
 const Results = styled.div`
   display: flex;
@@ -46,7 +45,7 @@ const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
     .map((id) => ({ id: id, ...components[id] }))
 }
 
-export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
+export const MainPage = (props: { mercuryApi: MercuryAPI }) => {
   const { mercuryApi } = props
   const [componentProperties, setComponentProperties] =
     useState<TComponentProperty[]>()
@@ -69,7 +68,7 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }): JSX.Element => {
       .finally(() => setIsLoading(false))
   }, [mercuryApi])
 
-  if (isLoading) return <></>
+  if (isLoading) return
 
   // TODO: Better error handling and message
   if (!componentProperties) return <div>Failed to fetch list of components</div>

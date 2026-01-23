@@ -1,5 +1,5 @@
 import { EdsProvider, Input, Table } from '@equinor/eds-core-react'
-import React from 'react'
+import type React from 'react'
 import styled from 'styled-components'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
@@ -11,7 +11,7 @@ const ComponentTableContainer = styled.div`
   margin-top: 15px;
 `
 
-export const ComponentTable = (): JSX.Element => {
+export const ComponentTable = () => {
   const { state, dispatch } = usePackageDialogContext()
   function handleOnChange(
     event: React.ChangeEvent<HTMLInputElement>,
@@ -26,7 +26,7 @@ export const ComponentTable = (): JSX.Element => {
 
   function createTableRows() {
     return state.selectedComponents.map((component, rowIndex) => (
-      // biome-ignore lint/suspicious/noArrayIndexKey:
+      // biome-ignore lint/suspicious/noArrayIndexKey: is okey
       <Table.Row key={rowIndex}>
         <Table.Cell
           data-testid={`Component-${rowIndex}`}

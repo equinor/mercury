@@ -14,12 +14,12 @@ function createTableRows(
   subtableIndex: number
 ) {
   return subtable.rows.map((row, rowIndex) => (
-    // biome-ignore lint/suspicious/noArrayIndexKey:
+    // biome-ignore lint/suspicious/noArrayIndexKey: is okey
     <Table.Row key={rowIndex}>
       {row.map((cell, cellIndex) => {
         const id = `${subtableIndex}-${subtable.headers[cellIndex]}-${rowIndex}`
         return (
-          // biome-ignore lint/suspicious/noArrayIndexKey:
+          // biome-ignore lint/suspicious/noArrayIndexKey: is okey
           <Table.Cell data-testid={id} key={cellIndex}>
             {cell}
           </Table.Cell>
@@ -28,7 +28,7 @@ function createTableRows(
     </Table.Row>
   ))
 }
-export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
+export const DynamicTable = (props: TDynamicTableInput) => {
   return (
     <EdsProvider density={props.density}>
       <Table>
@@ -36,12 +36,12 @@ export const DynamicTable = (props: TDynamicTableInput): JSX.Element => {
           <Typography variant="h3">{props.caption}</Typography>
         </Table.Caption>
         {props.subtables.map((subtable, subtableIndex) => (
-          // biome-ignore lint/suspicious/noArrayIndexKey:
+          // biome-ignore lint/suspicious/noArrayIndexKey: is okey
           <React.Fragment key={subtableIndex}>
             <Table.Head>
               <Table.Row>
                 {subtable.headers.map((header, headerIndex) => (
-                  // biome-ignore lint/suspicious/noArrayIndexKey:
+                  // biome-ignore lint/suspicious/noArrayIndexKey: is okey
                   <Table.Cell key={headerIndex}>{header}</Table.Cell>
                 ))}
               </Table.Row>

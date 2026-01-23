@@ -1,8 +1,8 @@
 import { Typography } from '@equinor/eds-core-react'
-import axios, { AxiosResponse } from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 
-export const VersionText = (): JSX.Element => {
+export const VersionText = () => {
   const [versionFile, setVersionFile] = useState<{ [key: string]: string }>({
     hash: '',
     date: '',
@@ -24,7 +24,7 @@ export const VersionText = (): JSX.Element => {
   }, [])
 
   if (versionFile.hash === '' || versionFile.date === '') {
-    return <p>Version: Null</p>
+    return <p>Version: local dev</p>
   }
   return (
     <p>

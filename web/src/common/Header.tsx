@@ -28,7 +28,7 @@ const NoBulletUnorderedList = styled.ul`
   list-style: none;
 `
 
-export const Header = (): JSX.Element => {
+export const Header = () => {
   const accountRefElement = useRef<HTMLButtonElement>(null)
   const infoRefElement = useRef<HTMLButtonElement>(null)
 
