@@ -10,8 +10,8 @@ import type {
   TPackage,
   TResults,
 } from '../../common/types'
+import { useLastInputContext } from '../../contexts/LastInputContext/LastInputContext'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { useLastInputContext } from '../../pages/context/LastInputContext'
 import { FluidDialog } from '../package_dialog/FluidDialog'
 import { FeedFlowInput } from './FeedFlowInput'
 import { TempOrPressureInput } from './TempOrPressureInput'

@@ -1,38 +1,20 @@
-import { Divider } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { type ComponentProperties, ComponentService } from '../api/generated'
-import { orderedComponents } from '../common/constants'
-import ErrorBoundary from '../common/ErrorBoundary'
-import { Header } from '../common/Header'
-import type { TCalcStatus, TComponentProperty, TResults } from '../common/types'
-import { CalculationInput } from '../feature/calculation_input/CalculationInput'
-import { HgDistributionTable } from '../feature/results/HgDistributionTable'
-import { PhaseEquilibriumTable } from '../feature/results/PhaseEquilibriumTable'
-import { Status } from '../feature/Status'
-import { LastInputProvider } from './context/LastInputContext'
-
-const Results = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: 50px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 40px;
-  align-items: flex-start;
-`
-
-const Container = styled.div`
-  margin: 60px 20px;
-  @media (min-width: 1200px) {
-    margin: 60px 150px;
-  }
-`
-
-const DividerWithLargeSpacings = styled(Divider)`
-  margin-top: 40px;
-`
+import { type ComponentProperties, ComponentService } from '../../api/generated'
+import { orderedComponents } from '../../common/constants'
+import ErrorBoundary from '../../common/ErrorBoundary'
+import { Header } from '../../common/Header'
+import type {
+  TCalcStatus,
+  TComponentProperty,
+  TResults,
+} from '../../common/types'
+import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
+import { CalculationInput } from '../../feature/calculation_input/CalculationInput'
+import { HgDistributionTable } from '../../feature/results/HgDistributionTable'
+import { PhaseEquilibriumTable } from '../../feature/results/PhaseEquilibriumTable'
+import { Status } from '../../feature/Status'
+import { Container, DividerWithLargeSpacings, Results } from './styles'
 
 const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
   const remainingComponents = Object.keys(components).filter(

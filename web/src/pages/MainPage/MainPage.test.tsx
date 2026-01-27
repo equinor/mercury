@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import { vi } from 'vitest'
-import { mockComponentProperties } from '../setupTests'
-import { MainPage } from './Main'
+import { mockComponentProperties } from '../../setupTests'
+import { MainPage } from './MainPage'
 
 // Mock the AppInsights context
 vi.mock('@microsoft/applicationinsights-react-js', () => ({
