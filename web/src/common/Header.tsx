@@ -8,7 +8,7 @@ import {
 import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import styled from 'styled-components'
-import { AUTH_DISABLED } from '../constants'
+import { AUTH_DISABLED } from './constants'
 import { VersionText } from './VersionText'
 
 const Icons = styled.div`

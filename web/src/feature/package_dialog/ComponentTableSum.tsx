@@ -1,6 +1,6 @@
 import { EdsProvider, Table } from '@equinor/eds-core-react'
-import { formatNumber } from '../../tableUtils'
-import type { TComponentRatio } from '../../types'
+import { formatNumber } from '../../common/tableUtils'
+import type { TComponentRatio } from '../../common/types'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 function computeComponentRatioSum(componentRatios: TComponentRatio[]) {

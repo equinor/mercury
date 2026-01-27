@@ -1,0 +1,8 @@
+services:
+  api:
+    build:
+      target: development
+    image: mercury-api-ci
+    environment:
+      ENVIRONMENT: local
+      AUTH_ENABLED: "False"

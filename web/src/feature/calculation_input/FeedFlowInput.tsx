@@ -1,7 +1,7 @@
 import { Switch, TextField } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { molePerStandardCubicMeter } from '../../constants'
+import { molePerStandardCubicMeter } from '../../common/constants'
 
 const FlexContainer = styled.div`
   display: flex;

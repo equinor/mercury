@@ -1,0 +1,23 @@
+services:
+  nginx:
+    restart: unless-stopped
+    build:
+      target: nginx-prod
+      context: ./web
+    image: ghcr.io/equinor/mercury-nginx
+    ports:
+      - "80:8080"
+
+  api:
+    image: ghcr.io/equinor/mercury-api
+    restart: unless-stopped
+    build:
+      context: api
+      cache_from:
+        - ghcr.io/equinor/mercury-api:latest
+      secrets:
+        - libhg-repo-deploy-key
+
+secrets:
+  libhg-repo-deploy-key:
+    environment: "LIBHG_REPO_DEPLOY_KEY"

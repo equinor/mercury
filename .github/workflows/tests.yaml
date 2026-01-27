@@ -15,9 +15,7 @@ permissions:
 
 env:
   IMAGE_REGISTRY: ghcr.io
-  REGISTRY_USER: $GITHUB_ACTOR
   API_IMAGE: ghcr.io/equinor/mercury-api
-  WEB_IMAGE: ghcr.io/equinor/mercury-web
 
 jobs:
   pre-commit:
@@ -56,33 +54,34 @@ jobs:
           --cache-from $API_IMAGE \
           --target development \
           --secret id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
-          --tag api-dev \
+          --tag mercury-api-ci \
           ./api
 
       - name: Pytest Unit tests
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest
+        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest
 
       - name: Pytest Integration tests
-        run: docker compose -f docker-compose.yml -f docker-compose.ci.yml run --rm api pytest --integration
+        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest --integration
 
   test-web:
     runs-on: ubuntu-latest
     steps:
       - name: "Setup: check out repository"
         uses: actions/checkout@v6
+        with:
+          sparse-checkout: web
 
-      - name: "Setup: login to image registry"
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+      - name: "Setup: install node"
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: yarn
+          cache-dependency-path: web/yarn.lock
 
-      - name: "Setup: build Web test image"
-        run: |
-          docker pull $WEB_IMAGE
-          DOCKER_BUILDKIT=1 docker build \
-          --cache-from $WEB_IMAGE \
-          --target development \
-          --build-arg AUTH_ENABLED=0 \
-          --tag web-dev \
-          ./web
+      - name: "Setup: Install node dependencies"
+        run: yarn install --frozen-lockfile
+        working-directory: web
 
-      - name: yarn tests
-        run: docker run --rm web-dev yarn test-ci
+      - name: "Run tests"
+        run: yarn test
+        working-directory: web

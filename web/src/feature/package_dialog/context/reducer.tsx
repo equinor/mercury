@@ -1,9 +1,9 @@
-import {
+import type {
   TComponentProperty,
   TComponentRatio,
   TPackageDialog,
-} from '../../../types'
-import { Action } from './PackageDialogContext'
+} from '../../../common/types'
+import type { Action } from './PackageDialogContext'
 
 const areValids = (ratios: TComponentRatio[]) => {
   const regex = /^\d+(\.\d+)?([eE][-+]?\d+)?$/

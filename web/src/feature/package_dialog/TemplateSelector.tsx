@@ -1,6 +1,6 @@
 import { Autocomplete } from '@equinor/eds-core-react'
-import { preSelectedComponents } from '../../constants'
-import { TPackage } from '../../types'
+import { preSelectedComponents } from '../../common/constants'
+import type { TPackage } from '../../common/types'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 export const TemplateSelector = (props: { packages: TPackage[] }) => {

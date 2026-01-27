@@ -1,6 +1,6 @@
 import { Icon, List, Typography } from '@equinor/eds-core-react'
 import { account_circle } from '@equinor/eds-icons'
-import { Component, ErrorInfo, ReactNode } from 'react'
+import { Component, type ErrorInfo, type ReactNode } from 'react'
 
 interface Props {
   children?: ReactNode
