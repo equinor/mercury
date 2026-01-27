@@ -1,5 +1,11 @@
 export const AUTH_DISABLED = import.meta.env.REACT_APP_AUTH !== '1'
 
+export const APP_NAME = 'Mercury Calculator'
+export const GITHUB_REPO_URL = 'https://github.com/equinor/mercury'
+export const CONTACT_PERSON_NAME = 'Eleni Pantelli'
+export const CONTACT_PERSON_EMAIL = 'elp@equinor.com'
+export const TECHNICAL_SUPPORT_EMAIL = 'fg_team_hermes@equinor.com'
+
 // Molecular weight of mercury
 export const mercuryMolecularWeight = 200.59
 

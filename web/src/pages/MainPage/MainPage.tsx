@@ -3,13 +3,13 @@ import { useEffect, useState } from 'react'
 import { type ComponentProperties, ComponentService } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
 import ErrorBoundary from '../../common/ErrorBoundary'
-import { Header } from '../../common/Header'
 import type {
   TCalcStatus,
   TComponentProperty,
   TResults,
 } from '../../common/types'
 import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
+import { AppBar } from '../../feature/AppBar/AppBar'
 import { CalculationInput } from '../../feature/calculation_input/CalculationInput'
 import { HgDistributionTable } from '../../feature/results/HgDistributionTable'
 import { PhaseEquilibriumTable } from '../../feature/results/PhaseEquilibriumTable'
@@ -54,7 +54,7 @@ export const MainPage = () => {
 
   return (
     <>
-      <Header />
+      <AppBar />
       <Container>
         <ErrorBoundary>
           <LastInputProvider>

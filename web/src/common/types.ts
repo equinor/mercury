@@ -1,5 +1,7 @@
 import type { ComponentProperties, Multiflash } from '../api/generated'
 
+export type Maybe<T> = NonNullable<T> | undefined
+
 export type TComponentProperty = ComponentProperties & {
   id: string
 }
