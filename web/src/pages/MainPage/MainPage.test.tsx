@@ -13,7 +13,7 @@ vi.mock('@microsoft/applicationinsights-react-js', () => ({
 }))
 
 // Mock the API
-vi.mock('../api/generated', () => ({
+vi.mock('../../api/generated', () => ({
   ComponentService: {
     getComponents: vi
       .fn()
