@@ -61,7 +61,7 @@ jobs:
             --build-arg AUTH_ENABLED=1 \
             --build-arg AZURE_CLIENT_ID=$AZURE_CLIENT_ID \
             --build-arg AZURE_TENANT_ID=$AZURE_TENANT_ID \
-            --build-arg OAUTH_AUTH_SCOPE=$AZURE_TENANT_ID \
+            --build-arg OAUTH_AUTH_SCOPE=$OAUTH_AUTH_SCOPE \
             --build-arg APPLICATIONINSIGHTS_CONNECTION_STRING="${{ inputs.applicationinsights-connection-string }}" \
             --tag $NGINX_IMAGE:latest \
             ./web
