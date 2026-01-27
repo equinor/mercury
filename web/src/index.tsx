@@ -4,8 +4,8 @@ import { createRoot } from 'react-dom/client'
 import { AuthProvider } from 'react-oauth2-code-pkce'
 import App from './App'
 import { OpenAPI } from './api/generated'
-import { reactPlugin } from './applicationInsight'
 import { authConfig } from './auth'
+import { reactPlugin } from './common/applicationInsight'
 
 const hasAuthConfig = import.meta.env.VITE_AUTH === '1'
 

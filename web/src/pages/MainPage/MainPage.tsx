@@ -2,7 +2,6 @@ import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useEffect, useState } from 'react'
 import { type ComponentProperties, ComponentService } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
-import ErrorBoundary from '../../common/ErrorBoundary'
 import type {
   TCalcStatus,
   TComponentProperty,
@@ -11,6 +10,7 @@ import type {
 import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
 import { AppBar } from '../../feature/AppBar/AppBar'
 import { CalculationInput } from '../../feature/calculation_input/CalculationInput'
+import { ErrorBoundary } from '../../feature/ErrorBoundary/ErrorBoundary'
 import { HgDistributionTable } from '../../feature/results/HgDistributionTable'
 import { PhaseEquilibriumTable } from '../../feature/results/PhaseEquilibriumTable'
 import { Status } from '../../feature/Status'

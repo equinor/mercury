@@ -2,9 +2,9 @@ import {
   mercuryMolecularWeight,
   molePerStandardCubicMeter,
 } from '../../common/constants'
-import { DynamicTable } from '../../common/DynamicTable'
 import { formatNumber, getCorrectUnit } from '../../common/tableUtils'
 import type { TResults } from '../../common/types'
+import { DynamicTable } from '../../components'
 
 function getRows(results: TResults): string[][] {
   const phPhaseFlowFactor =

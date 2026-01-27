@@ -26,7 +26,7 @@ It is also possible to use the model for glycol systems (MEG and TEG) but the un
 
 - Test fluids for calculations can be found [here](https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py)
 
-- For technical support and improvement suggestions please contact: fg_team_hermes@equinor.com
+- For technical support and improvement suggestions please contact: <fg_team_hermes@equinor.com>
 
 **References**
 
@@ -48,7 +48,7 @@ In order to run the application locally, you need:
 - [Docker Compose](https://docs.docker.com/compose/)
 - Make sure you have Python installed. version 3.10 or higher is required.
 
-Building the Dockerfile requires access to the private Github repository with the fortan library source (https://github.com/equinor/gpa-libhg).  
+Building the Dockerfile requires access to the private Github repository with the fortan library source (<https://github.com/equinor/gpa-libhg>).  
 The simplest way to manage this is by adding a **deploy key** to the repository.  
 Generate the keypair like so;
 
@@ -65,20 +65,20 @@ LIBHG_REPO_DEPLOY_KEY=-----BEGIN OPENSSH PRIVATE KEY-----\nb3Blbn...
 ### Testing
 
 Depending on your OS/CPU, tests can be run locally or via Docker. In order to test locally, Intel's Fortran compiler
-must be installed and libhg must be compiled (see https://github.com/equinor/gpa-libhg) for more details on how to
+must be installed and libhg must be compiled (see <https://github.com/equinor/gpa-libhg>) for more details on how to
 compile the library. Tests are then run through pytest from the command line.
 
 To run tests in docker you first have to build the Docker image. When the build is done, unit tests can be run with the
 command:
 
 ```bash
-docker-compose run --rm api pytest
+docker compose run --rm api pytest
 ```
 
 Integration tests are run with the command:
 
 ```bash
-docker-compose run --rm api pytest --integration
+docker compose run --rm api pytest --integration
 ```
 
 ### Common issues

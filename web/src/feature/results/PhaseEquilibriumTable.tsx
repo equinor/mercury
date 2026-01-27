@@ -1,9 +1,9 @@
 import { Switch } from '@equinor/eds-core-react'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { DynamicTable } from '../../common/DynamicTable'
 import { formatNumber } from '../../common/tableUtils'
 import type { TComponentProperty, TResults } from '../../common/types'
+import { DynamicTable } from '../../components'
 
 const Wrapper = styled.div`
   text-align: right;

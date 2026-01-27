@@ -3,13 +3,13 @@ import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { MultiflashService } from '../../api/generated'
-import { Card } from '../../common/Card'
 import type {
   TCalcStatus,
   TComponentProperty,
   TPackage,
   TResults,
 } from '../../common/types'
+import { Card } from '../../components'
 import { useLastInputContext } from '../../contexts/LastInputContext/LastInputContext'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { FluidDialog } from '../package_dialog/FluidDialog'
