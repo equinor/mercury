@@ -1,18 +1,14 @@
 name: "Publish container images"
 on:
   workflow_dispatch:
-  workflow_call: # Workflow is meant to be called from another workflow, with the image tag as input
+  workflow_call:
     inputs:
       image-tags:
         description: "Which tag to give the images. Supports multiple tags if comma separated, ie 'tag1,tag2'"
         required: true
         type: string
-      oauth-redirect-url:
-        description: "Redirect url for oauth. Should be the public url to access the web app"
-        default: "https://proxy-mercury-dev.radix.equinor.com"
-        required: true
-        type: string
-      app_insight_con_string:
+      applicationinsights-connection-string:
+        description: "Connection string for Application Insights"
         type: string
         required: true
     secrets:
@@ -26,10 +22,11 @@ permissions:
 
 env:
   IMAGE_REGISTRY: ghcr.io
-  REGISTRY_USER: $GITHUB_ACTOR
+  AZURE_CLIENT_ID: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f
+  AZURE_TENANT_ID: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+  OAUTH_AUTH_SCOPE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f/All
   NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
   API_IMAGE: ghcr.io/equinor/mercury-api
-  WEB_IMAGE: ghcr.io/equinor/mercury-web
 
 jobs:
   build-and-publish-nginx:
@@ -37,36 +34,6 @@ jobs:
     steps:
       - name: "Setup: check out repository"
         uses: actions/checkout@v6
-
-      - name: "Setup: login to image registry"
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
-
-      - name: "Setup: build nginx"
-        run: |
-          echo "Building nginx image with tag: ${{ inputs.image-tags }}"
-          docker pull $NGINX_IMAGE || echo "No NGINX image found"
-          DOCKER_BUILDKIT=1 docker build \
-            --cache-from ${NGINX_IMAGE}:latest \
-            --tag ${NGINX_IMAGE}:latest \
-            ./nginx
-
-      - name: "Run: publish nginx"
-        run: |
-          IFS=','
-          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
-          do
-            echo "Tagging with $IMAGE_TAG"
-            docker tag $NGINX_IMAGE:latest $NGINX_IMAGE:$IMAGE_TAG
-            docker push $NGINX_IMAGE:$IMAGE_TAG
-          done
-
-  build-and-publish-web:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Setup: check out repository"
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 2
 
       - name: "Setup: login to image registry"
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
@@ -82,27 +49,31 @@ jobs:
       - name: "Setup: show version info"
         run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
 
-      - name: "Setup: build web"
+      - name: "Setup: build nginx image"
         run: |
-          docker pull $WEB_IMAGE || echo "No web image found"
+          docker pull $NGINX_IMAGE || echo "No NGINX image found"
+          echo "Building nginx image with tag: ${{ inputs.image-tags }}"
           printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./web/public/version.txt
           DOCKER_BUILDKIT=1 docker build \
-            --cache-from ${WEB_IMAGE}:latest \
-            --build-arg REDIRECT_URI=${{inputs.oauth-redirect-url}} \
-            --build-arg AUTH_ENABLED=1 \
-            --build-arg APP_INSIGHT_CON_STRING="${{ inputs.app_insight_con_string }}" \
+            --cache-from ${NGINX_IMAGE}:latest \
+            --target nginx-prod \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --tag ${WEB_IMAGE}:latest \
+            --build-arg AUTH_ENABLED=1 \
+            --build-arg AZURE_CLIENT_ID=$AZURE_CLIENT_ID \
+            --build-arg AZURE_TENANT_ID=$AZURE_TENANT_ID \
+            --build-arg OAUTH_AUTH_SCOPE=$AZURE_TENANT_ID \
+            --build-arg APPLICATIONINSIGHTS_CONNECTION_STRING="${{ inputs.applicationinsights-connection-string }}" \
+            --tag $NGINX_IMAGE:latest \
             ./web
 
-      - name: "Run: publish web"
+      - name: "Run: publish nginx"
         run: |
           IFS=','
           for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
           do
             echo "Tagging with $IMAGE_TAG"
-            docker tag $WEB_IMAGE:latest $WEB_IMAGE:$IMAGE_TAG
-            docker push $WEB_IMAGE:$IMAGE_TAG
+            docker tag $NGINX_IMAGE:latest $NGINX_IMAGE:$IMAGE_TAG
+            docker push $NGINX_IMAGE:$IMAGE_TAG
           done
 
   build-and-publish-api:

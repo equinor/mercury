@@ -22,8 +22,7 @@ jobs:
     uses: ./.github/workflows/publish.yaml
     with:
       image-tags: latest
-      oauth-redirect-url: https://proxy-mercury-dev.radix.equinor.com
-      app_insight_con_string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
+      applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
     secrets:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
-import { Multiflash } from '../../api/generated'
-import { TLastInput } from '../../types'
+import type { Multiflash } from '../../api/generated'
+import type { TLastInput } from '../../common/types'
 
 const LastInputContext = createContext<
   | { lastInput: Multiflash; setLastInput: (input: TLastInput) => void }

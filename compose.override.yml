@@ -1,0 +1,42 @@
+services:
+  api:
+    platform: linux/amd64
+    build:
+      target: development
+    image: mercury-api-dev
+    volumes:
+      - ./api/src/:/code
+    env_file:
+      - .env
+    ports:
+      - "5000:5000"
+
+  web:
+    restart: unless-stopped
+    image: mercury-web-dev
+    volumes:
+      - ./web/src:/code/src
+    build:
+      target: development
+      context: ./web
+      args:
+        AZURE_CLIENT_ID: $AZURE_CLIENT_ID
+        AZURE_TENANT_ID: $AZURE_TENANT_ID
+        AUTH_ENABLED: $AUTH_ENABLED
+        OAUTH_AUTH_SCOPE: $OAUTH_AUTH_SCOPE
+        APPLICATIONINSIGHTS_CONNECTION_STRING: $APPLICATIONINSIGHTS_CONNECTION_STRING
+    stdin_open: true
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - api
+      - nginx
+
+  nginx:
+    build:
+      target: nginx-dev
+    attach: false
+    depends_on:
+      - api

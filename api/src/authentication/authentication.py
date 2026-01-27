@@ -15,6 +15,7 @@ oauth2_scheme = OAuth2AuthorizationCodeBearer(
     tokenUrl=config.OAUTH_TOKEN_ENDPOINT,
     auto_error=False,
 )
+_MICROSOFT_AUTH_PROVIDER = "login.microsoftonline.com"
 
 
 @cached(cache=TTLCache(maxsize=32, ttl=86400))
@@ -40,13 +41,13 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
         raise UnauthorizedException
     try:
         payload = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
-        if config.MICROSOFT_AUTH_PROVIDER in payload["iss"]:
+        if _MICROSOFT_AUTH_PROVIDER in payload["iss"]:
             # Azure AD uses an oid string to uniquely identify users. Each user has a unique oid value.
             user = User(user_id=payload["oid"], **payload)
         else:
             user = User(user_id=payload["sub"], **payload)
     except jwt.exceptions.InvalidTokenError as error:
-        logger.warning(f"Faild to decode JWT: {error}")
+        logger.warning(f"Failed to decode JWT: {error}")
         raise UnauthorizedException from error
 
     if user is None:

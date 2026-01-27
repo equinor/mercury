@@ -4,8 +4,8 @@ import {
   info_circle,
   warning_outlined,
 } from '@equinor/eds-icons'
+import type { TCalcStatus, TResults } from '../common/types'
 import { useLastInputContext } from '../pages/context/LastInputContext'
-import { TCalcStatus, TResults } from '../types'
 
 export const Status = (props: {
   calcStatus: TCalcStatus

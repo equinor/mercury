@@ -1,5 +1,9 @@
 import { Button } from '@equinor/eds-core-react'
-import { TComponentProperty, TComponentRatio, TPackage } from '../../types'
+import type {
+  TComponentProperty,
+  TComponentRatio,
+  TPackage,
+} from '../../common/types'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 function computeFeedMolecularWeight(

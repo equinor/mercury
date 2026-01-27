@@ -1,10 +1,6 @@
-import { TextEncoder } from 'util'
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
-import { TComponentProperty, TResults } from './types'
+import { vi } from 'vitest'
+import type { TComponentProperty, TResults } from './common/types'
 
 export const mockComponentRatios = {
   '3': 0.062202,
@@ -305,4 +301,7 @@ export const mockComponentProperties: TComponentProperty[] = [
   },
 ]
 
-global.TextEncoder = TextEncoder
+// mock appInsights
+export const useAppInsightsContext = vi.fn(() => ({
+  trackEvent: vi.fn(),
+}))

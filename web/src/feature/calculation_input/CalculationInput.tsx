@@ -1,19 +1,17 @@
 import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
-import { AxiosResponse } from 'axios'
 import { useState } from 'react'
 import styled from 'styled-components'
-import MercuryAPI from '../../api/MercuryAPI'
-import { MultiflashResponse } from '../../api/generated'
+import { MultiflashService } from '../../api/generated'
 import { Card } from '../../common/Card'
-import useLocalStorage from '../../hooks/useLocalStorage'
-import { useLastInputContext } from '../../pages/context/LastInputContext'
-import {
+import type {
   TCalcStatus,
   TComponentProperty,
   TPackage,
   TResults,
-} from '../../types'
+} from '../../common/types'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { useLastInputContext } from '../../pages/context/LastInputContext'
 import { FluidDialog } from '../package_dialog/FluidDialog'
 import { FeedFlowInput } from './FeedFlowInput'
 import { TempOrPressureInput } from './TempOrPressureInput'
@@ -37,12 +35,10 @@ const FluidPackage = styled(FlexContainer)`
 `
 
 export const CalculationInput = ({
-  mercuryApi,
   setResult,
   setCalcStatus,
   componentProperties,
 }: {
-  mercuryApi: MercuryAPI
   setResult: (result: TResults | undefined) => void
   setCalcStatus: (x: TCalcStatus) => void
   componentProperties: TComponentProperty[]
@@ -84,13 +80,10 @@ export const CalculationInput = ({
           cubicFeedFlow: cubicFeedFlow,
         }
         setLastInput(input)
-        mercuryApi
-          .computeMultiflash({
-            multiflash: input,
-          })
-          .then((result: AxiosResponse<MultiflashResponse>) => {
+        MultiflashService.computeMultiflash(input)
+          .then((response) => {
             setResult({
-              phaseValues: Object.entries(result.data.phaseValues).map(
+              phaseValues: Object.entries(response.phaseValues).map(
                 ([phase, data]) => ({
                   phase: phase,
                   percentage: data.percentage,
@@ -101,13 +94,13 @@ export const CalculationInput = ({
               componentFractions: selectedPackage.components
                 .filter(
                   (x) =>
-                    x.id in result.data.componentFractions &&
-                    x.id in result.data.feedFractions
+                    x.id in response.componentFractions &&
+                    x.id in response.feedFractions
                 )
                 .map((x) => ({
                   id: x.id,
-                  phaseFractions: result.data.componentFractions[x.id],
-                  feedFraction: result.data.feedFractions[x.id],
+                  phaseFractions: response.componentFractions[x.id],
+                  feedFraction: response.feedFractions[x.id],
                 })),
             })
             setCalcStatus('done')

@@ -1,10 +1,10 @@
-import { DynamicTable } from '../../common/DynamicTable'
 import {
   mercuryMolecularWeight,
   molePerStandardCubicMeter,
-} from '../../constants'
-import { formatNumber, getCorrectUnit } from '../../tableUtils'
-import { TResults } from '../../types'
+} from '../../common/constants'
+import { DynamicTable } from '../../common/DynamicTable'
+import { formatNumber, getCorrectUnit } from '../../common/tableUtils'
+import type { TResults } from '../../common/types'
 
 function getRows(results: TResults): string[][] {
   const phPhaseFlowFactor =

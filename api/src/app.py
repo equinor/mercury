@@ -21,15 +21,19 @@ def create_app() -> FastAPI:
     authenticated_routes.include_router(whoami_feature.router)
     authenticated_routes.include_router(multiflash_feature.router)
     authenticated_routes.include_router(component_feature.router)
-    app = FastAPI(title="Mercury", description="", version="1.1.6")  # x-release-please-version
+    app = FastAPI(
+        title="Mercury",
+        description="",
+        version="1.1.6",  # x-release-please-version
+    )
     app.include_router(authenticated_routes, dependencies=[Security(auth_with_jwt)])
     app.include_router(public_routes)
 
-    if config.APPINSIGHTS_CONSTRING:
+    if config.APPLICATIONINSIGHTS_CONNECTION_STRING:
         from azure.monitor.opentelemetry import configure_azure_monitor
         from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
-        configure_azure_monitor(connection_string=config.APPINSIGHTS_CONSTRING, logger_name="API")
+        configure_azure_monitor(connection_string=config.APPLICATIONINSIGHTS_CONNECTION_STRING, logger_name="API")
 
         FastAPIInstrumentor.instrument_app(app, excluded_urls="healthcheck")
 
@@ -52,6 +56,7 @@ def cli():
 def run():
     uvicorn.run(
         "app:create_app",
+        factory=True,
         host="0.0.0.0",  # noqa: S104
         port=5000,
         reload=config.ENVIRONMENT == "local",

@@ -1,8 +1,12 @@
 import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
-import { preSelectedComponents } from '../../constants'
-import type { TComponentProperty, TPackage, TPackageDialog } from '../../types'
+import { preSelectedComponents } from '../../common/constants'
+import type {
+  TComponentProperty,
+  TPackage,
+  TPackageDialog,
+} from '../../common/types'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'

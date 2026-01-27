@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useReducer } from 'react'
-import {
+import type React from 'react'
+import { createContext, useContext, useReducer } from 'react'
+import type {
   TComponentProperty,
   TComponentRatio,
   TPackageDialog,
-} from '../../../types'
+} from '../../../common/types'
 import { packageDialogReducer } from './reducer'
 
 export type Action =

@@ -1,18 +1,16 @@
 import { Divider } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
-import type { AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import type { ComponentProperties, ComponentResponse } from '../api/generated'
-import type MercuryAPI from '../api/MercuryAPI'
+import { type ComponentProperties, ComponentService } from '../api/generated'
+import { orderedComponents } from '../common/constants'
 import ErrorBoundary from '../common/ErrorBoundary'
 import { Header } from '../common/Header'
-import { orderedComponents } from '../constants'
+import type { TCalcStatus, TComponentProperty, TResults } from '../common/types'
 import { CalculationInput } from '../feature/calculation_input/CalculationInput'
 import { HgDistributionTable } from '../feature/results/HgDistributionTable'
 import { PhaseEquilibriumTable } from '../feature/results/PhaseEquilibriumTable'
 import { Status } from '../feature/Status'
-import type { TCalcStatus, TComponentProperty, TResults } from '../types'
 import { LastInputProvider } from './context/LastInputContext'
 
 const Results = styled.div`
@@ -45,8 +43,7 @@ const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
     .map((id) => ({ id: id, ...components[id] }))
 }
 
-export const MainPage = (props: { mercuryApi: MercuryAPI }) => {
-  const { mercuryApi } = props
+export const MainPage = () => {
   const [componentProperties, setComponentProperties] =
     useState<TComponentProperty[]>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -58,15 +55,15 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }) => {
   useEffect(() => {
     appInsights.trackEvent({ name: 'MainPageLoaded' }, {})
   }, [appInsights])
+
   // Fetch list of components name once on page load
   useEffect(() => {
-    mercuryApi
-      .getComponents()
-      .then((response: AxiosResponse<ComponentResponse>) =>
-        setComponentProperties(toSortedArray(response.data.components))
-      )
+    ComponentService.getComponents()
+      .then((response) => {
+        setComponentProperties(toSortedArray(response.components))
+      })
       .finally(() => setIsLoading(false))
-  }, [mercuryApi])
+  }, [])
 
   if (isLoading) return
 
@@ -80,7 +77,6 @@ export const MainPage = (props: { mercuryApi: MercuryAPI }) => {
         <ErrorBoundary>
           <LastInputProvider>
             <CalculationInput
-              mercuryApi={mercuryApi}
               setResult={setResult}
               setCalcStatus={setCalcStatus}
               componentProperties={componentProperties}

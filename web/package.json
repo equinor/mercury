@@ -3,14 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN='true' WDS_SOCKET_PORT=80 react-scripts start",
-    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
     "compile": "tsc --noEmit",
-    "test": "react-scripts test",
-    "test-ci": "react-scripts test --watchAll=false",
-    "upgrade": "yarn upgrade-interactive && yarn up && yarn dedupe",
-    "lint": "yarn dlx -q @biomejs/biome check src --write --no-errors-on-unmatched",
-    "eject": "react-scripts eject"
+    "generate": "openapi -i http://localhost:5000/openapi.json -o './src/api/generated'",
+    "test": "vitest",
+    "lint": "biome check --write --no-errors-on-unmatched"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@equinor/eds-core-react": "^2.3.0",
@@ -21,9 +32,8 @@
     "axios": "^1.13.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-is": "^19.2.3",
     "react-oauth2-code-pkce": "^1.23.4",
-    "react-scripts": "5.0.1",
+    "react-router-dom": "^7.13.0",
     "styled-components": "^6.3.8"
   },
   "devDependencies": {
@@ -39,29 +49,15 @@
     "@types/react-router": "^5.1.20",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.36",
-    "typescript": "^5.9.3"
+    "@vitejs/plugin-react": "^5.1.2",
+    "jsdom": "^27.4.0",
+    "openapi-typescript-codegen": "=0.29.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-checker": "^0.12.0",
+    "vite-plugin-svgr": "^4.5.0",
+    "vite-tsconfig-paths": "^6.0.5",
+    "vitest": "^4.0.18"
   },
-  "overrides": {
-    "react-scripts": {
-      "typescript": "^5.2.2"
-    }
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "axios": "axios/dist/node/axios.cjs"
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "packageManager": "yarn@3.5.1"
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

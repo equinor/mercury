@@ -1,6 +1,0 @@
-services:
-  api:
-    image: api-dev
-    environment:
-      ENVIRONMENT: local
-      AUTH_ENABLED: "False"
