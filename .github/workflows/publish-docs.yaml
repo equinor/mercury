@@ -64,4 +64,3 @@ jobs:
           build_dir: site/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-

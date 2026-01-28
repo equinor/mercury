@@ -16,9 +16,3 @@ To make use of this authentication pattern, you will need to:
   * Redirect URIs: Select Single-page Application (SPA) and add minimum `http://localhost/`
 * Get the app's client ID from AAD (also called application ID)
   * The client ID is used to tell Azure which resource a user is attempting to access
-
-
-
-
-
-

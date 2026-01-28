@@ -44,16 +44,14 @@ repos:
         name: "Validate: parse .toml files"
       - id: check-merge-conflict
         name: "Validate: no merge conflict strings"
-      - id: detect-private-key
-        name: "Validate: no private keys"
       - id: check-case-conflict
         name: "Validate: no case conflicting file names"
       - id: trailing-whitespace
         name: "Lint: remove trailing whitespaces"
-        exclude: ^(.*\.(lock)$|docs\|web/src/api/gen/)
+        exclude: ^(.*\.(lock)$|docs\|web/src/api/generated/)
       - id: end-of-file-fixer
         name: "Lint: end all files with single empty line"
-        exclude: ^(.*\.(lock)$|docs\|web/src/api/gen/)
+        exclude: ^(.*\.(lock)$|docs\|web/src/api/generated/)
       - id: mixed-line-ending
         exclude: ^.*\.(lock)$||^docs\/
       - id: detect-private-key

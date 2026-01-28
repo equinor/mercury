@@ -70,8 +70,8 @@ From inside the /web folder.
 
 ### Package management
 
-This project uses __Yarn 2 Plug'n'Play__ to manage web package dependencies.  
-That means there is no need to run npm/yarn install.  
+This project uses __Yarn 2 Plug'n'Play__ to manage web package dependencies.
+That means there is no need to run npm/yarn install.
 However, if you want to add/remove/update packages, you need yarn installed locally.
 
 ```shell
@@ -80,7 +80,7 @@ $ npm install -g yarn
 
 #### Yarn PnP in Jetbrains IDEs
 
-To let the IDE know that dependencies can be found in `.yarn` instead of `node_modules`, follow these steps; https://www.jetbrains.com/help/idea/installing-and-removing-external-software-using-node-package-manager.html#ws_npm_yarn_set_up_yarn2 
+To let the IDE know that dependencies can be found in `.yarn` instead of `node_modules`, follow these steps; https://www.jetbrains.com/help/idea/installing-and-removing-external-software-using-node-package-manager.html#ws_npm_yarn_set_up_yarn2
 
 #### Yarn PnP in VSCode
 

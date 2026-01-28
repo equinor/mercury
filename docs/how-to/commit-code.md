@@ -56,5 +56,3 @@ Well in case you forget to do that in the heat of the moment. Forgetting means a
 This should be combined with feature flags.
 
 As the trunk is always kept ready for release, feature flags help decouple deployment from release so any changes that are not ready can be wrapped in a feature flag and kept hidden while features that are complete can be released to end-users without delay.
-
-

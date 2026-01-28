@@ -29,4 +29,3 @@ pre-commit run --all-files
 ```
 
 Pre-commit tests can be skipped on commits with `git commit --no-verify`.
-

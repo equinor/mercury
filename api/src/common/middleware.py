@@ -13,7 +13,7 @@ class TimerHeaderMiddleware(BaseHTTPMiddleware):
         start_time = time.time()
         response = await call_next(request)
         process_time = time.time() - start_time
-        milliseconds = int(round(process_time * 1000))
+        milliseconds = round(process_time * 1000)
         logger.info(f"{request.method} {request.url.path} - {milliseconds}ms - {response.status_code}")
         response.headers["X-Process-Time"] = str(process_time)
         return response

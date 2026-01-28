@@ -48,8 +48,8 @@ In order to run the application locally, you need:
 - [Docker Compose](https://docs.docker.com/compose/)
 - Make sure you have Python installed. version 3.10 or higher is required.
 
-Building the Dockerfile requires access to the private Github repository with the fortan library source (<https://github.com/equinor/gpa-libhg>).  
-The simplest way to manage this is by adding a **deploy key** to the repository.  
+Building the Dockerfile requires access to the private Github repository with the fortan library source (<https://github.com/equinor/gpa-libhg>).
+The simplest way to manage this is by adding a **deploy key** to the repository.
 Generate the keypair like so;
 
 ```bash

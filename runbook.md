@@ -20,7 +20,7 @@ Deployment to production is manually triggered by pushing a tag on format `v[0-9
 
 ## REST API
 
-The REST API is a basic Python FastAPI web server.  
+The REST API is a basic Python FastAPI web server.
 All configuration parameters are expected to be environment variables, and are defined in this file [config.py](https://github.com/equinor/Mercury/blob/main/src/config.py).
 
 Note that the API Dockerfile needs clone access to the private repository `github.com/equinor/gpa-libhg` during build. This repository keeps the Fortran library that is compiled and created Python bindings for.
@@ -36,12 +36,12 @@ These resources are defined in the [bicep](https://learn.microsoft.com/en-us/azu
 
 ### Authentication
 
-Authentication are handled by Azure Active Directory (AAD), which issues access tokens used to access the protected API endpoints.  
-The App Registration created for this project is `Mercury`.  
+Authentication are handled by Azure Active Directory (AAD), which issues access tokens used to access the protected API endpoints.
+The App Registration created for this project is `Mercury`.
 
 ### Logging
 
-The Application Insight resource has been placed in environment separated Resource Groups; `mercury-test`, and `mercury-prod`.  
+The Application Insight resource has been placed in environment separated Resource Groups; `mercury-test`, and `mercury-prod`.
 These resources can be recreated by running the [IaC script](https://github.com/equinor/Mercury/tree/main/IaC)
 
 #### Log queries

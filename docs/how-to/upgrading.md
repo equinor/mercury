@@ -27,10 +27,3 @@ cd web/
 # Add or remove package to package.json
 yarn instal
 ```
-
-
-
-
-
-
-
