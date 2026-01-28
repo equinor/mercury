@@ -48,12 +48,12 @@ repos:
         name: "Validate: no case conflicting file names"
       - id: trailing-whitespace
         name: "Lint: remove trailing whitespaces"
-        exclude: ^(.*\.(lock)$|docs\|web/src/api/generated/)
+        exclude: ^(.*\.(lock)$|docs/|web/src/api/generated/)
       - id: end-of-file-fixer
         name: "Lint: end all files with single empty line"
-        exclude: ^(.*\.(lock)$|docs\|web/src/api/generated/)
+        exclude: ^(.*\.(lock)$|docs/|web/src/api/generated/)
       - id: mixed-line-ending
-        exclude: ^.*\.(lock)$||^docs\/
+        exclude: ^(.*\.(lock)$|docs/|web/src/api/generated/)
       - id: detect-private-key
         exclude: api/src/tests/integration/mock_token_generator.py
         exclude_types:
