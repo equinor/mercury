@@ -1,7 +1,7 @@
 [project]
-name = "mercury"
-version = "1.1.6"
+name = "Mercury"
 description = "Mercury composition calculator REST API"
+dynamic = ["version"]
 requires-python = ">=3.10"
 readme = "README.md"
 license = "MIT"
@@ -26,20 +26,6 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pre-commit>=4.5.1", "pytest>=9.0", "ruff>=0.14.13", "mypy>=1.14.1"]
-
-[tool.uv]
-package = false
-
-[build-system]
-requires = ["uv_build>=0.9.22,<0.10.0"]
-build-backend = "uv_build"
-
-[tool.mypy]
-ignore_missing_imports = true
-warn_return_any = true
-warn_unused_configs = true
-explicit_package_bases = true
-namespace_packages = true
 
 [tool.ruff]
 src = ["src"]
@@ -66,3 +52,10 @@ lint.ignore = [
   "RUF012", # Pydantic class variables
   "S101",   # Use of "assert"
 ]
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_configs = true
+explicit_package_bases = true
+namespace_packages = true

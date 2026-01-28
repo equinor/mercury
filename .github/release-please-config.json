@@ -15,7 +15,7 @@
     { "type": "ci", "section": "Continuous Integration", "hidden": false }
   ],
   "extra-files": [
-    "api/pyproject.toml",
+    "api/src/cli/__about__.py",
     "api/src/app.py",
     {
       "type": "json",
