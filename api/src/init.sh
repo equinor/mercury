@@ -2,7 +2,7 @@
 set -eu
 
 if [ "$1" = 'api' ]; then
-  exec python3 /code/app.py run
+  exec python3 /code/src/app.py run
 else
   exec "$@"
 fi

@@ -5,7 +5,7 @@ services:
       target: development
     image: mercury-api-dev
     volumes:
-      - ./api/src/:/code
+      - ./api/src/:/code/src
     env_file:
       - .env
     ports:
