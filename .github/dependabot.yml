@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/api"
     schedule:
       interval: "monthly"
@@ -37,4 +37,3 @@ updates:
         update-types:
           - "minor"
           - "patch"
-
