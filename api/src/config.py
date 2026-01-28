@@ -4,6 +4,8 @@ from authentication.models import User
 
 
 class Config(BaseSettings):
+    APP_TITLE: str = "Mercury"
+    APP_REPOSITORY_URL: str = "https://github.com/equinor/mercury"
     ENVIRONMENT: str = "local"
 
     # Logging
