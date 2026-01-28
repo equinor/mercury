@@ -9,7 +9,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=config.APP_TITLE,
         description=_get_description_md(),
-        version="1.1.6",  # x-release-please-version
+        version="1.1.7",  # x-release-please-version
         license_info=_get_license_info(),
         swagger_ui_init_oauth=_get_swagger_ui_init_oauth(),
     )
