@@ -1,4 +1,4 @@
-FROM python:3.10-slim AS dependencies
+FROM python:3.10-slim AS build-base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
@@ -16,8 +16,9 @@ RUN apt-get update && \
   build-essential openssh-client intel-oneapi-compiler-fortran && \
   rm -rf /var/lib/apt/lists/*
 
+
+FROM build-base AS build
 # Clone libhg fortran repo
-FROM dependencies AS build
 ENV GITHASH=14ce571e2af87fce039de2a30721980e2dafe54b
 RUN --mount=type=secret,id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
   mkdir /root/.ssh && echo "${LIBHG_REPO_DEPLOY_KEY}" > /root/.ssh/id_ed25519 && \
@@ -34,34 +35,58 @@ SHELL ["/bin/bash", "-c"]
 COPY compile.sh ./libhg/
 RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
 
-FROM python:3.10-slim AS base
-ENV PYTHONUNBUFFERED=1
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PYTHONPATH=/usr/local/lib/
-ENTRYPOINT ["/code/init.sh"]
-CMD ["api"]
-EXPOSE 5000
+
+FROM python:3.10-slim AS uv-base
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH="/code/.venv/bin:$PATH"
 WORKDIR /code
 
-COPY --from=build /build/libhg.so /usr/local/lib/
-# Install poetry
+# install uv
+# - byte-compile packages for faster application startups
+# - silence uv complaining about not being able to use hard links
+# - prevent uv from accidentally downloading isolated Python builds
+# - use system python
+ENV UV_COMPILE_BYTECODE=1 \
+  UV_LINK_MODE=copy \
+  UV_PYTHON_DOWNLOADS=never \
+  UV_SYSTEM_PYTHON=1
 RUN pip install --upgrade pip && \
-  pip install poetry && \
-  poetry config virtualenvs.create false
-
-# Install python dependencies
-COPY pyproject.toml pyproject.toml
-COPY poetry.lock poetry.lock
+  pip install uv==0.9.22
 
 
-FROM base AS development
-RUN poetry install
+FROM uv-base AS main-dependencies
+# copy libhg build and add to PYTHONPATH
+COPY --from=build /build/libhg.so /code/libhg/
+ENV PYTHONPATH=/code/libhg:$PYTHONPATH
+
+# - use cache, mount pyproject.toml and uv.lock
+# - synchronise dependencies without installing the application itself
+RUN --mount=type=cache,target=/root/.cache/uv \
+  --mount=type=bind,source=uv.lock,target=uv.lock \
+  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  uv sync --locked --no-dev --no-install-project
 
 
-COPY ./src .
+FROM main-dependencies AS dev-dependencies
+# install dev dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+  --mount=type=bind,source=uv.lock,target=uv.lock \
+  --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+  uv sync --locked --dev --no-install-project
+
+
+FROM dev-dependencies AS development
+WORKDIR /code/src
+COPY src .
 USER 1000
+EXPOSE 5000
+ENTRYPOINT ["/code/src/init.sh"]
+CMD ["api"]
 
-FROM base AS prod
-RUN poetry install --only=main
-COPY ./src .
+
+FROM main-dependencies AS prod
+WORKDIR /code/src
+COPY src .
 USER 1000
+EXPOSE 5000
+ENTRYPOINT ["/code/src/init.sh"]
+CMD ["api"]
