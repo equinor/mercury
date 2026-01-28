@@ -21,6 +21,7 @@ dependencies = [
   "opentelemetry-instrumentation-fastapi~=0.57b1",
   "types-requests>=2.32.4.20260107",
   "types-cachetools>=6.2.0.20251022",
+  "typer>=0.21.1",
 ]
 
 [dependency-groups]
