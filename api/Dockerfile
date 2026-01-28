@@ -1,4 +1,4 @@
-FROM python:3.10-slim AS build-base
+FROM python:3.14-slim AS build-base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 WORKDIR /build
 
@@ -36,7 +36,7 @@ COPY compile.sh ./libhg/
 RUN cd libhg && source /opt/intel/oneapi/setvars.sh && ./compile.sh
 
 
-FROM python:3.10-slim AS uv-base
+FROM python:3.14-slim AS uv-base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH="/code/.venv/bin:$PATH"
 WORKDIR /code
 
