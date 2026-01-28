@@ -1,4 +1,4 @@
-from numpy.typing import ArrayLike
+from common.utils.arrays import NDArrayBytes, NDArrayFloat
 
 def compute_multiflash(
     num_comp: int,
@@ -6,4 +6,4 @@ def compute_multiflash(
     temperature: float,
     pressure: float,
     feed_composition: list[float],
-) -> tuple[ArrayLike, ArrayLike, ArrayLike, ArrayLike, ArrayLike]: ...
+) -> tuple[NDArrayBytes, NDArrayFloat, NDArrayFloat, NDArrayFloat, NDArrayFloat]: ...

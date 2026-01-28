@@ -1,7 +1,7 @@
 from enum import IntEnum
 from typing import Any
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, GetJsonSchemaHandler
 from pydantic_core import core_schema
 
 
@@ -14,20 +14,9 @@ class AccessLevel(IntEnum):
         return self.value >= required_level.value
 
     @classmethod
-    def __get_pydantic_core_schema__(cls, source, handler) -> core_schema.CoreSchema:
-        return core_schema.with_info_plain_validator_function(cls.validate)
-
-    @classmethod
-    def validate(cls, v):
-        if isinstance(v, cls):
-            return v
-        try:
-            return cls[v]
-        except KeyError as e:
-            raise ValueError("invalid AccessLevel enum value") from e
-
-    @classmethod
-    def __get_pydantic_json_schema__(cls, schema: dict[str, Any]):
+    def __get_pydantic_json_schema__(
+        cls, core_schema: core_schema.CoreSchema, handler: GetJsonSchemaHandler
+    ) -> dict[str, Any]:
         """
         Add a custom field type to the class representing the Enum's field names
         Ref: https://pydantic-docs.helpmanual.io/usage/schema/#modifying-schema-in-custom-fields
@@ -36,7 +25,9 @@ class AccessLevel(IntEnum):
         to provide names for the Enum values.
         Ref: https://openapi-generator.tech/docs/templating/#enum
         """
-        schema["x-enum-varnames"] = [choice.name for choice in cls]
+        json_schema = handler(core_schema)
+        json_schema["x-enum-varnames"] = [choice.name for choice in cls]
+        return json_schema
 
 
 class User(BaseModel):

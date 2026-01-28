@@ -1,4 +1,5 @@
 from pydantic import BaseModel, ConfigDict, Field
+from pydantic.alias_generators import to_camel
 
 from common.telemetry import tracer
 from common.utils.enums import PhaseLabels
@@ -15,20 +16,19 @@ class MultiflashResponse(BaseModel):
         ...,
         description="Phase labels (vapor, liquid, aqueous, mercury) with "
         "their fraction of unity and mercury concentration",
-        alias="phaseValues",
     )
     component_fractions: dict[str, list[float]] = Field(
         ...,
         description="Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)",
-        alias="componentFractions",
     )
     feed_fractions: dict[str, float] = Field(
-        ..., description="Ratio of components in the feed (guaranteed to sum to 1)", alias="feedFractions"
+        ..., description="Ratio of components in the feed (guaranteed to sum to 1)"
     )
 
     model_config = ConfigDict(
         frozen=True,
         populate_by_name=True,
+        alias_generator=to_camel,
         json_schema_extra={
             "example": {
                 "phaseValues": {

@@ -1,4 +1,5 @@
 import libhg
+
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
@@ -105,7 +106,7 @@ class Multiflash(BaseModel):
             mole_fractions,
             mass_fractions,
             mercury_concentrations,
-        ) = libhg.compute_multiflash(  # type: ignore
+        ) = libhg.compute_multiflash(
             num_comp=self.number_of_components,
             components=self.component_ids_as_ints,
             temperature=self.temperature,
