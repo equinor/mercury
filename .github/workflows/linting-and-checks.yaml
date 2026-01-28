@@ -1,0 +1,44 @@
+name: "Linting and checks"
+on:
+  # Workflow dispatch is used for manual triggers
+  workflow_dispatch:
+  # Workflow call is used for called from another workflow
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  prek:
+    runs-on: ubuntu-latest
+    name: "Linting and checks: Pre-commit"
+    steps:
+      - name: "Setup: Checkout repository"
+        uses: actions/checkout@v6
+
+      - name: "Run: Pre-commit with prek"
+        uses: j178/prek-action@v1
+
+  typescript-compile:
+    runs-on: ubuntu-latest
+    name: "Linting and checks: Typescript compile"
+    steps:
+      - name: "Setup: Checkout repository"
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: web
+
+      - name: "Setup: Install node"
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: yarn
+          cache-dependency-path: web/yarn.lock
+
+      - name: "Setup: Install node dependencies"
+        run: yarn install --frozen-lockfile
+        working-directory: web
+
+      - name: "Run: Compile with yarn"
+        run: yarn compile
+        working-directory: web

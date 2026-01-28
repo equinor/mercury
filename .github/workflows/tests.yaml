@@ -1,4 +1,4 @@
-name: "Test"
+name: "Tests"
 on:
   # Workflow dispatch is used for manual triggers
   workflow_dispatch:
@@ -18,34 +18,17 @@ env:
   API_IMAGE: ghcr.io/equinor/mercury-api
 
 jobs:
-  pre-commit:
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Setup: check out repository"
-        uses: actions/checkout@v6
-
-      - name: Set up python
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-
-      - name: Run pre-commit
-        id: pre-commit
-        uses: pre-commit/action@v3.0.1
-        with:
-          extra_args: --all-files --verbose
-
   test-api:
     runs-on: ubuntu-latest
+    name: "Tests: API"
     steps:
-      - name: "Setup: check out repository"
+      - name: "Setup: Checkout repository"
         uses: actions/checkout@v6
 
-      - name: "Setup: login to image registry"
+      - name: "Setup: Login to image registry"
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
 
-      - name: "Setup: build API test image"
+      - name: "Setup: Build API test image"
         env:
           LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
         run: |
@@ -57,21 +40,22 @@ jobs:
           --tag mercury-api-ci \
           ./api
 
-      - name: Pytest Unit tests
-        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest
+      - name: "Run: Unit tests with python"
+        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest --unit
 
-      - name: Pytest Integration tests
+      - name: "Run: Integration tests with python"
         run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest --integration
 
   test-web:
     runs-on: ubuntu-latest
+    name: "Tests: Web"
     steps:
-      - name: "Setup: check out repository"
+      - name: "Setup: Checkout repository"
         uses: actions/checkout@v6
         with:
           sparse-checkout: web
 
-      - name: "Setup: install node"
+      - name: "Setup: Install node"
         uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -82,6 +66,6 @@ jobs:
         run: yarn install --frozen-lockfile
         working-directory: web
 
-      - name: "Run tests"
+      - name: "Run: Tests with yarn"
         run: yarn test
         working-directory: web

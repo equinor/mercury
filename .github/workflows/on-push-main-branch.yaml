@@ -6,6 +6,11 @@ on:
       - main
 
 jobs:
+  linting-and-checks:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/linting-and-checks.yaml
+
   tests:
     permissions:
       contents: read
@@ -15,7 +20,7 @@ jobs:
       LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
 
   publish-latest-image:
-    needs: tests
+    needs: [linting-and-checks, tests]
     permissions:
       contents: read
       packages: write

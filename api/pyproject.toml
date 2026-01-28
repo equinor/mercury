@@ -36,7 +36,6 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "src/cli/__about__.py"
 
-
 [tool.ruff]
 src = ["src"]
 target-version = "py310"

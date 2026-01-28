@@ -3,6 +3,11 @@ on:
   pull_request:
 
 jobs:
+  linting-and-checks:
+    permissions:
+      contents: read
+    uses: ./.github/workflows/linting-and-checks.yaml
+
   tests:
     permissions:
       contents: read
