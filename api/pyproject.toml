@@ -3,8 +3,7 @@ name = "Mercury"
 description = "Mercury composition calculator REST API"
 dynamic = ["version"]
 requires-python = ">=3.10"
-readme = "README.md"
-license = "MIT"
+license-files = ["LICENSE.md"]
 dependencies = [
   "numpy==1.23",
   "httpx>=0.28.1,<0.29",
@@ -26,6 +25,17 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pre-commit>=4.5.1", "pytest>=9.0", "ruff>=0.14.13", "mypy>=1.14.1"]
+
+[tool.uv]
+package = false
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/cli/__about__.py"
+
 
 [tool.ruff]
 src = ["src"]
