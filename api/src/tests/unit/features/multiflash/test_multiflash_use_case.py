@@ -20,6 +20,7 @@ from tests.test_data.multiflash_data import MultiflashInput, MultiflashOutput
 def test_compute_multiflash_use_case(multiflash_input: dict, multiflash_expected_output: dict):
     multiflash = Multiflash(**multiflash_input)
     response: MultiflashResponse = compute_multiflash_use_case(multiflash)
+    print(response)
     computed_phase_values = response.phase_values
     computed_component_fractions = response.component_fractions
 
