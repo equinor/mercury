@@ -1,9 +1,9 @@
 import pytest
 from starlette.status import HTTP_200_OK
+from tests.integration.mock_token_generator import generate_mock_token
 
 from authentication.models import User
 from config import config
-from tests.integration.mock_token_generator import generate_mock_token
 
 pytestmark = pytest.mark.integration
 
