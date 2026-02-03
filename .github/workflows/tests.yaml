@@ -5,8 +5,8 @@ on:
   # Workflow call is used for called from another workflow
   workflow_call:
     secrets:
-      LIBHG_REPO_DEPLOY_KEY:
-        description: "Deploy key for cloning libhg repository"
+      LIBHG_PAT:
+        description: "PAT for accessing libhg repository"
         required: true
 
 permissions:
@@ -16,6 +16,7 @@ permissions:
 env:
   IMAGE_REGISTRY: ghcr.io
   API_IMAGE: ghcr.io/equinor/mercury-api
+  LIBHG_VERSION: v1.0.0
 
 jobs:
   test-api:
@@ -30,13 +31,14 @@ jobs:
 
       - name: "Setup: Build API test image"
         env:
-          LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+          LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
         run: |
           docker pull $API_IMAGE
           DOCKER_BUILDKIT=1 docker build \
           --cache-from $API_IMAGE \
           --target development \
-          --secret id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
+          --build-arg LIBHG_VERSION=$LIBHG_VERSION \
+          --secret id=libhg-pat,env=LIBHG_PAT \
           --tag mercury-api-ci \
           ./api
 

@@ -12,8 +12,8 @@ on:
         type: string
         required: true
     secrets:
-      LIBHG_REPO_DEPLOY_KEY:
-        description: "Deploy key for cloning libhg repository"
+      LIBHG_PAT:
+        description: "PAT for accessing libhg repository"
         required: true
 
 permissions:
@@ -27,6 +27,7 @@ env:
   OAUTH_AUTH_SCOPE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f/All
   NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
   API_IMAGE: ghcr.io/equinor/mercury-api
+  LIBHG_VERSION: v1.0.0
 
 jobs:
   build-and-publish-nginx:
@@ -100,14 +101,15 @@ jobs:
 
       - name: "Setup: build API"
         env:
-          LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+          LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
         run: |
           docker pull $API_IMAGE || echo "No API image found"
           printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./api/src/version.txt
           DOCKER_BUILDKIT=1 docker build \
             --cache-from $API_IMAGE:latest \
             --target prod \
-            --secret id=libhg-repo-deploy-key,env=LIBHG_REPO_DEPLOY_KEY \
+            --build-arg LIBHG_VERSION=$LIBHG_VERSION \
+            --secret id=libhg-pat,env=LIBHG_PAT \
             --build-arg BUILDKIT_INLINE_CACHE=1 \
             --tag $API_IMAGE:latest \
             ./api

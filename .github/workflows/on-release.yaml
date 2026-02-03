@@ -8,8 +8,8 @@ on:
         required: true
         type: string
     secrets:
-      LIBHG_REPO_DEPLOY_KEY:
-        description: "Deploy key for cloning libhg repository"
+      LIBHG_PAT:
+        description: "PAT for accessing libhg repository"
         required: true
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
       image-tags: ${{ inputs.release-tag }}
       applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
     secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
 
   deploy-prod:
     needs: publish-release-image

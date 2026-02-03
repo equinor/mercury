@@ -17,7 +17,7 @@ jobs:
       packages: read
     uses: ./.github/workflows/tests.yaml
     secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
 
   publish-latest-image:
     needs: [linting-and-checks, tests]
@@ -29,7 +29,7 @@ jobs:
       image-tags: latest
       applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
     secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
 
   deploy-dev:
     needs: publish-latest-image
@@ -70,4 +70,4 @@ jobs:
     with:
       release-tag: ${{ needs.release-please.outputs.tag_name }}
     secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
