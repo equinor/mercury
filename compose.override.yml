@@ -6,6 +6,7 @@ services:
     image: mercury-api-dev
     volumes:
       - ./api/src/:/code/src
+      - ./api/tests/:/code/tests
     env_file:
       - .env
     ports:

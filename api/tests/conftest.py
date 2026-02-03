@@ -4,11 +4,11 @@ import os
 
 import pytest
 from starlette.testclient import TestClient
+from tests.integration.mock_token_generator import mock_auth_with_jwt
 
 from app import create_app
 from authentication.authentication import auth_with_jwt
 from config import config
-from tests.integration.mock_token_generator import mock_auth_with_jwt
 
 
 @pytest.fixture(autouse=True)

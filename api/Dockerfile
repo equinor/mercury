@@ -52,8 +52,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 
 FROM dev-dependencies AS development
-WORKDIR /code/src
-COPY src .
+COPY . .
 USER 1000
 EXPOSE 5000
 ENTRYPOINT ["/code/src/init.sh"]
@@ -61,8 +60,7 @@ CMD ["api"]
 
 
 FROM main-dependencies AS prod
-WORKDIR /code/src
-COPY src .
+COPY src src
 USER 1000
 EXPOSE 5000
 ENTRYPOINT ["/code/src/init.sh"]
