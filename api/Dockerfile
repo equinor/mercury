@@ -13,7 +13,7 @@ RUN gh release download ${LIBHG_VERSION} \
   --output /tmp/libhg.so
 
 
-FROM python:3.13-slim AS uv-base
+FROM python:3.14-slim AS uv-base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 PATH="/code/.venv/bin:$PATH"
 WORKDIR /code
 
