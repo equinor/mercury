@@ -2,10 +2,10 @@
 name = "Mercury"
 description = "Mercury composition calculator REST API"
 dynamic = ["version"]
-requires-python = "~=3.10.0"
+requires-python = ">=3.12"
 license-files = ["LICENSE.md"]
 dependencies = [
-  "numpy==1.23",
+  "numpy~=2.1",
   "httpx>=0.28.1,<0.29",
   "cachetools~=6.2",
   "fastapi~=0.128",

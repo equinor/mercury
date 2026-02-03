@@ -68,17 +68,15 @@ class Multiflash(BaseModel):
         mercury_concentrations: NDArrayFloat,
     ) -> dict[PhaseLabels, PhaseValues]:
         """
-        Converts phase related output from libhg.compute_multiflash (phase_labels, phase_fractions,
+        Convert phase related output from libhg.compute_multiflash (phase_labels, phase_fractions,
         mercury_concentration) to dictionary where keys are PhaseLabel objects and values are PhaseValues tuples.
         """
-        phase_label_byte_strings = [b"".join(label).strip() for label in phase_labels]
-        phases = {
-            PhaseLabels[label.decode("utf-8").upper()]: PhaseValues(
+        return {
+            PhaseLabels[label.decode("utf-8").strip().upper()]: PhaseValues(
                 percentage=phase_fractions[i], mercury=mercury_concentrations[i]
             )
-            for i, label in enumerate(filter(lambda label: label != b"", phase_label_byte_strings))
+            for i, label in enumerate(filter(lambda label: label != b"", phase_labels))
         }
-        return phases
 
     def format_component_results(
         self,
@@ -87,7 +85,7 @@ class Multiflash(BaseModel):
         columns_to_keep: tuple = (1, 2, 3, 4),
     ) -> dict[str, ComponentFractions]:
         """
-        Converts fraction related output from libhg.compute_multiflash (mole_fractions, mass_fractions) into dictionary
+        Convert fraction related output from libhg.compute_multiflash (mole_fractions, mass_fractions) into dictionary
         where the keys are component id and the values are ComponentFractions tuples.
         """
         sliced_mole_fractions = mole_fractions[:, columns_to_keep]

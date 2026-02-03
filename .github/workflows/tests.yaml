@@ -16,7 +16,7 @@ permissions:
 env:
   IMAGE_REGISTRY: ghcr.io
   API_IMAGE: ghcr.io/equinor/mercury-api
-  LIBHG_VERSION: v1.0.0
+  LIBHG_VERSION: v2.0.0
 
 jobs:
   test-api:

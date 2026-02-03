@@ -27,7 +27,7 @@ env:
   OAUTH_AUTH_SCOPE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f/All
   NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
   API_IMAGE: ghcr.io/equinor/mercury-api
-  LIBHG_VERSION: v1.0.0
+  LIBHG_VERSION: v2.0.0
 
 jobs:
   build-and-publish-nginx:
