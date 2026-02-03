@@ -14,4 +14,4 @@ jobs:
       packages: read
     uses: ./.github/workflows/tests.yaml
     secrets:
-      LIBHG_REPO_DEPLOY_KEY: ${{ secrets.LIBHG_REPO_DEPLOY_KEY }}
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
