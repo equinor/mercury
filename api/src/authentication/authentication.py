@@ -6,7 +6,7 @@ from cachetools import TTLCache, cached
 from fastapi import Security
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from jwt import PyJWKClient
-from jwt.exceptions import DecodeError, PyJWKClientError
+from jwt.exceptions import DecodeError, ExpiredSignatureError, PyJWKClientError
 
 from authentication.models import User
 from common.exceptions import UnauthorizedException
@@ -42,7 +42,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
         raise UnauthorizedException
     try:
         key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key
-    except (DecodeError, PyJWKClientError) as error:
+    except (DecodeError, PyJWKClientError, ExpiredSignatureError) as error:
         logger.warning(f"Failed to get signing key from JWT token: {error}")
         raise UnauthorizedException from None
     try:
