@@ -44,7 +44,7 @@ def _extract_full_path(scope: Scope) -> str:
     path = scope["path"]
     raw_query_string = scope.get("query_string", b"")
     if not raw_query_string:
-        return path
+        return path  # type: ignore
 
     query_string = raw_query_string.decode()
     return f"{path}?{query_string}"
