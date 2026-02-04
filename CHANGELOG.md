@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.8](https://github.com/equinor/mercury/compare/v1.1.7...v1.1.8) (2026-02-04)
+
+
+### Continuous Integration
+
+* update release workflows ([9125e43](https://github.com/equinor/mercury/commit/9125e43f91f89442e8f30713b3e3c4f634cc70f7))
+
 ## [1.1.7](https://github.com/equinor/mercury/compare/v1.1.6...v1.1.7) (2026-02-04)
 
 

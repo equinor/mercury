@@ -13,7 +13,7 @@ APP_REPOSITORY_URL = "https://github.com/equinor/mercury"
 def create_app() -> FastAPI:
     app = FastAPI(
         title=APP_TITLE,
-        version="1.1.7",  # x-release-please-version
+        version="1.1.8",  # x-release-please-version
         description=_get_description_md(),
         middleware=[Middleware(LocalLoggerMiddleware)],  # type: ignore
         license_info=_get_license_info(),
