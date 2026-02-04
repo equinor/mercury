@@ -1,3 +1,4 @@
+from pydantic import SecretStr
 from pydantic_settings import BaseSettings
 
 from common.environment import Environment
@@ -9,7 +10,7 @@ class Config(BaseSettings):
 
     # Logging
     LOGGER_LEVEL: LoggerLevel = LoggerLevel.INFO
-    APPLICATIONINSIGHTS_CONNECTION_STRING: str | None = None
+    APPLICATIONINSIGHTS_CONNECTION_STRING: SecretStr | None = None
 
     # Access control
     APPLICATION_ADMIN: str = "admin"
@@ -26,6 +27,18 @@ class Config(BaseSettings):
     OAUTH_AUTH_ENDPOINT: str = ""
     OAUTH_TOKEN_ENDPOINT: str = ""
     OAUTH_WELL_KNOWN: str = ""
+
+    @property
+    def has_applicationinsight_connection_string(self) -> bool:
+        return (
+            self.APPLICATIONINSIGHTS_CONNECTION_STRING is not None
+            and self.APPLICATIONINSIGHTS_CONNECTION_STRING.get_secret_value() != ""
+        )
+
+    def get_applicationinsight_connection_string(self) -> str:
+        if self.APPLICATIONINSIGHTS_CONNECTION_STRING is None:
+            return ""
+        return self.APPLICATIONINSIGHTS_CONNECTION_STRING.get_secret_value()
 
 
 config = Config()

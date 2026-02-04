@@ -20,11 +20,11 @@ def create_app() -> FastAPI:
         swagger_ui_init_oauth=_get_swagger_ui_init_oauth(),
     )
 
-    if config.APPLICATIONINSIGHTS_CONNECTION_STRING:
+    if config.has_applicationinsight_connection_string:
         from azure.monitor.opentelemetry import configure_azure_monitor
         from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
-        configure_azure_monitor(connection_string=config.APPLICATIONINSIGHTS_CONNECTION_STRING, logger_name="API")
+        configure_azure_monitor(connection_string=config.get_applicationinsight_connection_string(), logger_name="API")
         FastAPIInstrumentor.instrument_app(app, excluded_urls="healthcheck")
 
     app.include_router(get_authenticated_routes(), dependencies=[Security(auth_with_jwt)])
