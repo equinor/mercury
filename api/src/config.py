@@ -2,6 +2,7 @@ from pydantic_settings import BaseSettings
 
 from authentication.models import User
 from common.environment import Environment
+from common.logger_level import LoggerLevel
 
 
 class Config(BaseSettings):
@@ -10,7 +11,7 @@ class Config(BaseSettings):
     ENVIRONMENT: Environment = Environment.LOCAL
 
     # Logging
-    LOGGER_LEVEL: str = "INFO"
+    LOGGER_LEVEL: LoggerLevel = LoggerLevel.INFO
     APPLICATIONINSIGHTS_CONNECTION_STRING: str | None = None
 
     # Access control

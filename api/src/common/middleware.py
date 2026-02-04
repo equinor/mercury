@@ -5,7 +5,7 @@ from typing import Any
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from common.utils.logger import logger
+from common.logger import logger
 
 
 class TimerHeaderMiddleware(BaseHTTPMiddleware):

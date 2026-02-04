@@ -4,6 +4,7 @@ from rich import print as rich_print
 from rich.console import Console
 
 from common.environment import Environment
+from common.logger import uvicorn_log_config
 from config import config
 
 err_console = Console(stderr=True)
@@ -14,14 +15,16 @@ def run_command() -> None:
     _validate_config()
 
     use_reload = config.ENVIRONMENT == Environment.LOCAL
+    has_access_log = "uvicorn.access" in uvicorn_log_config["loggers"]
 
     uvicorn.run(
         "app:create_app",
-        factory=True,
         host="0.0.0.0",  # noqa: S104
         port=5000,
+        factory=True,
         reload=use_reload,
-        log_level=config.LOGGER_LEVEL.lower(),
+        log_config=uvicorn_log_config,
+        access_log=has_access_log,
     )
 
 

@@ -12,7 +12,7 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
 
 from common.exceptions import ApplicationException, ErrorResponse, ExceptionSeverity
-from common.utils.logger import logger
+from common.logger import logger
 
 
 class ExceptionHandlingRoute(APIRoute):
@@ -41,7 +41,7 @@ def fall_back_exception_handler(request: Request, exc: Exception) -> JSONRespons
     error_id = uuid.uuid4()
     traceback_string = " ".join(traceback.format_tb(tb=exc.__traceback__))
     print(traceback_string)
-    logger.error(
+    logger.exception(
         f"Unexpected unhandled exception ({error_id}): {exc}",
         extra={"custom_dimensions": {"Error ID": error_id, "Traceback": traceback_string}},
     )
@@ -62,7 +62,7 @@ def generic_exception_handler(request: Request, exc: ApplicationException) -> JS
     elif exc.severity == ExceptionSeverity.WARNING:
         logger.warning(exc)
     else:
-        logger.error(exc)
+        logger.exception(exc)
     return JSONResponse(
         ErrorResponse(
             status=exc.status,
@@ -76,7 +76,7 @@ def generic_exception_handler(request: Request, exc: ApplicationException) -> JS
 
 
 def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
-    logger.error(exc)
+    logger.exception(exc)
     return JSONResponse(
         ErrorResponse(
             status=status.HTTP_422_UNPROCESSABLE_ENTITY,
@@ -90,7 +90,7 @@ def validation_exception_handler(request: Request, exc: RequestValidationError) 
 
 
 def http_exception_handler(request: Request, exc: HTTPStatusError) -> JSONResponse:
-    logger.error(exc)
+    logger.exception(exc)
     return JSONResponse(
         ErrorResponse(
             type="ExternalFetchException",

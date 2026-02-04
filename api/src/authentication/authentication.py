@@ -7,7 +7,7 @@ from jwt import PyJWKClient
 
 from authentication.models import User
 from common.exceptions import UnauthorizedException
-from common.utils.logger import logger
+from common.logger import logger
 from config import config, default_user
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(
@@ -27,7 +27,7 @@ def get_JWK_client() -> PyJWKClient:
         return PyJWKClient(oid_conf["jwks_uri"])
 
     except Exception as error:
-        logger.error(f"Failed to fetch OpenId Connect configuration for '{config.OAUTH_WELL_KNOWN}': {error}")
+        logger.exception(f"Failed to fetch OpenId Connect configuration for '{config.OAUTH_WELL_KNOWN}': {error}")
         raise UnauthorizedException from error
 
 
