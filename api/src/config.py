@@ -1,12 +1,13 @@
 from pydantic_settings import BaseSettings
 
 from authentication.models import User
+from common.environment import Environment
 
 
 class Config(BaseSettings):
     APP_TITLE: str = "Mercury"
     APP_REPOSITORY_URL: str = "https://github.com/equinor/mercury"
-    ENVIRONMENT: str = "local"
+    ENVIRONMENT: Environment = Environment.LOCAL
 
     # Logging
     LOGGER_LEVEL: str = "INFO"

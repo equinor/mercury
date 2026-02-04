@@ -3,6 +3,7 @@ import uvicorn
 from rich import print as rich_print
 from rich.console import Console
 
+from common.environment import Environment
 from config import config
 
 err_console = Console(stderr=True)
@@ -12,7 +13,7 @@ def run_command() -> None:
     """Run application."""
     _validate_config()
 
-    use_reload = config.ENVIRONMENT == "local"
+    use_reload = config.ENVIRONMENT == Environment.LOCAL
 
     uvicorn.run(
         "app:create_app",
