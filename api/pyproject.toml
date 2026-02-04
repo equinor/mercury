@@ -74,4 +74,4 @@ namespace_packages = true
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
-testpaths = ["tests"]
+testpaths = ["tests/unit", "tests/integration"]

@@ -5,33 +5,28 @@ import pytest
 
 from config import config
 
+_UNIT_TEST_MARKER = "unit"
+_INTEGRATION_TEST_MARKER = "integration"
+
+
+def pytest_configure(config: pytest.Config):
+    """Add markers to be recognised by pytest."""
+    config.addinivalue_line("markers", f"{_UNIT_TEST_MARKER}: mark test as unit test")
+    config.addinivalue_line("markers", f"{_INTEGRATION_TEST_MARKER}: mark test as integration test")
+
+
+def pytest_collection_modifyitems(config: pytest.Config, items: list[pytest.Item]):
+    """Add markers to tests based on folder structure."""
+    unit_test_directory = config.rootpath / "tests/unit"
+    use_case_test_directory = config.rootpath / "tests/integration"
+
+    for unit_test_item in filter(lambda item: item.path.is_relative_to(unit_test_directory), items):
+        unit_test_item.add_marker(_UNIT_TEST_MARKER)
+
+    for use_case_test_item in filter(lambda item: item.path.is_relative_to(use_case_test_directory), items):
+        use_case_test_item.add_marker(_INTEGRATION_TEST_MARKER)
+
 
 @pytest.fixture(autouse=True)
 def disable_auth():
     config.AUTH_ENABLED = False
-
-
-def pytest_addoption(parser):
-    """
-    Adds option flags to pytest:
-        --integration: runs only integration tests
-        --unit: runs unit tests
-    """
-    parser.addoption("--integration", action="store_true", help="run integration tests")
-    parser.addoption("--unit", action="store_true", help="run unit tests")
-
-
-def pytest_collection_modifyitems(config, items):
-    """
-    Collection modifier for passed options. If --integration is passed, only integration tests are run, similarly
-    for --unit. No options mean all tests are run.
-    """
-    for item in items:
-        if config.getoption("--integration"):
-            if "integration" not in str(item.path):
-                item.add_marker(
-                    pytest.mark.skip(reason=f"--integration option is passed: {item.name} is not an integration test")
-                )
-        elif config.getoption("--unit"):
-            if "unit" not in str(item.path):
-                item.add_marker(pytest.mark.skip(reason=f"--unit option is passed: {item.name} is not a unit test"))
