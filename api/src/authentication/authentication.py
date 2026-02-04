@@ -1,3 +1,5 @@
+from typing import Any
+
 import jwt
 import requests
 from cachetools import TTLCache, cached
@@ -44,10 +46,13 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
         logger.warning(f"Failed to get signing key from JWT token: {error}")
         raise UnauthorizedException from None
     try:
-        payload = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
+        payload: dict[str, Any] = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
         if _MICROSOFT_AUTH_PROVIDER in payload["iss"]:
             # Azure AD uses an oid string to uniquely identify users. Each user has a unique oid value.
-            user = User(user_id=payload["oid"], **payload)
+            user_id = payload["oid"]
+            name = payload.get("name")
+            email = payload.get("preferred_username")
+            user = User(user_id=user_id, full_name=name, email=email, **payload)
         else:
             user = User(user_id=payload["sub"], **payload)
     except jwt.exceptions.InvalidTokenError as error:
