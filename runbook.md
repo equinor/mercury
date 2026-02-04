@@ -15,7 +15,7 @@ In Omnia Radix there are two environments for Mercury: development (`dev`) and p
 
 The development environment is automatically deployed from every commit to the master branch on GitHub. This is done by a
 [Github Actions workflow](https://github.com/equinor/Mercury/blob/main/.github/workflows/on-push-main-branch.yaml).
-Deployment to production is manually triggered by pushing a tag on format `v[0-9]+.[0-9]+.[0-9]+`
+Deployment to production is triggered by merging the release PR.
 
 ## REST API
 
