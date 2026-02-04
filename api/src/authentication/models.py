@@ -1,5 +1,5 @@
 from enum import IntEnum
-from typing import Any
+from typing import Any, Self
 
 from pydantic import BaseModel, Field, GetJsonSchemaHandler
 from pydantic_core import core_schema
@@ -40,6 +40,14 @@ class User(BaseModel):
 
     def __hash__(self):
         return hash(type(self.user_id))
+
+    @classmethod
+    def create_default(cls) -> Self:
+        return cls(
+            user_id="nologin",
+            full_name="Not Authenticated",
+            email="nologin@example.com",
+        )
 
 
 class ACL(BaseModel):

@@ -1,15 +1,66 @@
-import jwt
-from fastapi import Security
+# Fixtures for integration tests
 
-from authentication.authentication import oauth2_scheme
+import jwt
+import pytest
+from fastapi import Security
+from starlette.testclient import TestClient
+
+from app import create_app
+from authentication.authentication import auth_with_jwt, oauth2_scheme
 from authentication.models import User
 from common.exceptions import UnauthorizedException
-from config import config, default_user
+from config import config
 
 
-def get_mock_rsa_private_key() -> str:
-    """
-    Used for testing.
+@pytest.fixture(scope="function")
+def test_app():
+    app = create_app()
+    client = TestClient(app=app)
+
+    app.dependency_overrides[auth_with_jwt] = _mock_auth_with_jwt
+    yield client
+
+
+@pytest.fixture(scope="function")
+def test_user():
+    yield User(user_id="1", email="foo@bar.baz", roles=["a"])
+
+
+@pytest.fixture(scope="function")
+def get_mock_jwt_token():
+    yield _get_mock_jwt_token
+
+
+def _get_mock_jwt_token(user: User) -> str:
+    """Return mock JWT token for testing."""
+    # https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens#claims-in-an-id-token
+    payload = {
+        "name": user.full_name,
+        "preferred_username": user.email,
+        "scp": "testing",
+        "sub": user.user_id,
+        "roles": user.roles,
+        "iss": "mock-auth-server",
+        "aud": "TEST",
+    }
+    return jwt.encode(payload, _get_mock_rsa_private_key(), algorithm="RS256")
+
+
+def _mock_auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
+    if not config.AUTH_ENABLED:
+        return User.create_default()
+    try:
+        payload = jwt.decode(jwt_token, _get_mock_rsa_public_key(), algorithms=["RS256"], audience="TEST")
+        user = User(user_id=payload["sub"], **payload)
+    except jwt.exceptions.InvalidTokenError as error:
+        raise UnauthorizedException from error
+    if user is None:
+        raise UnauthorizedException
+    return user
+
+
+def _get_mock_rsa_private_key() -> str:
+    """Return mock RSA private key for testing.
     Generated with: 'openssl req  -nodes -new -x509  -keyout server.key -out server.cert'.
     """
     return """
@@ -44,9 +95,8 @@ Ps2+z0zvD9eqCcQ4YrrqXGM=
 """
 
 
-def get_mock_rsa_public_key() -> str:
-    """
-    Used for testing.
+def _get_mock_rsa_public_key() -> str:
+    """Return mock RSA public key for testing.
     Convert cert to pub key with: 'openssl x509 -pubkey -noout < server.cert'
     """
     return """
@@ -60,35 +110,3 @@ Iwn8q+2gUVUMDnQQ8cCYFnKM8QlQbPrK46rHIpI9ihBODLbC4Lc/xaiv04m8HYbX
 gwIDAQAB
 -----END PUBLIC KEY-----
 """
-
-
-def generate_mock_token(user: User = default_user):
-    """
-    This function is for testing purposes only
-    Used for behave testing
-    """
-    # https://docs.microsoft.com/en-us/azure/active-directory/develop/id-tokens#claims-in-an-id-token
-    payload = {
-        "name": user.full_name,
-        "preferred_username": user.email,
-        "scp": "testing",
-        "sub": user.user_id,
-        "roles": user.roles,
-        "iss": "mock-auth-server",
-        "aud": "TEST",
-    }
-    return jwt.encode(payload, get_mock_rsa_private_key(), algorithm="RS256")
-
-
-def mock_auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
-    if not config.AUTH_ENABLED:
-        return default_user
-    try:
-        payload = jwt.decode(jwt_token, get_mock_rsa_public_key(), algorithms=["RS256"], audience="TEST")
-        print(payload)
-        user = User(user_id=payload["sub"], **payload)
-    except jwt.exceptions.InvalidTokenError as error:
-        raise UnauthorizedException from error
-    if user is None:
-        raise UnauthorizedException
-    return user

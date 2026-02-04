@@ -8,7 +8,7 @@ from jwt import PyJWKClient
 from authentication.models import User
 from common.exceptions import UnauthorizedException
 from common.logger import logger
-from config import config, default_user
+from config import config
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(
     authorizationUrl=config.OAUTH_AUTH_ENDPOINT,
@@ -33,7 +33,7 @@ def get_JWK_client() -> PyJWKClient:
 
 def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
     if not config.AUTH_ENABLED:
-        return default_user
+        return User.create_default()
     if not jwt_token:
         raise UnauthorizedException
     key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key

@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings
 
-from authentication.models import User
 from common.environment import Environment
 from common.logger_level import LoggerLevel
 
@@ -22,7 +21,6 @@ class Config(BaseSettings):
 
     # Authentication
     AUTH_ENABLED: bool = False
-    TEST_TOKEN: bool = False  # This value should only be changed at runtime by test setup
     OAUTH_AUDIENCE: str = ""
     OAUTH_AUTH_SCOPE: str = ""
     OAUTH_AUTH_ENDPOINT: str = ""
@@ -31,11 +29,3 @@ class Config(BaseSettings):
 
 
 config = Config()
-
-default_user: User = User(
-    **{
-        "user_id": "nologin",
-        "full_name": "Not Authenticated",
-        "email": "nologin@example.com",
-    }
-)

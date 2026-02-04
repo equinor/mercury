@@ -1,6 +1,8 @@
+from collections.abc import Callable
+
 import pytest
 from starlette.status import HTTP_200_OK
-from tests.integration.mock_token_generator import generate_mock_token
+from starlette.testclient import TestClient
 
 from authentication.models import User
 from config import config
@@ -9,11 +11,9 @@ pytestmark = pytest.mark.integration
 
 
 class TestWhoami:
-    def test_whoami(self, test_app):
+    def test_whoami(self, test_app: TestClient, test_user: User, get_mock_jwt_token: Callable[[User], str]):
         config.AUTH_ENABLED = True
-        config.TEST_TOKEN = True
-        user = User(user_id="1", roles=["a"])
-        headers = {"Authorization": f"Bearer {generate_mock_token(user)}"}
+        headers = {"Authorization": f"Bearer {get_mock_jwt_token(test_user)}"}
         response = test_app.get("/whoami", headers=headers)
         data = response.json()
         assert response.status_code == HTTP_200_OK

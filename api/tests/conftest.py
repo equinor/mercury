@@ -1,30 +1,14 @@
 # Global fixtures can be defined in this file
 
-import os
 
 import pytest
-from starlette.testclient import TestClient
-from tests.integration.mock_token_generator import mock_auth_with_jwt
 
-from app import create_app
-from authentication.authentication import auth_with_jwt
 from config import config
 
 
 @pytest.fixture(autouse=True)
 def disable_auth():
     config.AUTH_ENABLED = False
-    os.environ["AUTH_ENABLED"] = "False"
-
-
-@pytest.fixture(scope="module")
-def test_app():
-    app = create_app()
-    client = TestClient(app=app)
-
-    app.dependency_overrides[auth_with_jwt] = mock_auth_with_jwt
-
-    yield client
 
 
 def pytest_addoption(parser):
