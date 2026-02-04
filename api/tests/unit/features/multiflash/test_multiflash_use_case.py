@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from tests.test_data.multiflash_data import MultiflashInput, MultiflashOutput
+from test_data.multiflash_data import MultiflashInput, MultiflashOutput
 
 from entities.Multiflash import Multiflash
 from features.multiflash.multiflash_use_case import (
