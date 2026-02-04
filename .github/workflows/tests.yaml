@@ -43,10 +43,10 @@ jobs:
           ./api
 
       - name: "Run: Unit tests with python"
-        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest --unit
+        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest -m unit
 
       - name: "Run: Integration tests with python"
-        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest --integration
+        run: docker compose -f compose.yml -f compose.ci.yml run --rm api pytest -m integration
 
   test-web:
     runs-on: ubuntu-latest
