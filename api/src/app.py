@@ -1,15 +1,21 @@
 from fastapi import FastAPI, Security
+from starlette.middleware import Middleware
 
 from authentication.authentication import auth_with_jwt
+from common.middleware import LocalLoggerMiddleware
 from config import config
 from features.get_routes import get_authenticated_routes, get_public_routes
+
+APP_TITLE = "Mercury"
+APP_REPOSITORY_URL = "https://github.com/equinor/mercury"
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title=config.APP_TITLE,
-        description=_get_description_md(),
+        title=APP_TITLE,
         version="1.1.6",  # x-release-please-version
+        description=_get_description_md(),
+        middleware=[Middleware(LocalLoggerMiddleware)],
         license_info=_get_license_info(),
         swagger_ui_init_oauth=_get_swagger_ui_init_oauth(),
     )
@@ -31,7 +37,7 @@ def _get_license_info() -> dict[str, str]:
     """Return license info."""
     return {
         "name": "MIT",
-        "url": f"{config.APP_REPOSITORY_URL}/blob/main/LICENSE.md",
+        "url": f"{APP_REPOSITORY_URL}/blob/main/LICENSE.md",
     }
 
 

@@ -6,8 +6,6 @@ from common.logger_level import LoggerLevel
 
 
 class Config(BaseSettings):
-    APP_TITLE: str = "Mercury"
-    APP_REPOSITORY_URL: str = "https://github.com/equinor/mercury"
     ENVIRONMENT: Environment = Environment.LOCAL
 
     # Logging
