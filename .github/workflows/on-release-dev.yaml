@@ -1,0 +1,30 @@
+name: "Release new dev (latest) version"
+on:
+  workflow_dispatch:
+  workflow_call:
+    secrets:
+      LIBHG_PAT:
+        description: "PAT for accessing libhg repository"
+        required: true
+
+jobs:
+  publish-latest-image:
+    permissions:
+      contents: read
+      packages: write
+    uses: ./.github/workflows/publish-images.yaml
+    with:
+      image-tags: latest
+      applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_DEV }}
+    secrets:
+      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
+
+  deploy-dev-to-radix:
+    needs: publish-latest-image
+    permissions:
+      contents: read
+      id-token: write
+    uses: ./.github/workflows/deploy-to-radix.yaml
+    with:
+      image-tag: latest
+      radix-environment: dev

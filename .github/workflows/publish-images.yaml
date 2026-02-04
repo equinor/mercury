@@ -35,6 +35,9 @@ jobs:
     steps:
       - name: "Setup: check out repository"
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+          fetch-tags: true
 
       - name: "Setup: login to image registry"
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
@@ -83,7 +86,8 @@ jobs:
       - name: "Setup: check out repository"
         uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 1
+          fetch-tags: true
 
       - name: "Setup: login to image registry"
         run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin

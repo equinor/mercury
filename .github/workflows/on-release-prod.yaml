@@ -1,4 +1,4 @@
-name: "Deploy release"
+name: "Release new prod version"
 on:
   workflow_dispatch:
   workflow_call:
@@ -17,19 +17,19 @@ jobs:
     permissions:
       contents: read
       packages: write
-    uses: ./.github/workflows/publish.yaml
+    uses: ./.github/workflows/publish-images.yaml
     with:
       image-tags: ${{ inputs.release-tag }}
       applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
     secrets:
       LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
 
-  deploy-prod:
+  deploy-prod-to-radix:
     needs: publish-release-image
     permissions:
       contents: read
       id-token: write
-    uses: ./.github/workflows/deploy.yaml
+    uses: ./.github/workflows/deploy-to-radix.yaml
     with:
       image-tag: ${{ inputs.release-tag }}
-      radix-environment: "prod"
+      radix-environment: prod
