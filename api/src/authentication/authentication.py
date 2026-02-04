@@ -4,6 +4,7 @@ from cachetools import TTLCache, cached
 from fastapi import Security
 from fastapi.security import OAuth2AuthorizationCodeBearer
 from jwt import PyJWKClient
+from jwt.exceptions import DecodeError, PyJWKClientError
 
 from authentication.models import User
 from common.exceptions import UnauthorizedException
@@ -34,11 +35,14 @@ def get_JWK_client() -> PyJWKClient:
 def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
     if not config.AUTH_ENABLED:
         return User.create_default()
+
     if not jwt_token:
         raise UnauthorizedException
-    key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key
-    if not key:
-        raise UnauthorizedException
+    try:
+        key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key
+    except (DecodeError, PyJWKClientError) as error:
+        logger.warning(f"Failed to get signing key from JWT token: {error}")
+        raise UnauthorizedException from None
     try:
         payload = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
         if _MICROSOFT_AUTH_PROVIDER in payload["iss"]:
