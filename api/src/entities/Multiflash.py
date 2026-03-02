@@ -1,4 +1,5 @@
 import libhg
+from collections.abc import Mapping
 
 import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -34,8 +35,9 @@ class Multiflash(BaseModel):
         },
     )
 
-    @field_validator("component_composition")
-    def validate_composition(cls, component_composition):
+    @field_validator("component_composition", mode="after")
+    @classmethod
+    def validate_composition(cls, component_composition: Mapping[str, float]) -> dict[str, float]:
         ids = list(component_composition.keys())
         if not set(ids) <= set(COMPONENTS.keys()):
             raise ValueError("component_id input contains unknown component!")
