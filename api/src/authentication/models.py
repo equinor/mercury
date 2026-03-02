@@ -38,9 +38,6 @@ class User(BaseModel):
     roles: list[str] = Field(default_factory=list)
     scope: AccessLevel = AccessLevel.WRITE
 
-    def __hash__(self):
-        return hash(type(self.user_id))
-
     @classmethod
     def create_default(cls) -> Self:
         return cls(
