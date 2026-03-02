@@ -12,7 +12,6 @@ permissions:
 
 env:
   API_IMAGE: ghcr.io/equinor/mercury-api
-  LIBHG_VERSION: v2.0.0
 
 jobs:
   test-api:
@@ -41,7 +40,7 @@ jobs:
           tags: mercury-api-ci
           cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
           build-args: |
-            LIBHG_VERSION=${{ env.LIBHG_VERSION }}
+            LIBHG_VERSION=${{ vars.LIBHG_VERSION }}
           secrets: |
             libhg-pat=${{ secrets.LIBHG_PAT }}
 
