@@ -1,0 +1,35 @@
+[lint-ruff]
+description = "Run ruff linter"
+depends = ["install-api-dependencies"]
+run = ["uv run ruff check --fix --exit-zero", "uv run ruff format"]
+
+[lint-mypy]
+description = "Run mypy linter on the api"
+depends = ["install-api-dependencies"]
+dir = "{{ config_root }}/api"
+run = "uv run mypy src"
+
+[lint-biome]
+description = "Run biome linter"
+depends = ["install-web-dependencies"]
+run = "{{config_root}}/web/node_modules/.bin/biome check --write --no-errors-on-unmatched"
+
+[lint-typescript-compilation]
+description = "Ensure typescript code compiles without errors"
+depends = ["install-web-dependencies"]
+dir = "{{ config_root }}/web"
+run = "yarn compile"
+
+[lint-pre-commit]
+description = "Run pre-commit (prek)"
+run = "prek run --all-files"
+
+[lint]
+description = "Lint entire project"
+run = [
+  "mise fmt",
+  "mise run lint-pre-commit",             # includes ruff and biome
+  "mise run lint-mypy",
+  "mise run lint-ty",
+  "mise run lint-typescript-compilation",
+]

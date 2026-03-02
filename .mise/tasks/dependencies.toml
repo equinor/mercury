@@ -1,0 +1,40 @@
+[install-api-dependencies]
+description = "Install all the latest api dependencies"
+dir = "{{ config_root }}/api"
+run = "uv sync --locked"
+
+[install-web-dependencies]
+description = "Install all the latest web dependencies"
+dir = "{{ config_root }}/web"
+run = "yarn install --frozen-lockfile"
+
+[install-dependencies]
+description = "Install all the latest dependencies in the project"
+depends = [
+  "install-api-dependencies", # Backend - FastAPI
+  "install-web-dependencies", # Frontend
+]
+
+[upgrade-api-dependencies]
+description = "Upgrade api main dependencies"
+dir = "{{ config_root }}/api"
+run = "uv sync --upgrade"
+
+[upgrade-api-packages]
+description = "Upgrade specific api dependencies"
+dir = "{{ config_root }}/api"
+usage = '''
+  arg "<packages>" var=#true
+  flag "--dry-run" help="dry run"
+'''
+run = """
+#!/usr/bin/env bash
+
+upgrade_args=""
+for package in ${usage_packages}; do
+    upgrade_args="${upgrade_args}--upgrade-package ${package} "
+done
+
+echo uv sync ${upgrade_args}${usage_dry_run:+--dry-run}
+uv sync ${upgrade_args}${usage_dry_run:+--dry-run}
+"""

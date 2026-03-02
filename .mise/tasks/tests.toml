@@ -1,0 +1,25 @@
+[docker-pytest]
+hide = true
+description = "Run pytest in docker"
+run = "docker compose run --rm api uv run pytest"
+
+[test-api-unit]
+description = "Run api unit tests"
+run = "mise run docker-pytest -m unit"
+
+[test-api-integration]
+description = "Run use case tests"
+run = "mise run docker-pytest -m integration"
+
+[test-api]
+description = "Run all api tests"
+run = "mise run docker-pytest"
+
+[test-web-unit]
+description = "Run web unit tests"
+dir = "{{ config_root }}/web"
+run = "yarn test run"
+
+[test]
+description = "Run all tests"
+run = ["mise run test-api", "mise run test-web-unit"]

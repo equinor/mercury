@@ -1,0 +1,4 @@
+[serve-app]
+description = "Serve latest app with hot reloading and live preview"
+depends = ["install-dependencies"]
+run = "docker compose up --build"
