@@ -44,7 +44,7 @@ COPY nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 USER 1000
 
 
-FROM node:22-alpine AS base
+FROM node:25-alpine AS base
 ARG AUTH_ENABLED=0
 ARG OAUTH_AUTH_SCOPE=""
 ARG AZURE_CLIENT_ID=""
