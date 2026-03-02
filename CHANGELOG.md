@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.9](https://github.com/equinor/mercury/compare/v1.1.8...v1.1.9) (2026-03-02)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump axios from 1.13.4 to 1.13.5 in /web ([f67b0b4](https://github.com/equinor/mercury/commit/f67b0b47b658916ebbcdcebe3052c0fa811cfa93))
+* **deps:** bump cachetools from 6.2.6 to 7.0.1 in /api ([ac3694f](https://github.com/equinor/mercury/commit/ac3694f27b979897d853803fb4ecd4d3b3e66024))
+* **deps:** bump cryptography from 46.0.4 to 46.0.5 in /api ([09a2cfa](https://github.com/equinor/mercury/commit/09a2cfa1c196b80cb5a718d8d9f26f8c7a1ef94a))
+* release 1.8.1 ([a91feef](https://github.com/equinor/mercury/commit/a91feef9477790a69723b4face687e83514e30db))
+
 ## [1.1.8](https://github.com/equinor/mercury/compare/v1.1.7...v1.1.8) (2026-02-04)
 
 
