@@ -33,6 +33,8 @@ jobs:
 
       - name: "Setup: Build API test image"
         uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_SUMMARY: false
         with:
           context: ./api
           target: development
