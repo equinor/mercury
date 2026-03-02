@@ -35,9 +35,10 @@ repos:
     hooks:
       - id: check-ast
         name: "Validate: parse .py files"
-        language_version: python3.10
+        language_version: python3.13
       - id: check-json
         name: "Validate: parse .json files"
+        exclude: ".devcontainer"
       - id: check-yaml
         name: "Validate: parse .yaml files"
       - id: check-toml
