@@ -13,7 +13,7 @@ RUN gh release download ${LIBHG_VERSION} \
   --output /tmp/libhg.so
 
 
-FROM python:3.14-slim-bookworm AS base
+FROM python:3.13-slim-bookworm AS base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV UV_VERSION="0.9.22"
 ENV USER="mercury"
