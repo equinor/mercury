@@ -1,6 +1,5 @@
 name: "Publish container images"
 on:
-  workflow_dispatch:
   workflow_call:
     inputs:
       image-tags:
@@ -45,6 +44,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Setup: set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
       - name: "Setup: get version info"
         id: version
         run: |
@@ -53,35 +55,33 @@ jobs:
           VERSION=$(git describe --tags --exact-match 2>/dev/null || echo "")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: "Setup: show version info"
-        run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
-
-      - name: "Setup: build nginx image"
+      - name: "Setup: write version file"
         run: |
-          docker pull $NGINX_IMAGE || echo "No NGINX image found"
-          echo "Building nginx image with tag: ${{ inputs.image-tags }}"
           printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./web/public/version.txt
-          DOCKER_BUILDKIT=1 docker build \
-            --cache-from ${NGINX_IMAGE}:latest \
-            --target nginx-prod \
-            --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --build-arg AUTH_ENABLED=1 \
-            --build-arg AZURE_CLIENT_ID=$AZURE_CLIENT_ID \
-            --build-arg AZURE_TENANT_ID=$AZURE_TENANT_ID \
-            --build-arg OAUTH_AUTH_SCOPE=$OAUTH_AUTH_SCOPE \
-            --build-arg APPLICATIONINSIGHTS_CONNECTION_STRING="${{ inputs.applicationinsights-connection-string }}" \
-            --tag $NGINX_IMAGE:latest \
-            ./web
 
-      - name: "Run: publish nginx"
+      - name: "Setup: generate image tags"
+        id: tags
         run: |
-          IFS=','
-          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
-          do
-            echo "Tagging with $IMAGE_TAG"
-            docker tag $NGINX_IMAGE:latest $NGINX_IMAGE:$IMAGE_TAG
-            docker push $NGINX_IMAGE:$IMAGE_TAG
-          done
+          TAGS=$(echo "${{ inputs.image-tags }}" | tr ',' '\n' | sed "s|.*|${{ env.NGINX_IMAGE }}:&|")
+          echo "tags<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: "Run: build and publish nginx"
+        uses: docker/build-push-action@v6
+        with:
+          context: ./web
+          target: nginx-prod
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          cache-from: type=registry,ref=${{ env.NGINX_IMAGE }}:latest
+          cache-to: type=inline
+          build-args: |
+            AUTH_ENABLED=1
+            AZURE_CLIENT_ID=${{ env.AZURE_CLIENT_ID }}
+            AZURE_TENANT_ID=${{ env.AZURE_TENANT_ID }}
+            OAUTH_AUTH_SCOPE=${{ env.OAUTH_AUTH_SCOPE }}
+            APPLICATIONINSIGHTS_CONNECTION_STRING=${{ inputs.applicationinsights-connection-string }}
 
   build-and-publish-api:
     runs-on: ubuntu-latest
@@ -99,6 +99,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Setup: set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
       - name: "Setup: get version info"
         id: version
         run: |
@@ -107,30 +110,28 @@ jobs:
           VERSION=$(git describe --tags --exact-match 2>/dev/null || echo "")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: "Setup: show version info"
-        run: echo "Hash=${{ steps.version.outputs.hash }}, Date=${{ steps.version.outputs.date }}, Refs=${{ steps.version.outputs.version }}"
-
-      - name: "Setup: build API"
-        env:
-          LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
+      - name: "Setup: write version file"
         run: |
-          docker pull $API_IMAGE || echo "No API image found"
           printf "hash: ${{ steps.version.outputs.hash }}\ndate: ${{ steps.version.outputs.date }}\nrefs: ${{ steps.version.outputs.version }}" > ./api/src/version.txt
-          DOCKER_BUILDKIT=1 docker build \
-            --cache-from $API_IMAGE:latest \
-            --target prod \
-            --build-arg LIBHG_VERSION=$LIBHG_VERSION \
-            --secret id=libhg-pat,env=LIBHG_PAT \
-            --build-arg BUILDKIT_INLINE_CACHE=1 \
-            --tag $API_IMAGE:latest \
-            ./api
 
-      - name: "Run: publish API"
+      - name: "Setup: generate image tags"
+        id: tags
         run: |
-          IFS=','
-          for IMAGE_TAG in $(echo ${{ inputs.image-tags }})
-          do
-            echo "Tagging with $IMAGE_TAG"
-            docker tag $API_IMAGE:latest $API_IMAGE:$IMAGE_TAG
-            docker push $API_IMAGE:$IMAGE_TAG
-          done
+          TAGS=$(echo "${{ inputs.image-tags }}" | tr ',' '\n' | sed "s|.*|${{ env.API_IMAGE }}:&|")
+          echo "tags<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: "Run: build and publish API"
+        uses: docker/build-push-action@v6
+        with:
+          context: ./api
+          target: prod
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
+          cache-to: type=inline
+          build-args: |
+            LIBHG_VERSION=${{ env.LIBHG_VERSION }}
+          secrets: |
+            libhg-pat=${{ secrets.LIBHG_PAT }}

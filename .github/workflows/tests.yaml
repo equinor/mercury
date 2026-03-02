@@ -29,18 +29,21 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Setup: set up Docker Buildx"
+        uses: docker/setup-buildx-action@v3
+
       - name: "Setup: Build API test image"
-        env:
-          LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
-        run: |
-          docker pull $API_IMAGE
-          DOCKER_BUILDKIT=1 docker build \
-          --cache-from $API_IMAGE \
-          --target development \
-          --build-arg LIBHG_VERSION=$LIBHG_VERSION \
-          --secret id=libhg-pat,env=LIBHG_PAT \
-          --tag mercury-api-ci \
-          ./api
+        uses: docker/build-push-action@v6
+        with:
+          context: ./api
+          target: development
+          load: true
+          tags: mercury-api-ci
+          cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
+          build-args: |
+            LIBHG_VERSION=${{ env.LIBHG_VERSION }}
+          secrets: |
+            libhg-pat=${{ secrets.LIBHG_PAT }}
 
       - name: "Run: Unit tests with python"
         run: docker compose -f compose.yml -f compose.ci.yml run --rm api uv run pytest -m unit
