@@ -1,0 +1,24 @@
+[tools]
+python = "3.13.7"
+uv = "0.10.4"
+node = "24"
+"npm:yarn" = "1.22.22"
+prek = "latest"
+
+[env]
+PROJECT_NAME = "{{ config_root | basename }}"
+DOCKER_BUILDKIT = 1
+_.file = ".env"
+_.python.venv = { path = "api/.venv", create = true, uv_create_args = [
+  "--prompt",
+  "$PROJECT_NAME",
+] }
+
+[task_config]
+includes = [".mise/tasks/*.toml"]
+
+[settings.python]
+uv_venv_auto = true
+
+[settings.pipx]
+uvx = true
