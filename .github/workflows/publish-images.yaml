@@ -40,7 +40,11 @@ jobs:
           fetch-tags: true
 
       - name: "Setup: login to image registry"
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Setup: get version info"
         id: version
@@ -90,7 +94,11 @@ jobs:
           fetch-tags: true
 
       - name: "Setup: login to image registry"
-        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login $IMAGE_REGISTRY -u $GITHUB_ACTOR --password-stdin
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.IMAGE_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Setup: get version info"
         id: version
