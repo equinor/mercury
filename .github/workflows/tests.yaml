@@ -1,8 +1,5 @@
 name: "Tests"
 on:
-  # Workflow dispatch is used for manual triggers
-  workflow_dispatch:
-  # Workflow call is used for called from another workflow
   workflow_call:
     secrets:
       LIBHG_PAT:
@@ -14,7 +11,6 @@ permissions:
   packages: read
 
 env:
-  IMAGE_REGISTRY: ghcr.io
   API_IMAGE: ghcr.io/equinor/mercury-api
   LIBHG_VERSION: v2.0.0
 
@@ -29,7 +25,7 @@ jobs:
       - name: "Setup: Login to image registry"
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.IMAGE_REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 

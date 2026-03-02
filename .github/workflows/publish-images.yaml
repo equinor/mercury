@@ -21,7 +21,6 @@ permissions:
   packages: write
 
 env:
-  IMAGE_REGISTRY: ghcr.io
   AZURE_CLIENT_ID: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f
   AZURE_TENANT_ID: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
   OAUTH_AUTH_SCOPE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f/api
@@ -42,7 +41,7 @@ jobs:
       - name: "Setup: login to image registry"
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.IMAGE_REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
@@ -96,7 +95,7 @@ jobs:
       - name: "Setup: login to image registry"
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.IMAGE_REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
