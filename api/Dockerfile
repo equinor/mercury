@@ -1,7 +1,7 @@
 FROM alpine:latest AS build
 
 # install github cli
-RUN apk --no-cache add github-cli@2.86.0
+RUN apk --no-cache add github-cli
 
 # Download specific release of libhg
 ARG LIBHG_VERSION
