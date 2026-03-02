@@ -25,7 +25,6 @@ env:
   OAUTH_AUTH_SCOPE: api://0cd10735-a40c-4ff6-84c8-74e3b54ed93f/api
   NGINX_IMAGE: ghcr.io/equinor/mercury-nginx
   API_IMAGE: ghcr.io/equinor/mercury-api
-  LIBHG_VERSION: v2.0.0
 
 jobs:
   build-and-publish-nginx:
@@ -132,6 +131,6 @@ jobs:
           cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
           cache-to: type=inline
           build-args: |
-            LIBHG_VERSION=${{ env.LIBHG_VERSION }}
+            LIBHG_VERSION=${{ vars.LIBHG_VERSION }}
           secrets: |
             libhg-pat=${{ secrets.LIBHG_PAT }}
