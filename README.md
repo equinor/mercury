@@ -1,4 +1,4 @@
-# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI)](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml/badge.svg)
+# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI)](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml/badge.svg) [![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/mercury/badge)](https://developer.equinor.com/governance/scm-policy/)
 
 Mercury calculator - API and Webapp
 
