@@ -1,0 +1,13 @@
+site_name: Mercury Documentation
+site_url: https://mercury.app.radix.equinor.com/docs
+site_description: Documentation for Mercury calculator
+site_author: Team Hermes
+repo_url: https://github.com/equinor/mercury
+docs_dir: docs
+theme:
+  name: material
+plugins:
+  - techdocs-core
+nav:
+  - Welcome to Mercury: index.md
+  - Runbook: runbook.md
