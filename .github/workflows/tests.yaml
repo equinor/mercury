@@ -21,6 +21,9 @@ jobs:
       - name: "Setup: Checkout repository"
         uses: actions/checkout@v6
 
+      - name: "Setup: install mise"
+        uses: jdx/mise-action@v3
+
       - name: "Setup: Login to image registry"
         uses: docker/login-action@v3
         with:
@@ -47,31 +50,20 @@ jobs:
             libhg-pat=${{ secrets.LIBHG_PAT }}
 
       - name: "Run: Unit tests with python"
-        run: docker compose -f compose.yml -f compose.ci.yml run --rm api uv run pytest -m unit
+        run: mise run docker-pytest-ci -m unit
 
       - name: "Run: Integration tests with python"
-        run: docker compose -f compose.yml -f compose.ci.yml run --rm api uv run pytest -m integration
+        run: mise run docker-pytest-ci -m integration
 
   test-web:
     runs-on: ubuntu-latest
     name: "Tests: Web"
     steps:
-      - name: "Setup: Checkout repository"
+      - name: "Setup: check out repository"
         uses: actions/checkout@v6
-        with:
-          sparse-checkout: web
 
-      - name: "Setup: Install node"
-        uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: yarn
-          cache-dependency-path: web/yarn.lock
-
-      - name: "Setup: Install node dependencies"
-        run: yarn install --frozen-lockfile
-        working-directory: web
+      - name: "Setup: install mise"
+        uses: jdx/mise-action@v3
 
       - name: "Run: Tests with yarn"
-        run: yarn test
-        working-directory: web
+        run: mise run test-web-unit
