@@ -1,21 +1,37 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.11/schema.json",
+  "$schema": "./web/node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
-    "includes": [
-      "**",
-      "!**/src/api/generated/**/*",
-      "!**/build",
-      "!.github/release-please-manifest.json"
-    ]
+    "ignoreUnknown": true,
+    "includes": ["**", "!**/src/api/generated/**/*", "!**/build", "!.github/release-please-manifest.json"]
+  },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
   },
   "formatter": {
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "lineWidth": 120
+  },
+  "linter": {
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "useExhaustiveDependencies": "off",
+        "noUnusedImports": "error"
+      }
+    }
   },
   "javascript": {
     "formatter": {
       "trailingCommas": "es5",
       "semicolons": "asNeeded",
       "quoteStyle": "single"
+    }
+  },
+  "json": {
+    "formatter": {
+      "indentStyle": "space"
     }
   }
 }

@@ -3,8 +3,7 @@ import type { Multiflash } from '../../api/generated'
 import type { TLastInput } from '../../common/types'
 
 const LastInputContext = createContext<
-  | { lastInput: Multiflash; setLastInput: (input: TLastInput) => void }
-  | undefined
+  { lastInput: Multiflash; setLastInput: (input: TLastInput) => void } | undefined
 >(undefined)
 
 function LastInputProvider({ children }: { children: React.ReactNode }) {
@@ -16,19 +15,13 @@ function LastInputProvider({ children }: { children: React.ReactNode }) {
   }
   const [lastInput, setLastInput] = useState<TLastInput>(initial as TLastInput)
 
-  return (
-    <LastInputContext.Provider value={{ lastInput, setLastInput }}>
-      {children}
-    </LastInputContext.Provider>
-  )
+  return <LastInputContext.Provider value={{ lastInput, setLastInput }}>{children}</LastInputContext.Provider>
 }
 
 function useLastInputContext() {
   const context = useContext(LastInputContext)
   if (context === undefined) {
-    throw new Error(
-      'useLastInputContext must be used within a LastInputProvider'
-    )
+    throw new Error('useLastInputContext must be used within a LastInputProvider')
   }
   return context
 }

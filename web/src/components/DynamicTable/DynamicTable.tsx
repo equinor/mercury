@@ -9,10 +9,7 @@ type TDynamicTableInput = {
   density: 'comfortable' | 'compact'
   caption: string
 }
-function createTableRows(
-  subtable: { headers: string[]; rows: string[][] },
-  subtableIndex: number
-) {
+function createTableRows(subtable: { headers: string[]; rows: string[][] }, subtableIndex: number) {
   return subtable.rows.map((row, rowIndex) => (
     // biome-ignore lint/suspicious/noArrayIndexKey: is okey
     <Table.Row key={rowIndex}>

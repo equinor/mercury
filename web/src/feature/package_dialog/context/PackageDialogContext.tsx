@@ -1,10 +1,6 @@
 import type React from 'react'
 import { createContext, useContext, useReducer } from 'react'
-import type {
-  TComponentProperty,
-  TComponentRatio,
-  TPackageDialog,
-} from '../../../common/types'
+import type { TComponentProperty, TComponentRatio, TPackageDialog } from '../../../common/types'
 import { packageDialogReducer } from './reducer'
 
 export type Action =
@@ -18,17 +14,10 @@ const PackageDialogContext = createContext<{
   dispatch: (action: Action) => void
 }>({ state: {} as TPackageDialog, dispatch: () => ({}) })
 
-export function PackageDialogProvider(props: {
-  children: React.ReactNode
-  initial: TPackageDialog
-}) {
+export function PackageDialogProvider(props: { children: React.ReactNode; initial: TPackageDialog }) {
   const [state, dispatch] = useReducer(packageDialogReducer, props.initial)
 
-  return (
-    <PackageDialogContext.Provider value={{ state, dispatch }}>
-      {props.children}
-    </PackageDialogContext.Provider>
-  )
+  return <PackageDialogContext.Provider value={{ state, dispatch }}>{props.children}</PackageDialogContext.Provider>
 }
 
 export function usePackageDialogContext() {

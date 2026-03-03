@@ -1,8 +1,7 @@
 import { ReactPlugin } from '@microsoft/applicationinsights-react-js'
 import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 
-const connectionString =
-  import.meta.env.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING || ''
+const connectionString = import.meta.env.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING || ''
 export const reactPlugin = new ReactPlugin()
 export const appInsights = new ApplicationInsights({
   config: {

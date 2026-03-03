@@ -2,11 +2,7 @@ import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useEffect, useState } from 'react'
 import { type ComponentProperties, ComponentService } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
-import type {
-  TCalcStatus,
-  TComponentProperty,
-  TResults,
-} from '../../common/types'
+import type { TCalcStatus, TComponentProperty, TResults } from '../../common/types'
 import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
 import { AppBar } from '../../feature/AppBar/AppBar'
 import { CalculationInput } from '../../feature/calculation_input/CalculationInput'
@@ -17,17 +13,14 @@ import { Status } from '../../feature/Status'
 import { Container, DividerWithLargeSpacings, Results } from './styles'
 
 const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
-  const remainingComponents = Object.keys(components).filter(
-    (id) => !orderedComponents.includes(id)
-  )
+  const remainingComponents = Object.keys(components).filter((id) => !orderedComponents.includes(id))
   return [...orderedComponents, ...remainingComponents]
     .filter((id) => components[id])
     .map((id) => ({ id: id, ...components[id] }))
 }
 
 export const MainPage = () => {
-  const [componentProperties, setComponentProperties] =
-    useState<TComponentProperty[]>()
+  const [componentProperties, setComponentProperties] = useState<TComponentProperty[]>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [calcStatus, setCalcStatus] = useState<TCalcStatus>()
   const [result, setResult] = useState<TResults>()
@@ -69,10 +62,7 @@ export const MainPage = () => {
               <Results>
                 {/*TODO: Make use of cubicFeedFlow in LastInputContext here: */}
                 <HgDistributionTable results={result} />
-                <PhaseEquilibriumTable
-                  results={result}
-                  componentProperties={componentProperties}
-                />
+                <PhaseEquilibriumTable results={result} componentProperties={componentProperties} />
               </Results>
             )}
           </LastInputProvider>

@@ -5,9 +5,7 @@ import { useVersionInfoContext } from '../../../contexts/VersionInfoContext'
 export function AppVersion() {
   const { commitInfo } = useVersionInfoContext()
 
-  const githubUrl = commitInfo.hash
-    ? `${GITHUB_REPO_URL}/commit/${commitInfo.hash}`
-    : GITHUB_REPO_URL
+  const githubUrl = commitInfo.hash ? `${GITHUB_REPO_URL}/commit/${commitInfo.hash}` : GITHUB_REPO_URL
 
   return (
     <p>

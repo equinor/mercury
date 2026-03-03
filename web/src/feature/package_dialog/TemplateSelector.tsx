@@ -14,9 +14,7 @@ export const TemplateSelector = (props: { packages: TPackage[] }) => {
         const template = changes.selectedItems[0]
         dispatch({
           type: 'setRatios',
-          value:
-            template?.components ??
-            preSelectedComponents.map((x) => ({ id: x, ratio: '' })),
+          value: template?.components ?? preSelectedComponents.map((x) => ({ id: x, ratio: '' })),
         })
       }}
       autoWidth

@@ -30,21 +30,16 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <>
           <Typography variant={'h3'}>Ops... Something went wrong 😞</Typography>
-          <Typography variant={'body_short'}>
-            You should try the following:
-          </Typography>
+          <Typography variant={'body_short'}>You should try the following:</Typography>
           <List variant="numbered" style={{ lineHeight: '2.25rem' }}>
             <List.Item>Refresh the page (F5)</List.Item>
             <List.Item>
-              Resetting the application by clicking the{' '}
-              <Icon data={account_circle} /> icon, and then{' '}
+              Resetting the application by clicking the <Icon data={account_circle} /> icon, and then{' '}
               <i>&quot;reset application data&quot;</i>.
             </List.Item>
             <List.Item>
               Contact technical support by email at{' '}
-              <a href={'mailto:fg_team_hermes@equinor.com'}>
-                fg_team_hermes@equinor.com
-              </a>
+              <a href={'mailto:fg_team_hermes@equinor.com'}>fg_team_hermes@equinor.com</a>
             </List.Item>
           </List>
         </>

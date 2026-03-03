@@ -1,18 +1,10 @@
-import type {
-  TComponentProperty,
-  TComponentRatio,
-  TPackageDialog,
-} from '../../../common/types'
+import type { TComponentProperty, TComponentRatio, TPackageDialog } from '../../../common/types'
 import type { Action } from './PackageDialogContext'
 
 const areValids = (ratios: TComponentRatio[]) => {
   const regex = /^\d+(\.\d+)?([eE][-+]?\d+)?$/
   return Object.fromEntries(
-    ratios.map((x) => [
-      x.id,
-      (x.ratio.length === 0 || regex.test(x.ratio)) &&
-        !Number.isNaN(Number(x.ratio)),
-    ])
+    ratios.map((x) => [x.id, (x.ratio.length === 0 || regex.test(x.ratio)) && !Number.isNaN(Number(x.ratio))])
   )
 }
 
@@ -36,9 +28,7 @@ export function packageDialogReducer(state: TPackageDialog, action: Action) {
         ratios: action.value,
         isRatioValid: areValids(action.value),
         selectedComponents: action.value
-          .map((x) =>
-            state.componentProperties.find((prop) => prop.id === x.id)
-          )
+          .map((x) => state.componentProperties.find((prop) => prop.id === x.id))
           .filter((x): x is TComponentProperty => !!x),
       }
     }

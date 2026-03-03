@@ -1,9 +1,5 @@
 import { Button } from '@equinor/eds-core-react'
-import type {
-  TComponentProperty,
-  TComponentRatio,
-  TPackage,
-} from '../../common/types'
+import type { TComponentProperty, TComponentRatio, TPackage } from '../../common/types'
 import { usePackageDialogContext } from './context/PackageDialogContext'
 
 function computeFeedMolecularWeight(
@@ -14,18 +10,13 @@ function computeFeedMolecularWeight(
     ? componentRatios
         .map(
           (ratio) =>
-            Number(ratio.ratio) *
-            (componentProperties.find((prop) => prop.id === ratio.id)
-              ?.molecularWeight ?? 0)
+            Number(ratio.ratio) * (componentProperties.find((prop) => prop.id === ratio.id)?.molecularWeight ?? 0)
         )
         .reduce((a, b) => a + b)
     : 1
 }
 
-export const SaveButton = (props: {
-  editablePackage?: TPackage
-  savePackage: (x?: TPackage) => void
-}) => {
+export const SaveButton = (props: { editablePackage?: TPackage; savePackage: (x?: TPackage) => void }) => {
   const { state } = usePackageDialogContext()
   const isSaveable = (): boolean => {
     const isValidPackage =
@@ -35,10 +26,7 @@ export const SaveButton = (props: {
     if (props.editablePackage) {
       const ratioHasChanged =
         props.editablePackage.components.length !== state.ratios.length ||
-        !props.editablePackage.components.every(
-          (old) =>
-            old.ratio === state.ratios.find((x) => x.id === old.id)?.ratio
-        )
+        !props.editablePackage.components.every((old) => old.ratio === state.ratios.find((x) => x.id === old.id)?.ratio)
       const hasChanged =
         state.name !== props.editablePackage.name ||
         state.description !== props.editablePackage.description ||
@@ -54,10 +42,7 @@ export const SaveButton = (props: {
           name: state.name,
           description: state.description,
           components: state.ratios,
-          molecularWeightSum: computeFeedMolecularWeight(
-            state.componentProperties,
-            state.ratios
-          ),
+          molecularWeightSum: computeFeedMolecularWeight(state.componentProperties, state.ratios),
         })
       }}
       disabled={!isSaveable()}

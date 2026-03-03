@@ -4,14 +4,9 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { Maybe } from '../../common/types'
 import type { CommitInfo } from './types'
 
-const VersionInfoContext =
-  createContext<Maybe<{ commitInfo: CommitInfo }>>(undefined)
+const VersionInfoContext = createContext<Maybe<{ commitInfo: CommitInfo }>>(undefined)
 
-export function VersionInfoProvider({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export function VersionInfoProvider({ children }: { children: React.ReactNode }) {
   const [commitInfo, setCommitInfo] = useState<CommitInfo>({
     hash: '',
     date: '',
@@ -41,19 +36,13 @@ export function VersionInfoProvider({
   // Memoize the context value
   const contextValue = useMemo(() => ({ commitInfo }), [commitInfo])
 
-  return (
-    <VersionInfoContext.Provider value={contextValue}>
-      {children}
-    </VersionInfoContext.Provider>
-  )
+  return <VersionInfoContext.Provider value={contextValue}>{children}</VersionInfoContext.Provider>
 }
 
 export function useVersionInfoContext() {
   const context = useContext(VersionInfoContext)
   if (!context) {
-    throw new Error(
-      'useVersionInfoContext must be used within a VersionInfoProvider'
-    )
+    throw new Error('useVersionInfoContext must be used within a VersionInfoProvider')
   }
   return context
 }

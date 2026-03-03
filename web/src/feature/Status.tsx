@@ -1,16 +1,9 @@
 import { Banner as EdsBanner, Icon, Progress } from '@equinor/eds-core-react'
-import {
-  error_outlined,
-  info_circle,
-  warning_outlined,
-} from '@equinor/eds-icons'
+import { error_outlined, info_circle, warning_outlined } from '@equinor/eds-icons'
 import type { TCalcStatus, TResults } from '../common/types'
 import { useLastInputContext } from '../contexts/LastInputContext/LastInputContext'
 
-export const Status = (props: {
-  calcStatus: TCalcStatus
-  result: TResults | undefined
-}) => {
+export const Status = (props: { calcStatus: TCalcStatus; result: TResults | undefined }) => {
   const { lastInput } = useLastInputContext()
 
   switch (props.calcStatus) {
@@ -28,16 +21,14 @@ export const Status = (props: {
           </EdsBanner>
         )
       }
-      return <></>
+      return null
     case 'failure':
       return (
         <EdsBanner>
           <EdsBanner.Icon variant="warning">
             <Icon data={error_outlined} />
           </EdsBanner.Icon>
-          <EdsBanner.Message>
-            An unexpected error has occurred. Please inform us if it persists
-          </EdsBanner.Message>
+          <EdsBanner.Message>An unexpected error has occurred. Please inform us if it persists</EdsBanner.Message>
         </EdsBanner>
       )
     default:
@@ -46,9 +37,7 @@ export const Status = (props: {
           <EdsBanner.Icon variant="info">
             <Icon data={info_circle} />
           </EdsBanner.Icon>
-          <EdsBanner.Message>
-            Run a calculation to get results
-          </EdsBanner.Message>
+          <EdsBanner.Message>Run a calculation to get results</EdsBanner.Message>
         </EdsBanner>
       )
   }
