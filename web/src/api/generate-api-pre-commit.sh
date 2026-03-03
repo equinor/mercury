@@ -21,7 +21,6 @@ else
 
 	# Use curl to fetch the OpenAPI specification and store it in a temporary file
 	TEMP_FILE=$(mktemp)
-	curl -s "$OPENAPI_URL" >"$TEMP_FILE"
 
 	# Check if the curl command was successful
 	if ! curl -s "$OPENAPI_URL" >"$TEMP_FILE"; then
