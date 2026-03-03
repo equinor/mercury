@@ -1,6 +1,6 @@
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useEffect, useState } from 'react'
-import { type ComponentProperties, ComponentService } from '../../api/generated'
+import { type ComponentProperties, getComponents } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
 import type { TCalcStatus, TComponentProperty, TResults } from '../../common/types'
 import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
@@ -33,9 +33,9 @@ export const MainPage = () => {
 
   // Fetch list of components name once on page load
   useEffect(() => {
-    ComponentService.getComponents()
-      .then((response) => {
-        setComponentProperties(toSortedArray(response.components))
+    getComponents()
+      .then(({ data }) => {
+        if (data) setComponentProperties(toSortedArray(data.components))
       })
       .finally(() => setIsLoading(false))
   }, [])

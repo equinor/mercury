@@ -2,7 +2,7 @@ import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { MultiflashService } from '../../api/generated'
+import { computeMultiflash } from '../../api/generated'
 import type { TCalcStatus, TComponentProperty, TPackage, TResults } from '../../common/types'
 import { Card } from '../../components'
 import { useLastInputContext } from '../../contexts/LastInputContext/LastInputContext'
@@ -68,21 +68,26 @@ export const CalculationInput = ({
           cubicFeedFlow: cubicFeedFlow,
         }
         setLastInput(input)
-        MultiflashService.computeMultiflash(input)
-          .then((response) => {
+        computeMultiflash({ body: input })
+          .then(({ data, error }) => {
+            if (error || !data) {
+              appInsights.trackEvent({ name: 'CalculationFailed' }, input)
+              setCalcStatus('failure')
+              return
+            }
             setResult({
-              phaseValues: Object.entries(response.phaseValues).map(([phase, data]) => ({
+              phaseValues: Object.entries(data.phaseValues).map(([phase, phaseData]) => ({
                 phase: phase,
-                percentage: data.percentage,
-                mercury: data.mercury,
+                percentage: phaseData.percentage,
+                mercury: phaseData.mercury,
               })),
               cubicFeedFlow: cubicFeedFlow,
               componentFractions: selectedPackage.components
-                .filter((x) => x.id in response.componentFractions && x.id in response.feedFractions)
+                .filter((x) => x.id in data.componentFractions && x.id in data.feedFractions)
                 .map((x) => ({
                   id: x.id,
-                  phaseFractions: response.componentFractions[x.id],
-                  feedFraction: response.feedFractions[x.id],
+                  phaseFractions: data.componentFractions[x.id],
+                  feedFraction: data.feedFractions[x.id],
                 })),
             })
             setCalcStatus('done')

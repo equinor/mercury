@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import type { Multiflash } from '../../api/generated'
+import type { Multiflash } from '../../api/generated/types.gen'
 import type { TLastInput } from '../../common/types'
 
 const LastInputContext = createContext<

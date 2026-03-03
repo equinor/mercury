@@ -1,4 +1,4 @@
-import type { ComponentProperties, Multiflash } from '../api/generated'
+import type { ComponentProperties, Multiflash } from '../api/generated/types.gen'
 
 export type Maybe<T> = NonNullable<T> | undefined
 
