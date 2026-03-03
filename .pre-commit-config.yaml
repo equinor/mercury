@@ -18,6 +18,7 @@ repos:
             build,
             chore,
             ci,
+            ops,
             docs,
             feat,
             fix,
