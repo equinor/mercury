@@ -3,6 +3,11 @@ hide = true
 description = "Run pytest in docker"
 run = "docker compose run --rm api uv run pytest"
 
+[docker-pytest-ci]
+hide = true
+description = "Run pytest in docker for ci"
+run = "docker compose -f compose.yml -f compose.ci.yml run --rm api uv run pytest"
+
 [test-api-unit]
 description = "Run api unit tests"
 run = "mise run docker-pytest -m unit"
@@ -17,6 +22,7 @@ run = "mise run docker-pytest"
 
 [test-web-unit]
 description = "Run web unit tests"
+depends = ["install-web-dependencies"]
 dir = "{{ config_root }}/web"
 run = "yarn test run"
 
