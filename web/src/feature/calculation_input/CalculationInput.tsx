@@ -3,12 +3,7 @@ import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useState } from 'react'
 import styled from 'styled-components'
 import { MultiflashService } from '../../api/generated'
-import type {
-  TCalcStatus,
-  TComponentProperty,
-  TPackage,
-  TResults,
-} from '../../common/types'
+import type { TCalcStatus, TComponentProperty, TPackage, TResults } from '../../common/types'
 import { Card } from '../../components'
 import { useLastInputContext } from '../../contexts/LastInputContext/LastInputContext'
 import useLocalStorage from '../../hooks/useLocalStorage'
@@ -59,12 +54,7 @@ export const CalculationInput = ({
   const calculate = (
     <Button
       data-testid="computeMf"
-      disabled={
-        calculating ||
-        !selectedPackage ||
-        !isTemperatureValid ||
-        !isPressureValid
-      }
+      disabled={calculating || !selectedPackage || !isTemperatureValid || !isPressureValid}
       onClick={() => {
         if (selectedPackage === undefined) return
         setCalculating(true)
@@ -72,9 +62,7 @@ export const CalculationInput = ({
         setResult(undefined)
         setCalcStatus('calculating')
         const input = {
-          componentComposition: Object.fromEntries(
-            selectedPackage.components.map((x) => [x.id, Number(x.ratio)])
-          ),
+          componentComposition: Object.fromEntries(selectedPackage.components.map((x) => [x.id, Number(x.ratio)])),
           temperature: temperature,
           pressure: pressure,
           cubicFeedFlow: cubicFeedFlow,
@@ -83,20 +71,14 @@ export const CalculationInput = ({
         MultiflashService.computeMultiflash(input)
           .then((response) => {
             setResult({
-              phaseValues: Object.entries(response.phaseValues).map(
-                ([phase, data]) => ({
-                  phase: phase,
-                  percentage: data.percentage,
-                  mercury: data.mercury,
-                })
-              ),
+              phaseValues: Object.entries(response.phaseValues).map(([phase, data]) => ({
+                phase: phase,
+                percentage: data.percentage,
+                mercury: data.mercury,
+              })),
               cubicFeedFlow: cubicFeedFlow,
               componentFractions: selectedPackage.components
-                .filter(
-                  (x) =>
-                    x.id in response.componentFractions &&
-                    x.id in response.feedFractions
-                )
+                .filter((x) => x.id in response.componentFractions && x.id in response.feedFractions)
                 .map((x) => ({
                   id: x.id,
                   phaseFractions: response.componentFractions[x.id],
@@ -122,9 +104,7 @@ export const CalculationInput = ({
       oldPackages = oldPackages.filter((x) => x.name !== selectedPackage.name)
     }
 
-    const packageNameConflict = oldPackages.find(
-      (x) => x.name === newPackage?.name
-    )
+    const packageNameConflict = oldPackages.find((x) => x.name === newPackage?.name)
     if (packageNameConflict) {
       const overwrite: boolean = window.confirm(
         `A package named '${newPackage?.name}' already exists.\nOk to overwrite?`
@@ -147,17 +127,11 @@ export const CalculationInput = ({
               label="Fluid package"
               options={packages}
               optionLabel={(option) => option.name}
-              onOptionsChange={(changes) =>
-                setSelectedPackage(changes.selectedItems[0])
-              }
+              onOptionsChange={(changes) => setSelectedPackage(changes.selectedItems[0])}
               selectedOptions={selectedPackage ? [selectedPackage] : []}
               autoWidth
             />
-            <Button
-              variant="outlined"
-              onClick={() => setIsEditOpen(true)}
-              disabled={selectedPackage === undefined}
-            >
+            <Button variant="outlined" onClick={() => setIsEditOpen(true)} disabled={selectedPackage === undefined}>
               Edit
             </Button>
             <Button variant="outlined" onClick={() => setIsNewOpen(true)}>

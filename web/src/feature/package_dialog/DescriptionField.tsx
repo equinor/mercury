@@ -9,9 +9,7 @@ export const DescriptionField = () => {
       placeholder="Description"
       label="Description"
       value={state.description}
-      onChange={(event) =>
-        dispatch({ type: 'setDescription', value: event.target.value })
-      }
+      onChange={(event) => dispatch({ type: 'setDescription', value: event.target.value })}
       rows={6}
     />
   )

@@ -2,11 +2,7 @@ import { Button, Dialog, Typography } from '@equinor/eds-core-react'
 import { tokens } from '@equinor/eds-tokens'
 import styled from 'styled-components'
 import { preSelectedComponents } from '../../common/constants'
-import type {
-  TComponentProperty,
-  TPackage,
-  TPackageDialog,
-} from '../../common/types'
+import type { TComponentProperty, TPackage, TPackageDialog } from '../../common/types'
 import { ComponentSelector } from './ComponentSelector'
 import { ComponentTable } from './ComponentTable'
 import { ComponentTableSum } from './ComponentTableSum'
@@ -72,13 +68,9 @@ export const FluidDialog = ({
   const initial: TPackageDialog = {
     name: editablePackage?.name ?? '',
     description: editablePackage?.description ?? '',
-    ratios:
-      editablePackage?.components ??
-      preSelectedComponents.map((x) => ({ id: x, ratio: '' })),
+    ratios: editablePackage?.components ?? preSelectedComponents.map((x) => ({ id: x, ratio: '' })),
     isRatioValid: {},
-    selectedComponents: (
-      editablePackage?.components.map((x) => x.id) ?? preSelectedComponents
-    )
+    selectedComponents: (editablePackage?.components.map((x) => x.id) ?? preSelectedComponents)
       .map((x) => componentProperties.find((prop) => prop.id === x))
       .filter((x): x is TComponentProperty => !!x),
     componentProperties: componentProperties,
@@ -88,10 +80,7 @@ export const FluidDialog = ({
     <PackageDialogProvider initial={initial}>
       <WideDialog open onClose={close} isDismissable>
         <Dialog.Header>
-          <Typography
-            variant="h3"
-            color={tokens.colors.infographic.primary__moss_green_100.hex}
-          >
+          <Typography variant="h3" color={tokens.colors.infographic.primary__moss_green_100.hex}>
             {editablePackage === undefined ? 'Create' : 'Edit'} fluid package
           </Typography>
         </Dialog.Header>
@@ -100,9 +89,7 @@ export const FluidDialog = ({
             <FirstColumn>
               <NameField />
               <DescriptionField />
-              {editablePackage === undefined && (
-                <TemplateSelector packages={packages} />
-              )}
+              {editablePackage === undefined && <TemplateSelector packages={packages} />}
             </FirstColumn>
             <SecondColumn>
               <ComponentSelector />
@@ -115,10 +102,7 @@ export const FluidDialog = ({
               <Button variant="outlined" onClick={close}>
                 Cancel
               </Button>
-              <SaveButton
-                editablePackage={editablePackage}
-                savePackage={savePackage}
-              />
+              <SaveButton editablePackage={editablePackage} savePackage={savePackage} />
             </ButtonGroup>
             <ButtonGroup>
               {editablePackage !== undefined && (
@@ -126,9 +110,7 @@ export const FluidDialog = ({
                   color="danger"
                   variant="outlined"
                   onClick={() => {
-                    const overwrite: boolean = window.confirm(
-                      'Are you sure you want to delete the package?'
-                    )
+                    const overwrite: boolean = window.confirm('Are you sure you want to delete the package?')
                     if (!overwrite) return
                     savePackage()
                   }}

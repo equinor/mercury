@@ -13,14 +13,9 @@ const ComponentTableContainer = styled.div`
 
 export const ComponentTable = () => {
   const { state, dispatch } = usePackageDialogContext()
-  function handleOnChange(
-    event: React.ChangeEvent<HTMLInputElement>,
-    id: string
-  ) {
+  function handleOnChange(event: React.ChangeEvent<HTMLInputElement>, id: string) {
     const ratio = event.target.value
-    const newRatios = state.ratios.map((x) =>
-      x.id === id ? { id: id, ratio: ratio } : x
-    )
+    const newRatios = state.ratios.map((x) => (x.id === id ? { id: id, ratio: ratio } : x))
     dispatch({ type: 'setRatios', value: newRatios })
   }
 
@@ -37,14 +32,11 @@ export const ComponentTable = () => {
             value={state.ratios.find((x) => x.id === component.id)?.ratio ?? ''}
             variant={
               state.isRatioValid[component.id] === false ||
-              (component.id === '5' &&
-                !(Number(state.ratios.find((x) => x.id === '5')?.ratio) > 0))
+              (component.id === '5' && !(Number(state.ratios.find((x) => x.id === '5')?.ratio) > 0))
                 ? 'error'
                 : undefined
             }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleOnChange(event, component.id)
-            }
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleOnChange(event, component.id)}
           />
         </Table.Cell>
       </Table.Row>

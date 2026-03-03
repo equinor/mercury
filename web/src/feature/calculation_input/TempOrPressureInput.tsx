@@ -1,11 +1,5 @@
 import { TextField } from '@equinor/eds-core-react'
-import {
-  absoluteZero,
-  maxPressure,
-  maxTemperature,
-  minPressure,
-  minTemperature,
-} from '../../common/constants'
+import { absoluteZero, maxPressure, maxTemperature, minPressure, minTemperature } from '../../common/constants'
 
 export const TempOrPressureInput = (props: {
   value: number
@@ -20,10 +14,8 @@ export const TempOrPressureInput = (props: {
   const min = props.name === 'Temperature' ? absoluteZero : undefined
   function getHelperText() {
     if (!props.isValid) return undefined
-    if (props.value > maxValue)
-      return `The ${props.name.toLowerCase()} is very high`
-    if (props.value < minValue)
-      return `The ${props.name.toLowerCase()} is very low`
+    if (props.value > maxValue) return `The ${props.name.toLowerCase()} is very high`
+    if (props.value < minValue) return `The ${props.name.toLowerCase()} is very low`
   }
   function getVariant() {
     if (!props.isValid) return 'error'
@@ -42,10 +34,7 @@ export const TempOrPressureInput = (props: {
       onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         //This regex allows negative and positive decimal numbers
         const regex = /^[-+]?\d+(\.\d+)?$/
-        props.setIsValid(
-          regex.test(event.target.value) &&
-            !Number.isNaN(Number(event.target.value))
-        )
+        props.setIsValid(regex.test(event.target.value) && !Number.isNaN(Number(event.target.value)))
 
         props.setValue(Number(event.target.value))
       }}

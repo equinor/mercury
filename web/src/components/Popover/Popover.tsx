@@ -10,14 +10,7 @@ interface PopoverProps {
   anchor?: HTMLElement | null
 }
 
-export const Popover = ({
-  content,
-  actions,
-  title,
-  toggle,
-  isOpen,
-  anchor,
-}: PopoverProps) => {
+export const Popover = ({ content, actions, title, toggle, isOpen, anchor }: PopoverProps) => {
   return (
     <EDSPopover open={isOpen} anchorEl={anchor} onClose={toggle} trapFocus>
       <EDSPopover.Header>

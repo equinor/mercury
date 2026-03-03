@@ -1,12 +1,7 @@
 import { Button, Icon } from '@equinor/eds-core-react'
 import { info_circle } from '@equinor/eds-icons'
 import { useRef, useState } from 'react'
-import {
-  APP_NAME,
-  CONTACT_PERSON_EMAIL,
-  CONTACT_PERSON_NAME,
-  TECHNICAL_SUPPORT_EMAIL,
-} from '../../../common/constants'
+import { APP_NAME, CONTACT_PERSON_EMAIL, CONTACT_PERSON_NAME, TECHNICAL_SUPPORT_EMAIL } from '../../../common/constants'
 import { Popover } from '../../../components'
 import { AppVersion } from './AppVersion'
 import { ContactInformation } from './ContactInformation'
@@ -28,16 +23,8 @@ export function AboutApplication() {
         content={
           <>
             <AppVersion />
-            <ContactInformation
-              title="Person of Contact"
-              email={CONTACT_PERSON_EMAIL}
-              name={CONTACT_PERSON_NAME}
-            />
-            <ContactInformation
-              title="Technical Support"
-              email={TECHNICAL_SUPPORT_EMAIL}
-              name="Team Hermes"
-            />
+            <ContactInformation title="Person of Contact" email={CONTACT_PERSON_EMAIL} name={CONTACT_PERSON_NAME} />
+            <ContactInformation title="Technical Support" email={TECHNICAL_SUPPORT_EMAIL} name="Team Hermes" />
           </>
         }
         title={`About ${APP_NAME}`}

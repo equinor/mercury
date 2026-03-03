@@ -9,20 +9,12 @@ const FlexContainer = styled.div`
   max-width: 400px;
 `
 
-function convertFlowFromCubicToMass(
-  cubicFeedFlow: number,
-  molecularWeightSum: number
-): number {
+function convertFlowFromCubicToMass(cubicFeedFlow: number, molecularWeightSum: number): number {
   return (cubicFeedFlow * molecularWeightSum * molePerStandardCubicMeter) / 1000
 }
 
-function convertFlowFromMassToCubic(
-  massFeedFlow: number,
-  molecularWeightSum: number
-): number {
-  return (
-    (massFeedFlow * 1000) / (molecularWeightSum * molePerStandardCubicMeter)
-  )
+function convertFlowFromMassToCubic(massFeedFlow: number, molecularWeightSum: number): number {
+  return (massFeedFlow * 1000) / (molecularWeightSum * molePerStandardCubicMeter)
 }
 
 export const FeedFlowInput = (props: {
@@ -35,20 +27,12 @@ export const FeedFlowInput = (props: {
 
   const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (displayMassFeedFlow)
-      props.setCubicFeedFlow(
-        convertFlowFromMassToCubic(
-          Number(event.target.value),
-          props.molecularWeightSum ?? 1
-        )
-      )
+      props.setCubicFeedFlow(convertFlowFromMassToCubic(Number(event.target.value), props.molecularWeightSum ?? 1))
     else props.setCubicFeedFlow(Number(event.target.value))
   }
 
   const displayValue = displayMassFeedFlow
-    ? convertFlowFromCubicToMass(
-        props.cubicFeedFlow,
-        props.molecularWeightSum ?? 1
-      )
+    ? convertFlowFromCubicToMass(props.cubicFeedFlow, props.molecularWeightSum ?? 1)
     : props.cubicFeedFlow
 
   return (
