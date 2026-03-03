@@ -4,7 +4,7 @@ on:
     inputs:
       radix-environment:
         description: "Which radix environment to deploy into"
-        default: "test"
+        default: "dev"
         required: true
         type: string
       image-tag:
@@ -15,7 +15,7 @@ on:
     inputs:
       radix-environment:
         description: "Which radix environment to deploy into"
-        default: "test"
+        default: "dev"
         required: true
         type: string
       image-tag:

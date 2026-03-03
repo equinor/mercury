@@ -29,7 +29,6 @@ updates:
     directories:
       - "/web"
       - "/api"
-      - "/nginx"
     schedule:
       interval: "monthly"
     groups:

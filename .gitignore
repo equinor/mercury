@@ -1,10 +1,11 @@
 __pycache__/
+*.pyc
 build/
 .env
 .venv
 /id_ed25519
 /id_ed25519.pub
-/web/node_modules/
+node_modules/
 .yarn-integrity
 
 # Yarn 2
@@ -19,4 +20,6 @@ web/.yarn/*
 # Other
 .idea
 .mypy_cache
+.pytest_cache/
+.ruff_cache/
 .tool-versions

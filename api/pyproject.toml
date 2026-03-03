@@ -2,7 +2,7 @@
 name = "Mercury"
 description = "Mercury composition calculator REST API"
 dynamic = ["version"]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 license-files = ["LICENSE.md"]
 dependencies = [
   "numpy~=2.1",
@@ -38,7 +38,7 @@ path = "src/cli/__about__.py"
 
 [tool.ruff]
 src = ["src"]
-target-version = "py310"
+target-version = "py313"
 line-length = 120        # This is the prefered line-length. ruff will _try_ to make this
 
 lint.select = [
