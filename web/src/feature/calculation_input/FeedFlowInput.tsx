@@ -17,38 +17,68 @@ function convertFlowFromMassToCubic(massFeedFlow: number, molecularWeightSum: nu
   return (massFeedFlow * 1000) / (molecularWeightSum * molePerStandardCubicMeter)
 }
 
+function formatDisplayValue(value: number): string {
+  return (+value.toFixed(2)).toString()
+}
+
 export const FeedFlowInput = (props: {
   cubicFeedFlow: number
   setCubicFeedFlow: (value: number) => void
   molecularWeightSum: number | undefined
 }) => {
   const [displayMassFeedFlow, setDisplayMassFeedFlow] = useState<boolean>(false)
+  const [inputText, setInputText] = useState<string>(formatDisplayValue(props.cubicFeedFlow))
   const selectedUnit = displayMassFeedFlow ? 'kg/d' : 'Sm3/d'
 
-  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (displayMassFeedFlow)
-      props.setCubicFeedFlow(convertFlowFromMassToCubic(Number(event.target.value), props.molecularWeightSum ?? 1))
-    else props.setCubicFeedFlow(Number(event.target.value))
+  const handleUnitToggle = (checked: boolean) => {
+    setDisplayMassFeedFlow(checked)
+    const displayValue = checked
+      ? convertFlowFromCubicToMass(props.cubicFeedFlow, props.molecularWeightSum ?? 1)
+      : props.cubicFeedFlow
+    setInputText(formatDisplayValue(displayValue))
   }
 
-  const displayValue = displayMassFeedFlow
-    ? convertFlowFromCubicToMass(props.cubicFeedFlow, props.molecularWeightSum ?? 1)
-    : props.cubicFeedFlow
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = event.target.value
+    setInputText(raw)
+
+    const parsed = Number(raw)
+    if (raw !== '' && !Number.isNaN(parsed)) {
+      if (displayMassFeedFlow) {
+        props.setCubicFeedFlow(convertFlowFromMassToCubic(parsed, props.molecularWeightSum ?? 1))
+      } else {
+        props.setCubicFeedFlow(parsed)
+      }
+    }
+  }
+
+  const handleBlur = () => {
+    const parsed = Number(inputText)
+    if (inputText === '' || Number.isNaN(parsed)) {
+      // Revert to the last valid value on blur
+      const displayValue = displayMassFeedFlow
+        ? convertFlowFromCubicToMass(props.cubicFeedFlow, props.molecularWeightSum ?? 1)
+        : props.cubicFeedFlow
+      setInputText(formatDisplayValue(displayValue))
+    } else {
+      setInputText(formatDisplayValue(parsed))
+    }
+  }
 
   return (
     <FlexContainer>
       <TextField
         id="feed-flow-input"
         unit={selectedUnit}
-        type="number"
-        value={(+displayValue.toFixed(2)).toString()}
+        value={inputText}
         onChange={handleChangeInput}
+        onBlur={handleBlur}
       />
       <Switch
         label="unit"
         checked={displayMassFeedFlow}
         disabled={!props.molecularWeightSum}
-        onChange={(event) => setDisplayMassFeedFlow(event.target.checked)}
+        onChange={(event) => handleUnitToggle(event.target.checked)}
       />
     </FlexContainer>
   )
