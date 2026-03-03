@@ -31,7 +31,9 @@ class AccessLevel(IntEnum):
 
 
 class User(BaseModel):
-    user_id: str  # If using azure AD authentication, user_id is the oid field from the access token.
+    user_id: (
+        str  # If using Microsoft Entra ID (Azure AD) authentication, user_id is the oid field from the access token.
+    )
     # If using another oauth provider, user_id will be from the "sub" attribute in the access token.
     email: str | None = None
     full_name: str | None = None
