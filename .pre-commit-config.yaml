@@ -42,6 +42,8 @@ repos:
         exclude: ".devcontainer"
       - id: check-yaml
         name: "Validate: parse .yaml files"
+        args: ["--allow-multiple-documents"]
+        exclude: mkdocs.yml
       - id: check-toml
         name: "Validate: parse .toml files"
       - id: check-merge-conflict
