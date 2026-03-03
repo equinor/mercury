@@ -61,17 +61,22 @@ repos:
         exclude_types:
           - markdown
 
-  - repo: https://github.com/biomejs/pre-commit
-    rev: v2.4.4
-    hooks:
-      - id: biome-check
-        name: "Lint: biome (js/ts)"
-
-  - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.15.4"
+  - repo: local
     hooks:
       - id: ruff
         name: "Lint: ruff (python)"
-        args: [--fix, --exit-non-zero-on-fix]
-      - id: ruff-format
-        name: "Lint: ruff-format (python)"
+        language: system
+        types: [text]
+        files: "\\.py$"
+        entry: mise run lint-ruff
+        pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: biome
+        name: "Lint: biome (js/ts/json)"
+        language: system
+        types: [text]
+        files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|s?css)$"
+        entry: mise run lint-biome
+        pass_filenames: false
