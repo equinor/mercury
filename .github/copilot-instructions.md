@@ -88,7 +88,7 @@ api/
     init.sh                  # Docker entrypoint
     cli/                     # Typer CLI (run, version)
       __about__.py           # Version string (release-please managed)
-    authentication/          # JWT auth via Azure AD
+    authentication/          # JWT auth via Microsoft Entra ID (Azure AD)
     features/                # Feature-based routes (chemeq, multiflash, health_check, metrics, whoami)
       get_routes.py          # Registers authenticated + public routes
     entities/                # Domain models (Multiflash, ComponentResponse)
@@ -140,7 +140,7 @@ The API follows a feature-based layout under `api/src/features/`. Each feature t
 - A `*_feature.py` file defining FastAPI routes
 - A `*_use_case.py` file containing business logic
 
-Routes are split into authenticated (JWT via Azure AD) and public, registered in `get_routes.py`. Configuration uses pydantic-settings with environment variables. Pydantic models use `alias_generator=to_camel` for camelCase JSON serialization while keeping snake_case in Python.
+Routes are split into authenticated (JWT via Microsoft Entra ID) and public, registered in `get_routes.py`. Configuration uses pydantic-settings with environment variables. Pydantic models use `alias_generator=to_camel` for camelCase JSON serialization while keeping snake_case in Python.
 
 ## Conventions
 

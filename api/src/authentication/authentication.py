@@ -52,7 +52,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
     try:
         payload: dict[str, Any] = jwt.decode(jwt_token, key, algorithms=["RS256"], audience=config.OAUTH_AUDIENCE)
         if _MICROSOFT_AUTH_PROVIDER in payload["iss"]:
-            # Azure AD uses an oid string to uniquely identify users. Each user has a unique oid value.
+            # Microsoft Entra ID (Azure AD) uses an oid string to uniquely identify users. Each user has a unique oid value.
             user_id = payload["oid"]
             name = payload.get("name")
             email = payload.get("preferred_username")
