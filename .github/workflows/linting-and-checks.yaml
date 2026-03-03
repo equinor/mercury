@@ -7,9 +7,19 @@ permissions:
   contents: read
 
 jobs:
-  prek:
+  lint:
     runs-on: ubuntu-latest
-    name: "Linting and checks: Pre-commit"
+    name: "Linting and checks: ${{ matrix.title }}"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - title: "Pre-commit with prek"
+            task: lint-pre-commit
+          - title: "mypy type check"
+            task: lint-mypy
+          - title: "Typescript compilation"
+            task: lint-typescript-compilation
     steps:
       - name: "Setup: Checkout repository"
         uses: actions/checkout@v6
@@ -17,31 +27,5 @@ jobs:
       - name: "Setup: install mise"
         uses: jdx/mise-action@v3
 
-      - name: "Run: Pre-commit with prek"
-        run: mise run lint-pre-commit
-
-  mypy:
-    runs-on: ubuntu-latest
-    name: "mypy static type checking"
-    steps:
-      - name: "Setup: check out repository"
-        uses: actions/checkout@v6
-
-      - name: "Setup: install mise"
-        uses: jdx/mise-action@v3
-
-      - name: "Run: mypy type check"
-        run: mise run lint-mypy
-
-  typescript-compile:
-    runs-on: ubuntu-latest
-    name: "typescript compilation"
-    steps:
-      - name: "Setup: check out repository"
-        uses: actions/checkout@v6
-
-      - name: "Setup: install mise"
-        uses: jdx/mise-action@v3
-
-      - name: "Run: typescript compilation"
-        run: mise run lint-typescript-compilation
+      - name: "Run: ${{ matrix.title }}"
+        run: mise run ${{ matrix.task }}
