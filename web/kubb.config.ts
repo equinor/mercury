@@ -31,7 +31,7 @@ export default defineConfig({
         barrelType: 'named',
       },
       client: 'fetch',
-      clientType: 'class',
+      clientType: 'staticClass',
       dataReturnType: 'data',
       importPath: '../../../client',
       group: {

@@ -9,17 +9,13 @@ import type { ComputeMultiflashMutationRequest, ComputeMultiflashMutationRespons
 import { mergeConfig } from "../../../client";
 
 export class MultiflashService {
-  #config: Partial<RequestConfig> & { client?: Client }
-
-  constructor(config: Partial<RequestConfig> & { client?: Client } = {}) {
-    this.#config = config
-  }
+  static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
    * @summary Compute Multiflash
    * {@link /multiflash}
    */
-  async computeMultiflash(data: ComputeMultiflashMutationRequest, config: Partial<RequestConfig<ComputeMultiflashMutationRequest>> & { client?: Client } = {}) {
+    static async computeMultiflash(data: ComputeMultiflashMutationRequest, config: Partial<RequestConfig<ComputeMultiflashMutationRequest>> & { client?: Client } = {}) {
     const { client: request = fetch, ...requestConfig } = mergeConfig(this.#config, config)
     const requestData = data
     const res = await request<ComputeMultiflashMutationResponse, ResponseErrorConfig<ComputeMultiflash422>, ComputeMultiflashMutationRequest>({ ... requestConfig, method : "POST", url : `/multiflash`, data : requestData })

@@ -9,17 +9,13 @@ import type { GetComponentsQueryResponse } from "../../types/GetComponents.ts";
 import { mergeConfig } from "../../../client";
 
 export class ComponentService {
-  #config: Partial<RequestConfig> & { client?: Client }
-
-  constructor(config: Partial<RequestConfig> & { client?: Client } = {}) {
-    this.#config = config
-  }
+  static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
    * @summary Components
    * {@link /components}
    */
-  async getComponents(config: Partial<RequestConfig> & { client?: Client } = {}) {
+    static async getComponents(config: Partial<RequestConfig> & { client?: Client } = {}) {
     const { client: request = fetch, ...requestConfig } = mergeConfig(this.#config, config)
     const res = await request<GetComponentsQueryResponse, ResponseErrorConfig<Error>, unknown>({ ... requestConfig, method : "GET", url : `/components` })
     return res.data
