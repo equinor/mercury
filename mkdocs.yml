@@ -18,4 +18,5 @@ nav:
       - Upgrading: developers/guide/upgrading.md
       - How We Work: developers/guide/how-we-work.md
   - Contributing Guide: contributing.md
+  - Changelog: changelog.md
   - Runbook: runbook.md
