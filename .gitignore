@@ -23,3 +23,5 @@ web/.yarn/*
 .pytest_cache/
 .ruff_cache/
 .tool-versions
+.vscode/
+web/openapi.json

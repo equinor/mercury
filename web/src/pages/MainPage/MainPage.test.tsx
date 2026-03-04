@@ -14,10 +14,9 @@ vi.mock('@microsoft/applicationinsights-react-js', () => ({
 
 // Mock the API
 vi.mock('../../api/generated', () => ({
-  ComponentService: {
-    getComponents: vi.fn().mockResolvedValue({ components: mockComponentProperties }),
+  ComponentService: class {
+    getComponents = vi.fn().mockResolvedValue({ components: mockComponentProperties })
   },
-  OpenAPI: {},
 }))
 
 // Mock AuthContext for Header

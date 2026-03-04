@@ -7,7 +7,7 @@ from common.exception_handling import ExceptionHandlingRoute
 router = APIRouter(tags=["whoami"], prefix="/whoami", route_class=ExceptionHandlingRoute)
 
 
-@router.get("/", operation_id="whoami")
+@router.get("/", operation_id="get_whoami")
 async def get_information_on_authenticated_user(
     user: User = Depends(auth_with_jwt),
 ):

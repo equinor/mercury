@@ -33,7 +33,8 @@ export const MainPage = () => {
 
   // Fetch list of components name once on page load
   useEffect(() => {
-    ComponentService.getComponents()
+    new ComponentService()
+      .getComponents()
       .then((response) => {
         setComponentProperties(toSortedArray(response.components))
       })

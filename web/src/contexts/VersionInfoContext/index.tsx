@@ -1,5 +1,3 @@
-import axios, { type AxiosResponse } from 'axios'
-
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { Maybe } from '../../common/types'
 import type { CommitInfo } from './types'
@@ -24,13 +22,15 @@ export function VersionInfoProvider({ children }: { children: React.ReactNode })
       return
     }
 
-    axios.get('version.txt').then((res: AxiosResponse<string>) => {
-      const entries = res.data
-        .split('\n')
-        .filter((line) => line.includes(': '))
-        .map((line) => line.split(': '))
-      setCommitInfo(Object.fromEntries(entries) as CommitInfo)
-    })
+    fetch('version.txt')
+      .then((res) => res.text())
+      .then((text) => {
+        const entries = text
+          .split('\n')
+          .filter((line: string) => line.includes(': '))
+          .map((line: string) => line.split(': '))
+        setCommitInfo(Object.fromEntries(entries) as CommitInfo)
+      })
   }, [])
 
   // Memoize the context value

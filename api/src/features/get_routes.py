@@ -7,7 +7,7 @@ def get_authenticated_routes() -> APIRouter:
     from features.multiflash import multiflash_feature
     from features.whoami import whoami_feature
 
-    authenticated_routes = APIRouter(tags=["mercury"])
+    authenticated_routes = APIRouter()
     authenticated_routes.include_router(whoami_feature.router)
     authenticated_routes.include_router(multiflash_feature.router)
     authenticated_routes.include_router(component_feature.router)
