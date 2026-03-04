@@ -10,4 +10,12 @@ plugins:
   - techdocs-core
 nav:
   - Welcome to Mercury: index.md
+  - Mercury developers:
+      - Overview: developers/guide/index.md
+      - Setup: developers/guide/setup.md
+      - Running: developers/guide/running.md
+      - Testing: developers/guide/testing.md
+      - Upgrading: developers/guide/upgrading.md
+      - How We Work: developers/guide/how-we-work.md
+  - Contributing Guide: contributing.md
   - Runbook: runbook.md
