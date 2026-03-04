@@ -36,7 +36,11 @@ export default defineConfig({
       importPath: '../../../client',
       group: {
         type: 'tag',
-        name: ({ group }) => `${group.charAt(0).toUpperCase()}${group.slice(1)}Service`,
+        name: ({ group }) =>
+          `${group
+            .split(/[_-]/)
+            .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+            .join('')}Service`,
       },
     }),
   ],

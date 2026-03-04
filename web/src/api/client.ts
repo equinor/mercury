@@ -10,7 +10,7 @@ export function setTokenProvider(fn: () => string | undefined) {
 }
 
 export type RequestConfig<TData = unknown> = {
-  url?: string
+  url: string
   method: 'GET' | 'PUT' | 'PATCH' | 'POST' | 'DELETE'
   params?: object
   data?: TData | FormData
@@ -34,7 +34,8 @@ export type ResponseErrorConfig<TData = unknown> = {
 export const client = async <TData, _TError = unknown, TVariables = unknown>(
   config: RequestConfig<TVariables>
 ): Promise<ResponseConfig<TData>> => {
-  const url = new URL(`${_baseUrl}${config.url}`)
+  const base = _baseUrl || window.location.origin
+  const url = new URL(`${base}${config.url}`)
 
   if (config.params) {
     for (const [key, value] of Object.entries(config.params)) {
