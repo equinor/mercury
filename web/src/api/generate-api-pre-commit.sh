@@ -17,15 +17,15 @@ else
 	echo "Changes detected in API relevant files. Generating API ..."
 	# This requires the API to be running on localhost port 5000
 	# Define the URL of the OpenAPI specification
-	OPENAPI_URL="http://0.0.0.0:5000/openapi.json"
+	OPENAPI_URL="http://localhost:5000/openapi.json"
 
 	# Use curl to fetch the OpenAPI specification and store it in a temporary file
 	TEMP_FILE=$(mktemp)
+	trap 'rm -f "$TEMP_FILE"' EXIT
 
 	# Check if the curl command was successful
-	if ! curl -s "$OPENAPI_URL" >"$TEMP_FILE"; then
+	if ! curl -sf "$OPENAPI_URL" >"$TEMP_FILE"; then
 		echo "Failed to fetch the OpenAPI specification."
-		rm "$TEMP_FILE"
 		exit 1
 	fi
 
@@ -45,6 +45,4 @@ else
 		echo "API Client successfully generated"
 	fi
 
-	# Clean up the temporary file
-	rm "$TEMP_FILE"
 fi
