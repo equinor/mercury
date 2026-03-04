@@ -2,3 +2,8 @@
 description = "Serve latest app with hot reloading and live preview"
 depends = ["install-dependencies"]
 run = "docker compose up --build"
+
+[serve-docs]
+description = "Serve docs with mkdocs"
+depends = ["install-api-dependencies"]
+run = "uv run mkdocs serve --livereload"
