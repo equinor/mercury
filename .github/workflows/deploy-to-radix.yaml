@@ -32,8 +32,21 @@ env:
   AZURE_CLIENT_ID: 0cd10735-a40c-4ff6-84c8-74e3b54ed93f
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Setup: check out repository"
+        uses: actions/checkout@v6
+
+      - name: "Setup: radix CLI (RX)"
+        uses: equinor/radix-github-actions@v2
+
+      - name: "Run: Validate radix config"
+        run: rx validate radix-config
+
   deploy-on-radix:
     runs-on: ubuntu-latest
+    needs: [validate]
     steps:
       - name: "Setup: check out repository"
         uses: actions/checkout@v6
