@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "serve": "vite preview",
     "compile": "tsc --noEmit",
-    "generate": "cd ../api && uv run python export_openapi.py && cd ../web && kubb generate && rm -f openapi.json",
+    "generate": "kubb generate",
     "test": "vitest",
     "lint": "biome check --write --no-errors-on-unmatched"
   },
