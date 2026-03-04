@@ -9,17 +9,13 @@ import type { GetWhoamiQueryResponse } from "../../types/GetWhoami.ts";
 import { mergeConfig } from "../../../client";
 
 export class WhoamiService {
-  #config: Partial<RequestConfig> & { client?: Client }
-
-  constructor(config: Partial<RequestConfig> & { client?: Client } = {}) {
-    this.#config = config
-  }
+  static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
    * @summary Get Information On Authenticated User
    * {@link /whoami/}
    */
-  async getWhoami(config: Partial<RequestConfig> & { client?: Client } = {}) {
+    static async getWhoami(config: Partial<RequestConfig> & { client?: Client } = {}) {
     const { client: request = fetch, ...requestConfig } = mergeConfig(this.#config, config)
     const res = await request<GetWhoamiQueryResponse, ResponseErrorConfig<Error>, unknown>({ ... requestConfig, method : "GET", url : `/whoami/` })
     return res.data

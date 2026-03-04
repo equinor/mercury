@@ -9,17 +9,13 @@ import type { GetMetricsQueryResponse } from "../../types/GetMetrics.ts";
 import { mergeConfig } from "../../../client";
 
 export class MetricsService {
-  #config: Partial<RequestConfig> & { client?: Client }
-
-  constructor(config: Partial<RequestConfig> & { client?: Client } = {}) {
-    this.#config = config
-  }
+  static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
    * @summary Collect application metrics
    * {@link /metrics}
    */
-  async getMetrics(config: Partial<RequestConfig> & { client?: Client } = {}) {
+    static async getMetrics(config: Partial<RequestConfig> & { client?: Client } = {}) {
     const { client: request = fetch, ...requestConfig } = mergeConfig(this.#config, config)
     const res = await request<GetMetricsQueryResponse, ResponseErrorConfig<Error>, unknown>({ ... requestConfig, method : "GET", url : `/metrics` })
     return res.data

@@ -9,17 +9,13 @@ import type { GetHealthCheckQueryResponse } from "../../types/GetHealthCheck.ts"
 import { mergeConfig } from "../../../client";
 
 export class HealthCheckService {
-  #config: Partial<RequestConfig> & { client?: Client }
-
-  constructor(config: Partial<RequestConfig> & { client?: Client } = {}) {
-    this.#config = config
-  }
+  static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
    * @summary Get
    * {@link /health-check}
    */
-  async getHealthCheck(config: Partial<RequestConfig> & { client?: Client } = {}) {
+    static async getHealthCheck(config: Partial<RequestConfig> & { client?: Client } = {}) {
     const { client: request = fetch, ...requestConfig } = mergeConfig(this.#config, config)
     const res = await request<GetHealthCheckQueryResponse, ResponseErrorConfig<Error>, unknown>({ ... requestConfig, method : "GET", url : `/health-check` })
     return res.data
