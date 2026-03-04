@@ -22,7 +22,7 @@ _MICROSOFT_AUTH_PROVIDER = "login.microsoftonline.com"
 
 
 @cached(cache=TTLCache(maxsize=32, ttl=86400))
-def get_JWK_client() -> PyJWKClient:
+def get_jwk_client() -> PyJWKClient:
     try:
         oid_conf_response = httpx.get(
             config.OAUTH_WELL_KNOWN,
@@ -45,7 +45,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
     if not jwt_token:
         raise UnauthorizedException
     try:
-        key = get_JWK_client().get_signing_key_from_jwt(jwt_token).key
+        key = get_jwk_client().get_signing_key_from_jwt(jwt_token).key
     except (DecodeError, PyJWKClientError, ExpiredSignatureError) as error:
         logger.warning(f"Failed to get signing key from JWT token: {error}")
         raise UnauthorizedException from None

@@ -38,6 +38,7 @@ class LocalLoggerMiddleware:
 
         await self.app(scope, receive, inner_send)
         logger.info(f"{method} {path} - {process_time}ms - {response['status']}")
+        return None
 
 
 def _extract_full_path(scope: Scope) -> str:

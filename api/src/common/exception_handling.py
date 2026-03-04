@@ -31,7 +31,7 @@ class ExceptionHandlingRoute(APIRoute):
                 return validation_exception_handler(request, e)
             except ApplicationException as e:
                 return generic_exception_handler(request, e)
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 return fall_back_exception_handler(request, e)
 
         return custom_route_handler
@@ -40,7 +40,6 @@ class ExceptionHandlingRoute(APIRoute):
 def fall_back_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     error_id = uuid.uuid4()
     traceback_string = " ".join(traceback.format_tb(tb=exc.__traceback__))
-    print(traceback_string)
     logger.exception(
         f"Unexpected unhandled exception ({error_id}): {exc}",
         extra={"custom_dimensions": {"Error ID": error_id, "Traceback": traceback_string}},

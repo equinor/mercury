@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import APIRouter, Depends
 
 from authentication.authentication import auth_with_jwt
@@ -9,6 +11,6 @@ router = APIRouter(tags=["whoami"], prefix="/whoami", route_class=ExceptionHandl
 
 @router.get("/", operation_id="get_whoami")
 async def get_information_on_authenticated_user(
-    user: User = Depends(auth_with_jwt),
+    user: Annotated[User, Depends(auth_with_jwt)],
 ):
     return user

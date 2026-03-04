@@ -33,30 +33,59 @@ build-backend = "hatchling.build"
 path = "src/cli/__about__.py"
 
 [tool.ruff]
-src = ["src"]
+src = ["src", "tests"]
 target-version = "py313"
 line-length = 120        # This is the prefered line-length. ruff will _try_ to make this
 
-lint.select = [
-  "E",   # pycodestyle errors
-  "W",   # pycodestyle warnings
-  "F",   # pyflakes
-  "I",   # isort
-  "S",   # Bandit
-  "C",   # flake8-comprehensions
-  "B",   # flake8-bugbear
-  "UP",  # automatically upgrade syntax for newer versions of the language
-  "RUF", # ruff specific rules
+[tool.ruff.lint]
+select = [
+  "E",    # pycodestyle errors
+  "W",    # pycodestyle warnings
+  "F",    # pyflakes
+  "I",    # isort
+  "S",    # Bandit (security)
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "UP",   # automatically upgrade syntax for newer versions of the language
+  "RUF",  # ruff specific rules
+  "N",    # pep8-naming
+  "SIM",  # flake8-simplify
+  "PT",   # flake8-pytest-style
+  "RET",  # flake8-return
+  "FAST", # fastapi best practices
+  "PIE",  # flake8-pie (misc. lints)
+  "T20",  # flake8-print (no print statements)
+  "ICN",  # flake8-import-conventions
+  "LOG",  # flake8-logging
+  "G",    # flake8-logging-format
+  "DTZ",  # flake8-datetimez
+  "FLY",  # flynt (f-string conversion)
+  "PERF", # perflint (performance anti-patterns)
+  "FURB", # refurb (modern Python idioms)
+  "PLC",  # pylint conventions
+  "PLE",  # pylint errors
+  "TCH",  # flake8-type-checking (move type-only imports behind TYPE_CHECKING)
+  "FA",   # flake8-future-annotations
+  "ISC",  # flake8-implicit-str-concat
+  "RSE",  # flake8-raise
+  "FBT",  # flake8-boolean-trap
+  "A",    # flake8-builtins (shadowing builtins)
+  "BLE",  # flake8-blind-except
+  "YTT",  # flake8-2020 (sys.version checks)
 ]
 
-lint.ignore = [
-  "W191",   # conflict with ruff formatter
-  "B008",   # do not perform function calls in argument defaults
-  "E501",   # line too long (ruff formater is doing the best it can. Fix them yourself if you dont like the line length)
-  "C901",   # Code complexity
-  "RUF012", # Pydantic class variables
-  "S101",   # Use of "assert"
+ignore = [
+  "E501",    # line too long (formatter handles this best-effort)
+  "B008",    # function calls in argument defaults (required by FastAPI/Depends)
+  "RUF012",  # Pydantic class variables (false positives with Pydantic models)
+  "SIM102",  # collapsible-if (sometimes nested ifs are more readable)
+  "PLC0415", # import-outside-top-level (intentional lazy imports in app factory/CLI)
+  "N818",    # exception name Error suffix (ApplicationException is established naming)
+  "PT003"    # Nice to have explicit fixture scope
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]  # assert usage is expected in tests
 
 [tool.ruff.lint.isort]
 extra-standard-library = ["libhg"]

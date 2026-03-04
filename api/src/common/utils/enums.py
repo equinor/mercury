@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class PhaseLabels(str, Enum):
+class PhaseLabels(StrEnum):
     """Enum class for phase labels"""
 
     MERCURY = "Mercury"

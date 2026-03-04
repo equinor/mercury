@@ -59,8 +59,7 @@ class MultiflashResponse(BaseModel):
         new_phase_values = {label: value._asdict() for label, value in phase_values.items()}
         # convert component_fraction to dictionary with lists (not numpy arrays):
         new_component_fractions = {
-            component_id: component_fractions[component_id].moles.tolist()
-            for component_id in component_fractions.keys()
+            component_id: component_fractions[component_id].moles.tolist() for component_id in component_fractions
         }
         # feed fractions to dictionary:
         new_feed_fractions = dict(zip(component_fractions.keys(), feed_fractions, strict=False))

@@ -2,9 +2,9 @@ from timeit import default_timer as timer
 
 import pytest
 from pydantic import ValidationError
-from test_data.multiflash_data import MultiflashEntityOutput, MultiflashInput
 
 from entities.Multiflash import Multiflash, MultiflashResult
+from test_data.multiflash_data import MultiflashEntityOutput, MultiflashInput
 
 
 def test_multiflash_init():
@@ -56,7 +56,7 @@ def test_multiflash_invalid_id():
 
 
 @pytest.mark.parametrize(
-    "multiflash_input, multiflash_expected_result",
+    ("multiflash_input", "multiflash_expected_result"),
     [
         (MultiflashInput.case_1, MultiflashEntityOutput.case_1),
         (MultiflashInput.case_2, MultiflashEntityOutput.case_2),
@@ -66,15 +66,13 @@ def test_multiflash_invalid_id():
 def test_multiflash_compute(multiflash_input: dict, multiflash_expected_result: MultiflashResult):
     multiflash = Multiflash(**multiflash_input)
 
-    print("\nComputing multiflash:")
-    start = timer()
+    timer()
     multiflash_result: MultiflashResult = multiflash.compute()
-    print(f"Multiflash finished: {timer() - start}")
     assert multiflash_result == multiflash_expected_result
 
 
 @pytest.mark.parametrize(
-    "multiflash_input, multiflash_expected_result",
+    ("multiflash_input", "multiflash_expected_result"),
     [
         (MultiflashInput.case_1, MultiflashEntityOutput.case_1),
     ],

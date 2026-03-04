@@ -18,9 +18,7 @@ class PhaseValues(NamedTuple):
     def __eq__(self, other) -> bool:
         if not np.isclose(self.percentage, other.percentage):
             return False
-        if not np.isclose(self.mercury, other.mercury):
-            return False
-        return True
+        return bool(np.isclose(self.mercury, other.mercury))
 
 
 class ComponentFractions(NamedTuple):
@@ -35,9 +33,7 @@ class ComponentFractions(NamedTuple):
     def __eq__(self, other) -> bool:
         if not np.allclose(self.moles, other.moles, rtol=1e-3):
             return False
-        if not np.allclose(self.mass, other.mass, rtol=1e-3):
-            return False
-        return True
+        return np.allclose(self.mass, other.mass, rtol=0.001)
 
 
 class MultiflashResult(NamedTuple):
@@ -60,10 +56,10 @@ class MultiflashResult(NamedTuple):
             return False
         if not set(self.component_fractions.keys()) == set(other.component_fractions.keys()):
             return False
-        for label in self.phase_values.keys():
+        for label in self.phase_values:
             if not self.phase_values[label] == other.phase_values[label]:
                 return False
-        for component_id in self.component_fractions.keys():
+        for component_id in self.component_fractions:
             if not self.component_fractions[component_id] == other.component_fractions[component_id]:
                 return False
         return True

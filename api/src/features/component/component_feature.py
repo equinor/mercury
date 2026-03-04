@@ -8,7 +8,7 @@ from features.metrics.metrics_feature import metrics
 router = APIRouter(tags=["component"], route_class=ExceptionHandlingRoute)
 
 
-@router.get("/components", operation_id="get_components", response_model=ComponentResponse)
+@router.get("/components", operation_id="get_components")
 async def components() -> ComponentResponse:
     metrics.FETCH_COMPONENTS_COUNT += 1
     return ComponentResponse(components=COMPONENTS)
