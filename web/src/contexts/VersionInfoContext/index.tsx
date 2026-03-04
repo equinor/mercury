@@ -23,13 +23,21 @@ export function VersionInfoProvider({ children }: { children: React.ReactNode })
     }
 
     fetch('version.txt')
-      .then((res) => res.text())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Failed to fetch version.txt: ${res.status}`)
+        return res.text()
+      })
       .then((text) => {
         const entries = text
           .split('\n')
           .filter((line: string) => line.includes(': '))
           .map((line: string) => line.split(': '))
-        setCommitInfo(Object.fromEntries(entries) as CommitInfo)
+        if (entries.length > 0) {
+          setCommitInfo(Object.fromEntries(entries) as CommitInfo)
+        }
+      })
+      .catch(() => {
+        // Keep default commitInfo on failure
       })
   }, [])
 

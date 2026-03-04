@@ -13,7 +13,8 @@ vi.mock('@microsoft/applicationinsights-react-js', () => ({
 }))
 
 // Mock the API
-vi.mock('../../api/generated', () => ({
+vi.mock('../../api/generated', async () => ({
+  ...(await vi.importActual('../../api/generated')),
   getComponents: vi.fn().mockResolvedValue({ data: { components: mockComponentProperties } }),
 }))
 

@@ -15,10 +15,14 @@ function App() {
 
   useEffect(() => {
     const id = client.interceptors.request.use((request) => {
-      if (tokenRef.current) {
-        request.headers.set('Authorization', `Bearer ${tokenRef.current}`)
+      if (!tokenRef.current) {
+        return request
       }
-      return request
+
+      const headers = new Headers(request.headers)
+      headers.set('Authorization', `Bearer ${tokenRef.current}`)
+
+      return new Request(request, { headers })
     })
     return () => {
       client.interceptors.request.eject(id)
