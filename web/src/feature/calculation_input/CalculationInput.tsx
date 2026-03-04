@@ -68,13 +68,14 @@ export const CalculationInput = ({
           cubicFeedFlow: cubicFeedFlow,
         }
         setLastInput(input)
-        MultiflashService.computeMultiflash(input)
+        new MultiflashService()
+          .computeMultiflash(input)
           .then((response) => {
             setResult({
-              phaseValues: Object.entries(response.phaseValues).map(([phase, data]) => ({
+              phaseValues: Object.entries(response.phaseValues).map(([phase, phaseData]) => ({
                 phase: phase,
-                percentage: data.percentage,
-                mercury: data.mercury,
+                percentage: phaseData.percentage,
+                mercury: phaseData.mercury,
               })),
               cubicFeedFlow: cubicFeedFlow,
               componentFractions: selectedPackage.components

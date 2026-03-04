@@ -1,17 +1,21 @@
 import { Button, Divider, Progress, Typography } from '@equinor/eds-core-react'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { RouterProvider } from 'react-router-dom'
 import styled from 'styled-components'
-import { OpenAPI } from './api/generated'
+import { setTokenProvider } from './api/client'
 import { router } from './router'
 
 const hasAuthConfig = import.meta.env.VITE_AUTH === '1'
 
 function App() {
   const { token, error, loginInProgress } = useContext(AuthContext)
+  const tokenRef = useRef(token)
+  tokenRef.current = token
 
-  OpenAPI.TOKEN = token
+  useEffect(() => {
+    setTokenProvider(() => tokenRef.current)
+  }, [])
 
   if (hasAuthConfig && error) {
     return <AuthErrorScreen error={error} />
