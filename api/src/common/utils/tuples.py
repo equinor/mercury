@@ -33,7 +33,7 @@ class ComponentFractions(NamedTuple):
     def __eq__(self, other) -> bool:
         if not np.allclose(self.moles, other.moles, rtol=1e-3):
             return False
-        return np.allclose(self.mass, other.mass, rtol=0.001)
+        return bool(np.allclose(self.mass, other.mass, rtol=0.001))
 
 
 class MultiflashResult(NamedTuple):
