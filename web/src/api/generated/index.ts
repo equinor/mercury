@@ -11,7 +11,7 @@ export type { MultiflashResponse } from "./types/MultiflashResponse.ts";
 export type { PhaseLabels, PhaseLabelsEnumKey } from "./types/PhaseLabels.ts";
 export type { ValidationError } from "./types/ValidationError.ts";
 export { ComponentService } from "./clients/ComponentService/ComponentService.ts";
-export { HealthCheckService } from "./clients/Health_checkService/HealthCheckService.ts";
+export { HealthCheckService } from "./clients/HealthCheckService/HealthCheckService.ts";
 export { MetricsService } from "./clients/MetricsService/MetricsService.ts";
 export { MultiflashService } from "./clients/MultiflashService/MultiflashService.ts";
 export { WhoamiService } from "./clients/WhoamiService/WhoamiService.ts";
