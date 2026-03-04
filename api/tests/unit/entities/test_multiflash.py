@@ -1,5 +1,3 @@
-from timeit import default_timer as timer
-
 import pytest
 from pydantic import ValidationError
 
@@ -66,7 +64,6 @@ def test_multiflash_invalid_id():
 def test_multiflash_compute(multiflash_input: dict, multiflash_expected_result: MultiflashResult):
     multiflash = Multiflash(**multiflash_input)
 
-    timer()
     multiflash_result: MultiflashResult = multiflash.compute()
     assert multiflash_result == multiflash_expected_result
 
