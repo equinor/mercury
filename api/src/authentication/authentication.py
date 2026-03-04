@@ -1,7 +1,7 @@
 from typing import Any
 
+import httpx
 import jwt
-import requests
 from cachetools import TTLCache, cached
 from fastapi import Security
 from fastapi.security import OAuth2AuthorizationCodeBearer
@@ -24,7 +24,7 @@ _MICROSOFT_AUTH_PROVIDER = "login.microsoftonline.com"
 @cached(cache=TTLCache(maxsize=32, ttl=86400))
 def get_JWK_client() -> PyJWKClient:
     try:
-        oid_conf_response = requests.get(config.OAUTH_WELL_KNOWN, timeout=30)
+        oid_conf_response = httpx.get(config.OAUTH_WELL_KNOWN, timeout=30)
         oid_conf_response.raise_for_status()
         oid_conf = oid_conf_response.json()
         return PyJWKClient(oid_conf["jwks_uri"])
