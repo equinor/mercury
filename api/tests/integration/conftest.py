@@ -1,5 +1,7 @@
 # Fixtures for integration tests
 
+from collections.abc import Callable
+
 import jwt
 import pytest
 from fastapi import Security
@@ -13,22 +15,22 @@ from config import config
 
 
 @pytest.fixture(scope="function")
-def test_app():
+def test_app() -> TestClient:
     app = create_app()
     client = TestClient(app=app)
 
     app.dependency_overrides[auth_with_jwt] = _mock_auth_with_jwt
-    yield client
+    return client
 
 
 @pytest.fixture(scope="function")
-def test_user():
-    yield User(user_id="1", email="foo@bar.baz", roles=["a"])
+def test_user() -> User:
+    return User(user_id="1", email="foo@bar.baz", roles=["a"])
 
 
 @pytest.fixture(scope="function")
-def get_mock_jwt_token():
-    yield _get_mock_jwt_token
+def get_mock_jwt_token() -> Callable[[User], str]:
+    return _get_mock_jwt_token
 
 
 def _get_mock_jwt_token(user: User) -> str:

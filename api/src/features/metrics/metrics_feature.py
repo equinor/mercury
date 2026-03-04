@@ -20,7 +20,6 @@ metrics = Metrics()
     operation_id="get_metrics",
     response_class=PlainTextResponse,
     summary="Collect application metrics",
-    response_model=str,
 )
 async def get() -> str:
     return f"""mercury_calculations_count {{env={config.ENVIRONMENT}}} {metrics.MULTIFLASH_CALCULATION_COUNT}\n
