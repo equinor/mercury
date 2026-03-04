@@ -77,4 +77,30 @@ describe('FeedFlowInput', () => {
     fireEvent.blur(input)
     expect(input).toHaveValue('1000')
   })
+
+  test('does not propagate whitespace-only input as 0', () => {
+    const { input, setCubicFeedFlow } = renderFeedFlowInput()
+    typeInto(input, '   ')
+    expect(setCubicFeedFlow).not.toHaveBeenCalled()
+  })
+
+  test('does not propagate Infinity', () => {
+    const { input, setCubicFeedFlow } = renderFeedFlowInput()
+    typeInto(input, 'Infinity')
+    expect(setCubicFeedFlow).not.toHaveBeenCalled()
+  })
+
+  test('reverts whitespace-only input on blur', () => {
+    const { input } = renderFeedFlowInput({ cubicFeedFlow: 1000 })
+    typeInto(input, '   ')
+    fireEvent.blur(input)
+    expect(input).toHaveValue('1000')
+  })
+
+  test('reverts Infinity on blur', () => {
+    const { input } = renderFeedFlowInput({ cubicFeedFlow: 1000 })
+    typeInto(input, 'Infinity')
+    fireEvent.blur(input)
+    expect(input).toHaveValue('1000')
+  })
 })
