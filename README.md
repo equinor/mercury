@@ -1,8 +1,25 @@
-# Mercury &middot; ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg) ![CI)](https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml/badge.svg) [![SCM Compliance](https://scm-compliance-api.radix.equinor.com/repos/equinor/mercury/badge)](https://developer.equinor.com/governance/scm-policy/)
+<!-- markdownlint-configure-file {
+  "MD033": false,
+  "MD041": false
+} -->
 
-Mercury calculator - API and Webapp
+<div align="center">
 
-## About
+# Mercury
+
+[![License][license-badge]][license]
+[![On push main branch][on-push-main-branch-badge]][on-push-main-branch-action]
+[![SCM Compliance][scm-badge]][scm-policy]
+
+This is an **application** to perform phase equilibrium calculations for mercury.
+
+[About](#about) • [Development](#development) • [Contributing](#Contributing)
+
+</div>
+
+<a id="about"></a>
+
+## :books: About
 
 This calculator performs phase equilibrium calculations for mercury. It can be used to provide mercury
 distribution results for hydrocarbon mixtures at different temperatures and pressures.
@@ -10,8 +27,7 @@ Depending on the corresponding conditions used, the calculator can provide resul
 Hydrocarbon Gas/Hydrocarbon Liquid/Aqueous/Pure Mercury (liquid or solid).
 
 The core of the calculator is the UMR model (1-4). This model has been qualified for mercury calculations through
-the research activity “Mercury distribution in the oil & gas value chain”
-[colab link](https://colab.equinor.com/technologies/75C06E9B-49E4-4746-940E-EE6E33ED7F3E/summary).
+the research activity “Mercury distribution in the oil & gas value chain” [colab link][colab]
 
 The model was tested and qualified for gas/condensate systems for the following conditions:
 
@@ -33,9 +49,9 @@ Hg concentrations, which can be up to an order of magnitude higher.
 It is also possible to use the model for glycol systems (MEG and TEG) but the uncertainty of the model is
 not defined for such calculations.
 
-- The architecture contract for the calculator can be found [here (requires sign in)](https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md)
+- The architecture contract for the calculator can be found [here (requires sign in)][architecture-contract]
 
-- Test fluids for calculations can be found in [multiflash_data.py](https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py)
+- Test fluids for calculations can be found in [multiflash_data.py][multiflash-test-data]
 
 - For technical support and improvement suggestions please contact: <fg_team_hermes@equinor.com>
 
@@ -53,49 +69,28 @@ Fuel 233 (2018) 558-564.
 4. Koulocheris V, Plakia A, Louli V, Panteli E, Voutsas E, Calculating the chemical and phase equilibria of mercury
 in natural gas, Fluid Phase Equilibria, 544-545 (2021) 113089.
 
-## Develop
+<a id="development"></a>
 
-### Prerequisites
+## :dizzy: Development
 
-In order to run the application locally, you need:
+See the [docs][docs] if you want to start developing.
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- Make sure you have Python installed. version 3.10 or higher is required.
+<a id="Contributing"></a>
 
-Building the Dockerfile requires read access to the private Github repository containing the Fortan
-library source (<https://github.com/equinor/gpa-libhg>).
-The simplest way to manage this is to create a new access token:
-Create a new fine-grained access token with the access to the gpa-libhg repository,
-along with read access to code and metadata. Set the token to the `.env` variable `LIBHG_PAT`.
+## :+1: Contributing
 
-### Testing
+Thanks for your interest in contributing! There are many ways to contribute to this project.
 
-Depending on your OS/CPU, tests can be run locally or via Docker. In order to test locally, Intel's Fortran compiler
-must be installed and libhg must be compiled (see <https://github.com/equinor/gpa-libhg>) for more details on how to
-compile the library. Tests are then run through pytest from the command line.
+Please see the [contributing guidelines][docs-contributing] for more information.
 
-To run tests in docker you first have to build the Docker image. When the build is done, unit tests can be run with the
-command:
-
-```bash
-docker compose run --rm api pytest
-```
-
-Integration tests are run with the command:
-
-```bash
-docker compose run --rm api pytest --integration
-```
-
-### Common issues
-
-- **gpg: no valid OpenPGP data found.**\
-  If this error occurs when you try to run `docker-compose up` locally, it might be caused by you being connected to the
-Access_Restricted_WInternetwork network. Try instead to connect to Statoil-Approved.
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+[license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+[license]: https://github.com/equinor/mercury/blob/main/LICENSE.md
+[on-push-main-branch-badge]: https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml/badge.svg
+[on-push-main-branch-action]: https://github.com/equinor/mercury/actions/workflows/on-push-main-branch.yaml
+[scm-badge]: https://scm-compliance-api.radix.equinor.com/repos/equinor/mercury/badge
+[scm-policy]: https://developer.equinor.com/governance/scm-policy/
+[colab]: https://colab.equinor.com/technologies/75C06E9B-49E4-4746-940E-EE6E33ED7F3E/summary
+[architecture-contract]: https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md
+[multiflash-test-data]: https://github.com/equinor/mercury/blob/main/api/tests/test_data/multiflash_data.py
+[docs]: https://varia.equinor.com/docs/default/system/mercury
+[docs-contributing]: https://varia.equinor.com/docs/default/system/mercury/contributing
