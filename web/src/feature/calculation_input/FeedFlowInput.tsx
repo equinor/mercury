@@ -1,5 +1,5 @@
 import { Switch, TextField } from '@equinor/eds-core-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { molePerStandardCubicMeter } from '../../common/constants'
 
@@ -30,6 +30,13 @@ export const FeedFlowInput = (props: {
   const [inputText, setInputText] = useState<string>(formatDisplayValue(props.cubicFeedFlow))
   const selectedUnit = displayMassFeedFlow ? 'kg/d' : 'Sm3/d'
 
+  useEffect(() => {
+    if (props.molecularWeightSum === undefined && displayMassFeedFlow) {
+      setDisplayMassFeedFlow(false)
+      setInputText(formatDisplayValue(props.cubicFeedFlow))
+    }
+  }, [props.molecularWeightSum, props.cubicFeedFlow, displayMassFeedFlow])
+
   const handleUnitToggle = (checked: boolean) => {
     setDisplayMassFeedFlow(checked)
     const displayValue = checked
@@ -42,8 +49,11 @@ export const FeedFlowInput = (props: {
     const raw = event.target.value
     setInputText(raw)
 
-    const parsed = Number(raw)
-    if (raw !== '' && !Number.isNaN(parsed)) {
+    const trimmed = raw.trim()
+    if (trimmed === '') return
+
+    const parsed = Number(trimmed)
+    if (Number.isFinite(parsed)) {
       if (displayMassFeedFlow) {
         props.setCubicFeedFlow(convertFlowFromMassToCubic(parsed, props.molecularWeightSum ?? 1))
       } else {
@@ -53,8 +63,9 @@ export const FeedFlowInput = (props: {
   }
 
   const handleBlur = () => {
-    const parsed = Number(inputText)
-    if (inputText === '' || Number.isNaN(parsed)) {
+    const trimmed = inputText.trim()
+    const parsed = Number(trimmed)
+    if (trimmed === '' || !Number.isFinite(parsed)) {
       // Revert to the last valid value on blur
       const displayValue = displayMassFeedFlow
         ? convertFlowFromCubicToMass(props.cubicFeedFlow, props.molecularWeightSum ?? 1)
