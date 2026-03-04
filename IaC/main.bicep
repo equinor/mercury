@@ -1,33 +1,45 @@
 @description('Specifies the location for resources.')
 param location string = 'norwayeast'
-@allowed(['dev', 'test', 'prod'])
+
+@allowed(['dev', 'prod'])
 param environment string
 
-@maxValue(730)
-param logRetentionDays int
+var tags = {
+  application: 'mercury'
+  environment: environment
+}
 
-resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
+var appInsightsRetentionDays = environment == 'prod' ? 365 : 90
+var workspaceRetentionDays = environment == 'prod' ? 730 : 30
+
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: 'mercury-${environment}-logWorkspace'
   location: location
+  tags: tags
   properties: {
     sku: {
-      name: 'pergb2018'
+      name: 'PerGB2018'
     }
+    retentionInDays: workspaceRetentionDays
   }
 }
 
 resource appInsight 'Microsoft.Insights/components@2020-02-02' = {
   name: 'mercury-${environment}-logs'
   location: location
+  tags: tags
   kind: 'web'
   properties: {
     Application_Type: 'web'
     Flow_Type: 'Bluefield'
     IngestionMode: 'LogAnalytics'
     publicNetworkAccessForIngestion: 'Enabled'
-    publicNetworkAccessForQuery: 'Disabled'
+    publicNetworkAccessForQuery: 'Enabled'
     Request_Source: 'rest'
-    RetentionInDays: logRetentionDays
+    RetentionInDays: appInsightsRetentionDays
     WorkspaceResourceId: logAnalyticsWorkspace.id
   }
 }
+
+output appInsightsConnectionString string = appInsight.properties.ConnectionString
+output appInsightsInstrumentationKey string = appInsight.properties.InstrumentationKey
