@@ -57,7 +57,7 @@ def auth_with_jwt(jwt_token: str = Security(oauth2_scheme)) -> User:
             user = User(user_id=payload["sub"], **payload)
     except jwt.exceptions.InvalidTokenError as error:
         logger.warning(f"Failed to decode JWT: {error}")
-        raise UnauthorizedException from error
+        raise UnauthorizedException from None
 
     if user is None:
         raise UnauthorizedException

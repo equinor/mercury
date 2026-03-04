@@ -36,6 +36,7 @@ class ApplicationException(Exception):
         status: int = 500,
         severity: ExceptionSeverity = ExceptionSeverity.ERROR,
     ):
+        super().__init__(message)
         self.status = status
         self.type = self.__class__.__name__
         self.message = message
@@ -104,5 +105,5 @@ class UnauthorizedException(ApplicationException):
         debug: str = "Token was not valid for requested operation.",
         extra: dict[str, Any] | None = None,
     ):
-        super().__init__(message, debug, extra, status.HTTP_401_UNAUTHORIZED)
+        super().__init__(message, debug, extra, status.HTTP_401_UNAUTHORIZED, severity=ExceptionSeverity.WARNING)
         self.type = self.__class__.__name__
