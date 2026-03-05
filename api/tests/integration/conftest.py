@@ -1,6 +1,6 @@
 # Fixtures for integration tests
 
-from collections.abc import Callable
+from collections.abc import Callable, Generator
 
 import jwt
 import pytest
@@ -15,12 +15,11 @@ from config import config
 
 
 @pytest.fixture(scope="function")
-def test_app() -> TestClient:
+def test_app() -> Generator[TestClient]:
     app = create_app()
-    client = TestClient(app=app)
-
     app.dependency_overrides[auth_with_jwt] = _mock_auth_with_jwt
-    return client
+    with TestClient(app=app) as client:
+        yield client
 
 
 @pytest.fixture(scope="function")
