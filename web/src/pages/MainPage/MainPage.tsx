@@ -1,5 +1,7 @@
+import { Button, Typography } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
-import { useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { AuthContext } from 'react-oauth2-code-pkce'
 import { type ComponentProperties, ComponentService } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
 import type { TCalcStatus, TComponentProperty, TResults } from '../../common/types'
@@ -19,31 +21,68 @@ const toSortedArray = (components: { [key: string]: ComponentProperties }) => {
     .map((id) => ({ id: id, ...components[id] }))
 }
 
+const isUnauthorizedError = (error: unknown): boolean => {
+  return error instanceof Error && 'status' in error && (error as Error & { status: number }).status === 401
+}
+
 export const MainPage = () => {
   const [componentProperties, setComponentProperties] = useState<TComponentProperty[]>()
   const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [fetchError, setFetchError] = useState<unknown>()
   const [calcStatus, setCalcStatus] = useState<TCalcStatus>()
   const [result, setResult] = useState<TResults>()
 
   const appInsights = useAppInsightsContext()
+  const { logIn } = useContext(AuthContext)
 
   useEffect(() => {
     appInsights.trackEvent({ name: 'MainPageLoaded' }, {})
   }, [appInsights])
 
-  // Fetch list of components name once on page load
-  useEffect(() => {
+  const fetchComponents = useCallback(() => {
+    setIsLoading(true)
+    setFetchError(undefined)
     ComponentService.getComponents()
       .then((response) => {
         setComponentProperties(toSortedArray(response.components))
       })
+      .catch((error: unknown) => {
+        setFetchError(error)
+      })
       .finally(() => setIsLoading(false))
   }, [])
 
+  // Fetch list of components on page load
+  useEffect(() => {
+    fetchComponents()
+  }, [fetchComponents])
+
   if (isLoading) return
 
-  // TODO: Better error handling and message
-  if (!componentProperties) return <div>Failed to fetch list of components</div>
+  if (fetchError) {
+    return (
+      <Container>
+        <Typography variant="h4">Failed to fetch list of components</Typography>
+        {isUnauthorizedError(fetchError) ? (
+          <>
+            <Typography variant="body_short">Your session may have expired.</Typography>
+            <Button variant="contained" onClick={() => logIn()}>
+              Log in again
+            </Button>
+          </>
+        ) : (
+          <>
+            <Typography variant="body_short">An unexpected error occurred. Please try again.</Typography>
+            <Button variant="contained" onClick={fetchComponents}>
+              Retry
+            </Button>
+          </>
+        )}
+      </Container>
+    )
+  }
+
+  if (!componentProperties) return
 
   return (
     <>

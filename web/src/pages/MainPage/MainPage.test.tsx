@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 import { vi } from 'vitest'
 import { mockComponentProperties } from '../../setupTests'
@@ -25,6 +25,7 @@ vi.mock('react-oauth2-code-pkce', () => ({
     token: 'mock-token',
     tokenData: { name: 'Mock User' },
     logOut: vi.fn(),
+    logIn: vi.fn(),
   }),
 }))
 
@@ -32,4 +33,30 @@ test('renders without crashing', () => {
   const { container } = render(<MainPage />)
 
   expect(container).toBeInTheDocument()
+})
+
+test('shows error with retry button when fetch fails', async () => {
+  const { ComponentService } = await import('../../api/generated')
+  vi.mocked(ComponentService.getComponents).mockRejectedValueOnce(new Error('Network error'))
+
+  render(<MainPage />)
+
+  await waitFor(() => {
+    expect(screen.getByText('Failed to fetch list of components')).toBeInTheDocument()
+  })
+  expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument()
+})
+
+test('shows login button when receiving 401 unauthorized', async () => {
+  const { ComponentService } = await import('../../api/generated')
+  const error = new Error('Unauthorized')
+  Object.assign(error, { status: 401 })
+  vi.mocked(ComponentService.getComponents).mockRejectedValueOnce(error)
+
+  render(<MainPage />)
+
+  await waitFor(() => {
+    expect(screen.getByText('Your session may have expired.')).toBeInTheDocument()
+  })
+  expect(screen.getByRole('button', { name: 'Log in again' })).toBeInTheDocument()
 })
