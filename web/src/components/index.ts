@@ -1,3 +1,5 @@
 export { Card } from './Card/Card'
 export { DynamicTable } from './DynamicTable/DynamicTable'
+export { ErrorState } from './ErrorState/ErrorState'
+export { Flexbox } from './Flexbox/Flexbox'
 export { Popover } from './Popover/Popover'

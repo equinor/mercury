@@ -1,10 +1,11 @@
-import { Button, Typography } from '@equinor/eds-core-react'
+import { error_outlined, lock } from '@equinor/eds-icons'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { type ComponentProperties, ComponentService } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
 import type { TCalcStatus, TComponentProperty, TResults } from '../../common/types'
+import { ErrorState } from '../../components'
 import { LastInputProvider } from '../../contexts/LastInputContext/LastInputContext'
 import { AppBar } from '../../feature/AppBar/AppBar'
 import { CalculationInput } from '../../feature/calculation_input/CalculationInput'
@@ -62,21 +63,22 @@ export const MainPage = () => {
   if (fetchError) {
     return (
       <Container>
-        <Typography variant="h4">Failed to fetch list of components</Typography>
         {isUnauthorizedError(fetchError) ? (
-          <>
-            <Typography variant="body_short">Your session has expired.</Typography>
-            <Button variant="contained" onClick={() => logIn()}>
-              Log in again
-            </Button>
-          </>
+          <ErrorState
+            icon={lock}
+            title="Your session has expired."
+            message="You need to log in again."
+            buttonLabel="Log in again"
+            onAction={() => logIn()}
+          />
         ) : (
-          <>
-            <Typography variant="body_short">An unexpected error occurred. Please try again.</Typography>
-            <Button variant="contained" onClick={fetchComponents}>
-              Retry
-            </Button>
-          </>
+          <ErrorState
+            icon={error_outlined}
+            title="Failed to fetch list of components."
+            message="Please try to reload the page."
+            buttonLabel="Reload"
+            onAction={() => fetchComponents()}
+          />
         )}
       </Container>
     )

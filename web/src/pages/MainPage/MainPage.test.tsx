@@ -43,9 +43,9 @@ test('shows error with retry button when fetch fails', async () => {
   render(<MainPage />)
 
   await waitFor(() => {
-    expect(screen.getByText('Failed to fetch list of components')).toBeInTheDocument()
+    expect(screen.getByText('Failed to fetch list of components.')).toBeInTheDocument()
   })
-  expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument()
+  expect(screen.getByRole('button', { name: 'Reload' })).toBeInTheDocument()
 })
 
 test('shows login button when receiving 401 unauthorized', async () => {
