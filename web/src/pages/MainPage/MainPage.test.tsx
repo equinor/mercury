@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import React from 'react'
 import { vi } from 'vitest'
 import { mockComponentProperties } from '../../setupTests'
@@ -56,7 +57,41 @@ test('shows login button when receiving 401 unauthorized', async () => {
   render(<MainPage />)
 
   await waitFor(() => {
-    expect(screen.getByText('Your session may have expired.')).toBeInTheDocument()
+    expect(screen.getByText('Your session has expired.')).toBeInTheDocument()
   })
   expect(screen.getByRole('button', { name: 'Log in again' })).toBeInTheDocument()
+})
+
+test('clicking Log in again triggers login flow', async () => {
+  const user = userEvent.setup()
+  const mockLogIn = vi.fn()
+  const { AuthContext } = await import('react-oauth2-code-pkce')
+
+  const { ComponentService } = await import('../../api/generated')
+  const error = new Error('Unauthorized')
+  Object.assign(error, { status: 401 })
+  vi.mocked(ComponentService.getComponents).mockRejectedValueOnce(error)
+
+  render(
+    <AuthContext.Provider
+      value={
+        {
+          token: 'mock-token',
+          tokenData: { name: 'Mock User' },
+          logOut: vi.fn(),
+          logIn: mockLogIn,
+        } as unknown as React.ContextType<typeof AuthContext>
+      }
+    >
+      <MainPage />
+    </AuthContext.Provider>
+  )
+
+  await waitFor(() => {
+    expect(screen.getByRole('button', { name: 'Log in again' })).toBeInTheDocument()
+  })
+
+  await user.click(screen.getByRole('button', { name: 'Log in again' }))
+
+  expect(mockLogIn).toHaveBeenCalledTimes(1)
 })
