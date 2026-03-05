@@ -1,44 +1,16 @@
 FROM nginx:1.29-alpine AS server
+HEALTHCHECK CMD ["nginx", "-t"]
 
-RUN apk upgrade --update-cache
-
-# Create a non-root user, which will be running the server
-RUN <<EOF
-#!/usr/bin/env sh
-set -eu
-
-# Ensure that the nginx-user has a uid >= 1000
-# that way, it is not a privileged user, and radix will be happy
-deluser "nginx"
-adduser \
-    --disabled-password \
-    --no-create-home \
-    --gecos "" \
-    --uid 1000 \
-    "nginx"
-
-# Remove default nginx config
-rm /etc/nginx/conf.d/default.conf
-
-# Create log directory if not present, set permissions
-mkdir -p /var/log/nginx
-chown -R "nginx:nginx" /var/log/nginx
-
-# Create tmp directory if not present, set permissions
-mkdir -p /tmp/nginx
-chown -R "nginx:nginx" /tmp/nginx
-
-# Create pidfile, set permissions
-touch /var/run/nginx.pid
-chown -R "nginx:nginx" /var/run/nginx.pid
-EOF
+# Set up non root writable directories
+RUN apk upgrade --update-cache && \
+  deluser nginx && adduser -D -H -u 1000 nginx && \
+  rm /etc/nginx/conf.d/default.conf && \
+  mkdir -p /var/log/nginx /tmp/nginx && \
+  touch /var/run/nginx.pid && \
+  chown -R nginx:nginx /var/log/nginx /tmp/nginx /var/run/nginx.pid
 
 # Copy configs
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY nginx/config/ /etc/nginx/config
-
-# Copy sites-available into sites-enabled
-COPY nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
+COPY nginx/rootfs/ /
 
 # Run master process as non-root user
 USER 1000
