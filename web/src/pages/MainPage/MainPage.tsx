@@ -65,7 +65,7 @@ export const MainPage = () => {
         <Typography variant="h4">Failed to fetch list of components</Typography>
         {isUnauthorizedError(fetchError) ? (
           <>
-            <Typography variant="body_short">Your session may have expired.</Typography>
+            <Typography variant="body_short">Your session has expired.</Typography>
             <Button variant="contained" onClick={() => logIn()}>
               Log in again
             </Button>
