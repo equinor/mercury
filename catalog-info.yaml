@@ -7,6 +7,7 @@ metadata:
   annotations:
     github.com/project-slug: equinor/mercury
     backstage.io/techdocs-ref: dir:.
+    equinor.com/techdocs-builder: host
   links:
     - url: https://mercury.app.radix.equinor.com/
       title: Production app
@@ -19,8 +20,8 @@ metadata:
       icon: console
 spec:
   type: product
-  owner: team-hermes
   lifecycle: production
+  owner: team-hermes
 
 ---
 apiVersion: backstage.io/v1alpha1
@@ -29,6 +30,9 @@ metadata:
   name: mercury-api
   title: Mercury API
   description: API for the Mercury calculator
+  tags:
+    - python
+    - fastapi
   annotations:
     github.com/project-slug: equinor/mercury
     backstage.io/techdocs-entity: system:default/mercury
@@ -36,33 +40,15 @@ metadata:
     - url: https://api-mercury-prod.radix.equinor.com/docs
       title: API documentation
       icon: api
-
 spec:
   type: service
-  owner: team-hermes
   lifecycle: production
+  owner: team-hermes
   providesApis:
     - mercury-api
   dependsOn:
-    - component:default/gpa-libhg
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-metadata:
-  name: mercury-auth-proxy
-  title: Mercury Auth Proxy
-  description: OAuth2 Proxy for authentication and authorization.
-  tags:
-    - oauth2
-    - proxy
-  annotations:
-    github.com/project-slug: equinor/mercury
-    backstage.io/techdocs-entity: system:default/mercury
-spec:
-  type: service
-  lifecycle: production
-  owner: team-hermes
-  system: system:default/mercury
+    - resource:default/gpa-libhg
+
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -74,6 +60,7 @@ metadata:
     - frontend
     - react
     - typescript
+    - proxy
   annotations:
     github.com/project-slug: equinor/mercury
     backstage.io/techdocs-entity: system:default/mercury
@@ -90,13 +77,14 @@ spec:
     - mercury-api
   dependsOn:
     - component:default/mercury-api
+
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
   name: mercury-api
   title: Mercury API
-  description: REST API for Mercury core analysis data.
+  description: REST API for Mercury calculator
   annotations:
     github.com/project-slug: equinor/mercury
     backstage.io/techdocs-entity: system:default/mercury
@@ -107,9 +95,10 @@ spec:
   system: system:default/mercury
   definition:
     $text: https://mercury.app.radix.equinor.com/api/openapi.json
+
 ---
 apiVersion: backstage.io/v1alpha1
-kind: Component
+kind: Resource
 metadata:
   name: gpa-libhg
   title: GPA LibHg
