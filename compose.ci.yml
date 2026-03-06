@@ -2,6 +2,8 @@ services:
   api:
     build:
       target: development
+      cache_from:
+        - ghcr.io/equinor/mercury-api:latest
     image: mercury-api-ci
     environment:
       ENVIRONMENT: local
