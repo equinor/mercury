@@ -15,7 +15,6 @@ RUN gh release download ${LIBHG_VERSION} \
 
 FROM python:3.13-slim-bookworm AS base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV UV_VERSION="0.9.22"
 ENV USER="mercury"
 ENV PYTHONPATH=/code/src
 
@@ -36,9 +35,7 @@ ENV UV_COMPILE_BYTECODE=1 \
   UV_LINK_MODE=copy \
   UV_PYTHON_DOWNLOADS=never \
   UV_TOOL_BIN_DIR=/usr/local/bin
-RUN --mount=type=cache,target=/root/.cache/pip \
-  pip install --upgrade pip && \
-  pip install "uv==$UV_VERSION"
+COPY --from=ghcr.io/astral-sh/uv:0.9.22 /uv /usr/local/bin/uv
 
 
 WORKDIR /code
