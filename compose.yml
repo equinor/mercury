@@ -13,8 +13,6 @@ services:
     restart: unless-stopped
     build:
       context: api
-      cache_from:
-        - ghcr.io/equinor/mercury-api:latest
       args:
         LIBHG_VERSION: $LIBHG_VERSION
       secrets:
