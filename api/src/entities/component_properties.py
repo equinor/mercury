@@ -1,6 +1,9 @@
+from typing import Self, cast
+
 from pydantic import ConfigDict, Field
 
 from common.base_model_wrapper import BaseModelWrapper
+from common.components import ComponentPropertiesDict
 
 
 class ComponentProperties(BaseModelWrapper):
@@ -16,3 +19,8 @@ class ComponentProperties(BaseModelWrapper):
     model_config = ConfigDict(
         json_schema_extra={"example": {"chemicalFormula": "Hg", "altName": "Mercury", "molecularWeight": 200.59}},
     )
+
+    @classmethod
+    def from_dictionary(cls, dictionary: ComponentPropertiesDict) -> Self:
+        """Create from dictionary."""
+        return cast("Self", cls.model_validate(dictionary))

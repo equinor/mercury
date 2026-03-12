@@ -1,4 +1,7 @@
-COMPONENTS = {
+ComponentPropertiesDict = dict[str, str | float]
+ComponentsDict = dict[str, ComponentPropertiesDict]
+
+COMPONENTS: ComponentsDict = {
     "1": {
         "chemical_formula": "CO2",
         "alt_name": "Carbon Dioxide",

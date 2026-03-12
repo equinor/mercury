@@ -1,6 +1,9 @@
+from typing import Self
+
 from pydantic import ConfigDict, Field
 
 from common.base_model_wrapper import BaseModelWrapper
+from common.components import ComponentsDict
 from entities.component_properties import ComponentProperties
 
 
@@ -27,3 +30,8 @@ class ComponentResponse(BaseModelWrapper):
             }
         },
     )
+
+    @classmethod
+    def from_dictionary(cls, dictionary: ComponentsDict) -> Self:
+        """Create from dictionary."""
+        return cls(components={key: ComponentProperties.from_dictionary(value) for key, value in dictionary.items()})
