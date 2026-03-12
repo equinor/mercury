@@ -7,7 +7,12 @@ from features.metrics.metrics_use_case import get_metrics_use_case
 router = APIRouter(tags=["metrics"], route_class=ExceptionHandlingRoute)
 
 
-@router.get("/metrics", operation_id="get_metrics", summary="Collect application metrics")
-async def get() -> PlainTextResponse:
+@router.get(
+    "/metrics",
+    operation_id="get_metrics",
+    response_class=PlainTextResponse,
+    summary="Collect application metrics",
+)
+async def get() -> str:
     """Return metrics for application."""
-    return PlainTextResponse(get_metrics_use_case())
+    return get_metrics_use_case()
