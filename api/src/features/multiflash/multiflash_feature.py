@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from common.exception_handling import ExceptionHandlingRoute
-from entities.Multiflash import Multiflash
+from entities.multiflash import Multiflash
 from features.metrics.metrics_feature import metrics
 from features.multiflash.multiflash_use_case import (
     MultiflashResponse,

@@ -1,7 +1,7 @@
 import pytest
 from pydantic import ValidationError
 
-from entities.Multiflash import Multiflash, MultiflashResult
+from entities.multiflash import Multiflash, MultiflashResult
 from test_data.multiflash_data import MultiflashEntityOutput, MultiflashInput
 
 

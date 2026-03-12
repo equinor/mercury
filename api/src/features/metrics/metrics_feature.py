@@ -15,12 +15,7 @@ class Metrics:
 metrics = Metrics()
 
 
-@router.get(
-    "/metrics",
-    operation_id="get_metrics",
-    response_class=PlainTextResponse,
-    summary="Collect application metrics",
-)
-async def get() -> str:
-    return f"""mercury_calculations_count {{env={config.ENVIRONMENT}}} {metrics.MULTIFLASH_CALCULATION_COUNT}\n
-mercury_fetch_components_count {{env={config.ENVIRONMENT}}} {metrics.FETCH_COMPONENTS_COUNT}\n"""
+@router.get("/metrics", operation_id="get_metrics", summary="Collect application metrics")
+async def get() -> PlainTextResponse:
+    return PlainTextResponse(f"""mercury_calculations_count {{env={config.ENVIRONMENT}}} {metrics.MULTIFLASH_CALCULATION_COUNT}\n
+mercury_fetch_components_count {{env={config.ENVIRONMENT}}} {metrics.FETCH_COMPONENTS_COUNT}\n""")

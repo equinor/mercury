@@ -3,7 +3,7 @@ from typing import NamedTuple
 import numpy as np
 
 from common.utils.tuples import ComponentFractions, PhaseLabels, PhaseValues
-from entities.Multiflash import MultiflashResult
+from entities.multiflash import MultiflashResult
 
 
 class InputArguments(NamedTuple):

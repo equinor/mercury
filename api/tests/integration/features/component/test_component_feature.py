@@ -1,7 +1,7 @@
 from starlette.status import HTTP_200_OK
 
 from common.components import COMPONENTS
-from entities.ComponentResponse import ComponentProperties
+from entities.component_properties import ComponentProperties
 
 
 def test_components_feature(test_app):

@@ -7,7 +7,7 @@
 /**
  * @description Successful Response
 */
-export type GetMetrics200 = string;
+export type GetMetrics200 = any;
 
 export type GetMetricsQueryResponse = GetMetrics200;
 

@@ -3,11 +3,13 @@
 * Do not edit manually.
 */
 
+import type { User } from "./User.ts";
 
 /**
+ * User
  * @description Successful Response
 */
-export type GetWhoami200 = any;
+export type GetWhoami200 = User;
 
 export type GetWhoamiQueryResponse = GetWhoami200;
 

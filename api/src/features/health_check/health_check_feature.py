@@ -11,7 +11,6 @@ router = APIRouter(tags=["health_check"], prefix="/health-check", route_class=Ex
     operation_id="get_health_check",
     status_code=status.HTTP_200_OK,
     responses={status.HTTP_200_OK: {"model": str, "content": {"text/plain": {"example": "OK"}}}},
-    response_class=PlainTextResponse,
 )
-async def get():
-    return "OK"
+async def get() -> PlainTextResponse:
+    return PlainTextResponse("OK")
