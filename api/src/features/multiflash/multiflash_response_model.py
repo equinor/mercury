@@ -2,7 +2,7 @@ from typing import Self
 
 from pydantic import ConfigDict, Field
 
-from common.base_model_wrapper import BaseModelWrapper
+from common.entities.base_model_wrapper import BaseModelWrapper
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import MultiflashResult
 

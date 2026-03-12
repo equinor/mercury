@@ -2,8 +2,8 @@ from typing import Self
 
 from pydantic import ConfigDict, Field
 
-from common.base_model_wrapper import BaseModelWrapper
 from common.components import ComponentsDict
+from common.entities.base_model_wrapper import BaseModelWrapper
 from entities.component_properties import ComponentProperties
 
 

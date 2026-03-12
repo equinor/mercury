@@ -4,8 +4,8 @@ from collections.abc import Mapping
 import numpy as np
 from pydantic import ConfigDict, Field, field_validator
 
-from common.base_model_wrapper import BaseModelWrapper
 from common.components import COMPONENTS
+from common.entities.base_model_wrapper import BaseModelWrapper
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
