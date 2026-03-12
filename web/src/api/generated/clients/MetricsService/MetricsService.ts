@@ -12,6 +12,7 @@ export class MetricsService {
   static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
+   * @description Return metrics for application.
    * @summary Collect application metrics
    * {@link /metrics}
    */

@@ -1,3 +1,4 @@
+from common.metrics import metrics
 from common.telemetry import tracer
 from entities.multiflash import (
     Multiflash,
@@ -9,5 +10,6 @@ from features.multiflash.multiflash_response_model import MultiflashResponse
 @tracer.start_as_current_span("compute_multiflash_use_case")
 def compute_multiflash_use_case(multiflash: Multiflash) -> MultiflashResponse:
     """Compute multiflash."""
+    metrics.increase_multiflash_calculation_count()
     multiflash_result: MultiflashResult = multiflash.compute()
     return MultiflashResponse.from_results(multiflash_result)
