@@ -12,5 +12,5 @@ router = APIRouter(tags=["whoami"], prefix="/whoami", route_class=ExceptionHandl
 @router.get("/", operation_id="get_whoami")
 async def get_information_on_authenticated_user(
     user: Annotated[User, Depends(auth_with_jwt)],
-):
+) -> User:
     return user

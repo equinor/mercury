@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from entities.Multiflash import Multiflash
+from entities.multiflash import Multiflash
 from features.multiflash.multiflash_use_case import (
     MultiflashResponse,
     compute_multiflash_use_case,

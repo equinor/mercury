@@ -1,3 +1,4 @@
+export type { AccessLevel, AccessLevelEnumKey } from "./types/AccessLevel.ts";
 export type { ComponentProperties } from "./types/ComponentProperties.ts";
 export type { ComponentResponse } from "./types/ComponentResponse.ts";
 export type { ComputeMultiflash200, ComputeMultiflash422, ComputeMultiflashMutation, ComputeMultiflashMutationRequest, ComputeMultiflashMutationResponse } from "./types/ComputeMultiflash.ts";
@@ -9,10 +10,12 @@ export type { HTTPValidationError } from "./types/HTTPValidationError.ts";
 export type { Multiflash } from "./types/Multiflash.ts";
 export type { MultiflashResponse } from "./types/MultiflashResponse.ts";
 export type { PhaseLabels, PhaseLabelsEnumKey } from "./types/PhaseLabels.ts";
+export type { User } from "./types/User.ts";
 export type { ValidationError } from "./types/ValidationError.ts";
 export { ComponentService } from "./clients/ComponentService/ComponentService.ts";
 export { HealthCheckService } from "./clients/HealthCheckService/HealthCheckService.ts";
 export { MetricsService } from "./clients/MetricsService/MetricsService.ts";
 export { MultiflashService } from "./clients/MultiflashService/MultiflashService.ts";
 export { WhoamiService } from "./clients/WhoamiService/WhoamiService.ts";
+export { accessLevelEnum } from "./types/AccessLevel.ts";
 export { phaseLabelsEnum } from "./types/PhaseLabels.ts";
