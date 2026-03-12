@@ -15,7 +15,7 @@ class _Metrics:
         self._multiflash_calculation_count += 1
 
     def increase_fetch_components_count(self) -> None:
-        """Increase multiflash calculation count by 1."""
+        """Increase fetch components count by 1."""
         self._fetch_components_count += 1
 
 
