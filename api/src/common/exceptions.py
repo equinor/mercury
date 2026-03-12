@@ -3,7 +3,7 @@ from typing import Any
 
 from starlette import status
 
-from common.entities.StrictModel import StrictModel
+from common.entities.strict_model import StrictModel
 
 
 class ExceptionSeverity(Enum):
