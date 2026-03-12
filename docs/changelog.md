@@ -1,5 +1,108 @@
 # Changelog
 
+## [1.1.9](https://github.com/equinor/mercury/compare/v1.1.8...v1.1.9) (2026-03-12)
+
+
+### Bug Fixes
+
+* address PR review comments ([3c9dc67](https://github.com/equinor/mercury/commit/3c9dc67e07059a3533d6ba9a8d51b6d6324998a9))
+* **api:** handle expired JWT gracefully without traceback ([f2578b5](https://github.com/equinor/mercury/commit/f2578b5dcb6a760caa91ca7b988d49f7842f8ef3))
+* **api:** remove orphaned timer() call and wrap np.allclose in bool() ([be3a084](https://github.com/equinor/mercury/commit/be3a0842819216d2426d9f049f36426f629a4e2e))
+* **api:** use TestClient context manager for proper ASGI lifespan handling in tests ([1e93494](https://github.com/equinor/mercury/commit/1e93494d37e1ed8012eb84fd43ad4bbfda59244f)), closes [#741](https://github.com/equinor/mercury/issues/741)
+* harden curl in pre-commit script\n\n- Use curl -sf to fail on HTTP errors\n- Use localhost instead of 0.0.0.0 for client requests\n- Add trap for temp file cleanup on all exit paths ([2396bd0](https://github.com/equinor/mercury/commit/2396bd0e96752b4c073f6131340f26889482524a))
+* remove duplicate curl call in API client generation script ([87a78f1](https://github.com/equinor/mercury/commit/87a78f1ba29dbb946cc5c4b4e53752e1e47c0893))
+* **web:** address PR review comments ([b53aaa9](https://github.com/equinor/mercury/commit/b53aaa9d93a2e726f9f18decd25d35cb24338434))
+* **web:** feed flow input does not accept decimals or exponentials ([0869a0d](https://github.com/equinor/mercury/commit/0869a0d745890445278b0a5fc29baaa60db6fc15)), closes [#258](https://github.com/equinor/mercury/issues/258)
+* **web:** handle unauthorized error on component fetch ([ccc72af](https://github.com/equinor/mercury/commit/ccc72afca2200218dba6354cf1678b89fcc113c3)), closes [#733](https://github.com/equinor/mercury/issues/733)
+* **web:** reject whitespace and Infinity in feed flow input ([c710841](https://github.com/equinor/mercury/commit/c7108414956317661aaecd1c9c5812592c3a69c7))
+
+
+### Documentation
+
+* add revised docs ([bbcbfbc](https://github.com/equinor/mercury/commit/bbcbfbc88d8018f2defd2ea4af7b82dc478bc71a))
+* Add SCM badge ([ac38b3b](https://github.com/equinor/mercury/commit/ac38b3ba59e499f946069ad44e9646b14f4df9c1))
+* Add varia docs ([c12c049](https://github.com/equinor/mercury/commit/c12c049f8837f81d524c3275bb89241e8d51b59c))
+* make docs live in Varia ([8fd2a48](https://github.com/equinor/mercury/commit/8fd2a48a8b140756c2404356d2a608ef62beb9df))
+* move changelog ([533cbcf](https://github.com/equinor/mercury/commit/533cbcfea51453aa23f22a6120da0cedc158bf59))
+* refactor readme ([ec00d52](https://github.com/equinor/mercury/commit/ec00d52f7f6a321d91f3e9357101256f0e26d73a))
+* remove stale web readme ([ed2367b](https://github.com/equinor/mercury/commit/ed2367bafe0dbeb1a82ad780cc267f255df472a5))
+* update readme ([61df7ad](https://github.com/equinor/mercury/commit/61df7ad72454a2ba8a74ac6c74a4dde377d7ea5c))
+* update runbook to follow template ([f0ccc0a](https://github.com/equinor/mercury/commit/f0ccc0a30de8add65661b7da5bcc7e722cd8334c))
+
+
+### Styles
+
+* run biome on entire project ([2701e25](https://github.com/equinor/mercury/commit/2701e2502fb47227c00fa94a86d50da52d249735))
+
+
+### Miscellaneous Chores
+
+* Add  to field validator ([f0898a9](https://github.com/equinor/mercury/commit/f0898a9f1acf0615e20e430010b43e0fcf192be6))
+* add copilot instructions ([28697f8](https://github.com/equinor/mercury/commit/28697f8c48b1e90705844067280411f23db326d3))
+* add devcontainer ([34ca743](https://github.com/equinor/mercury/commit/34ca7436d3f7e1fad071d8204eec519ec7db0063))
+* add mise ([a1653dc](https://github.com/equinor/mercury/commit/a1653dc04bd66867c79d7684bc67136d47fc20a8))
+* add mkdocs as dev dependency ([50a2237](https://github.com/equinor/mercury/commit/50a223777164027b697c459aaa54b624134b2f9b))
+* add ops conventional commit keyword ([a1e5010](https://github.com/equinor/mercury/commit/a1e50108b0792646171688b87bbf37d64835af50))
+* **api:** expand ruff rules for stricter linting ([59f27f4](https://github.com/equinor/mercury/commit/59f27f4ac2a08a068770e7f449accd4137079de3))
+* clean up Docker config ([6d63f81](https://github.com/equinor/mercury/commit/6d63f8127ff7023bda4c6c8f5c9386d2e3bc7223))
+* **deps-dev:** bump @biomejs/biome in /web in the front-end group ([6d45c2f](https://github.com/equinor/mercury/commit/6d45c2f8e03adffec88f902c32da9c581e5319c9))
+* **deps-dev:** bump jsdom from 27.4.0 to 28.1.0 in /web ([4e626df](https://github.com/equinor/mercury/commit/4e626dfcd887f6a70579c43ee3aa87e9826393c9))
+* **deps:** bump axios from 1.13.4 to 1.13.5 in /web ([f67b0b4](https://github.com/equinor/mercury/commit/f67b0b47b658916ebbcdcebe3052c0fa811cfa93))
+* **deps:** bump cachetools from 6.2.6 to 7.0.1 in /api ([ac3694f](https://github.com/equinor/mercury/commit/ac3694f27b979897d853803fb4ecd4d3b3e66024))
+* **deps:** bump cachetools in /api in the back-end group ([6a7f6b6](https://github.com/equinor/mercury/commit/6a7f6b6b56acad3285ada9917ba112d5132e75c1))
+* **deps:** bump cryptography from 46.0.4 to 46.0.5 in /api ([09a2cfa](https://github.com/equinor/mercury/commit/09a2cfa1c196b80cb5a718d8d9f26f8c7a1ef94a))
+* **deps:** bump node from 22-alpine to 25-alpine in /web ([36243be](https://github.com/equinor/mercury/commit/36243be0321a194ca9c00a6d1ad676642834da5d))
+* **deps:** bump rollup from 4.57.1 to 4.59.0 in /web ([420af9a](https://github.com/equinor/mercury/commit/420af9a7205164c77ed7d24c20890279fb268889))
+* **deps:** bump the back-end group in /api with 8 updates ([b22ed20](https://github.com/equinor/mercury/commit/b22ed20cafb255f3514762142ed131011401e8d8))
+* **deps:** bump the dockerfile group across 2 directories with 2 updates ([4d6f2e5](https://github.com/equinor/mercury/commit/4d6f2e57afb743cfe3f6e7e673025836d0656f93))
+* **deps:** bump the front-end group in /web with 12 updates ([e920625](https://github.com/equinor/mercury/commit/e9206252bc90f5145e39f04c0eb8273a484b5be4))
+* fix alpine image for reproducability ([e74ee34](https://github.com/equinor/mercury/commit/e74ee3426b053d34051053273ac2ffdc6c07748d))
+* fix repo configs and improve .gitignore ([c1a8c87](https://github.com/equinor/mercury/commit/c1a8c87dea1f790e386c47dde7bd27fa500e23c8))
+* release 1.8.1 ([a91feef](https://github.com/equinor/mercury/commit/a91feef9477790a69723b4face687e83514e30db))
+* remove dead code and unused exports ([673d36c](https://github.com/equinor/mercury/commit/673d36cb0188e278ee9bea3b23596974cb4e4442))
+* remove stale [@types](https://github.com/types) packages and use vitest/globals types ([fae3324](https://github.com/equinor/mercury/commit/fae332458387a8faf4794f32356e91d45f7e9e92))
+* update api dependencies ([4245227](https://github.com/equinor/mercury/commit/42452275fc304f86beec4ed35434de86bebad91a))
+* use correct ruff code ([f2297d8](https://github.com/equinor/mercury/commit/f2297d849210e3ae4f08109fc49cd111055efe55))
+
+
+### Code Refactoring
+
+* fix components typing error ([fb054f9](https://github.com/equinor/mercury/commit/fb054f9bb72d38b5ab0f0baeffc290c475dca16f))
+* make ErrorState component ([de217db](https://github.com/equinor/mercury/commit/de217dbbe02d4e7c4d7f7fcb24fbcf6e67525d57))
+* make features consistent ([bfa15af](https://github.com/equinor/mercury/commit/bfa15af2bfc3da4d4fb1ec4fae094ef7533f9c30))
+* migrate API client from openapi-typescript-codegen to Kubb ([a59e2c8](https://github.com/equinor/mercury/commit/a59e2c8e3efeee645e5a5d8054916705ee6f0579))
+* move base model wrapper ([94d15e3](https://github.com/equinor/mercury/commit/94d15e3d0593c759ff8e68eb6ff269bf5d37a7be))
+* move metrics to common ([5a96ab0](https://github.com/equinor/mercury/commit/5a96ab0917e63cc5d813fef767cdd211bfd3e45f))
+* nginx config ([f8dd7b2](https://github.com/equinor/mercury/commit/f8dd7b2c77664c266afd6f2cd568241b6c7232b8))
+* rename applicationInsight.js to .ts ([ee8ea02](https://github.com/equinor/mercury/commit/ee8ea0285e762455e579536e82c7e8cb1fee71f3))
+* rename strict model file ([0c3fc02](https://github.com/equinor/mercury/commit/0c3fc02caa18c57022b7dad909f7a8b629b57edd))
+* simplify API client generation ([3849130](https://github.com/equinor/mercury/commit/3849130203ca84149c983feb9ce728c6e9432cc3))
+* use BaseModelWrapper ([a5d4e5f](https://github.com/equinor/mercury/commit/a5d4e5fe905b8afc34522e8d6d518fe918e60ce3))
+* use staticClass for Kubb service generation ([50a8789](https://github.com/equinor/mercury/commit/50a8789a0f1f57252effb4ae9408c305971d2624))
+
+
+### Build System
+
+* **api:** clean up unused and misplaced dependencies ([f27f72b](https://github.com/equinor/mercury/commit/f27f72b9bb83104f1dfe9d6a9a1360e99b5b30ce))
+* Bump to current lts ([0a876a3](https://github.com/equinor/mercury/commit/0a876a3d101e0093556a5e4edb50d2381ebb5ced))
+* Stay on python 3.13 ([ef67b3d](https://github.com/equinor/mercury/commit/ef67b3dbab9c80d7efd504f2e0b75c24eaab8614))
+* update bicep and bicep readme ([9c6e75f](https://github.com/equinor/mercury/commit/9c6e75f5b405d0ca2c2f09dc2268108f06cd4636))
+
+
+### Continuous Integration
+
+* Bump pre-commit hooks ([cf95f6d](https://github.com/equinor/mercury/commit/cf95f6dd421e8c60fe64549ccd406a234ac9fcf6))
+* disable docker build summary for tests build ([486cc6a](https://github.com/equinor/mercury/commit/486cc6a8bba310353dfc6eb61dc1f77c2c8e6c71))
+* remove registry env variable ([2a029ee](https://github.com/equinor/mercury/commit/2a029ee3f558f76fd34f5da55dbfee9005287248))
+* run tests with mise ([49b190c](https://github.com/equinor/mercury/commit/49b190c8c7c4815e27bf65d46a961ddf9a39dfb7))
+* update codeowners to Team Hermes ([83e7e3d](https://github.com/equinor/mercury/commit/83e7e3dda2ce3faf3a6a34647aac536eb39ad9e0))
+* use docker action to build and push ([3af8b50](https://github.com/equinor/mercury/commit/3af8b5046a58086bc7edd9b561cc884705e81cf6))
+* use docker login action ([a25e29b](https://github.com/equinor/mercury/commit/a25e29bb4320ee51f268c9ecbfa9a606c21030d2))
+* Use GitHub app for PAT generation ([8fcac94](https://github.com/equinor/mercury/commit/8fcac9463ef158eaf66c89d5912d543bd84fb13b))
+* use matrix strategy for lints ([c69e522](https://github.com/equinor/mercury/commit/c69e5221837d9ea765771ed60856c51f360eed54))
+* use mise to lint ([8626663](https://github.com/equinor/mercury/commit/86266638a4fe501f7151e1e1bd6b5643b9042c41))
+* use repo variable for libhg version ([9b5f25b](https://github.com/equinor/mercury/commit/9b5f25bb62985f23a9cb116425fb3593115a346d))
+
 ## [1.1.8](https://github.com/equinor/mercury/compare/v1.1.7...v1.1.8) (2026-02-04)
 
 
