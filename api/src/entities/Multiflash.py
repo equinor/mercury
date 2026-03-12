@@ -2,30 +2,27 @@ import libhg
 from collections.abc import Mapping
 
 import numpy as np
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import ConfigDict, Field, field_validator
 
+from common.base_model_wrapper import BaseModelWrapper
 from common.components import COMPONENTS
 from common.utils.arrays import NDArrayBytes, NDArrayFloat
 from common.utils.enums import PhaseLabels
 from common.utils.tuples import ComponentFractions, MultiflashResult, PhaseValues
 
 
-class Multiflash(BaseModel):
+class Multiflash(BaseModelWrapper):
     """
     Model for the computing multiphase flash calculation input.
     """
 
     component_composition: dict[str, float] = Field(
-        ...,
-        description="The component ids (as string parsed numbers) and the percentage of each component in the feed",
-        alias="componentComposition",
+        ..., description="The component ids (as string parsed numbers) and the percentage of each component in the feed"
     )
     temperature: float = Field(..., description="Temperature (in Celsius) for computation", gt=-273.15)
     pressure: float = Field(..., description="Pressure (in bar) for computation")
 
     model_config = ConfigDict(
-        frozen=True,
-        populate_by_name=True,
         json_schema_extra={
             "example": {
                 "componentComposition": {"1": 0.1057, "2": 0.2535, "3": 0.2720, "101": 0.23102, "5": 0.137},

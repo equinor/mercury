@@ -1,6 +1,6 @@
-from pydantic import BaseModel, ConfigDict, Field
-from pydantic.alias_generators import to_camel
+from pydantic import ConfigDict, Field
 
+from common.base_model_wrapper import BaseModelWrapper
 from common.telemetry import tracer
 from common.utils.enums import PhaseLabels
 from entities.Multiflash import (
@@ -11,7 +11,7 @@ from entities.Multiflash import (
 )
 
 
-class MultiflashResponse(BaseModel):
+class MultiflashResponse(BaseModelWrapper):
     phase_values: dict[PhaseLabels, dict[str, float]] = Field(
         ...,
         description="Phase labels (vapor, liquid, aqueous, mercury) with "
@@ -26,9 +26,6 @@ class MultiflashResponse(BaseModel):
     )
 
     model_config = ConfigDict(
-        frozen=True,
-        populate_by_name=True,
-        alias_generator=to_camel,
         json_schema_extra={
             "example": {
                 "phaseValues": {
@@ -75,7 +72,7 @@ class MultiflashResponse(BaseModel):
 
     @property
     def phase_fractions(self) -> list[float]:
-        return [value["percentage"] for key, value in self.phase_values.items()]
+        return [value["percentage"] for _, value in self.phase_values.items()]
 
 
 @tracer.start_as_current_span("compute_multiflash_use_case")
