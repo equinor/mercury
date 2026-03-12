@@ -12,6 +12,7 @@ export class ComponentService {
   static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
+   * @description Get components.
    * @summary Components
    * {@link /components}
    */

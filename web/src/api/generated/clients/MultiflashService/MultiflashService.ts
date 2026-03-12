@@ -12,6 +12,7 @@ export class MultiflashService {
   static #config: Partial<RequestConfig> & { client?: Client } = {}
 
 /**
+   * @description Compute multiflash.
    * @summary Compute Multiflash
    * {@link /multiflash}
    */
