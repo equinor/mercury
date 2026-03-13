@@ -25,7 +25,7 @@ def create_app() -> FastAPI:
         from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 
         configure_azure_monitor(connection_string=config.get_applicationinsight_connection_string(), logger_name="API")
-        FastAPIInstrumentor.instrument_app(app, excluded_urls="healthcheck")
+        FastAPIInstrumentor.instrument_app(app, excluded_urls="health-check,metrics")
 
     app.include_router(get_authenticated_routes(), dependencies=[Security(auth_with_jwt)])
     app.include_router(get_public_routes())
