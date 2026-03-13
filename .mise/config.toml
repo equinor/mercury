@@ -8,6 +8,7 @@ prek = "latest"
 [env]
 PROJECT_NAME = "{{ config_root | basename }}"
 DOCKER_BUILDKIT = 1
+KUBB_DISABLE_TELEMETRY = 1
 _.file = ".env"
 _.python.venv = { path = "api/.venv", create = true, uv_create_args = [
   "--prompt",
