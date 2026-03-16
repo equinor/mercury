@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.10](https://github.com/equinor/mercury/compare/v1.1.9...v1.1.10) (2026-03-16)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump pyjwt from 2.11.0 to 2.12.0 in /api ([ab54d08](https://github.com/equinor/mercury/commit/ab54d08f96ca8e3f1239edb6d10337c195eb4395))
+* **deps:** bump undici from 7.22.0 to 7.24.1 in /web ([fff233c](https://github.com/equinor/mercury/commit/fff233c2175cf74294041c03723ef6bc0c516c9d))
+
+
+### Code Refactoring
+
+* fix response class for metrics endpoint ([d87540a](https://github.com/equinor/mercury/commit/d87540a9c56143366509be3be692b7eae43552a7))
+
 ## [1.1.9](https://github.com/equinor/mercury/compare/v1.1.8...v1.1.9) (2026-03-12)
 
 
