@@ -26,4 +26,4 @@ function useLastInputContext() {
   return context
 }
 
-export { useLastInputContext, LastInputProvider, LastInputContext }
+export { LastInputContext, LastInputProvider, useLastInputContext }

@@ -36,10 +36,10 @@
     "styled-components": "^6.3.11"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.5",
-    "@kubb/cli": "^4.31.5",
+    "@biomejs/biome": "^2.4.7",
+    "@kubb/cli": "^4.36.1",
     "@kubb/core": "^4.31.5",
-    "@kubb/plugin-client": "^4.31.5",
+    "@kubb/plugin-client": "^4.36.1",
     "@kubb/plugin-oas": "^4.31.5",
     "@kubb/plugin-ts": "^4.31.5",
     "@kubb/react-fabric": "^0.13.3",
@@ -47,7 +47,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^25.3.3",
+    "@types/node": "^25.5.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
@@ -57,7 +57,10 @@
     "vite-plugin-checker": "^0.12.0",
     "vite-plugin-svgr": "^4.5.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
+  },
+  "resolutions": {
+    "vitest/vite": "^7.3.1"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
