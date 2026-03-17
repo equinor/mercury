@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.1.11](https://github.com/equinor/mercury/compare/v1.1.10...v1.1.11) (2026-03-17)
+
+
+### Miscellaneous Chores
+
+* add patterns to pre-commit dependabot group ([0485912](https://github.com/equinor/mercury/commit/04859120b4f3786550da7d9df34c2fe52b8c68be))
+* add pre-commit ecosystem to dependabot config ([ce0e765](https://github.com/equinor/mercury/commit/ce0e765c2507b4398d3f48e9a8b923ec6a39c746))
+* **deps-dev:** bump @vitejs/plugin-react from 5.1.4 to 5.2.0 in /web ([282348a](https://github.com/equinor/mercury/commit/282348afd38c703619b8df32903cbf01b23bff81))
+* **deps-dev:** bump jsdom from 28.1.0 to 29.0.0 in /web ([6bb2b72](https://github.com/equinor/mercury/commit/6bb2b72c912c11edb482b63ec3ccdb98275a3d11))
+* **deps-dev:** bump the front-end group in /web with 8 updates ([550b42f](https://github.com/equinor/mercury/commit/550b42f5e3bf0dc1749691100734154f8b9874eb))
+* **deps-dev:** bump types-cachetools in /api ([cca7e88](https://github.com/equinor/mercury/commit/cca7e88976e1fcf429475099209bc842e1a4e35d))
+* **deps:** bump actions/create-github-app-token in /.github/workflows ([2e33022](https://github.com/equinor/mercury/commit/2e33022e23287767ee48ae78a6e3702c6776de83))
+* **deps:** bump docker/build-push-action in /.github/workflows ([acd41ac](https://github.com/equinor/mercury/commit/acd41ac082e0bd54c4e1163c7874632aaf337e49))
+* **deps:** bump docker/login-action from 3 to 4 in /.github/workflows ([9c9bc4a](https://github.com/equinor/mercury/commit/9c9bc4a0065d35b796fdf798dc1ec91ff7c97a20))
+* **deps:** bump docker/setup-buildx-action in /.github/workflows ([7fa70f2](https://github.com/equinor/mercury/commit/7fa70f2b63a4e79ffd32f7f0ac2e63b4986f61af))
+* **deps:** bump jdx/mise-action from 3 to 4 in /.github/workflows ([4a5fdef](https://github.com/equinor/mercury/commit/4a5fdef54d312a2d3893d2a58c4a66667e2b326b))
+* **deps:** bump the back-end group in /api with 5 updates ([c64d368](https://github.com/equinor/mercury/commit/c64d368709f3486341749b7ebd5a50fbdeda673f))
+
 ## [1.1.10](https://github.com/equinor/mercury/compare/v1.1.9...v1.1.10) (2026-03-16)
 
 
