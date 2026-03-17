@@ -25,7 +25,7 @@ jobs:
         uses: jdx/mise-action@v3
 
       - name: "Setup: Login to image registry"
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
