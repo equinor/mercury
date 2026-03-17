@@ -43,3 +43,5 @@ updates:
       interval: "monthly"
     groups:
       pre-commit:
+        patterns:
+          - "*"
