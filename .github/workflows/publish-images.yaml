@@ -67,7 +67,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: "Run: build and publish nginx"
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./web
           target: nginx-prod
@@ -122,7 +122,7 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: "Run: build and publish API"
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: ./api
           target: prod
