@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.12](https://github.com/equinor/mercury/compare/v1.1.11...v1.1.12) (2026-03-26)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump picomatch from 4.0.3 to 4.0.4 in /web ([1b68e7f](https://github.com/equinor/mercury/commit/1b68e7f52671c190d815b6c8872d6ccfb94eb0a2))
+* **deps:** bump requests from 2.32.5 to 2.33.0 in /api ([d1fcfae](https://github.com/equinor/mercury/commit/d1fcfae88c463b185f29fe0956abee7638de4b02))
+
 ## [1.1.11](https://github.com/equinor/mercury/compare/v1.1.10...v1.1.11) (2026-03-17)
 
 
