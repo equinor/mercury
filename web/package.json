@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@equinor/eds-core-react": "^2.3.7",
+    "@equinor/eds-core-react": "^2.4.0",
     "@equinor/eds-icons": "^1.2.0",
     "@equinor/eds-tokens": "^2.1.1",
     "@microsoft/applicationinsights-react-js": "^19.3.8",
@@ -32,17 +32,17 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-oauth2-code-pkce": "^1.24.0",
-    "react-router-dom": "^7.13.1",
-    "styled-components": "^6.3.11"
+    "react-router-dom": "^7.13.2",
+    "styled-components": "^6.3.12"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.7",
-    "@kubb/cli": "^4.36.1",
+    "@biomejs/biome": "^2.4.10",
+    "@kubb/cli": "^4.37.1",
     "@kubb/core": "^4.31.5",
-    "@kubb/plugin-client": "^4.36.1",
+    "@kubb/plugin-client": "^4.37.1",
     "@kubb/plugin-oas": "^4.31.5",
     "@kubb/plugin-ts": "^4.31.5",
-    "@kubb/react-fabric": "^0.13.3",
+    "@kubb/react-fabric": "^0.15.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
@@ -51,13 +51,13 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
-    "jsdom": "^29.0.0",
+    "jsdom": "^29.0.1",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-checker": "^0.12.0",
     "vite-plugin-svgr": "^4.5.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   },
   "resolutions": {
     "vitest/vite": "^7.3.1"
