@@ -1,5 +1,24 @@
 # Changelog
 
+## [1.1.13](https://github.com/equinor/mercury/compare/v1.1.12...v1.1.13) (2026-04-07)
+
+
+### Bug Fixes
+
+* use bundler moduleResolution for TypeScript 6 compatibility ([e16524d](https://github.com/equinor/mercury/commit/e16524da5e3567b09712478293c1ba61cca18358))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump typescript from 5.9.3 to 6.0.2 in /web ([beeee3a](https://github.com/equinor/mercury/commit/beeee3ab234e512dc12568e0b1051d5c46965f6c))
+* **deps-dev:** bump vite from 7.3.1 to 7.3.2 in /web ([2acb722](https://github.com/equinor/mercury/commit/2acb722103fcddba09aa8bcefac250f80030b8ca))
+* **deps-dev:** bump vite from 7.3.1 to 8.0.3 in /web ([4c41e96](https://github.com/equinor/mercury/commit/4c41e9642dca15b924cef1aff1f164db0235976f))
+* **deps-dev:** bump vite-plugin-svgr from 4.5.0 to 5.0.0 in /web ([d8ee4a8](https://github.com/equinor/mercury/commit/d8ee4a81eb7fd2bffbc710d3388d2c3410bcdf49))
+* **deps:** bump cryptography from 46.0.5 to 46.0.6 in /api ([a02040e](https://github.com/equinor/mercury/commit/a02040eef61233f1192008fcf1b3edd9a0f35acb))
+* **deps:** bump lodash from 4.17.23 to 4.18.1 in /web ([0703be5](https://github.com/equinor/mercury/commit/0703be5201b51698337e2154053a2d71d3362fed))
+* **deps:** bump the back-end group across 1 directory with 8 updates ([1e52571](https://github.com/equinor/mercury/commit/1e52571210e66db2aaeef0039d56deaf71478d8c))
+* **deps:** bump the front-end group in /web with 12 updates ([8d624ab](https://github.com/equinor/mercury/commit/8d624abcc890ca2077907d751370add40e79fa89))
+
 ## [1.1.12](https://github.com/equinor/mercury/compare/v1.1.11...v1.1.12) (2026-03-26)
 
 
