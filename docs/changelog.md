@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.14](https://github.com/equinor/mercury/compare/v1.1.13...v1.1.14) (2026-04-16)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump pytest from 9.0.2 to 9.0.3 in /api ([e60a1ca](https://github.com/equinor/mercury/commit/e60a1cae67e818c8af5d8de82a8af4fb02249795))
+* **deps-dev:** bump types-cachetools in /api ([c049495](https://github.com/equinor/mercury/commit/c049495a7c76929a71636ee3037f39aa809c96a1))
+* **deps:** bump cryptography from 46.0.6 to 46.0.7 in /api ([3fcbd2d](https://github.com/equinor/mercury/commit/3fcbd2dad0a1e04730a63968ed0800f794261398))
+* **deps:** bump the back-end group in /api with 4 updates ([4ef66ba](https://github.com/equinor/mercury/commit/4ef66ba163039892fadf32bc5874e72a9050b01f))
+
 ## [1.1.13](https://github.com/equinor/mercury/compare/v1.1.12...v1.1.13) (2026-04-07)
 
 
