@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-04-22)
+
+
+### Miscellaneous Chores
+
+* **deps:** bump python-dotenv from 1.2.1 to 1.2.2 in /api ([7b06b32](https://github.com/equinor/mercury/commit/7b06b323720cef9a0cc86d3c1c4c82521232f0bc))
+
 ## [1.1.14](https://github.com/equinor/mercury/compare/v1.1.13...v1.1.14) (2026-04-16)
 
 
