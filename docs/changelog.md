@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-05-04)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @vitejs/plugin-react from 5.2.0 to 6.0.1 in /web ([9723bd1](https://github.com/equinor/mercury/commit/9723bd16b50e82b41401ec496994fffd5512dc1c))
+* **deps:** bump alpine ([8a39cde](https://github.com/equinor/mercury/commit/8a39cde1b2fba1c0e2ae4ed9b6293259316064f4))
+* **deps:** bump googleapis/release-please-action in /.github/workflows ([cbfccbf](https://github.com/equinor/mercury/commit/cbfccbffceeff6baeac62eb5a48f5b800021f889))
+* **deps:** bump python-dotenv from 1.2.1 to 1.2.2 in /api ([7b06b32](https://github.com/equinor/mercury/commit/7b06b323720cef9a0cc86d3c1c4c82521232f0bc))
+* **deps:** bump the back-end group in /api with 9 updates ([8f77632](https://github.com/equinor/mercury/commit/8f776328f178e9c388951af091c65b0e32e0dacc))
+* **deps:** bump the front-end group in /web with 21 updates ([4de22ed](https://github.com/equinor/mercury/commit/4de22edbe197415cef2e3bd48cdac4c90b60cf48))
+
 ## [1.1.14](https://github.com/equinor/mercury/compare/v1.1.13...v1.1.14) (2026-04-16)
 
 
