@@ -4,6 +4,8 @@ updates:
     directory: "/api"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       back-end:
         update-types:
@@ -14,6 +16,8 @@ updates:
     directory: "/web/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       front-end:
         update-types:
@@ -24,6 +28,8 @@ updates:
     directory: ".github/workflows"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "docker"
     directories:
@@ -31,6 +37,8 @@ updates:
       - "/api"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       dockerfile:
         update-types:
@@ -41,6 +49,8 @@ updates:
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     groups:
       pre-commit:
         patterns:

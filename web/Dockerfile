@@ -40,7 +40,7 @@ WORKDIR /code
 USER "node"
 COPY --chown="node:node" package.json yarn.lock ./
 RUN --mount=type=cache,target=$YARN_CACHE_FOLDER,uid=1000 \
-  yarn install
+  yarn install --frozen-lockfile
 
 COPY --chown="node:node" public public
 COPY --chown="node:node" tsconfig.json vite.config.mts index.html ./

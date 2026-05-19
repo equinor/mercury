@@ -36,10 +36,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Setup: check out repository"
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: "Setup: radix CLI (RX)"
-        uses: equinor/radix-github-actions@v2
+        uses: equinor/radix-github-actions@b23674a56b82a1da783b507bc7f15e7ca7067dd8 # v2
 
       - name: "Run: Validate radix config"
         run: rx validate radix-config
@@ -49,10 +49,10 @@ jobs:
     needs: [validate]
     steps:
       - name: "Setup: check out repository"
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: "Setup: radix CLI (RX)"
-        uses: equinor/radix-github-actions@v2
+        uses: equinor/radix-github-actions@b23674a56b82a1da783b507bc7f15e7ca7067dd8 # v2
         with:
           azure_client_id: ${{ env.AZURE_CLIENT_ID }}
 
