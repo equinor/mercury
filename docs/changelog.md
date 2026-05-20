@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-05-20)
+
+
+### Styles
+
+* fix biome formatting in devcontainer.json ([a208ffb](https://github.com/equinor/mercury/commit/a208ffb851558d7fde8e96232da06eed8900a541))
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @vitejs/plugin-react from 5.2.0 to 6.0.1 in /web ([9723bd1](https://github.com/equinor/mercury/commit/9723bd16b50e82b41401ec496994fffd5512dc1c))
+* **deps-dev:** bump mypy from 1.20.2 to 2.1.0 in /api ([8922b6b](https://github.com/equinor/mercury/commit/8922b6b4fae3df7f63ac4450a13162ffe5485944))
+* **deps-dev:** bump types-cachetools in /api ([51fe5c6](https://github.com/equinor/mercury/commit/51fe5c6dc54e8702c70598e3432947983e6d7d57))
+* **deps:** bump alpine ([8a39cde](https://github.com/equinor/mercury/commit/8a39cde1b2fba1c0e2ae4ed9b6293259316064f4))
+* **deps:** bump fast-uri from 3.1.0 to 3.1.2 in /web ([65c5547](https://github.com/equinor/mercury/commit/65c5547069075b28b21667034a355edcfea27695))
+* **deps:** bump googleapis/release-please-action in /.github/workflows ([cbfccbf](https://github.com/equinor/mercury/commit/cbfccbffceeff6baeac62eb5a48f5b800021f889))
+* **deps:** bump idna from 3.11 to 3.15 in /api ([0fef0d4](https://github.com/equinor/mercury/commit/0fef0d44fcc46d6bc8a8cb235267c0498be8c994))
+* **deps:** bump python-dotenv from 1.2.1 to 1.2.2 in /api ([7b06b32](https://github.com/equinor/mercury/commit/7b06b323720cef9a0cc86d3c1c4c82521232f0bc))
+* **deps:** bump the back-end group across 1 directory with 3 updates ([3b7f0bc](https://github.com/equinor/mercury/commit/3b7f0bcc23169a25b352b7498b359fa9efa231b5))
+* **deps:** bump the back-end group in /api with 9 updates ([8f77632](https://github.com/equinor/mercury/commit/8f776328f178e9c388951af091c65b0e32e0dacc))
+* **deps:** bump the front-end group in /web with 21 updates ([4de22ed](https://github.com/equinor/mercury/commit/4de22edbe197415cef2e3bd48cdac4c90b60cf48))
+* **deps:** bump the front-end group in /web with 7 updates ([3bcc561](https://github.com/equinor/mercury/commit/3bcc56106c60e889d9fb8229cde5c4e0b38b2169))
+* **deps:** bump urllib3 from 2.6.3 to 2.7.0 in /api ([8c90e82](https://github.com/equinor/mercury/commit/8c90e829634304b09d67963aab4bdd1785482a67))
+
+
+### Build System
+
+* harden against supply-chain attacks ([13b6694](https://github.com/equinor/mercury/commit/13b669477305da298e8ac3e65531d8d06052bc60))
+
 ## [1.1.14](https://github.com/equinor/mercury/compare/v1.1.13...v1.1.14) (2026-04-16)
 
 
