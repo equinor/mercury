@@ -26,7 +26,7 @@ dev = [
   "ruff>=0.15.12",
   "mypy>=1.20.2",
   "mkdocs-techdocs-core>=1.6.2",
-  "types-cachetools>=6.2.0.20260408",
+  "types-cachetools>=7.0.0.20260503",
 ]
 
 [tool.uv]
