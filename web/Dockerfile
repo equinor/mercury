@@ -16,7 +16,7 @@ COPY nginx/rootfs/ /
 USER 1000
 
 
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 ARG AUTH_ENABLED=0
 ARG OAUTH_AUTH_SCOPE=""
 ARG AZURE_CLIENT_ID=""
