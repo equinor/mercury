@@ -5,25 +5,25 @@ dynamic = ["version"]
 requires-python = ">=3.13"
 license-files = ["LICENSE.md"]
 dependencies = [
-  "numpy~=2.1",
+  "numpy~=2.4",
   "httpx>=0.28.1,<0.29",
   "cachetools~=7.1",
   "fastapi~=0.136",
-  "pyjwt~=2.10",
+  "pyjwt~=2.13",
   "pydantic~=2.13",
-  "uvicorn~=0.46",
+  "uvicorn~=0.48",
   "pydantic-settings~=2.14",
-  "azure-monitor-opentelemetry>=1.8.4",
+  "azure-monitor-opentelemetry>=1.8.8",
   "opentelemetry-api>=1.39.0",
   "opentelemetry-instrumentation-fastapi>=0.60b0",
-  "typer>=0.25.1",
+  "typer>=0.26.1",
 ]
 
 [dependency-groups]
 dev = [
   "pre-commit>=4.6.0",
   "pytest>=9.0.3",
-  "ruff>=0.15.12",
+  "ruff>=0.15.14",
   "mypy>=2.1.0",
   "mkdocs-techdocs-core>=1.6.2",
   "types-cachetools>=7.0.0.20260518",
