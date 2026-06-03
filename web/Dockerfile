@@ -1,4 +1,4 @@
-FROM nginx:1.29-alpine AS server
+FROM nginx:1.31.1-alpine AS server
 HEALTHCHECK CMD ["nginx", "-t"]
 
 # Set up non root writable directories
