@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.1.16](https://github.com/equinor/mercury/compare/v1.1.15...v1.1.16) (2026-06-05)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump types-cachetools in /api ([2a612e4](https://github.com/equinor/mercury/commit/2a612e4d469a990e876cac9100049863a8fd39bc))
+* **deps:** bump @nevware21/ts-utils from 0.13.0 to 0.14.0 in /web ([c360291](https://github.com/equinor/mercury/commit/c3602918913b38c8493aa8bf41d1450f88940f49))
+* **deps:** bump docker/build-push-action in /.github/workflows ([52fda82](https://github.com/equinor/mercury/commit/52fda82504115cb2a9b34c025f0e8135db3646c3))
+* **deps:** bump docker/login-action in /.github/workflows ([1bc0e3e](https://github.com/equinor/mercury/commit/1bc0e3e26e6a79e6456dd355a93c2248090c0a5a))
+* **deps:** bump docker/setup-buildx-action in /.github/workflows ([5614578](https://github.com/equinor/mercury/commit/56145786f11bff06c99dbddc96ce4b45480bd6a1))
+* **deps:** bump nginx ([ed851cf](https://github.com/equinor/mercury/commit/ed851cf05700d6eeeb5e237aa6cec50f4cc3c700))
+* **deps:** bump starlette from 0.50.0 to 1.0.1 in /api ([19cc07a](https://github.com/equinor/mercury/commit/19cc07ac96bf7c8cd302ea98e96b4cc9c8d55a62))
+* **deps:** bump the back-end group across 1 directory with 8 updates ([1d69126](https://github.com/equinor/mercury/commit/1d691260cb8f6050f5b7b7310b79ff4a934be85a))
+* **deps:** bump the front-end group in /web with 16 updates ([410ce63](https://github.com/equinor/mercury/commit/410ce635d64501b8e0908bd445b3c14876a81e8e))
+
 ## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-05-20)
 
 
