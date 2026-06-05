@@ -29,7 +29,7 @@ yarn compile                     # TypeScript type check (tsc --noEmit)
 yarn lint                        # Biome lint + format check
 yarn test run                    # Run vitest unit tests
 yarn build                       # Production build (tsc + vite build → web/build/)
-yarn generate                    # Regenerate API client (requires API on port 5000)
+yarn generate                    # Regenerate API client (exports schema from source; no running API needed)
 ```
 
 ### API (`api/` directory)
@@ -146,7 +146,7 @@ Routes are split into authenticated (JWT via Microsoft Entra ID) and public, reg
 
 - **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/). Prefixes: `feat`, `fix`, `build`, `chore`, `ci`, `docs`, `perf`, `refactor`, `revert`, `style`, `test`. Enforced by pre-commit.
 - **Versioning**: Managed by `release-please`. Version tracked in `api/src/cli/__about__.py`, `api/src/app.py`, and `web/package.json`. Do NOT manually bump versions.
-- **Generated code**: `web/src/api/generated/` is auto-generated from the OpenAPI schema. Never edit directly. Regenerate with `yarn generate` (requires API running on port 5000).
+- **Generated code**: `web/src/api/generated/` is auto-generated from the OpenAPI schema. Never edit directly. Regenerate with `yarn generate` (the schema is exported directly from `create_app().openapi()` via `api/scripts/export_openapi.py`, so no running API is required).
 - **Python style**: 120 char line length, ruff for linting/formatting, type hints required. `libhg` is treated as a standard library import for isort.
 - **TypeScript style**: Biome — spaces for indent, single quotes, trailing commas (ES5), no semicolons. Generated files excluded from linting.
 - **Deployment**: Radix (Equinor Kubernetes PaaS). Config in `radixconfig.yaml`. Two environments: `dev` (auto-deploy from main) and `prod` (deploy on release).
