@@ -1,4 +1,4 @@
-FROM alpine:3.23.4 AS build
+FROM alpine:3.24.1 AS build
 
 # install github cli
 RUN apk --no-cache add github-cli
