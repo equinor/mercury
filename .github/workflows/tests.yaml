@@ -19,7 +19,7 @@ jobs:
     name: "Tests: API"
     steps:
       - name: "Setup: Checkout repository"
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6
 
       - name: "Setup: install mise"
         uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
@@ -60,7 +60,7 @@ jobs:
     name: "Tests: Web"
     steps:
       - name: "Setup: check out repository"
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v6
 
       - name: "Setup: install mise"
         uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4
