@@ -1,5 +1,35 @@
 # Changelog
 
+## [1.1.16](https://github.com/equinor/mercury/compare/v1.1.15...v1.1.16) (2026-07-16)
+
+
+### Miscellaneous Chores
+
+* **deps-dev:** bump @types/node from 25.9.1 to 26.1.1 in /web ([4345df7](https://github.com/equinor/mercury/commit/4345df791bfa5f1d628acb06d45d337c71ea830a))
+* **deps-dev:** bump types-cachetools in /api ([2a612e4](https://github.com/equinor/mercury/commit/2a612e4d469a990e876cac9100049863a8fd39bc))
+* **deps-dev:** bump vite from 8.0.14 to 8.0.16 in /web ([86affcd](https://github.com/equinor/mercury/commit/86affcdb10ce723df1f758ff05ea190fa1f93333))
+* **deps-dev:** bump vite from 8.0.16 to 8.1.0 in /web ([63d7d9e](https://github.com/equinor/mercury/commit/63d7d9ea5ee1ef4ea6a2133f97e326328f85c7a8))
+* **deps-dev:** bump vite from 8.1.0 to 8.1.1 in /web ([e9b7a74](https://github.com/equinor/mercury/commit/e9b7a745854483cd56bedc2e726ff09045a6c856))
+* **deps:** bump @babel/core from 7.29.0 to 7.29.7 in /web ([6aee9d7](https://github.com/equinor/mercury/commit/6aee9d7053656280aea9d960e9ce7469a8ea3c20))
+* **deps:** bump @nevware21/ts-utils from 0.13.0 to 0.14.0 in /web ([c360291](https://github.com/equinor/mercury/commit/c3602918913b38c8493aa8bf41d1450f88940f49))
+* **deps:** bump actions/checkout in /.github/workflows ([1904cde](https://github.com/equinor/mercury/commit/1904cdeede93cfcded6bf159944f1001a91c6f5a))
+* **deps:** bump cryptography from 46.0.7 to 48.0.1 in /api ([6beae44](https://github.com/equinor/mercury/commit/6beae44511120cb2eb844bfe844c93d63f1253e1))
+* **deps:** bump docker/build-push-action in /.github/workflows ([52fda82](https://github.com/equinor/mercury/commit/52fda82504115cb2a9b34c025f0e8135db3646c3))
+* **deps:** bump docker/login-action in /.github/workflows ([1bc0e3e](https://github.com/equinor/mercury/commit/1bc0e3e26e6a79e6456dd355a93c2248090c0a5a))
+* **deps:** bump docker/setup-buildx-action in /.github/workflows ([5614578](https://github.com/equinor/mercury/commit/56145786f11bff06c99dbddc96ce4b45480bd6a1))
+* **deps:** bump jdx/mise-action in /.github/workflows ([7762e42](https://github.com/equinor/mercury/commit/7762e421a5a6ab125d27597391a70d3d77499417))
+* **deps:** bump js-yaml from 4.1.1 to 4.2.0 in /web ([94506cb](https://github.com/equinor/mercury/commit/94506cb8c037293819ab80e8ad558ebfb0b9b8e5))
+* **deps:** bump nginx ([ed851cf](https://github.com/equinor/mercury/commit/ed851cf05700d6eeeb5e237aa6cec50f4cc3c700))
+* **deps:** bump pydantic-settings from 2.14.1 to 2.14.2 in /api ([f3e6ad5](https://github.com/equinor/mercury/commit/f3e6ad5869a864e20fbce2f518ebfcba5e798e01))
+* **deps:** bump pymdown-extensions from 10.21.2 to 10.21.3 in /api ([a1710fa](https://github.com/equinor/mercury/commit/a1710faae978a9a4a7fafa6e12b8bee6cca86259))
+* **deps:** bump shell-quote from 1.8.3 to 1.8.4 in /web ([3feac56](https://github.com/equinor/mercury/commit/3feac5625b3adbde29c320c04b50d128f889f481))
+* **deps:** bump starlette from 0.50.0 to 1.0.1 in /api ([19cc07a](https://github.com/equinor/mercury/commit/19cc07ac96bf7c8cd302ea98e96b4cc9c8d55a62))
+* **deps:** bump starlette from 1.0.1 to 1.3.1 in /api ([d746834](https://github.com/equinor/mercury/commit/d74683424447c810125671fdce68498969e57a9e))
+* **deps:** bump the back-end group across 1 directory with 8 updates ([1d69126](https://github.com/equinor/mercury/commit/1d691260cb8f6050f5b7b7310b79ff4a934be85a))
+* **deps:** bump the dockerfile group across 2 directories with 2 updates ([ede3f20](https://github.com/equinor/mercury/commit/ede3f2037cdec69eb7ede9da22441049ebe3328d))
+* **deps:** bump the front-end group in /web with 16 updates ([410ce63](https://github.com/equinor/mercury/commit/410ce635d64501b8e0908bd445b3c14876a81e8e))
+* **deps:** bump undici from 7.25.0 to 7.28.0 in /web ([98e8b72](https://github.com/equinor/mercury/commit/98e8b72c628835b9aaafe54cb0a2e45b7edaa349))
+
 ## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-05-20)
 
 
