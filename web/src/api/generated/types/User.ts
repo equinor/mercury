@@ -20,6 +20,7 @@ export type User = {
     */
     roles?: string[];
     /**
+     * @default 2
      * @type integer | undefined
     */
     scope?: AccessLevel;
