@@ -1,7 +1,7 @@
 [lint-ruff]
 description = "Run ruff linter"
 depends = ["install-api-dependencies"]
-run = ["uv run ruff check --fix --exit-zero", "uv run ruff format"]
+run = ["uv run ruff check --fix", "uv run ruff format"]
 
 [lint-mypy]
 description = "Run mypy linter on the api"
