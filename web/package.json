@@ -57,7 +57,7 @@
     "vite-plugin-checker": "^0.14.1",
     "vite-plugin-svgr": "^5.2.0",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.7"
+    "vitest": "^5.0.0"
   },
   "resolutions": {
     "vitest/vite": "^7.3.1"
