@@ -1,4 +1,3 @@
-import libhg
 from collections.abc import Mapping
 
 import numpy as np
@@ -95,6 +94,8 @@ class Multiflash(BaseModelWrapper):
         }
 
     def compute(self) -> MultiflashResult:
+        import libhg
+
         # Need to normalize feed composition for phase_fraction to not be NaN:
         normalized_feed_composition = self.normalized_feed_composition
         (

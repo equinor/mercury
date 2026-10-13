@@ -8,4 +8,8 @@ echo "Virtual Environment: $VIRTUAL_ENV"
 [generate-api-types]
 description = "Generate API types for typescript"
 dir = "{{ config_root }}/web"
-run = "yarn generate"
+run = '''
+(cd ../api && uv run python scripts/export_openapi.py "{{ config_root }}/web/openapi.json")
+CI=true yarn generate
+rm -f openapi.json
+'''

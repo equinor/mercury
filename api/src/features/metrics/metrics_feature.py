@@ -17,5 +17,4 @@ router = APIRouter(tags=["metrics"], route_class=ExceptionHandlingRoute)
 )
 async def get() -> str:
     """Return metrics for application."""
-    response = cast("str", get_metrics_use_case())
-    return response
+    return cast("str", get_metrics_use_case())
