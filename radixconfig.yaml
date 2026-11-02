@@ -25,6 +25,13 @@ spec:
         - environment: dev
           monitoring: true
           imageTagName: latest
+          secretsRefs:
+            azureKeyVaults:
+              - name: mercury-kv
+                path: /mnt/key-vault
+                useAzureIdentity: true
+                items:
+                  - name: APP-INSIGHTS-CON-STRING-DEV
           variables:
             ENVIRONMENT: development
             LOGGING_LEVEL: "info"
