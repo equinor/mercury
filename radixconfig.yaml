@@ -25,7 +25,7 @@ spec:
         - environment: dev
           monitoring: true
           imageTagName: latest
-          secretsRefs:
+          secretRefs:
             azureKeyVaults:
               - name: mercury-kv
                 path: /mnt/key-vault
