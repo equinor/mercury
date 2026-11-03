@@ -1,14 +1,11 @@
 name: "Tests"
 on:
   workflow_call:
-    secrets:
-      LIBHG_PAT:
-        description: "PAT for accessing libhg repository"
-        required: true
 
 permissions:
   contents: read
   packages: read
+  id-token: write
 
 env:
   API_IMAGE: ghcr.io/equinor/mercury-api
@@ -17,6 +14,7 @@ jobs:
   test-api:
     runs-on: ubuntu-latest
     name: "Tests: API"
+
     steps:
       - name: "Setup: Checkout repository"
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -34,6 +32,15 @@ jobs:
       - name: "Setup: set up Docker Buildx"
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
 
+      - name: "Setup Azure Login"
+        id: keyvault
+        uses: ./.github/actions/azure-login
+        with:
+          secret-name: LIBHG-PAT
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: "Setup: Build API test image"
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
         env:
@@ -45,7 +52,7 @@ jobs:
           tags: mercury-api-ci
           cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
           secrets: |
-            libhg-pat=${{ secrets.LIBHG_PAT }}
+            libhg-pat=${{ steps.keyvault.outputs.secret }}
 
       - name: "Run: Unit tests with python"
         run: mise run docker-pytest-ci -m unit
