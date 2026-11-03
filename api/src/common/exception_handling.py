@@ -6,7 +6,7 @@ from typing import Any
 from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.routing import APIRoute
-from httpx import HTTPStatusError
+from httpx2 import HTTPStatusError
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response

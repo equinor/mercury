@@ -1,6 +1,6 @@
 [tools]
-python = "3.13.7"
-uv = "0.10.4"
+python = "3.13.18"
+uv = "0.13.6"
 node = "24"
 "npm:yarn" = "1.22.22"
 prek = "latest"

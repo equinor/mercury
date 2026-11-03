@@ -1,4 +1,4 @@
-FROM alpine:3.24.1 AS build
+FROM alpine:3.24.3 AS build
 
 # install github cli
 RUN apk --no-cache add github-cli
@@ -13,7 +13,7 @@ RUN gh release download ${LIBHG_VERSION} \
   --output /tmp/libhg.so
 
 
-FROM python:3.13-slim-bookworm AS base
+FROM python:3.13-slim-trixie AS base
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV USER="mercury"
 ENV PYTHONPATH=/code/src
@@ -35,7 +35,7 @@ ENV UV_COMPILE_BYTECODE=1 \
   UV_LINK_MODE=copy \
   UV_PYTHON_DOWNLOADS=never \
   UV_TOOL_BIN_DIR=/usr/local/bin
-COPY --from=ghcr.io/astral-sh/uv:0.9.22 /uv /usr/local/bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.13.6 /uv /usr/local/bin/uv
 
 
 WORKDIR /code

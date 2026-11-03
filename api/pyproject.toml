@@ -6,7 +6,6 @@ requires-python = ">=3.13"
 license-files = ["LICENSE.md"]
 dependencies = [
   "numpy~=2.5",
-  "httpx>=0.28.1,<0.29",
   "cachetools~=7.2",
   "fastapi~=0.162",
   "pyjwt~=2.15",
@@ -17,6 +16,8 @@ dependencies = [
   "opentelemetry-api>=1.39.0",
   "opentelemetry-instrumentation-fastapi>=0.60b0",
   "typer>=0.27.3",
+  "rich~=15.0",
+  "httpx2~=2.16",
 ]
 
 [dependency-groups]
