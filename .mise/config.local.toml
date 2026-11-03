@@ -1,0 +1,3 @@
+# Windows: prefer Git Bash over WSL bash (System32) so prek can run .sh hooks
+[env]
+_.path = ["C:/Program Files/Git/bin"]

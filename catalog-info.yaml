@@ -48,7 +48,6 @@ spec:
     - mercury-api
   dependsOn:
     - resource:default/gpa-libhg
-
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -77,7 +76,6 @@ spec:
     - mercury-api
   dependsOn:
     - component:default/mercury-api
-
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -95,7 +93,6 @@ spec:
   system: system:default/mercury
   definition:
     $text: https://mercury.app.radix.equinor.com/api/openapi.json
-
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
