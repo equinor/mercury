@@ -3,15 +3,20 @@
 * Do not edit manually.
 */
 
+export type GetMetricsStatus200 = string;
+
+export type GetMetricsOptions = {
+  body?: never;
+  path?: never;
+  query?: never;
+  headers?: never;
+};
+
+export type GetMetricsResponses = {
+  '200': GetMetricsStatus200;
+};
 
 /**
- * @description Successful Response
-*/
-export type GetMetrics200 = string;
-
-export type GetMetricsQueryResponse = GetMetrics200;
-
-export type GetMetricsQuery = {
-    Response: GetMetrics200;
-    Errors: any;
-};
+ * @description Union of all possible responses
+ */
+export type GetMetricsResponse = GetMetricsStatus200;

@@ -3,28 +3,27 @@
 * Do not edit manually.
 */
 
-
 /**
- * Multiflash
  * @description Model for the computing multiphase flash calculation input.
- * @example [object Object]
-*/
+ * @example {"componentComposition":{"1":0.1057,"2":0.2535,"3":0.272,"5":0.137,"101":0.23102},"pressure":20,"temperature":37}
+ * @type object
+ */
 export type Multiflash = {
-    /**
-     * @description The component ids (as string parsed numbers) and the percentage of each component in the feed
-     * @type object
-    */
-    componentComposition: {
-        [key: string]: number;
-    };
-    /**
-     * @description Temperature (in Celsius) for computation
-     * @type number
-    */
-    temperature: number;
-    /**
-     * @description Pressure (in bar) for computation
-     * @type number
-    */
-    pressure: number;
+  /**
+   * @description The component ids (as string parsed numbers) and the percentage of each component in the feed
+   * @type object
+   */
+  componentComposition: {
+    [key: string]: number;
+  };
+  /**
+   * @description Temperature (in Celsius) for computation
+   * @type number
+   */
+  temperature: number;
+  /**
+   * @description Pressure (in bar) for computation
+   * @type number
+   */
+  pressure: number;
 };

@@ -2,7 +2,7 @@ import { error_outlined, lock } from '@equinor/eds-icons'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
-import { type ComponentProperties, ComponentService } from '../../api/generated'
+import { type ComponentProperties, getComponents } from '../../api/generated'
 import { orderedComponents } from '../../common/constants'
 import type { TCalcStatus, TComponentProperty, TResults } from '../../common/types'
 import { ErrorState } from '../../components'
@@ -43,7 +43,7 @@ export const MainPage = () => {
   const fetchComponents = useCallback(() => {
     setIsLoading(true)
     setFetchError(undefined)
-    ComponentService.getComponents()
+    getComponents()
       .then((response) => {
         setComponentProperties(toSortedArray(response.components))
       })

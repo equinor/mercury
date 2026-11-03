@@ -3,17 +3,22 @@
 * Do not edit manually.
 */
 
-import type { User } from "./User.ts";
+import type { User } from './User'
+
+export type GetWhoamiStatus200 = User;
+
+export type GetWhoamiOptions = {
+  body?: never;
+  path?: never;
+  query?: never;
+  headers?: never;
+};
+
+export type GetWhoamiResponses = {
+  '200': GetWhoamiStatus200;
+};
 
 /**
- * User
- * @description Successful Response
-*/
-export type GetWhoami200 = User;
-
-export type GetWhoamiQueryResponse = GetWhoami200;
-
-export type GetWhoamiQuery = {
-    Response: GetWhoami200;
-    Errors: any;
-};
+ * @description Union of all possible responses
+ */
+export type GetWhoamiResponse = GetWhoamiStatus200;

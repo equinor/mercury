@@ -3,16 +3,20 @@
 * Do not edit manually.
 */
 
+export type GetHealthCheckStatus200 = string;
+
+export type GetHealthCheckOptions = {
+  body?: never;
+  path?: never;
+  query?: never;
+  headers?: never;
+};
+
+export type GetHealthCheckResponses = {
+  '200': GetHealthCheckStatus200;
+};
 
 /**
- * Response 200 Get Health Check
- * @description Successful Response
-*/
-export type GetHealthCheck200 = string;
-
-export type GetHealthCheckQueryResponse = GetHealthCheck200;
-
-export type GetHealthCheckQuery = {
-    Response: GetHealthCheck200;
-    Errors: any;
-};
+ * @description Union of all possible responses
+ */
+export type GetHealthCheckResponse = GetHealthCheckStatus200;

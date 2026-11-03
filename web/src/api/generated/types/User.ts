@@ -3,24 +3,16 @@
 * Do not edit manually.
 */
 
-import type { AccessLevel } from "./AccessLevel.ts";
+import type { AccessLevelKey } from './AccessLevel'
 
-/**
- * User
-*/
 export type User = {
-    /**
-     * @type string
-    */
-    user_id: string;
-    email?: (string | null);
-    full_name?: (string | null);
-    /**
-     * @type array | undefined
-    */
-    roles?: string[];
-    /**
-     * @type integer | undefined
-    */
-    scope?: AccessLevel;
+  user_id: string;
+  email?: string | null;
+  full_name?: string | null;
+  roles?: string[];
+  /**
+   * @default 2
+   * @type number | undefined
+   */
+  scope?: AccessLevelKey;
 };

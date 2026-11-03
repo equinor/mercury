@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { RouterProvider } from 'react-router-dom'
 import styled from 'styled-components'
-import { setTokenProvider } from './api/client'
+import { client } from './api/generated'
 import { router } from './router'
 
 const hasAuthConfig = import.meta.env.VITE_AUTH === '1'
@@ -14,7 +14,7 @@ function App() {
   tokenRef.current = token
 
   useEffect(() => {
-    setTokenProvider(() => tokenRef.current)
+    client.setConfig({ auth: () => tokenRef.current })
   }, [])
 
   if (hasAuthConfig && error) {

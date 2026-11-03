@@ -3,18 +3,11 @@
 * Do not edit manually.
 */
 
-
-export const phaseLabelsEnum = {
-    Mercury: "Mercury",
-    Liquid: "Liquid",
-    Vapor: "Vapor",
-    Aqueous: "Aqueous"
+export const phaseLabels = {
+  Mercury: 'Mercury',
+  Liquid: 'Liquid',
+  Vapor: 'Vapor',
+  Aqueous: 'Aqueous',
 } as const;
 
-export type PhaseLabelsEnumKey = (typeof phaseLabelsEnum)[keyof typeof phaseLabelsEnum];
-
-/**
- * PhaseLabels
- * @description Enum class for phase labels
-*/
-export type PhaseLabels = PhaseLabelsEnumKey;
+export type PhaseLabelsKey = (typeof phaseLabels)[keyof typeof phaseLabels];

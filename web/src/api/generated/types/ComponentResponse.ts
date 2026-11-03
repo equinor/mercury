@@ -3,19 +3,19 @@
 * Do not edit manually.
 */
 
-import type { ComponentProperties } from "./ComponentProperties.ts";
+import type { ComponentProperties } from './ComponentProperties'
 
 /**
- * ComponentResponse
  * @description Model for containing the response of getting the component dictionary.
- * @example [object Object]
-*/
+ * @example {"components":{"1":{"altName":"Carbon Dioxide","chemicalFormula":"CO2","molecularWeight":44.01},"2":{"altName":"Nitrogen","chemicalFormula":"N2","molecularWeight":28.014},"3":{"altName":"Water","chemicalFormula":"H2O","molecularWeight":18.015},"5":{"altName":"Mercury","chemicalFormula":"Hg","molecularWeight":200.59},"101":{"altName":"Methane","chemicalFormula":"CH4","molecularWeight":16.043}}}
+ * @type object
+ */
 export type ComponentResponse = {
-    /**
-     * @description Dictionary of component_ids as string and ComponentProperties as value
-     * @type object
-    */
-    components: {
-        [key: string]: ComponentProperties;
-    };
+  /**
+   * @description Dictionary of component_ids as string and ComponentProperties as value
+   * @type object
+   */
+  components: {
+    [key: string]: ComponentProperties;
+  };
 };

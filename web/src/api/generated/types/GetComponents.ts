@@ -3,18 +3,27 @@
 * Do not edit manually.
 */
 
-import type { ComponentResponse } from "./ComponentResponse.ts";
+import type { ComponentResponse } from './ComponentResponse'
 
 /**
- * ComponentResponse
- * @description Successful Response
- * @example [object Object]
-*/
-export type GetComponents200 = ComponentResponse;
+ * @description Model for containing the response of getting the component dictionary.
+ * @example {"components":{"1":{"altName":"Carbon Dioxide","chemicalFormula":"CO2","molecularWeight":44.01},"2":{"altName":"Nitrogen","chemicalFormula":"N2","molecularWeight":28.014},"3":{"altName":"Water","chemicalFormula":"H2O","molecularWeight":18.015},"5":{"altName":"Mercury","chemicalFormula":"Hg","molecularWeight":200.59},"101":{"altName":"Methane","chemicalFormula":"CH4","molecularWeight":16.043}}}
+ * @type object
+ */
+export type GetComponentsStatus200 = ComponentResponse;
 
-export type GetComponentsQueryResponse = GetComponents200;
-
-export type GetComponentsQuery = {
-    Response: GetComponents200;
-    Errors: any;
+export type GetComponentsOptions = {
+  body?: never;
+  path?: never;
+  query?: never;
+  headers?: never;
 };
+
+export type GetComponentsResponses = {
+  '200': GetComponentsStatus200;
+};
+
+/**
+ * @description Union of all possible responses
+ */
+export type GetComponentsResponse = GetComponentsStatus200;

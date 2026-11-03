@@ -3,26 +3,26 @@
 * Do not edit manually.
 */
 
-
 /**
- * ComponentProperties
- * @description Model containing properties of the component: I.e. the chemical name (H2O, Hg, etc.), the alternate name for a\ncomponent (water, mercury, etc.) and the molecular weight of the component.
- * @example [object Object]
-*/
+ * @description Model containing properties of the component: I.e. the chemical name (H2O, Hg, etc.), the alternate name for a
+ * component (water, mercury, etc.) and the molecular weight of the component.
+ * @example {"altName":"Mercury","chemicalFormula":"Hg","molecularWeight":200.59}
+ * @type object
+ */
 export type ComponentProperties = {
-    /**
-     * @description Chemical name of the component
-     * @type string
-    */
-    chemicalFormula: string;
-    /**
-     * @description Alternate name of the component
-     * @type string
-    */
-    altName: string;
-    /**
-     * @description Molecular weight of the component (g/mol)
-     * @type number
-    */
-    molecularWeight: number;
+  /**
+   * @description Chemical name of the component
+   * @type string
+   */
+  chemicalFormula: string;
+  /**
+   * @description Alternate name of the component
+   * @type string
+   */
+  altName: string;
+  /**
+   * @description Molecular weight of the component (g/mol)
+   * @type number
+   */
+  molecularWeight: number;
 };
