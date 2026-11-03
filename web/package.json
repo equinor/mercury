@@ -50,7 +50,7 @@
     "jsdom": "^29.1.1",
     "kubb": "^5.15.3",
     "typescript": "^6.0.3",
-    "vite": "^8.3.5",
+    "vite": "^7.3.1",
     "vite-plugin-checker": "^0.14.5",
     "vite-plugin-svgr": "^5.2.0",
     "vitest": "^4.1.7"
