@@ -6,7 +6,6 @@ This document covers operational information about the Mercury Calculator and sh
 ## Links
 
 > _Quick access to essential resources and communication channels related to the application's development and operation._
-
 - [GitHub Repository][github-repository]
 - [GitHub Team][github-team]
 - [GitHub Project][github-project]
@@ -14,9 +13,8 @@ This document covers operational information about the Mercury Calculator and sh
 See [resources](#resources) section for overview of all resources used by the application.
 
 ## Overview Platforms
->
-> _Quick overview of all platforms used._
 
+> _Quick overview of all platforms used._
 - [ ] [DRM](https://drm.equinor.com/)
 - [ ] [Omnia Classic](https://docs.omnia.equinor.com/products/Service-Offerings/#omnia-classic)
 - [ ] [Omnia Standalone](https://docs.omnia.equinor.com/products/Service-Offerings/#omnia-standalone)
@@ -25,34 +23,35 @@ See [resources](#resources) section for overview of all resources used by the ap
 
 
 ## Prerequisites
+
 > _List of all necessary permissions, or knowledge required to perform the tasks described in this runbook._
 
 <details>
     <summary>Permissions required </summary>
 
-* **For Managing Radix**
- * To access the Radix console
-    * Apply for the `Radix Platform Users` and `Radix Playground Users` through [AccessIT](https://accessit.equinor.com)
-    * Added to the [Team Hermes Radix Admin][radix-admin-group] group that controls who can administrate the Radix application.
-  * To change the `radixconfig.yaml` file
-    * Added to the [GitHub repository][github-repository]
-*  **For Managing Azure Resources**
-  * To access Azure resources, apply for the `Owner` and/or the `Contributor` role in the `S538-NeqSim API` subscription through [AccessIT](https://accessit.equinor.com) or get added to the `mercury-dev` / `mercury-prod` AZ groups.
+- **For Managing Radix**
+- To access the Radix console
+  - Apply for the `Radix Platform Users` and `Radix Playground Users` through [AccessIT](https://accessit.equinor.com)
+    - Added to the [Team Hermes Radix Admin][radix-admin-group] group that controls who can administrate the Radix application.
+- To change the `radixconfig.yaml` file
+  - Added to the [GitHub repository][github-repository]
+-  **For Managing Azure Resources**
+- To access Azure resources, apply for the `Owner` and/or the `Contributor` role in the `S538-NeqSim API` subscription through [AccessIT](https://accessit.equinor.com) or get added to the `mercury-dev` / `mercury-prod` AZ groups.
 </details>
 
 <details>
     <summary>Competence required </summary>
 
-* [Radix](https://www.radix.equinor.com)
-* [Docker](https://docs.docker.com/)
-* [Azure](https://learn.microsoft.com/en-us/azure/)
-* [React](https://react.dev/)
-* [yarn](https://yarnpkg.com/)
-* [Python](https://www.python.org/)
-* [Oauth2](https://oauth.net/2/)
-* [Pre-commit](https://pre-commit.com/)
-* [Git](https://git-scm.com/)
-* [GitHub Actions](https://docs.github.com/en/actions)
+- [Radix](https://www.radix.equinor.com)
+- [Docker](https://docs.docker.com/)
+- [Azure](https://learn.microsoft.com/en-us/azure/)
+- [React](https://react.dev/)
+- [yarn](https://yarnpkg.com/)
+- [Python](https://www.python.org/)
+- [Oauth2](https://oauth.net/2/)
+- [Pre-commit](https://pre-commit.com/)
+- [Git](https://git-scm.com/)
+- [GitHub Actions](https://docs.github.com/en/actions)
 
 </details>
 
@@ -145,15 +144,16 @@ sequenceDiagram
 </details>
 
 ## Resources
+
 > _List of all resources used by the application_
 
 
 <details>
     <summary>Radix </summary>
 
-| Name                                             | Description                          |
-|--------------------------------------------------|--------------------------------------|
-| [Radix Application][radix-application-console]   | The application registered in Radix. |
+| Name                                           | Description                          |
+| ---------------------------------------------- | ------------------------------------ |
+| [Radix Application][radix-application-console] | The application registered in Radix. |
 
 The configuration for our Radix app is in [radixconfig.yaml](./radixconfig.yaml).
 There are two environments in Radix for Mercury: development (`dev`) and production (`prod`).
@@ -166,6 +166,7 @@ There are two environments in Radix for Mercury: development (`dev`) and product
     <summary>Azure </summary>
 
 #### Subscription
+
 All resources for Mercury in Azure are under the `S538-NeqSim API` subscription.
 These resources are defined in the [bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 _Infrastructure-as-Code_-language for Azure. The bicep file can be found at [`./IaC`](./IaC).
@@ -174,7 +175,7 @@ _Infrastructure-as-Code_-language for Azure. The bicep file can be found at [`./
 
 #### Authentication
 
-Authentication are handled by Microsoft Entra ID, which issues access tokens used to access the protected API endpoints. The App Registration created for this project is `Mercury`. 
+Authentication are handled by Microsoft Entra ID, which issues access tokens used to access the protected API endpoints. The App Registration created for this project is `Mercury`.
 
 #### Logging
 
@@ -182,22 +183,21 @@ The Application Insight resource has been placed in environment separated Resour
 These resources can be recreated by running the [IaC script](https://github.com/equinor/Mercury/tree/main/IaC)
 
 
->
- ```
- // See number of calculations
+> ```
+```
+// See number of calculations
 
 customEvents
 | where name == "CalculationStarted"
-```
+````
 
->
- ```
- // See number of unique visitors
+>```
+// See number of unique visitors
 
 customEvents
 | where name == "MainPageLoaded"
 | distinct user_Id
-```
+````
 
 </details>
 
@@ -206,8 +206,8 @@ customEvents
     <summary>Secrets, Certificates and Keys</summary>
 
 > _Overview of all secret and certificates used in the application_
- 
-`LIBHG_PAT`: A secret used to access the private repository `github.com/equinor/gpa-libhg` stored in Github and used during build of the API container image. The repository contains the Fortran library that is compiled and used for thermodynamic calculations in the API. 
+
+`LIBHG_PAT`: A secret used to access the private repository `github.com/equinor/gpa-libhg` stored in Github and used during build of the API container image. The repository contains the Fortran library that is compiled and used for thermodynamic calculations in the API.
 
 When running the application locally, this secret needs to be created as a PAT from [https://github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) and then added to the environment variables.
 
@@ -229,6 +229,7 @@ A container image is available at `ghcr.io/equinor/mercury-api`.
 </details>
 
 ## Administrative Tasks
+
 > _Higher-level tasks associated with managing and configuring the system._
 
 <details>
@@ -243,16 +244,16 @@ Configurations of Radix environments can be adjusted by modifying the `radixconf
 
 Outlined below are descriptions of each environment with their respective deployment strategies.
 
-| Environment            | Deployed how?                                                                            |
-|------------------------|------------------------------------------------------------------------------------------|
-| [Development][dev-url] | Automatically deployed from every commit to the main branch on GitHub                    |
-| [Production][prod-url] | Automatically deployed when the release-please PR is merged                               |
+| Environment            | Deployed how?                                                         |
+| ---------------------- | --------------------------------------------------------------------- |
+| [Development][dev-url] | Automatically deployed from every commit to the main branch on GitHub |
+| [Production][prod-url] | Automatically deployed when the release-please PR is merged           |
 
 How to deploy to development environment:
 
-  1. Create a pull request to main branch and assert that all checks passes.
-  2. Merge the pull request and follow conventional commits for commit message.
-  3. The development environment in Radix will now be built and deployed automatically.
+1. Create a pull request to main branch and assert that all checks passes.
+2. Merge the pull request and follow conventional commits for commit message.
+3. The development environment in Radix will now be built and deployed automatically.
 
 </details>
 
@@ -277,8 +278,8 @@ Firewall is configured through [Access & Network Services][access-and-network-se
 
 **Monitoring and Managing Vulnerabilities**
 
-* CodeQL is used to monitor and manage security vulnerabilities in the application.
-* Dependabot is used to monitor and manage dependencies in the application.
+- CodeQL is used to monitor and manage security vulnerabilities in the application.
+- Dependabot is used to monitor and manage dependencies in the application.
 
 
 **Penetration Tests**
@@ -290,6 +291,7 @@ Firewall is configured through [Access & Network Services][access-and-network-se
 
 
 ## Operational Tasks
+
 > _Routine activities required to keep the system running smoothly._
 
 <details>
@@ -303,9 +305,8 @@ Firewall is configured through [Access & Network Services][access-and-network-se
     <summary>Monitoring System Health and Usage Statistics</summary>
 
 > _Describe how the system health and security monitoring is performed._
-
-* Application status and logs can be monitored via the [Radix Application Console][radix-application-console], and you can also navigate from there to Grafana dashboard to monitor application performance and resource utilization.
-* Usage statistics of site traffic, inspect applications logs for errors or unusual activity is available in `Application Insights`:
+- Application status and logs can be monitored via the [Radix Application Console][radix-application-console], and you can also navigate from there to Grafana dashboard to monitor application performance and resource utilization.
+- Usage statistics of site traffic, inspect applications logs for errors or unusual activity is available in `Application Insights`:
   - [dev][dev-application-insights]
   - [prod][prod-application-insights]
 
