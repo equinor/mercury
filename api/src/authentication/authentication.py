@@ -1,6 +1,6 @@
 from typing import Any
 
-import httpx
+import httpx2
 import jwt
 from cachetools import TTLCache, cached
 from fastapi import Security
@@ -24,7 +24,7 @@ _MICROSOFT_AUTH_PROVIDER = "login.microsoftonline.com"
 @cached(cache=TTLCache(maxsize=32, ttl=86400))
 def get_jwk_client() -> PyJWKClient:
     try:
-        oid_conf_response = httpx.get(
+        oid_conf_response = httpx2.get(
             config.OAUTH_WELL_KNOWN,
             timeout=30,
             follow_redirects=True,
