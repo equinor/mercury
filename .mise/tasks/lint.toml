@@ -28,8 +28,6 @@ run = "prek run --all-files"
 description = "Lint entire project"
 run = [
   "mise fmt",
-  "mise run lint-pre-commit",             # includes ruff and biome
+  "mise run lint-pre-commit", # includes ruff, biome and typescript compilation
   "mise run lint-mypy",
-  "mise run lint-ty",
-  "mise run lint-typescript-compilation",
 ]

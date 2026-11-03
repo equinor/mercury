@@ -66,3 +66,13 @@ repos:
         files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|s?css)$"
         entry: mise run lint-biome
         pass_filenames: false
+
+  - repo: local
+    hooks:
+      - id: ts-lint
+        name: "Lint: TypeScript"
+        language: system
+        types: [text]
+        files: "^web/.*\\.tsx?$"
+        entry: mise run lint-typescript-compilation
+        pass_filenames: false
