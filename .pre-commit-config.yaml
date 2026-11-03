@@ -13,23 +13,7 @@ repos:
       - id: conventional-pre-commit
         stages: [commit-msg]
         name: "Validate: Commit is conventional"
-        args:
-          [
-            build,
-            chore,
-            ci,
-            ops,
-            docs,
-            feat,
-            fix,
-            perf,
-            refactor,
-            revert,
-            style,
-            test,
-            _fix,
-            _feat,
-          ]
+        args: [build, chore, ci, ops, docs, feat, fix, perf, refactor, revert, style, test, _fix, _feat]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0

@@ -37,13 +37,13 @@ export function ApplicationHelp() {
 
             <p>
               The core of the calculator is the UMR model (1-4). This model has been qualified for mercury calculations
-              through the research activity “Mercury distribution in the oil & gas value chain”{' '}
+              through the research activity{' '}
               <a
                 target="_blank"
                 href={'https://colab.equinor.com/technologies/75C06E9B-49E4-4746-940E-EE6E33ED7F3E/summary'}
                 rel="noreferrer"
               >
-                colab link
+                “Mercury distribution in the oil & gas value chain”
               </a>
               .
             </p>
@@ -86,14 +86,14 @@ export function ApplicationHelp() {
 
             <ul>
               <li>
-                The architecture contract for the calculator can be found{' '}
+                See the{' '}
                 <a
                   target="_blank"
                   href={'https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md'}
                   rel="noreferrer"
                 >
-                  here
-                </a>
+                  architecture contract for the calculator
+                </a>{' '}
                 (requires sign in)
               </li>
 
@@ -101,11 +101,11 @@ export function ApplicationHelp() {
                 Test fluids for calculations are available as{' '}
                 <a
                   target="_blank"
-                  href={'https://github.com/equinor/mercury/blob/main/api/src/tests/test_data/multiflash_data.py'}
+                  href={'https://github.com/equinor/mercury/blob/main/api/tests/test_data/multiflash_data.py'}
                   rel="noreferrer"
                 >
-                  python code{' '}
-                </a>
+                  python code
+                </a>{' '}
                 and as a{' '}
                 <a
                   target="_blank"
