@@ -15,9 +15,9 @@ jobs:
     permissions:
       contents: read
       packages: read
+      id-token: write
     uses: ./.github/workflows/tests.yaml
-    secrets:
-      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
+    secrets: inherit
 
   release-dev:
     needs: [linting-and-checks, tests]
@@ -26,8 +26,7 @@ jobs:
       packages: write
       id-token: write
     uses: ./.github/workflows/on-release-dev.yaml
-    secrets:
-      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
+    secrets: inherit
 
   release-please:
     runs-on: ubuntu-latest
@@ -35,14 +34,27 @@ jobs:
     permissions:
       contents: write
       issues: write
+      id-token: write
       pull-requests: write
     steps:
+      - name: "Setup: check out repository"
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v6
+
+      - name: "Setup Azure Login"
+        id: keyvault
+        uses: ./.github/actions/azure-login
+        with:
+          secret-name: APP-PRIVATE-KEY
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3
         with:
-          app-id: ${{ vars.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          client-id: ${{ vars.APP_ID }}
+          private-key: ${{ steps.keyvault.outputs.secret }}
 
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5
         id: release
@@ -56,13 +68,12 @@ jobs:
 
   release-prod:
     needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
     permissions:
       contents: read
       packages: write
       id-token: write
     uses: ./.github/workflows/on-release-prod.yaml
+    secrets: inherit
     with:
       release-tag: ${{ needs.release-please.outputs.tag_name }}
-    secrets:
-      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
