@@ -180,7 +180,7 @@
     "@babel/helper-string-parser" "^7.29.11"
     "@babel/helper-validator-identifier" "^7.29.7"
 
-"@biomejs/biome@^2.6.3":
+"@biomejs/biome@^2.6.4":
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/@biomejs/biome/-/biome-2.6.4.tgz#4f190d1cfa3003a6649db9197b34e47937420179"
   integrity sha512-8sKKwaNW4ot22awZ3lBjwWLHnUFXgXnrBPYS2gNlBAXRbDC++7kqjK2H7dR/FgCDtPvO1xfKpgEhJkGxAKYkxA==
@@ -335,12 +335,12 @@
     downshift "9.4.0"
     react-aria "^3.52.1"
 
-"@equinor/eds-icons@^1.2.0", "@equinor/eds-icons@^1.6.0":
+"@equinor/eds-icons@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@equinor/eds-icons/-/eds-icons-1.6.0.tgz#d3acdbde103403fe207c46a6cc56c6dca330a8b2"
   integrity sha512-kem0+yd7T/YQFLwC4tLxPq9LWLjQjODduGJLFQR1JXzm9e7oudozXgK7Fcmf7/ZXymEYBtAJyBkYR0d71GLPXw==
 
-"@equinor/eds-tokens@^2.3.0", "@equinor/eds-tokens@^2.3.2":
+"@equinor/eds-tokens@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@equinor/eds-tokens/-/eds-tokens-2.3.2.tgz#2559172945d39ce3e364a8f70815df0dc5248a5d"
   integrity sha512-XdLnBF0TwjhGAEWRmz2mO4eagiZ7x3uoMzpvr3XE3tUyOA7Oh2UBbDGx4wfmd3DTDPut+gVnyed5w/HcRsR6CQ==
@@ -1086,7 +1086,7 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
-"@types/node@^26.6.5":
+"@types/node@^26.6.6":
   version "26.6.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-26.6.6.tgz#9ed7b5817e728ed9216ef7c5b7d373fe3b777104"
   integrity sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==
@@ -1215,7 +1215,7 @@
   resolved "https://registry.yarnpkg.com/@valibot/to-json-schema/-/to-json-schema-1.8.0.tgz#c8f267dd8556ada802c07fa1c8c3c201d9a45ca3"
   integrity sha512-a0M+uwCuQZEPAo65NYkFSJ14O5c213KoSZmPdoCfuFvUhfULi4T2Z6Tpjv6lTVMW9RoLm74RpRAjNEa43KcN+g==
 
-"@vitejs/plugin-react@^6.1.2":
+"@vitejs/plugin-react@^6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-6.2.1.tgz#b0e5c19cff9cce00dc1d63b963bae273661814ec"
   integrity sha512-9KyWCij3r0+qLG3Q62vBmv0VyevmYibAtxaCIVK9o0k6CXgaajZRIe8tpfchQcdZArJ5b/7OrIz4W3b2uxVRDA==
@@ -2125,7 +2125,7 @@ react-oauth2-code-pkce@^1.24.0:
   resolved "https://registry.yarnpkg.com/react-oauth2-code-pkce/-/react-oauth2-code-pkce-1.24.0.tgz#e8170e582896bc0f06767b1690291e393df38d1f"
   integrity sha512-HV9cjI/FO8clCuRum540ZgjwCHcF5Cs2APOuUYGOo1F2/Fbxa+COWFSAlkixZEs1Z8axoKqWpht+n80u6qzQRw==
 
-react-router-dom@^7.18.4:
+react-router-dom@^7.18.5:
   version "7.18.5"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.18.5.tgz#25e19a13396de166785c1199227a64bcd6815a8d"
   integrity sha512-9HcfDMU6JJ/fp6gJZYGwNE6RknVGS4kBjH1HkNw959mCJi70TVwdipQWv2FEol9uGpi+SZTFtVpJPtEQfayeOw==
