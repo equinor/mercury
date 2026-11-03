@@ -3,33 +3,32 @@
 * Do not edit manually.
 */
 
+import type { PhaseLabelsKey } from './PhaseLabels'
 
 /**
- * MultiflashResponse
- * @example [object Object]
-*/
+ * @example {"componentFractions":{"1":[3.153640195684568e-23,0.17798810356465122,0.001283168757794131],"2":[8.232685472278065e-23,0.42824009015281783,0.00007363513673381724],"3":[6.089783280850285e-25,0.0035486377271550557,0.9984849101778882],"5":[1.0000000000000002,4.038754670974074e-7,7.447270506156235e-9],"101":[7.260898200622709e-23,0.390222764679909,0.00015827848031333905]},"feedFractions":{"1":0.1057,"2":0.2535,"3":0.272,"5":0.137,"101":0.23102},"phaseValues":{"Aqueous":{"mercury":82.76725027120922,"percentage":0.2705200698329841},"Mercury":{"mercury":1000000000,"percentage":0.13710670215621407},"Vapor":{"mercury":3426.2630579508586,"percentage":0.5923732280108018}}}
+ * @type object
+ */
 export type MultiflashResponse = {
-    /**
-     * @description Phase labels (vapor, liquid, aqueous, mercury) with their fraction of unity and mercury concentration
-     * @type object
-    */
-    phaseValues: {
-        [key: string]: {
-            [key: string]: number;
-        };
-    };
-    /**
-     * @description Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)
-     * @type object
-    */
-    componentFractions: {
-        [key: string]: number[];
-    };
-    /**
-     * @description Ratio of components in the feed (guaranteed to sum to 1)
-     * @type object
-    */
-    feedFractions: {
-        [key: string]: number;
-    };
+  /**
+   * @description Phase labels (vapor, liquid, aqueous, mercury) with their fraction of unity and mercury concentration
+   * @type object
+   */
+  phaseValues: Partial<Record<PhaseLabelsKey, {
+    [key: string]: number;
+  }>>;
+  /**
+   * @description Mole fractions of each of the components (Note: mass is discarded from MultiflashResult)
+   * @type object
+   */
+  componentFractions: {
+    [key: string]: number[];
+  };
+  /**
+   * @description Ratio of components in the feed (guaranteed to sum to 1)
+   * @type object
+   */
+  feedFractions: {
+    [key: string]: number;
+  };
 };

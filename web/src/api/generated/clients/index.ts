@@ -1,5 +1,5 @@
-export { ComponentService } from "./ComponentService/ComponentService.ts";
-export { HealthCheckService } from "./HealthCheckService/HealthCheckService.ts";
-export { MetricsService } from "./MetricsService/MetricsService.ts";
-export { MultiflashService } from "./MultiflashService/MultiflashService.ts";
-export { WhoamiService } from "./WhoamiService/WhoamiService.ts";
+export { computeMultiflash } from './computeMultiflash'
+export { getComponents } from './getComponents'
+export { getHealthCheck } from './getHealthCheck'
+export { getMetrics } from './getMetrics'
+export { getWhoami } from './getWhoami'

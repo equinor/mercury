@@ -3,26 +3,10 @@
 * Do not edit manually.
 */
 
-
-/**
- * ValidationError
-*/
 export type ValidationError = {
-    /**
-     * @type array
-    */
-    loc: (string | number)[];
-    /**
-     * @type string
-    */
-    msg: string;
-    /**
-     * @type string
-    */
-    type: string;
-    input?: any;
-    /**
-     * @type object | undefined
-    */
-    ctx?: object;
+  loc: (string | number)[];
+  msg: string;
+  type: string;
+  input?: unknown;
+  ctx?: object;
 };

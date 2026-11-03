@@ -3,16 +3,10 @@
 * Do not edit manually.
 */
 
-
-export const accessLevelEnum = {
-    WRITE: 2,
-    READ: 1,
-    NONE: 0
+export const accessLevel = {
+  WRITE: 2,
+  READ: 1,
+  NONE: 0,
 } as const;
 
-export type AccessLevelEnumKey = (typeof accessLevelEnum)[keyof typeof accessLevelEnum];
-
-/**
- * AccessLevel
-*/
-export type AccessLevel = AccessLevelEnumKey;
+export type AccessLevelKey = (typeof accessLevel)[keyof typeof accessLevel];

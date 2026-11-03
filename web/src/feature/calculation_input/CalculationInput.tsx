@@ -2,7 +2,7 @@ import { Autocomplete, Button, Progress } from '@equinor/eds-core-react'
 import { useAppInsightsContext } from '@microsoft/applicationinsights-react-js'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { MultiflashService } from '../../api/generated'
+import { computeMultiflash } from '../../api/generated'
 import type { TCalcStatus, TComponentProperty, TPackage, TResults } from '../../common/types'
 import { Card } from '../../components'
 import { useLastInputContext } from '../../contexts/LastInputContext/LastInputContext'
@@ -68,7 +68,7 @@ export const CalculationInput = ({
           cubicFeedFlow: cubicFeedFlow,
         }
         setLastInput(input)
-        MultiflashService.computeMultiflash(input)
+        computeMultiflash({ body: input })
           .then((response) => {
             setResult({
               phaseValues: Object.entries(response.phaseValues).map(([phase, phaseData]) => ({
