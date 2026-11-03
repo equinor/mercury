@@ -1,6 +1,6 @@
 # Mercury - Infrastructure as Code
 
-We use __Bicep__ to define our _Infrastructure as Code_.
+We use **Bicep** to define our _Infrastructure as Code_.
 
 - [Bicep overview](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep)
 - [Azure resource reference](https://learn.microsoft.com/en-us/azure/templates/)
