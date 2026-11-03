@@ -12,6 +12,9 @@ spec:
     - name: api
       image: ghcr.io/equinor/mercury-api:{imageTagName}
       alwaysPullImageOnDeploy: true
+      identity:
+        azure:
+          clientId: f30f22c0-8373-455d-94b7-2604f42740e2
       environmentConfig:
         - environment: prod
           imageTagName: latest
@@ -22,6 +25,13 @@ spec:
         - environment: dev
           monitoring: true
           imageTagName: latest
+          secretRefs:
+            azureKeyVaults:
+              - name: mercury-kv
+                path: /mnt/key-vault
+                useAzureIdentity: true
+                items:
+                  - name: APP-INSIGHTS-CON-STRING-DEV
           variables:
             ENVIRONMENT: development
             LOGGING_LEVEL: "info"
