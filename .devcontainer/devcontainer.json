@@ -1,21 +1,34 @@
 // Definition for the devcontainer used by GitHub Codespaces.
 {
   "name": "Full-stack devcontainer (Backend & Frontend)",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "WORKSPACE": "${containerWorkspaceFolder}"
+    }
+  },
+  "mounts": [
+    "source=uv-cache-${devcontainerId},target=/home/vscode/.cache/uv,type=volume",
+    "source=api-venv-${devcontainerId},target=${containerWorkspaceFolder}/api/.venv,type=volume",
+    "source=node-modules-${devcontainerId},target=${containerWorkspaceFolder}/web/node_modules,type=volume"
+  ],
+  "forwardPorts": [80],
+  "portsAttributes": {
+    "80": {
+      "label": "Mercury",
+      "onAutoForward": "openBrowser",
+      "requireLocalPort": true
+    }
+  },
   "remoteEnv": {
-    "COMPOSE_BAKE": "true",
-    "COREPACK_ENABLE_DOWNLOAD_PROMPT": "0"
+    "COMPOSE_BAKE": "true"
   },
   "postAttachCommand": {
-    "backend": "curl -LsSf https://astral.sh/uv/install.sh | sh && cd api && uv sync --all-groups && cd .. && uvx prek install",
-    "frontend": "cd web && yarn install"
+    "setup": "mise trust --yes && mise run setup"
   },
   "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts",
-      "installYarnUsingApt": false
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": { "moby": false }
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:4": { "moby": false }
   },
   "customizations": {
     "vscode": {
@@ -54,28 +67,32 @@
           }
         },
         // Python specific settings
-        "notebook.formatOnSave.enabled": true,
         "python.defaultInterpreterPath": "${workspaceFolder}/api/.venv/bin/python",
         // Frontend specific settings
+        "biome.requireConfiguration": true,
         "biome.lsp.bin": "web/node_modules/@biomejs/biome/bin/biome",
+        "biome.configPath": "${workspaceFolder}/biome.json",
         "git.terminalAuthentication": true
       },
       // Extensions that is handy to have in the devcontainer
       "extensions": [
-        "biomejs.biome@3.3.0",
+        "biomejs.biome",
         "charliermarsh.ruff",
         "ms-python.python",
-        "ms-toolsai.jupyter",
         "tamasfe.even-better-toml",
         "docker.docker",
         "redhat.vscode-yaml",
         "eamodio.gitlens",
+        "ms-azuretools.vscode-containers",
         "streetsidesoftware.code-spell-checker",
         "streetsidesoftware.code-spell-checker-norwegian-bokmal",
         "streetsidesoftware.code-spell-checker-scientific-terms",
         "github.vscode-github-actions",
         "DavidAnson.vscode-markdownlint",
-        "vitest.explorer"
+        "ms-azuretools.vscode-bicep",
+        "vitest.explorer",
+        "hverlin.mise-vscode",
+        "codeandstuff.package-json-upgrade"
       ]
     }
   }

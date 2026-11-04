@@ -13,8 +13,10 @@ To install relevant project tools:
 ```bash
 mise trust .
 mise install
-prek install
+mise run setup
 ```
+
+`mise run setup` installs the API and web dependencies and the git pre-commit hook.
 
 Environment variables is used for configuration and must be set before running in a file called `.env`.
 Use the `.env-template` to create your own `.env` file and populate with values.

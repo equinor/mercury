@@ -16,7 +16,7 @@ COPY nginx/rootfs/ /
 USER 1000
 
 
-FROM node:24-alpine AS base
+FROM node:26-alpine AS base
 ARG AUTH_ENABLED=0
 ARG OAUTH_AUTH_SCOPE=""
 ARG AZURE_CLIENT_ID=""
@@ -32,6 +32,9 @@ ENV VITE_AUTH_ENDPOINT=https://login.microsoftonline.com/${VITE_AUTH_TENANT_ID}/
 ENV VITE_LOGOUT_ENDPOINT=https://login.microsoftonline.com/${VITE_AUTH_TENANT_ID}/oauth2/logout
 
 ENV YARN_CACHE_FOLDER=/var/cache/yarn
+
+# Node 25+ images no longer include yarn
+RUN npm install --global yarn@1.22.22
 
 RUN mkdir /code && \
   chown -R "node:node" /code
