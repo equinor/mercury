@@ -6,7 +6,7 @@ export const reactPlugin = new ReactPlugin()
 export const appInsights = new ApplicationInsights({
   config: {
     connectionString: connectionString,
-    enableAutoRouteTracking: false,
+    enableAutoRouteTracking: true,
     maxBatchInterval: 0,
     extensions: [reactPlugin],
   },
@@ -14,4 +14,5 @@ export const appInsights = new ApplicationInsights({
 
 if (connectionString) {
   appInsights.loadAppInsights()
+  appInsights.trackPageView()
 }
