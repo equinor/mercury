@@ -130,7 +130,5 @@ jobs:
           tags: ${{ steps.tags.outputs.tags }}
           cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
           cache-to: type=inline
-          build-args: |
-            LIBHG_VERSION=${{ vars.LIBHG_VERSION }}
           secrets: |
             libhg-pat=${{ secrets.LIBHG_PAT }}
