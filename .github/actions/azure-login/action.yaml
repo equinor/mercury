@@ -34,9 +34,14 @@ runs:
       id: keyvault
       shell: bash
       run: |
-        SECRET_VALUE=$(az keyvault secret show \
-          --name "${{ inputs.secret-name }}" \
-          --vault-name mercury-kv \
-          --query value -o tsv)
-        echo "::add-mask::$SECRET_VALUE"
-        echo "secret=$SECRET_VALUE" >> "$GITHUB_OUTPUT"
+        value=$(az keyvault secret show --vault-name mercury-kv --name "${{ inputs.secret-name }}" --query value -o tsv)
+
+        while IFS= read -r line; do
+          if [ -n "$line" ]; then echo "::add-mask::$line"; fi
+        done <<< "$value"
+
+        {
+          echo "secret<<EOF"
+          echo "$value"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"
