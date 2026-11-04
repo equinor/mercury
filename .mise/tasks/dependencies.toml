@@ -15,6 +15,14 @@ depends = [
   "install-web-dependencies", # Frontend
 ]
 
+[install-git-hooks]
+description = "Install the prek git pre-commit hook"
+run = "prek install"
+
+[setup]
+description = "Set up the dev environment: install dependencies and git hooks (used by the devcontainer)"
+depends = ["install-dependencies", "install-git-hooks"]
+
 [upgrade-api-dependencies]
 description = "Upgrade api main dependencies"
 dir = "{{ config_root }}/api"

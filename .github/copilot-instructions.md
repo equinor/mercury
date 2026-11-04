@@ -12,7 +12,7 @@ The Fortran library `libhg` is a private binary dependency downloaded from `equi
 ## Tool Versions
 
 - **Python**: 3.13 (managed with `uv`, lockfile: `api/uv.lock`)
-- **Node.js**: 24 (package manager: `yarn` 1.22, lockfile: `web/yarn.lock`)
+- **Node.js**: 26 (package manager: `yarn` 1.22, lockfile: `web/yarn.lock`)
 - **Linting (Python)**: `ruff` for linting & formatting, `mypy` for static type checking
 - **Linting (JS/TS)**: `biome` (config: `biome.json` at repo root)
 - **Pre-commit**: `prek` (runs hooks from `.pre-commit-config.yaml`)
