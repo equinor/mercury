@@ -1,4 +1,4 @@
-from typing import Self, cast
+from typing import Self
 
 from pydantic import ConfigDict, Field
 
@@ -23,4 +23,4 @@ class ComponentProperties(BaseModelWrapper):
     @classmethod
     def from_dictionary(cls, dictionary: ComponentPropertiesDict) -> Self:
         """Create from dictionary."""
-        return cast("Self", cls.model_validate(dictionary))
+        return cls.model_validate(dictionary)

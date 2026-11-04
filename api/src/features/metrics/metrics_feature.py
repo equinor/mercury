@@ -1,5 +1,3 @@
-from typing import cast
-
 from fastapi import APIRouter
 from fastapi.responses import PlainTextResponse
 
@@ -17,5 +15,4 @@ router = APIRouter(tags=["metrics"], route_class=ExceptionHandlingRoute)
 )
 async def get() -> str:
     """Return metrics for application."""
-    response = cast("str", get_metrics_use_case())
-    return response
+    return get_metrics_use_case()
