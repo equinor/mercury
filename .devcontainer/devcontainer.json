@@ -78,6 +78,7 @@
       "extensions": [
         "biomejs.biome",
         "charliermarsh.ruff",
+        "astral-sh.ty",
         "ms-python.python",
         "tamasfe.even-better-toml",
         "docker.docker",
