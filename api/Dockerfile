@@ -4,7 +4,7 @@ FROM alpine:3.24.3 AS build
 RUN apk --no-cache add github-cli
 
 # Download specific release of libhg
-ARG LIBHG_VERSION
+ARG LIBHG_VERSION=v2.0.3
 RUN --mount=type=secret,id=libhg-pat,env=LIBHG_PAT \
   echo ${LIBHG_PAT} | gh auth login --with-token
 RUN gh release download ${LIBHG_VERSION} \

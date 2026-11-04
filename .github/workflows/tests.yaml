@@ -44,8 +44,6 @@ jobs:
           load: true
           tags: mercury-api-ci
           cache-from: type=registry,ref=${{ env.API_IMAGE }}:latest
-          build-args: |
-            LIBHG_VERSION=${{ vars.LIBHG_VERSION }}
           secrets: |
             libhg-pat=${{ secrets.LIBHG_PAT }}
 
