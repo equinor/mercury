@@ -16,8 +16,8 @@ jobs:
         include:
           - title: "Pre-commit with prek"
             task: lint-pre-commit
-          - title: "mypy type check"
-            task: lint-mypy
+          - title: "ty type check"
+            task: lint-ty
           - title: "Typescript compilation"
             task: lint-typescript-compilation
     steps:

@@ -13,7 +13,7 @@ The Fortran library `libhg` is a private binary dependency downloaded from `equi
 
 - **Python**: 3.13 (managed with `uv`, lockfile: `api/uv.lock`)
 - **Node.js**: 26 (package manager: `yarn` 1.22, lockfile: `web/yarn.lock`)
-- **Linting (Python)**: `ruff` for linting & formatting, `mypy` for static type checking
+- **Linting (Python)**: `ruff` for linting & formatting, `ty` for static type checking
 - **Linting (JS/TS)**: `biome` (config: `biome.json` at repo root)
 - **Pre-commit**: `prek` (runs hooks from `.pre-commit-config.yaml`)
 - **Task runner**: `mise` (config: `.mise.local.toml`)
@@ -39,7 +39,7 @@ cd api
 uv sync --locked --dev           # Install dependencies into api/.venv
 uv run ruff check src/           # Lint Python code
 uv run ruff format --check src/  # Check Python formatting
-uv run mypy src/                 # Static type check (~60s)
+uv run ty check src/             # Static type check
 ```
 
 **API tests require Docker** because they depend on the `libhg` Fortran library. Running pytest locally will fail with `ModuleNotFoundError: No module named 'libhg'`.
@@ -64,13 +64,13 @@ docker compose build     # Rebuild after dependency changes
 ### Before Submitting Changes
 
 1. `cd web && yarn install --frozen-lockfile && yarn compile && yarn lint && yarn test run`
-2. `cd api && uv sync --locked --dev && uv run ruff check src/ && uv run ruff format --check src/ && uv run mypy src/`
+2. `cd api && uv sync --locked --dev && uv run ruff check src/ && uv run ruff format --check src/ && uv run ty check src/`
 
 ## CI Pipeline (GitHub Actions)
 
 On every **pull request** and **push to main**:
 
-1. **Linting and checks** (`linting-and-checks.yaml`): `prek`, `mypy` on `api/src/`, TypeScript compile on `web/`
+1. **Linting and checks** (`linting-and-checks.yaml`): `prek`, `ty` on `api/src/`, TypeScript compile on `web/`
 2. **Tests** (`tests.yaml`): API unit + integration tests (Docker), web tests (`yarn test`)
 
 On **push to main** (after lint + tests pass): publishes `latest` images and deploys to dev via Radix.
@@ -80,7 +80,7 @@ On **release-please PR merge**: publishes tagged images and deploys to prod.
 
 ```
 api/
-  pyproject.toml             # uv/ruff/mypy/pytest config (line-length 120)
+  pyproject.toml             # uv/ruff/pytest config (line-length 120)
   Dockerfile                 # Multi-stage: build → base → dev → prod
   src/
     app.py                   # FastAPI app factory (create_app), version tagged by release-please

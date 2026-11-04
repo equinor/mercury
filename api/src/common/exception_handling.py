@@ -95,6 +95,7 @@ def http_exception_handler(request: Request, exc: HTTPStatusError) -> JSONRespon
             type="ExternalFetchException",
             status=exc.response.status_code,
             message="Failed to fetch an external resource",
-            debug=exc.response,
-        )
+            debug=str(exc),
+        ).model_dump(),
+        status_code=exc.response.status_code,
     )

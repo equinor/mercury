@@ -15,7 +15,7 @@ def create_app() -> FastAPI:
         title=APP_TITLE,
         version="1.1.15",  # x-release-please-version
         description=_get_description_md(),
-        middleware=[Middleware(LocalLoggerMiddleware)],  # type: ignore
+        middleware=[Middleware(LocalLoggerMiddleware)],
         license_info=_get_license_info(),
         swagger_ui_init_oauth=_get_swagger_ui_init_oauth(),
     )
