@@ -48,9 +48,6 @@ jobs:
         uses: ./.github/actions/azure-login
         with:
           secret-name: ${{ inputs.appinsights-secret-name }}
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: "Setup: get version info"
         id: version
@@ -112,9 +109,6 @@ jobs:
         uses: ./.github/actions/azure-login
         with:
           secret-name: LIBHG-PAT
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: "Setup: get version info"
         id: version
