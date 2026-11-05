@@ -13,9 +13,21 @@
 
 This is an application to perform phase equilibrium calculations for mercury.
 
+[About](#about) • [Development](#development) • [Contributing](#Contributing)
+
 </div>
 
-Mercury is a React web app with a FastAPI backend for perfomring the calculations. The actual thermodynamics lives in `libhg`, a library from the private [gpa-libhg](https://github.com/equinor/gpa-libhg) repo. The compiled module is pulled in whe2n the Docker image is built, so a GitHub token with access to the library e.g.  (`LIBHG_PAT`) is needed. See the [setup guide](docs/developers/guide/setup.md#secrets). 
+<a id="about"></a>
+
+## :books: About
+
+Mercury is a calculator. You give it a gas or oil mixture at a chosen temperature and pressure, and it tells you where the mercury in that mixture ends up. This matters in oil and gas processing because mercury is toxic and attacks equipment such as aluminium heat exchangers. Engineers need to know whether it will stay in the gas, collect in the liquids, dissolve in water, or settle out as pure mercury.
+
+See the [documentation][docs-about] for more information about the thermodynamic model used in Mercury Calculator.
+
+### Architecture
+
+Mercury is a React web app with a FastAPI backend that performs the calculations. The thermodynamics lives in `libhg`, a library from the private [gpa-libhg](https://github.com/equinor/gpa-libhg) repo. The compiled module is downloaded when the API Docker image is built, so building the image requires a GitHub token (`LIBHG_PAT`) with read access to gpa-libhg. See the [setup guide](docs/developers/guide/setup.md#secrets).
 
 ```mermaid
 flowchart LR
@@ -29,19 +41,17 @@ flowchart LR
         end
     end
 
-    azure["<b>Azure</b><br/>Key Vault<br/>App Insights"]
+    kv[Azure Key Vault]
+    ai[Azure App Insights]
 
     user -->|HTTPS| proxy
     user -.->|login / token| entra
     proxy -->|/api| api
     api -.->|validate JWT| entra
+    radix -.->|secrets| kv
+    api -.->|telemetry| ai
+    proxy -.->|telemetry| ai
 ```
-
-<a id="about"></a>
-
-## :books: About
-
-See the [documentation][docs-about] for more information about the thermodynamic model used in Mercury Calculator.
 
 <a id="development"></a>
 
