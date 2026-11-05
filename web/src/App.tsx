@@ -15,7 +15,11 @@ function App() {
 
   useEffect(() => {
     if (!hasAuthConfig) return
-    if (token || error) {
+    if (token) {
+      loginStarted.current = true
+      return
+    }
+    if (error) {
       loginStarted.current = false
       return
     }
