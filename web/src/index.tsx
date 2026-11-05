@@ -1,4 +1,5 @@
 import { AppInsightsContext } from '@microsoft/applicationinsights-react-js'
+import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { AuthProvider } from 'react-oauth2-code-pkce'
 import App from './App'
@@ -15,13 +16,15 @@ const container = document.getElementById('root')
 const root = createRoot(container as HTMLElement)
 
 root.render(
-  <AppInsightsContext value={reactPlugin}>
-    {hasAuthConfig ? (
-      <AuthProvider authConfig={authConfig}>
+  <React.StrictMode>
+    <AppInsightsContext value={reactPlugin}>
+      {hasAuthConfig ? (
+        <AuthProvider authConfig={authConfig}>
+          <App />
+        </AuthProvider>
+      ) : (
         <App />
-      </AuthProvider>
-    ) : (
-      <App />
-    )}
-  </AppInsightsContext>
+      )}
+    </AppInsightsContext>
+  </React.StrictMode>
 )
