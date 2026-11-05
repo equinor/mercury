@@ -24,7 +24,7 @@ run = "mise run docker-pytest"
 description = "Run web unit tests"
 depends = ["install-web-dependencies"]
 dir = "{{ config_root }}/web"
-run = "yarn test run"
+run = "pnpm test run"
 
 [test]
 description = "Run all tests"

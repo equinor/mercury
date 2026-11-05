@@ -12,7 +12,7 @@ The Fortran library `libhg` is a private binary dependency downloaded from `equi
 ## Tool Versions
 
 - **Python**: 3.13 (managed with `uv`, lockfile: `api/uv.lock`)
-- **Node.js**: 26 (package manager: `yarn` 1.22, lockfile: `web/yarn.lock`)
+- **Node.js**: 26 (package manager: `pnpm` 12, lockfile: `web/pnpm-lock.yaml`)
 - **Linting (Python)**: `ruff` for linting & formatting, `ty` for static type checking
 - **Linting (JS/TS)**: `biome` (config: `biome.json` at repo root)
 - **Pre-commit**: `prek` (runs hooks from `.pre-commit-config.yaml`)
@@ -24,12 +24,12 @@ The Fortran library `libhg` is a private binary dependency downloaded from `equi
 
 ```bash
 cd web
-yarn install --frozen-lockfile  # Install dependencies
-yarn compile                     # TypeScript type check (tsc --noEmit)
-yarn lint                        # Biome lint + format check
-yarn test run                    # Run vitest unit tests
-yarn build                       # Production build (tsc + vite build → web/build/)
-yarn generate                    # Regenerate API client (requires API on port 5000)
+pnpm install --frozen-lockfile  # Install dependencies
+pnpm compile                     # TypeScript type check (tsc --noEmit)
+pnpm lint                        # Biome lint + format check
+pnpm test run                    # Run vitest unit tests
+pnpm build                       # Production build (tsc + vite build → web/build/)
+pnpm generate                    # Regenerate API client (requires API on port 5000)
 ```
 
 ### API (`api/` directory)
@@ -63,7 +63,7 @@ docker compose build     # Rebuild after dependency changes
 
 ### Before Submitting Changes
 
-1. `cd web && yarn install --frozen-lockfile && yarn compile && yarn lint && yarn test run`
+1. `cd web && pnpm install --frozen-lockfile && pnpm compile && pnpm lint && pnpm test run`
 2. `cd api && uv sync --locked --dev && uv run ruff check src/ && uv run ruff format --check src/ && uv run ty check src/`
 
 ## CI Pipeline (GitHub Actions)
@@ -71,7 +71,7 @@ docker compose build     # Rebuild after dependency changes
 On every **pull request** and **push to main**:
 
 1. **Linting and checks** (`linting-and-checks.yaml`): `prek`, `ty` on `api/src/`, TypeScript compile on `web/`
-2. **Tests** (`tests.yaml`): API unit + integration tests (Docker), web tests (`yarn test`)
+2. **Tests** (`tests.yaml`): API unit + integration tests (Docker), web tests (`pnpm test`)
 
 On **push to main** (after lint + tests pass): publishes `latest` images and deploys to dev via Radix.
 On **release-please PR merge**: publishes tagged images and deploys to prod.
@@ -146,7 +146,7 @@ Routes are split into authenticated (JWT via Microsoft Entra ID) and public, reg
 
 - **Commits**: Follow [Conventional Commits](https://www.conventionalcommits.org/). Prefixes: `feat`, `fix`, `build`, `chore`, `ci`, `docs`, `perf`, `refactor`, `revert`, `style`, `test`. Enforced by pre-commit.
 - **Versioning**: Managed by `release-please`. Version tracked in `api/src/cli/__about__.py`, `api/src/app.py`, and `web/package.json`. Do NOT manually bump versions.
-- **Generated code**: `web/src/api/generated/` is auto-generated from the OpenAPI schema. Never edit directly. Regenerate with `yarn generate` (requires API running on port 5000).
+- **Generated code**: `web/src/api/generated/` is auto-generated from the OpenAPI schema. Never edit directly. Regenerate with `pnpm generate` (requires API running on port 5000).
 - **Python style**: 120 char line length, ruff for linting/formatting, type hints required. `libhg` is treated as a standard library import for isort.
 - **TypeScript style**: Biome — spaces for indent, single quotes, trailing commas (ES5), no semicolons. Generated files excluded from linting.
 - **Deployment**: Radix (Equinor Kubernetes PaaS). Config in `radixconfig.yaml`. Two environments: `dev` (auto-deploy from main) and `prod` (deploy on release).

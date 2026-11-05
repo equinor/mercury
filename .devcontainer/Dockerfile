@@ -18,7 +18,7 @@ RUN if curl -fsSL --max-time 30 -o /tmp/equinor-proxy-root.crt http://pki.equino
 ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
 
 # mise is the single source of truth for the toolchain (.mise/config.toml) and tasks (.mise/tasks/).
-# It installs python, uv, node, yarn and prek at attach time, so none of them are installed here.
+# It installs python, uv, node, pnpm and prek at attach time, so none of them are installed here.
 COPY --from=mise /usr/local/bin/mise /usr/local/bin/mise
 
 # Make mise-managed tools available as plain commands, also in the non-interactive postAttachCommand

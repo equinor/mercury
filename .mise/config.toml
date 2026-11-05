@@ -2,7 +2,7 @@
 python = "3.13.18"
 uv = "0.13.6"
 node = "26"
-"npm:yarn" = "1.22.22"
+pnpm = "12.16.1"
 prek = "latest"
 
 [env]

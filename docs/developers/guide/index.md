@@ -15,4 +15,4 @@ To run the project, you will need the following:
     - [pre-commit](https://pre-commit.com/) (4.2 or newer)
       - Alternatively [prek](https://github.com/j178/prek) (used by default with mise)
         - [Node.js](https://nodejs.org) (22 or newer) in `web/`
-        - [Yarn Classic](https://classic.yarnpkg.com/) (1.x) in `web/`
+        - [pnpm](https://pnpm.io/) (12.x) in `web/`
