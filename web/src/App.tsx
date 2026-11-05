@@ -1,5 +1,5 @@
-import { Button, Divider, Typography } from '@equinor/eds-core-react'
-import { useContext, useEffect, useRef } from 'react'
+import { Button, Divider, Progress, Typography } from '@equinor/eds-core-react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { RouterProvider } from 'react-router-dom'
 import styled from 'styled-components'
@@ -12,14 +12,12 @@ function App() {
   const { token, error, loginInProgress, logIn } = useContext(AuthContext)
   tokenStore.current = token
   const loginStarted = useRef(false)
+  const [hadToken, setHadToken] = useState(false)
 
   useEffect(() => {
     if (!hasAuthConfig) return
-    if (token) {
-      loginStarted.current = true
-      return
-    }
-    if (error) {
+    if (token) setHadToken(true)
+    if (token || error) {
       loginStarted.current = false
       return
     }
@@ -34,7 +32,12 @@ function App() {
     return <AuthErrorScreen error={error} />
   }
   if (hasAuthConfig && !token) {
-    return null
+    return (
+      <CenterContainer role="status" aria-busy="true">
+        <Typography>{hadToken ? 'Logging you out...' : 'Signing you in...'}</Typography>
+        <Progress.Dots color="primary" />
+      </CenterContainer>
+    )
   }
 
   return <RouterProvider router={router} />
