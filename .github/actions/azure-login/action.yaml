@@ -14,25 +14,25 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - name: "Setup: Azure login"
-      uses: azure/login@v3
-      with:
-        client-id: 90f149df-e313-495f-af5d-827e41086223
-        tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
-        subscription-id: f196e45a-a78b-4d35-ba40-b354140bc7a1
+  - name: "Setup: Azure login"
+    uses: azure/login@v3
+    with:
+      client-id: 7a44440b-c0c2-4900-949e-393430f0cfbc
+      tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+      subscription-id: 17337cf3-dd1d-4ccc-a711-6324e8bceabb #f196e45a-a78b-4d35-ba40-b354140bc7a1
 
-    - name: "Setup: read Key Vault secret"
-      id: keyvault
-      shell: bash
-      run: |
-        value=$(az keyvault secret show --vault-name mercury-kv --name "${{ inputs.secret-name }}" --query value -o tsv)
+  - name: "Setup: read Key Vault secret"
+    id: keyvault
+    shell: bash
+    run: |
+      value=$(az keyvault secret show --vault-name mercury-kv --name "${{ inputs.secret-name }}" --query value -o tsv)
 
-        while IFS= read -r line; do
-          if [ -n "$line" ]; then echo "::add-mask::$line"; fi
-        done <<< "$value"
+      while IFS= read -r line; do
+        if [ -n "$line" ]; then echo "::add-mask::$line"; fi
+      done <<< "$value"
 
-        {
-          echo "secret<<EOF"
-          echo "$value"
-          echo "EOF"
-        } >> "$GITHUB_OUTPUT"
+      {
+        echo "secret<<EOF"
+        echo "$value"
+        echo "EOF"
+      } >> "$GITHUB_OUTPUT"
