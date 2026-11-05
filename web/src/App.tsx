@@ -1,5 +1,5 @@
-import { Button, Divider, Progress, Typography } from '@equinor/eds-core-react'
-import { useContext } from 'react'
+import { Button, Divider, Typography } from '@equinor/eds-core-react'
+import { useContext, useEffect, useRef } from 'react'
 import { AuthContext } from 'react-oauth2-code-pkce'
 import { RouterProvider } from 'react-router-dom'
 import styled from 'styled-components'
@@ -9,37 +9,31 @@ import { router } from './router'
 const hasAuthConfig = import.meta.env.VITE_AUTH === '1'
 
 function App() {
-  const { token, error, loginInProgress } = useContext(AuthContext)
+  const { token, error, loginInProgress, logIn } = useContext(AuthContext)
   tokenStore.current = token
+  const loginStarted = useRef(false)
+
+  useEffect(() => {
+    if (!hasAuthConfig) return
+    if (token || error) {
+      loginStarted.current = false
+      return
+    }
+    // The ref stops StrictMode's double effect from starting two PKCE flows
+    if (!loginInProgress && !loginStarted.current) {
+      loginStarted.current = true
+      logIn()
+    }
+  }, [token, error, loginInProgress, logIn])
 
   if (hasAuthConfig && error) {
     return <AuthErrorScreen error={error} />
   }
-  if ((hasAuthConfig && !token) || loginInProgress) {
-    return <LoginScreen />
+  if (hasAuthConfig && !token) {
+    return null
   }
 
   return <RouterProvider router={router} />
-}
-
-const LoginScreen = () => {
-  const { logIn, loginInProgress } = useContext(AuthContext)
-
-  return (
-    <CenterContainer>
-      <Typography>Mercury</Typography>
-      {loginInProgress ? (
-        <>
-          <Typography>Login in progress.</Typography>
-          <Progress.Dots color="primary" />
-        </>
-      ) : (
-        <Button variant="contained" onClick={() => logIn()}>
-          Log in
-        </Button>
-      )}
-    </CenterContainer>
-  )
 }
 
 const AuthErrorScreen = (props: { error: string }) => {
