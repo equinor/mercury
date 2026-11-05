@@ -46,7 +46,7 @@ See [resources](#resources) section for overview of all resources used by the ap
 - [Docker](https://docs.docker.com/)
 - [Azure](https://learn.microsoft.com/en-us/azure/)
 - [React](https://react.dev/)
-- [yarn](https://yarnpkg.com/)
+- [pnpm](https://pnpm.io/)
 - [Python](https://www.python.org/)
 - [Oauth2](https://oauth.net/2/)
 - [Pre-commit](https://pre-commit.com/)

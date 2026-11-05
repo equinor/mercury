@@ -8,4 +8,4 @@ echo "Virtual Environment: $VIRTUAL_ENV"
 [generate-api-types]
 description = "Generate API types for typescript"
 dir = "{{ config_root }}/web"
-run = "yarn generate"
+run = "pnpm generate"

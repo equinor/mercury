@@ -22,7 +22,7 @@ else
 	fi
 	cd web
 	# CI=true forces Kubb to use a plain logger compatible with non-TTY environments
-	CI=true yarn generate
+	CI=true pnpm generate
 	rm -f openapi.json
 	echo "API Client successfully generated"
 fi

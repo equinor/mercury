@@ -6,7 +6,7 @@ run = "uv sync --locked"
 [install-web-dependencies]
 description = "Install all the latest web dependencies"
 dir = "{{ config_root }}/web"
-run = "yarn install --frozen-lockfile"
+run = "pnpm install --frozen-lockfile"
 
 [install-dependencies]
 description = "Install all the latest dependencies in the project"

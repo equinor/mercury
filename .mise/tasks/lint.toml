@@ -18,7 +18,7 @@ run = "{{config_root}}/web/node_modules/.bin/biome check --write --no-errors-on-
 description = "Ensure typescript code compiles without errors"
 depends = ["install-web-dependencies"]
 dir = "{{ config_root }}/web"
-run = "yarn compile"
+run = "pnpm compile"
 
 [lint-pre-commit]
 description = "Run pre-commit (prek)"
