@@ -1,0 +1,38 @@
+name: "Azure Login"
+description: "Logs in to Azure via OIDC and reads a secret from the mercury Key Vault"
+
+inputs:
+  secret-name:
+    description: "Name of the Key Vault secret to read"
+    required: true
+
+outputs:
+  secret:
+    description: "The Key Vault secret value (masked)"
+    value: ${{ steps.keyvault.outputs.secret }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Setup: Azure login"
+      uses: azure/login@v3
+      with:
+        client-id: 90f149df-e313-495f-af5d-827e41086223
+        tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
+        subscription-id: f196e45a-a78b-4d35-ba40-b354140bc7a1
+
+    - name: "Setup: read Key Vault secret"
+      id: keyvault
+      shell: bash
+      run: |
+        value=$(az keyvault secret show --vault-name mercury-kv --name "${{ inputs.secret-name }}" --query value -o tsv)
+
+        while IFS= read -r line; do
+          if [ -n "$line" ]; then echo "::add-mask::$line"; fi
+        done <<< "$value"
+
+        {
+          echo "secret<<EOF"
+          echo "$value"
+          echo "EOF"
+        } >> "$GITHUB_OUTPUT"

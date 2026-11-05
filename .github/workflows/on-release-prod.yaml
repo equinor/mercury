@@ -7,22 +7,18 @@ on:
         description: "release tag"
         required: true
         type: string
-    secrets:
-      LIBHG_PAT:
-        description: "PAT for accessing libhg repository"
-        required: true
 
 jobs:
   publish-release-image:
     permissions:
       contents: read
       packages: write
+      id-token: write
     uses: ./.github/workflows/publish-images.yaml
     with:
       image-tags: ${{ inputs.release-tag }}
-      applicationinsights-connection-string: ${{ vars.APP_INSIGHT_CON_STRING_PROD }}
-    secrets:
-      LIBHG_PAT: ${{ secrets.LIBHG_PAT }}
+      appinsights-secret-name: APP-INSIGHTS-CON-STRING-PROD
+    secrets: inherit
 
   deploy-prod-to-radix:
     needs: publish-release-image

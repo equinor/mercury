@@ -13,8 +13,6 @@ services:
     restart: unless-stopped
     build:
       context: api
-      args:
-        LIBHG_VERSION: $LIBHG_VERSION
       secrets:
         - libhg-pat
 
