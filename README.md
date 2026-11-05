@@ -11,11 +11,31 @@
 [![On push main branch][on-push-main-branch-badge]][on-push-main-branch-action]
 [![SCM Compliance][scm-badge]][scm-policy]
 
-This is an **application** to perform phase equilibrium calculations for mercury.
-
-[About](#about) • [Development](#development) • [Contributing](#Contributing)
+This is an application to perform phase equilibrium calculations for mercury.
 
 </div>
+
+Mercury is a React web app with a FastAPI backend for perfomring the calculations. The actual thermodynamics lives in `libhg`, a library from the private [gpa-libhg](https://github.com/equinor/gpa-libhg) repo. The compiled module is pulled in whe2n the Docker image is built, so a GitHub token with access to the library e.g.  (`LIBHG_PAT`) is needed. See the [setup guide](docs/developers/guide/setup.md#secrets). 
+
+```mermaid
+flowchart LR
+    user([User / Browser])
+    entra[Microsoft Entra ID]
+
+    subgraph radix[Radix - dev / prod]
+        proxy["nginx proxy<br/>+ React SPA"]
+        subgraph api[FastAPI]
+            libhg["libhg<br/>(Fortran, UMR)"]
+        end
+    end
+
+    azure["<b>Azure</b><br/>Key Vault<br/>App Insights"]
+
+    user -->|HTTPS| proxy
+    user -.->|login / token| entra
+    proxy -->|/api| api
+    api -.->|validate JWT| entra
+```
 
 <a id="about"></a>
 
