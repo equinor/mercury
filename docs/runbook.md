@@ -36,7 +36,7 @@ See [resources](#resources) section for overview of all resources used by the ap
 - To change the `radixconfig.yaml` file
   - Added to the [GitHub repository][github-repository]
 -  **For Managing Azure Resources**
-- To access Azure resources, apply for the `Owner` and/or the `Contributor` role in the `S538-NeqSim API` subscription through [AccessIT](https://accessit.equinor.com) or get added to the `mercury-dev` / `mercury-prod` AZ groups.
+- To access Azure resources, apply for the `Owner` and/or the `Contributor` role in the `R286-Mercury` subscription through [AccessIT](https://accessit.equinor.com) or get added to the `mercury-dev` / `mercury-prod` AZ groups.
 </details>
 
 <details>
@@ -167,7 +167,7 @@ There are two environments in Radix for Mercury: development (`dev`) and product
 
 #### Subscription
 
-All resources for Mercury in Azure are under the `S538-NeqSim API` subscription.
+All resources for Mercury in Azure are under the `R286-Mercury` subscription.
 These resources are defined in the [bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/)
 _Infrastructure-as-Code_-language for Azure. The bicep file can be found at [`./IaC`](./IaC).
 
@@ -207,9 +207,23 @@ customEvents
 
 > _Overview of all secret and certificates used in the application_
 
-`LIBHG_PAT`: A secret used to access the private repository `github.com/equinor/gpa-libhg` stored in Github and used during build of the API container image. The repository contains the Fortran library that is compiled and used for thermodynamic calculations in the API.
+Secrets are stored in the `mercury-kv` Key Vault (`R286-Mercury` subscription). GitHub Actions and Radix read them using workload identity.
 
-When running the application locally, this secret needs to be created as a PAT from [https://github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) and then added to the environment variables.
+| Secret                         | Used by               | Description                                                                                                        |
+| ------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `LIBHG-PAT`                    | GitHub Actions        | Token with read access to the private repository `github.com/equinor/gpa-libhg`, used when building the API image. |
+| `APP-PRIVATE-KEY`              | GitHub Actions        | Private key of the GitHub App that release-please uses to create release PRs.                                      |
+| `APP-INSIGHTS-CON-STRING-DEV`  | Radix, GitHub Actions | Application Insights connection string for `dev`.                                                                  |
+| `APP-INSIGHTS-CON-STRING-PROD` | Radix, GitHub Actions | Application Insights connection string for `prod`.                                                                 |
+
+`APP-PRIVATE-KEY` is multi-line and must be uploaded from a file, not pasted in the portal
+(see [Store a multi-line secret](https://learn.microsoft.com/azure/key-vault/secrets/multiline-secrets)):
+
+```bash
+az keyvault secret set --vault-name mercury-kv --name APP-PRIVATE-KEY --file key.pem
+```
+
+When running the application locally, `LIBHG_PAT` needs to be created as a PAT from [https://github.com/settings/personal-access-tokens](https://github.com/settings/personal-access-tokens) and added to `.env`.
 
 </details>
 

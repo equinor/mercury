@@ -12,7 +12,7 @@ We use **Bicep** to define our _Infrastructure as Code_.
 - Active Azure subscription set:
 
 ```bash
-az account set --subscription "S538-NeqSim API"
+az account set --subscription "R286-Mercury"
 ```
 
 You also need to have the necessary permissions to create and manage resources in the subscription (e.g., Owner or Contributor role).
