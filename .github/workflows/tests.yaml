@@ -37,9 +37,6 @@ jobs:
         uses: ./.github/actions/azure-login
         with:
           secret-name: LIBHG-PAT
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: "Setup: Build API test image"
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7
