@@ -2,7 +2,13 @@
   "$schema": "./web/node_modules/@biomejs/biome/configuration_schema.json",
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!**/src/api/generated/**/*", "!**/build", "!.github/release-please-manifest.json"]
+    "includes": [
+      "**",
+      "!**/src/api/generated/**/*",
+      "!**/build",
+      "!.github/release-please-manifest.json",
+      "!docs/changelog.md"
+    ]
   },
   "vcs": {
     "enabled": true,
