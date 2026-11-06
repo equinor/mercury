@@ -1,5 +1,105 @@
 # Changelog
 
+## [1.2.0](https://github.com/equinor/mercury/compare/v1.1.15...v1.2.0) (2026-11-06)
+
+
+### Features
+
+* add ty and remove mypy ([099ca5b](https://github.com/equinor/mercury/commit/099ca5bc249c9905447af2f52fced15d8189cfa2))
+* add ty to devcontainer extensions ([674a7c5](https://github.com/equinor/mercury/commit/674a7c514b8cbe62f3a2399a8239fb8b2363b2d1))
+* replace yarn with pnpm ([362d062](https://github.com/equinor/mercury/commit/362d0626f2ee618d259dd7d3f5a14ca1f218c483))
+* update docs ([af9c499](https://github.com/equinor/mercury/commit/af9c49985a8dfb714725d772f4098a6fd1327f53))
+* update runbook and fix diagrams that were impossible to read ([fe0b21c](https://github.com/equinor/mercury/commit/fe0b21c5df70e2e28ed1621c52c7e36ae9e7cf46))
+
+
+### Bug Fixes
+
+* add new azure identity client id ([58ce032](https://github.com/equinor/mercury/commit/58ce032a4eacbda6629fa7eb82f7709f9f26408f))
+* better feedback text on login/logout ([6b09b56](https://github.com/equinor/mercury/commit/6b09b56bda94e5351c92a9dadad69ad6f7b87c50))
+* fix small brain fart ([1d73cd4](https://github.com/equinor/mercury/commit/1d73cd43e22cb85140d6a34becb17d4daff38366))
+* formatting and linting fixes ([4f3050a](https://github.com/equinor/mercury/commit/4f3050a67710d46b209bbfd64ebb86004224baa7))
+* ignore changlelog.md in releaseplease ([c189399](https://github.com/equinor/mercury/commit/c1893995f16779d67d469f086326853f80421f71))
+* linting passes ([353cf13](https://github.com/equinor/mercury/commit/353cf137714505ae8369589fa1b8c1ac994f6cc5))
+* mini minor updates ([95da9d8](https://github.com/equinor/mercury/commit/95da9d8f9d4f720af828a35521b394b4e7070137))
+* move the token from component-scope to module-scope ([369b973](https://github.com/equinor/mercury/commit/369b97337ba4e2c9e7eaf39f49d81972d83e9e5b))
+* remove login page and improve login flow ([d571294](https://github.com/equinor/mercury/commit/d571294059a7c0e7804d4c8b7cf4c65fbf675545))
+* remove the edge case AuthError logout screen ([b56f052](https://github.com/equinor/mercury/commit/b56f0520763c980da08e0d6fc0e9b761b7a279ff))
+* revive devcontainer, update config (to be like ccs-hub), add equinor cert dockerfile, update node, cleanup extensions.json, and dependencies.toml ([5565a65](https://github.com/equinor/mercury/commit/5565a650c9c72293ee341989dd40f446ec144afb))
+* set autoLogin to true ([091ead7](https://github.com/equinor/mercury/commit/091ead7eeb31dcf6c513ff94e7e93ea94282b673))
+* update docs to follow newer biome standards, remove deprecated "recommended" field and fix faulty &lt;a&gt; setup ([566aab1](https://github.com/equinor/mercury/commit/566aab11b080155c8a2d5c54a9fecba1c680634b))
+* update minors ([b7c6110](https://github.com/equinor/mercury/commit/b7c6110a433306ccb291bd9bd90c43b98edfe390))
+
+
+### Documentation
+
+* **wip:** write more in about section + add diagram ([87d06e4](https://github.com/equinor/mercury/commit/87d06e444ec05074a9e5ac1fbccda257638725c3))
+
+
+### Miscellaneous Chores
+
+* add managed identity connection ([80de3fa](https://github.com/equinor/mercury/commit/80de3fa9db128c8f9d5e943508cc62d23c8dd03f))
+* add TS lint to precommit, cleanup lint.toml, revert kubb -&gt; do seperate pr, fix  vitest ([484e782](https://github.com/equinor/mercury/commit/484e7825a293ac4355660ead3cabf9ddf0cac806))
+* backend dependency updates, update httpx-&gt;httpx2 ([a9e9430](https://github.com/equinor/mercury/commit/a9e9430bbbe8435e5529b42694598bfeb78dda8a))
+* **deps-dev:** bump @types/node from 25.9.1 to 26.1.1 in /web ([4345df7](https://github.com/equinor/mercury/commit/4345df791bfa5f1d628acb06d45d337c71ea830a))
+* **deps-dev:** bump types-cachetools in /api ([2a612e4](https://github.com/equinor/mercury/commit/2a612e4d469a990e876cac9100049863a8fd39bc))
+* **deps-dev:** bump vite from 8.0.14 to 8.0.16 in /web ([86affcd](https://github.com/equinor/mercury/commit/86affcdb10ce723df1f758ff05ea190fa1f93333))
+* **deps-dev:** bump vite from 8.0.16 to 8.1.0 in /web ([63d7d9e](https://github.com/equinor/mercury/commit/63d7d9ea5ee1ef4ea6a2133f97e326328f85c7a8))
+* **deps-dev:** bump vite from 8.1.0 to 8.1.1 in /web ([e9b7a74](https://github.com/equinor/mercury/commit/e9b7a745854483cd56bedc2e726ff09045a6c856))
+* **deps-dev:** bump vite from 8.1.1 to 8.1.2 in /web ([4382ebb](https://github.com/equinor/mercury/commit/4382ebbf53fec1d2a84cf16e4d66b899ba25cf3d))
+* **deps-dev:** bump vite from 8.1.2 to 8.1.3 in /web ([844c5b0](https://github.com/equinor/mercury/commit/844c5b0ba4e52da6dc7781694ed873dcfd2d57ca))
+* **deps:** bump @babel/core from 7.29.0 to 7.29.7 in /web ([6aee9d7](https://github.com/equinor/mercury/commit/6aee9d7053656280aea9d960e9ce7469a8ea3c20))
+* **deps:** bump @nevware21/ts-utils from 0.13.0 to 0.14.0 in /web ([c360291](https://github.com/equinor/mercury/commit/c3602918913b38c8493aa8bf41d1450f88940f49))
+* **deps:** bump actions/checkout in /.github/workflows ([152a3ff](https://github.com/equinor/mercury/commit/152a3ff8446c3f3471be7ae77cc08d3250692ff9))
+* **deps:** bump actions/checkout in /.github/workflows ([1904cde](https://github.com/equinor/mercury/commit/1904cdeede93cfcded6bf159944f1001a91c6f5a))
+* **deps:** bump azure/login in /.github/actions/azure-login ([554e5b8](https://github.com/equinor/mercury/commit/554e5b893694a0b1f778511f48d5c50e81b411bd))
+* **deps:** bump cryptography from 46.0.7 to 48.0.1 in /api ([6beae44](https://github.com/equinor/mercury/commit/6beae44511120cb2eb844bfe844c93d63f1253e1))
+* **deps:** bump docker/build-push-action in /.github/workflows ([52fda82](https://github.com/equinor/mercury/commit/52fda82504115cb2a9b34c025f0e8135db3646c3))
+* **deps:** bump docker/login-action in /.github/workflows ([f4b4536](https://github.com/equinor/mercury/commit/f4b4536437ad575beeec43df5cbaf118a109e665))
+* **deps:** bump docker/login-action in /.github/workflows ([1bc0e3e](https://github.com/equinor/mercury/commit/1bc0e3e26e6a79e6456dd355a93c2248090c0a5a))
+* **deps:** bump docker/setup-buildx-action in /.github/workflows ([5614578](https://github.com/equinor/mercury/commit/56145786f11bff06c99dbddc96ce4b45480bd6a1))
+* **deps:** bump fast-uri from 3.1.2 to 3.1.4 in /web ([5fe894b](https://github.com/equinor/mercury/commit/5fe894bf41f78902ec3daaf405ab31af275a20f7))
+* **deps:** bump jdx/mise-action in /.github/workflows ([a7c0243](https://github.com/equinor/mercury/commit/a7c0243289fee85e0023769044067b22281ba87e))
+* **deps:** bump jdx/mise-action in /.github/workflows ([7762e42](https://github.com/equinor/mercury/commit/7762e421a5a6ab125d27597391a70d3d77499417))
+* **deps:** bump js-yaml from 4.1.1 to 4.2.0 in /web ([94506cb](https://github.com/equinor/mercury/commit/94506cb8c037293819ab80e8ad558ebfb0b9b8e5))
+* **deps:** bump js-yaml from 4.2.0 to 4.3.0 in /web ([faae741](https://github.com/equinor/mercury/commit/faae7410dde67f57261beabf660e3fd938360b17))
+* **deps:** bump mkdocs-material from 9.7.6 to 9.7.7 in /api ([c007203](https://github.com/equinor/mercury/commit/c007203cb0b15583eab7dac9f67bfa042f040dc9))
+* **deps:** bump nginx ([ed851cf](https://github.com/equinor/mercury/commit/ed851cf05700d6eeeb5e237aa6cec50f4cc3c700))
+* **deps:** bump pydantic-settings from 2.14.1 to 2.14.2 in /api ([f3e6ad5](https://github.com/equinor/mercury/commit/f3e6ad5869a864e20fbce2f518ebfcba5e798e01))
+* **deps:** bump pyjwt from 2.13.0 to 2.15.0 in /api ([8c35a3a](https://github.com/equinor/mercury/commit/8c35a3a273ce90ef4a74afb99441e6b36e9a982d))
+* **deps:** bump pymdown-extensions from 10.21.2 to 10.21.3 in /api ([a1710fa](https://github.com/equinor/mercury/commit/a1710faae978a9a4a7fafa6e12b8bee6cca86259))
+* **deps:** bump shell-quote from 1.8.3 to 1.8.4 in /web ([3feac56](https://github.com/equinor/mercury/commit/3feac5625b3adbde29c320c04b50d128f889f481))
+* **deps:** bump shell-quote from 1.8.4 to 1.10.0 in /web ([bde72ac](https://github.com/equinor/mercury/commit/bde72ac5d52d7cbd63c62547935010ca630a8f7f))
+* **deps:** bump starlette from 0.50.0 to 1.0.1 in /api ([19cc07a](https://github.com/equinor/mercury/commit/19cc07ac96bf7c8cd302ea98e96b4cc9c8d55a62))
+* **deps:** bump starlette from 1.0.1 to 1.3.1 in /api ([d746834](https://github.com/equinor/mercury/commit/d74683424447c810125671fdce68498969e57a9e))
+* **deps:** bump the back-end group across 1 directory with 15 updates ([7a539bb](https://github.com/equinor/mercury/commit/7a539bb22a35c2fae72a5cfb543180489acabea8))
+* **deps:** bump the back-end group across 1 directory with 8 updates ([1d69126](https://github.com/equinor/mercury/commit/1d691260cb8f6050f5b7b7310b79ff4a934be85a))
+* **deps:** bump the dockerfile group across 2 directories with 2 updates ([ede3f20](https://github.com/equinor/mercury/commit/ede3f2037cdec69eb7ede9da22441049ebe3328d))
+* **deps:** bump the front-end group across 1 directory with 21 updates ([ad3e9f9](https://github.com/equinor/mercury/commit/ad3e9f910009daa33416067cc8fe76167a63b7ff))
+* **deps:** bump the front-end group in /web with 16 updates ([410ce63](https://github.com/equinor/mercury/commit/410ce635d64501b8e0908bd445b3c14876a81e8e))
+* **deps:** bump undici from 7.25.0 to 7.28.0 in /web ([98e8b72](https://github.com/equinor/mercury/commit/98e8b72c628835b9aaafe54cb0a2e45b7edaa349))
+* **deps:** bump urllib3 from 2.7.0 to 2.8.0 in /api ([3497d7b](https://github.com/equinor/mercury/commit/3497d7b79bfee9eaffd9f79e83270b40b60db84e))
+* enable auto route tracking for tracking users ([ba2ac9a](https://github.com/equinor/mercury/commit/ba2ac9afc74a23f441942fed1725ebf338ef29d6))
+* jsdom + jstest ([34e95d3](https://github.com/equinor/mercury/commit/34e95d3d4dc386ed5c7a8371a33c9512b2a196c6))
+* leftover changes from kubb migrations ([eb99816](https://github.com/equinor/mercury/commit/eb99816d35ba818a17676f6937ee7448422fe772))
+* migrate kubb 4-&gt;5 ([b599896](https://github.com/equinor/mercury/commit/b59989632f17ed2d0acf6b823be056ada4611753))
+* remove archived architecture contract from app, this is found in official equinor systems now ([6c06858](https://github.com/equinor/mercury/commit/6c0685807efdff9aa9d42b7ab1220799ed762e66))
+* remove comment and run prek ([50b33ff](https://github.com/equinor/mercury/commit/50b33ffebb3b1ab955906ebf03b720a48d5acf34))
+* remove LIBHG_VERSION as a github variable ([49fa2d3](https://github.com/equinor/mercury/commit/49fa2d3e042934843a04d5e3fed72301f1020f63))
+* remove metrics and openapi spam in app insights ([c01d890](https://github.com/equinor/mercury/commit/c01d890fbe02c22408980e6c176aa227d576ea7d))
+* revert StricMode deletion ([5a97536](https://github.com/equinor/mercury/commit/5a9753661e0eb8d6c156696be47bf30718c63c94))
+* update gitignore ([3f42112](https://github.com/equinor/mercury/commit/3f4211286b9ec9d5902f675d34b53f75bfe6e7e5))
+* update pre-commit ([e6c7aad](https://github.com/equinor/mercury/commit/e6c7aad9760482756d8a3396a44846ee2ec0b11b))
+* update TS to 7 ([ff43e8e](https://github.com/equinor/mercury/commit/ff43e8e00696c50107686ef405950bbb5bfdb64a))
+* update vite major ([a1ffb2d](https://github.com/equinor/mercury/commit/a1ffb2d8f1817e63df0d4468ea5080e242154da4))
+
+
+### Continuous Integration
+
+* ids are not sensitive, hardcoding them in the composite action reduces the lines of code needed, and gives us a single source of truth ([fb70af0](https://github.com/equinor/mercury/commit/fb70af025e7d50dd0a02da6d3dcfd68acf52ec2e))
+* ids for new subscription is added ([4ec520d](https://github.com/equinor/mercury/commit/4ec520d48f01d05e74164c72209164213d3474fa))
+* update github actions and nginx base image ([49b6ad9](https://github.com/equinor/mercury/commit/49b6ad95e6e25859ce64cdffb950e6b05874f412))
+* update workflows to use secret directly from keyvault ([f89dcb1](https://github.com/equinor/mercury/commit/f89dcb1936a8358e539c35f6566f7ece700d2079))
+
 ## [1.1.15](https://github.com/equinor/mercury/compare/v1.1.14...v1.1.15) (2026-05-20)
 
 ### Styles
