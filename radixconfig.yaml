@@ -14,7 +14,7 @@ spec:
       alwaysPullImageOnDeploy: true
       identity:
         azure:
-          clientId: f30f22c0-8373-455d-94b7-2604f42740e2
+          clientId: e78da4c7-6b56-4331-ac39-422183eef6be
       environmentConfig:
         - environment: prod
           imageTagName: latest

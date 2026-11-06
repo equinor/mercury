@@ -86,18 +86,6 @@ export function ApplicationHelp() {
 
             <ul>
               <li>
-                See the{' '}
-                <a
-                  target="_blank"
-                  href={'https://github.com/equinor/architecturecontract/blob/master/contracts/Mercury.md'}
-                  rel="noreferrer"
-                >
-                  architecture contract for the calculator
-                </a>{' '}
-                (requires sign in)
-              </li>
-
-              <li>
                 Test fluids for calculations are available as{' '}
                 <a
                   target="_blank"

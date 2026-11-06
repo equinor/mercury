@@ -17,9 +17,9 @@ runs:
     - name: "Setup: Azure login"
       uses: azure/login@v3
       with:
-        client-id: 90f149df-e313-495f-af5d-827e41086223
+        client-id: 7a44440b-c0c2-4900-949e-393430f0cfbc
         tenant-id: 3aa4a235-b6e2-48d5-9195-7fcf05b459b0
-        subscription-id: f196e45a-a78b-4d35-ba40-b354140bc7a1
+        subscription-id: 17337cf3-dd1d-4ccc-a711-6324e8bceabb
 
     - name: "Setup: read Key Vault secret"
       id: keyvault
