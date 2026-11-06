@@ -6,7 +6,7 @@ export const authConfig: TAuthConfig = {
   tokenEndpoint: import.meta.env.VITE_TOKEN_ENDPOINT || '',
   scope: import.meta.env.VITE_AUTH_SCOPE || '',
   redirectUri: window.origin,
-  autoLogin: false,
+  autoLogin: true,
   onRefreshTokenExpire: (event) => {
     const agreeToLogin = window.confirm(
       'Session expired. Press OK to log in again, or Cancel to manually log in. ' +
