@@ -69,20 +69,18 @@ _We are using [C4 model][c4-model] for showing architecture diagrams._
 > _Provides a high-level overview of the system, including its purpose, main components, and how these components interact._
 
 ```mermaid
-C4Context
-title Mercury - System Context Diagram
+flowchart TB
+    user(["<b>User</b><br/>Equinor engineer"])
+    mercury["<b>Mercury Calculator</b><br/>Mercury phase equilibrium<br/>using the UMR model"]
+    entra["<b>Microsoft Entra ID</b><br/><i>External system</i><br/>Authenticates users"]
+    ai["<b>Azure Application Insights</b><br/><i>External system</i><br/>Telemetry and logs"]
 
-Person(User, "User", "An Equinor user that wants to perform phase equilibrium calculations for mercury in hydrocarbon mixtures.")
+    user -->|"Performs calculations<br/>[HTTPS]"| mercury
+    mercury -->|"Authenticates users<br/>[OAuth2 / PKCE]"| entra
+    mercury -->|"Sends telemetry<br/>[HTTPS]"| ai
 
-System(Application, "Mercury Calculator", "A web application that performs phase equilibrium calculations for mercury distribution in hydrocarbon mixtures using the UMR model.")
-System_Ext(AuthServer, "Entra ID", "Provides OAuth2 authentication and issues access tokens for API authorization.")
-System_Ext(AppInsights, "Azure Application Insights", "Collects telemetry, logs, and usage statistics from the application.")
-
-Rel(User, Application, "Performs mercury calculations", "HTTPS")
-Rel(Application, AuthServer, "Authenticates users", "OAuth2/PKCE")
-Rel(Application, AppInsights, "Sends telemetry and logs", "HTTPS")
-
-UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+    classDef external stroke-dasharray: 5 5
+    class entra,ai external
 ```
 
 </details>
@@ -95,28 +93,32 @@ UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
 > _Provide an overview of the containers (runnable and deployable units) that executes code or stores data._
 
 ```mermaid
-C4Container
-title Mercury - Container Diagram
+flowchart TB
+    user(["<b>User</b><br/>Web browser running<br/>the React SPA"])
 
-Person(User, "User", "An Equinor user that wants to perform phase equilibrium calculations for mercury in hydrocarbon mixtures.")
+    subgraph mercury["Mercury Calculator (Radix: dev / prod)"]
+        proxy["<b>Proxy</b><br/><i>nginx</i><br/>Serves the React SPA and<br/>forwards /api/* to the API"]
+        api["<b>API</b><br/><i>Python, FastAPI</i><br/>Multiflash calculations and<br/>component data via libhg<br/>(Fortran, UMR model)"]
+        radix["<b>Radix platform</b><br/>Runs the containers and<br/>injects secrets"]
+    end
 
-System_Boundary(Mercury, "Mercury Calculator") {
-  Container(Nginx, "Web / Nginx", "React SPA, Nginx", "Serves the static React web application (built from Node image) and reverse-proxies API requests.")
-  Container(API, "API", "Python, FastAPI", "Provides REST endpoints for multiflash calculations, component data, and metrics. Uses the libhg Fortran library for thermodynamic calculations via the UMR model.")
-}
+    entra["<b>Microsoft Entra ID</b><br/><i>External system</i><br/>Issues access tokens"]
+    ai["<b>Azure Application Insights</b><br/><i>External system</i><br/>Telemetry and logs"]
+    kv["<b>Azure Key Vault</b><br/><i>External system</i><br/>Secrets for Radix and CI"]
+    ghcr["<b>GitHub Container Registry</b><br/><i>External system</i><br/>API and web images"]
 
-System_Ext(AuthServer, "Entra ID", "Provides OAuth2/PKCE authentication and issues access tokens for API authorization.")
-System_Ext(AppInsights, "Azure Application Insights", "Collects telemetry, logs, and usage statistics.")
-System_Ext(GHCR, "GitHub Container Registry", "Stores container images for API and web.")
+    user -->|"Uses<br/>[HTTPS]"| proxy
+    user -->|"Logs in<br/>[OAuth2 / PKCE]"| entra
+    user -->|"Frontend telemetry<br/>[HTTPS]"| ai
+    proxy -->|"/api/*<br/>[HTTP]"| api
+    api -->|"Validates JWT<br/>[HTTPS]"| entra
+    api -->|"Backend telemetry<br/>[HTTPS]"| ai
+    radix -.->|"Injects secrets"| api
+    radix -.->|"Reads secrets<br/>[workload identity]"| kv
+    radix -.->|"Pulls images"| ghcr
 
-Rel(User, Nginx, "Uses", "HTTPS")
-Rel(Nginx, API, "Proxies API requests", "HTTP /api/*")
-Rel(Nginx, AuthServer, "Authenticates users (SPA)", "OAuth2/PKCE")
-Rel(API, AuthServer, "Validates JWT tokens", "HTTPS")
-Rel(Nginx, AppInsights, "Sends frontend telemetry", "HTTPS")
-Rel(API, AppInsights, "Sends backend telemetry and logs", "HTTPS")
-
-UpdateLayoutConfig($c4ShapeInRow="2", $c4BoundaryInRow="1")
+    classDef external stroke-dasharray: 5 5
+    class entra,ai,kv,ghcr external
 ```
 
 </details>
@@ -207,7 +209,7 @@ customEvents
 
 > _Overview of all secret and certificates used in the application_
 
-Secrets are stored in the `mercury-kv` Key Vault (`R286-Mercury` subscription). GitHub Actions and Radix read them using workload identity.
+Secrets are stored in the `mercury-kv` Key Vault (`R286-Mercury` subscription). GitHub Actions and Radix read them using managed identity.
 
 | Secret                         | Used by               | Description                                                                                                        |
 | ------------------------------ | --------------------- | ------------------------------------------------------------------------------------------------------------------ |
