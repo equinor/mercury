@@ -71,8 +71,8 @@ spec:
 
   privateImageHubs:
     ghcr.io:
-      username: mariuswinger
-      email: 89073985+mariuswinger@users.noreply.github.com
+      username: matsklevstad
+      email: 69513712+matsklevstad@users.noreply.github.com
 
   dnsAppAlias:
     environment: prod
