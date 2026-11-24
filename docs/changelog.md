@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/equinor/mercury/compare/v1.2.0...v1.2.1) (2026-11-24)
+
+
+### Continuous Integration
+
+* update ghcr private image hub user ([484deaa](https://github.com/equinor/mercury/commit/484deaa9d8ba0e055a1386cc70b469eccf6df47b))
+
 ## [1.2.0](https://github.com/equinor/mercury/compare/v1.1.15...v1.2.0) (2026-11-06)
 
 
